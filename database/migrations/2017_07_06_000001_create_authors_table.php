@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateAuthorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,18 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
             $table->string('unique_id', 13)->primary()->unique()->index();
             $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->string('image')->nullable();
-            $table->string('phone')->unique();
-            $table->text('address');
-            $table->string('encrypted_password');
-            $table->string('salt');
-            $table->integer('wallet')->default(0);
+            $table->string('phone');
+            $table->string('mobile')->unique();
+            $table->string('email')->unique();
             $table->string('country')->default("Iran");
             $table->string('state');
             $table->string('city');
-            $table->integer('confirmed_email')->default(0);
-            $table->integer('confirmed_phone')->default(0);
-            $table->string('location_x')->nullable();
-            $table->string('location_y')->nullable();
+            $table->string('image')->nullable();
+            $table->string('address');
+            $table->string('mCode', 10)->unique();
             $table->string('create_date');
             $table->string('update_date')->nullable();
             $table->timestamps();
@@ -43,6 +38,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('authors');
     }
 }
