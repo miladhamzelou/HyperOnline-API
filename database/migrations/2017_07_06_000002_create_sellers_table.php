@@ -28,10 +28,8 @@ class CreateSellersTable extends Migration
             $table->integer('closed')->default(0);
             $table->integer('confirmed')->default(0);
             $table->string('phone');
-            $table->string('country')->default("Iran");
             $table->string('state');
             $table->string('city');
-            $table->integer('video')->default(0);
             $table->text('description')->nullable();
             $table->integer('send_price')->default(0);
             $table->integer('min_price')->default(0);

@@ -19,7 +19,6 @@ class CreateAuthorsTable extends Migration
             $table->string('phone');
             $table->string('mobile')->unique();
             $table->string('email')->unique();
-            $table->string('country')->default("Iran");
             $table->string('state');
             $table->string('city');
             $table->string('image')->nullable();
