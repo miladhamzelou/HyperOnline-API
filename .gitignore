@@ -8,4 +8,9 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
+<<<<<<< HEAD
 .env
+=======
+
+/images
+>>>>>>> 044dd7de3c582bec4747ab9adc74c98c9605eaa5
