@@ -177,6 +177,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\v1\CommentServiceProvider::class,
+        App\Providers\v1\LoginServiceProvider::class,
+        App\Providers\v1\SellerServiceProvider::class,
+        App\Providers\v1\UserServiceProvider::class,
+        App\Providers\v1\OrderServiceProvider::class,
+        App\Providers\v1\ProductServiceProvider::class,
+
     ],
 
     /*
