@@ -8,4 +8,9 @@ class Product extends Model
 {
     protected $primaryKey = 'unique_id';
     public $incrementing = false;
+
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class);
+    }
 }
