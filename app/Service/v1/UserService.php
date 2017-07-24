@@ -59,7 +59,6 @@ class UserService
      */
     public function createUser($request)
     {
-        //Utility::stripXSS();
         $user = new User();
         $password = new Password();
 
