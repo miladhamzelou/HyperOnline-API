@@ -13,7 +13,7 @@ class UserServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Validator::extend('userPhone', 'App\Validators\MyValidator@validatePhone');
+        //Validator::extend('userPhone', 'App\Validators\MyValidator@validatePhone');
     }
 
     public function register()

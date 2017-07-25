@@ -41,7 +41,7 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
         $parameters = request()->input();
         $data = $this->Users->getUsers($parameters);

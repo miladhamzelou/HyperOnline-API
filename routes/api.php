@@ -24,8 +24,6 @@ Route::resource('/v1/users', v1\UserController::class, [
     ]
 ]);
 
-Route::resource('users', 'v1\UserController@store');
-
 Route::resource('v1/login', v1\LoginController::class, [
     'except' => [
         'create',
