@@ -7,7 +7,6 @@ namespace App\Services\v1;
 
 use App\Password;
 use App\User;
-use Illuminate\Support\Facades\Log;
 
 include(app_path() . '/Common/jdf.php');
 
@@ -33,7 +32,8 @@ class UserService
         return $this->filterUsers($users);
     }
 
-    public function getUser($id){
+    public function getUser($id)
+    {
         $user = User::where('unique_id', $id)->firstOrFail();
 
         $final = [
@@ -50,7 +50,7 @@ class UserService
             'confirmed_phone' => $user->confirmed_phone
         ];
 
-        return $final ;
+        return $final;
     }
 
     /**
@@ -87,6 +87,8 @@ class UserService
         $user->save();
         $password->save();
 
+        \App\Facades\CustomLog::info("User Registered : " . $user->name . " Date : " . $user->create_date, "users");
+
         return true;
     }
 
@@ -99,7 +101,8 @@ class UserService
         $user = User::where('phone', $request->input('phone'))->firstOrFail();
         $hash = $this->checkHashSSHA($user->salt, $request->input('password'));
         if ($hash == $user->encrypted_password) {
-            Log::info("login authorized");
+            $date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+            \App\Facades\CustomLog::info("User Authorized : " . $user->name . " Date : " . $date, "users");
             $final = [
                 'unique_id' => $user->unique_id,
                 'name' => $user->name,

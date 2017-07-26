@@ -3,7 +3,7 @@
  * Copyright (c) 2017 - All Rights Reserved - Arash Hatami
  */
 
-namespace App\Validators;
+namespace App\Validator;
 
 use App\Author;
 use App\Product;

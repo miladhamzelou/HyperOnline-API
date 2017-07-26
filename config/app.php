@@ -184,6 +184,8 @@ return [
         App\Providers\v1\OrderServiceProvider::class,
         App\Providers\v1\ProductServiceProvider::class,
 
+        App\Providers\LogProvider::class,
+
     ],
 
     /*

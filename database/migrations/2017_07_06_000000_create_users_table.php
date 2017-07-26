@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('encrypted_password');
             $table->string('salt');
             $table->integer('wallet')->default(0);
-            $table->string('country')->default("Iran");
             $table->string('state');
             $table->string('city');
             $table->string('district')->nullable();

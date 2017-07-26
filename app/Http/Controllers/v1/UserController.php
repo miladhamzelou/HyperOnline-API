@@ -10,6 +10,7 @@ use App\Services\v1\UserService;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -54,6 +55,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info("request:\n" . $request);
         $validator = Validator::make($request->all(), $this->rules, $this->messages);
 
         if ($validator->fails()) {
