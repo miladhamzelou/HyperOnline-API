@@ -20,12 +20,19 @@ class DatabaseSeeder extends Seeder
 
         factory(App\Author::class, 5)->create();
 
-        /*factory(App\Seller::class, 10)->create()->each(function ($seller) {
-            factory(App\Product::class, 20)->make()->each(function ($product) use ($seller) {
-                $seller->products()->save($product);
-            });
-        });*/
+        /*factory(App\Category1::class, 5)
+            ->create()
+            ->each(function ($category1) {
+                $ids = \App\Category1::all()->pluck('unique_id')->toArray();
+                factory(App\Category2::class, 10)
+                    ->create()
+                    ->each(function ($category2) use ($ids) {
 
+                    });
+            });*/
+        factory(App\Category1::class,5)->create();
+        factory(App\Category2::class,25)->create();
+        factory(App\Category3::class,50)->create();
         factory(App\Seller::class, 10)->create();
         factory(App\Product::class, 100)->create();
 

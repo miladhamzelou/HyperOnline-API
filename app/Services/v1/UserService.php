@@ -84,7 +84,7 @@ class UserService
         $password->password = $request->input('password');
         $password->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-        $user->save();
+                          $user->save();
         $password->save();
 
         \App\Facades\CustomLog::info("User Registered : " . $user->name . " Date : " . $user->create_date, "users");

@@ -27,7 +27,6 @@ $factory->define(App\Seller::class, function (Faker\Generator $faker) {
         'phone' => $faker->e164PhoneNumber,
         'state' => $faker->state,
         'city' => $faker->city,
-        'video' => $faker->numberBetween(0, 1),
         'create_date' => $date,
         'location_x' => $faker->latitude,
         'location_y' => $faker->longitude
