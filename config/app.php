@@ -183,6 +183,7 @@ return [
         App\Providers\v1\UserServiceProvider::class,
         App\Providers\v1\OrderServiceProvider::class,
         App\Providers\v1\ProductServiceProvider::class,
+        App\Providers\v1\MainServiceProvider::class,
 
         App\Providers\LogProvider::class,
 

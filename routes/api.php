@@ -35,6 +35,17 @@ Route::resource('v1/login', v1\LoginController::class, [
     ]
 ]);
 
+Route::resource('v1/main', v1\LoginController::class, [
+    'except' => [
+        'create',
+        'edit',
+        'destroy',
+        'show',
+        'store',
+        'update'
+    ]
+]);
+
 Route::resource('/v1/comments', v1\CommentController::class, [
     'except' => [
         'create',
