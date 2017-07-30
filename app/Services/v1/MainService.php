@@ -6,6 +6,7 @@
 namespace App\Services\v1;
 
 use App\Product;
+use App\Order;
 
 include(app_path() . '/Common/jdf.php');
 
