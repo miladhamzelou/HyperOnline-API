@@ -5,6 +5,7 @@
 
 namespace App\Providers\v1;
 
+use App\Services\v1\MainService;
 use Illuminate\Support\ServiceProvider;
 
 class MainServiceProvider extends ServiceProvider
@@ -26,6 +27,8 @@ class MainServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(MainService::class, function () {
+            return new MainService();
+        });
     }
 }

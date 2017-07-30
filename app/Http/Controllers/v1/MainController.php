@@ -35,10 +35,15 @@ class MainController extends Controller
     public function index()
     {
         try {
-            if ($data = $this->Data->getData())
+            $new = $this->Data->getNew();
+            $popular = $this->Data->getPopular();
+            $category = $this->Data->getCategories();
+            if ($new && $popular && $category)
                 return response()->json([
                     'error' => false,
-                    'user' => $data
+                    'new' => $new,
+                    'popular' => $popular,
+                    'category' => $category
                 ], 201);
             else
                 return response()->json([

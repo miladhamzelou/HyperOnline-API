@@ -5,17 +5,53 @@
 
 namespace App\Services\v1;
 
+use App\Category3;
 use App\Product;
-use App\Order;
 
 include(app_path() . '/Common/jdf.php');
 
 class MainService
 {
-    public function getData()
+    public function getNew()
     {
-        $new = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->take(8)->get();
+        $data = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->take(10)->get();
+        $new = [];
+        foreach ($data as $product) {
+            $entry = [
+                'name' => $product->name
+            ];
+            $new[] = $entry;
+        }
 
-        return null;
+        return $new;
+    }
+
+    public function getPopular()
+    {
+        $data = Product::where("confirmed", 1)->orderBy('point', 'desc')->take(10)->get();
+
+        $popular = [];
+        foreach ($data as $product) {
+            $entry = [
+                'name' => $product->name
+            ];
+            $popular[] = $entry;
+        }
+
+        return $popular;
+    }
+
+    public function getCategories(){
+        $data = Category3::orderBy('point', 'desc')->take(10)->get();
+
+        $category = [];
+        foreach ($data as $product) {
+            $entry = [
+                'name' => $product->name
+            ];
+            $category[] = $entry;
+        }
+
+        return $category;
     }
 }

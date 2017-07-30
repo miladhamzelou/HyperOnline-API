@@ -35,7 +35,7 @@ Route::resource('v1/login', v1\LoginController::class, [
     ]
 ]);
 
-Route::resource('v1/main', v1\LoginController::class, [
+Route::resource('v1/main', v1\MainController::class, [
     'except' => [
         'create',
         'edit',
