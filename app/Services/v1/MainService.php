@@ -14,12 +14,25 @@ class MainService
 {
     public function getNew()
     {
-        $data = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->take(10)->get();
+        $data = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->take(12)->get();
+
         $new = [];
         foreach ($data as $product) {
             $entry = [
-                'name' => $product->name
+                'unique_id' => $product->unique_id,
+                'seller_id' => $product->seller_id,
+                'category_id' => $product->category_id,
+                'name' => $product->name,
+                'image' => $product->image,
+                'point' => $product->point,
+                'point_count' => $product->point_count,
+                'description' => $product->description,
+                'off' => $product->off,
+                'count' => $product->count,
+                'price' => $product->price,
+                'created_at' => $product->create_date
             ];
+
             $new[] = $entry;
         }
 
@@ -28,27 +41,52 @@ class MainService
 
     public function getPopular()
     {
-        $data = Product::where("confirmed", 1)->orderBy('point', 'desc')->take(10)->get();
+        $data = Product::where("confirmed", 1)->orderBy('point', 'desc')->take(12)->get();
 
         $popular = [];
         foreach ($data as $product) {
             $entry = [
-                'name' => $product->name
+                'unique_id' => $product->unique_id,
+                'seller_id' => $product->seller_id,
+                'category_id' => $product->category_id,
+                'name' => $product->name,
+                'image' => $product->image,
+                'point' => $product->point,
+                'point_count' => $product->point_count,
+                'description' => $product->description,
+                'off' => $product->off,
+                'count' => $product->count,
+                'price' => $product->price,
+                'created_at' => $product->create_date
             ];
+
             $popular[] = $entry;
         }
 
         return $popular;
     }
 
-    public function getCategories(){
-        $data = Category3::orderBy('point', 'desc')->take(10)->get();
+    public function getCategories()
+    {
+        $data = Category3::orderBy('point', 'desc')->take(12)->get();
 
         $category = [];
         foreach ($data as $product) {
             $entry = [
-                'name' => $product->name
+                'unique_id' => $product->unique_id,
+                'seller_id' => $product->seller_id,
+                'category_id' => $product->category_id,
+                'name' => $product->name,
+                'image' => $product->image,
+                'point' => $product->point,
+                'point_count' => $product->point_count,
+                'description' => $product->description,
+                'off' => $product->off,
+                'count' => $product->count,
+                'price' => $product->price,
+                'created_at' => $product->create_date
             ];
+
             $category[] = $entry;
         }
 

@@ -118,8 +118,6 @@ class ProductService
                 'point_count' => $product->point_count,
                 'description' => $product->description,
                 'off' => $product->off,
-                'type' => $product->type,
-                'web3d' => $product->web3d,
                 'count' => $product->count,
                 'confirmed' => $product->confirmed,
                 'price' => $product->price,
