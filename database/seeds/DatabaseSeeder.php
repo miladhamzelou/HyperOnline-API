@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Seller::class, 10)->create();
         factory(App\Product::class, 100)->create();
         factory(App\Order::class, 100)->create();
+        factory(App\Option::class, 1)->create();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

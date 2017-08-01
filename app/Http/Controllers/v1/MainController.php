@@ -38,17 +38,19 @@ class MainController extends Controller
             $new = $this->Data->getNew();
             $popular = $this->Data->getPopular();
             $category = $this->Data->getCategories();
-            if ($new && $popular && $category)
+            $options = $this->Data->getOptions();
+            if ($new && $popular && $category && $options)
                 return response()->json([
                     'error' => false,
                     'new' => $new,
                     'popular' => $popular,
-                    'category' => $category
+                    'category' => $category,
+                    'options' => $options
                 ], 201);
             else
                 return response()->json([
                     'error' => true,
-                    'error_msg' => 'اطلاعات وارد شده صحیح نمی باشد'
+                    'error_msg' => "something's wrong"
                 ], 201);
         } catch (Exception $e) {
             return response()->json([

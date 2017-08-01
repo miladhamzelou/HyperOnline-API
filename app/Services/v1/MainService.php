@@ -5,7 +5,8 @@
 
 namespace App\Services\v1;
 
-use App\Category3;
+use App\Category1;
+use App\Option;
 use App\Product;
 
 include(app_path() . '/Common/jdf.php');
@@ -14,7 +15,9 @@ class MainService
 {
     public function getNew()
     {
-        $data = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->take(12)->get();
+        $option = Option::firstOrFail();
+
+        $data = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->take($option->new_count)->get();
 
         $new = [];
         foreach ($data as $product) {
@@ -41,7 +44,9 @@ class MainService
 
     public function getPopular()
     {
-        $data = Product::where("confirmed", 1)->orderBy('point', 'desc')->take(12)->get();
+        $option = Option::firstOrFail();
+
+        $data = Product::where("confirmed", 1)->orderBy('point', 'desc')->take($option->popular_count)->get();
 
         $popular = [];
         foreach ($data as $product) {
@@ -68,14 +73,15 @@ class MainService
 
     public function getCategories()
     {
-        $data = Category3::orderBy('point', 'desc')->take(12)->get();
+        $option = Option::firstOrFail();
+
+        $data = Category1::orderBy('point', 'desc')->take($option->category_count)->get();
 
         $category = [];
         foreach ($data as $product) {
             $entry = [
                 'unique_id' => $product->unique_id,
                 'seller_id' => $product->seller_id,
-                'category_id' => $product->category_id,
                 'name' => $product->name,
                 'image' => $product->image,
                 'point' => $product->point,
@@ -92,4 +98,22 @@ class MainService
 
         return $category;
     }
+
+    public function getOptions()
+    {
+        $has_event = 0;
+        $has_collection = 0;
+        $data = Category1::get();
+
+        foreach ($data as $product) {
+            if ($product->type == 2) $has_event = 1;
+            if ($product->type == 1) $has_collection = 1;
+        }
+
+        return [
+            'event' => $has_event,
+            'collection' => $has_collection
+        ];
+    }
+
 }
