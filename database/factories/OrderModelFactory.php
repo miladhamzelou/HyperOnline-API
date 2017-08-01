@@ -3,7 +3,7 @@
  * Copyright (c) 2017 - All Rights Reserved - Arash Hatami
  */
 
-$factory->define(App\Product::class, function (Faker\Generator $faker) {
+$factory->define(App\Order::class, function (Faker\Generator $faker) {
     $sellers = \App\Seller::all()->pluck('unique_id')->toArray();
     $users = \App\User::all()->pluck('unique_id')->toArray();
 
@@ -24,6 +24,18 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
     $count = $faker->numberBetween(1, 8);
     $product = \App\Product::inRandomOrder()->take($count)->get();
 
+    $price = 0;
+    $stuffs = "";
+    $stuffs_id = "";
+    foreach ($product as $item) {
+        $stuffs .= '-' . $item->name;
+        $stuffs_id .= '-' . $item->unique_id;
+        $price += $item->price;
+    }
+    // remove first '-' in string
+    $stuffs = ltrim($stuffs, '-');
+    $stuffs_id = ltrim($stuffs_id, '-');
+
     return [
         'unique_id' => str_random(13),
         'seller_id' => $seller,
@@ -31,7 +43,9 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'seller_name' => $seller_name,
         'user_name' => $user_name,
         'user_phone' => $user_phone,
-
+        'stuffs' => $stuffs,
+        'stuffs_id' => $stuffs_id,
+        'price' => $price,
         'create_date' => $date
     ];
 });

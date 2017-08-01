@@ -20,6 +20,8 @@ class CreateCategory1sTable extends Migration
             $table->float('point', 2, 1)->default(0.0);
             $table->integer('point_count')->default(0);
             $table->integer('off')->default(0);
+            $table->integer('type')->default(0);
+            $table->integer('type_name')->nullable();
             $table->string('create_date');
             $table->string('update_date')->nullable();
             $table->timestamps();

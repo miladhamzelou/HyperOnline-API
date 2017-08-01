@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('user_name');
             $table->string('user_phone');
             $table->text('stuffs');
+            $table->text('stuffs_id');
             $table->integer('price');
             $table->text('description')->nullable();
             $table->string('create_date');

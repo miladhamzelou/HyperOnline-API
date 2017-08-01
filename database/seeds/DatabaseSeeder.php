@@ -18,8 +18,6 @@ class DatabaseSeeder extends Seeder
         Eloquent::unguard();
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        factory(App\Author::class, 5)->create();
-
         /*factory(App\Category1::class, 5)
             ->create()
             ->each(function ($category1) {
@@ -30,11 +28,14 @@ class DatabaseSeeder extends Seeder
 
                     });
             });*/
+        factory(App\User::class, 1)->create();
+        factory(App\Author::class, 5)->create();
         factory(App\Category1::class,5)->create();
         factory(App\Category2::class,25)->create();
         factory(App\Category3::class,50)->create();
         factory(App\Seller::class, 10)->create();
         factory(App\Product::class, 100)->create();
+        factory(App\Order::class, 100)->create();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
