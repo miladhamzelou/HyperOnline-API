@@ -9,15 +9,7 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    protected $Data;
-
-    protected $rules = array(
-        'phone' => 'required|numeric|userPhone'
-    );
-
-    protected $messages = array(
-        'userPhone' => 'The :phone number is invalid'
-    );
+    protected $Main;
 
     /**
      * UserController constructor.
@@ -25,7 +17,7 @@ class MainController extends Controller
      */
     public function __construct(MainService $service)
     {
-        $this->Data = $service;
+        $this->Main = $service;
     }
 
     /**
@@ -35,17 +27,19 @@ class MainController extends Controller
     public function index()
     {
         try {
-            $new = $this->Data->getNew();
-            $popular = $this->Data->getPopular();
-            $category = $this->Data->getCategories();
-            $options = $this->Data->getOptions();
-            if ($new && $popular && $category && $options)
+            $new = $this->Main->getNew();
+            $popular = $this->Main->getPopular();
+            $category = $this->Main->getCategories();
+            $options = $this->Main->getOptions();
+            $most = $this->Main->getMostSell();
+            if ($new && $popular && $category && $options && $most)
                 return response()->json([
                     'error' => false,
                     'new' => $new,
                     'popular' => $popular,
                     'category' => $category,
-                    'options' => $options
+                    'options' => $options,
+                    'most' => $most
                 ], 201);
             else
                 return response()->json([

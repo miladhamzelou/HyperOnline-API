@@ -19,6 +19,7 @@ class CreateOptionsTable extends Migration
             $table->integer('off_count')->default(12);
             $table->integer('new_count')->default(12);
             $table->integer('popular_count')->default(12);
+            $table->integer('most_sell_count')->default(12);
             $table->integer('collection_count')->default(12);
             $table->integer('event_count')->default(12);
             $table->timestamps();
