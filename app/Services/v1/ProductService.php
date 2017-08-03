@@ -8,6 +8,7 @@ namespace App\Services\v1;
 use App\Common\Utility;
 use App\Product;
 use App\Seller;
+use Illuminate\Support\Facades\Log;
 
 class ProductService
 {
@@ -33,6 +34,32 @@ class ProductService
         $products = Product::with($withKeys)->where($whereClauses)->get();
 
         return $this->filterProducts($products, $withKeys);
+    }
+
+    public function getGroupProducts($parameters)
+    {
+        $index = $parameters['index'];
+        $products = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->skip(($index - 1) * 10)->take(10)->get();
+
+        $data = [];
+        foreach ($products as $product) {
+            $entry = [
+                'unique_id' => $product->unique_id,
+                'seller_id' => $product->seller_id,
+                'name' => $product->name,
+                'image' => $product->image,
+                'point' => $product->point,
+                'point_count' => $product->point_count,
+                'description' => $product->description,
+                'off' => $product->off,
+                'count' => $product->count,
+                'price' => $product->price
+            ];
+
+            $data[] = $entry;
+        }
+
+        return $products;
     }
 
     /**

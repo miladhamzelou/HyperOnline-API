@@ -5,14 +5,11 @@
 
 namespace App\Http\Controllers\v1;
 
-use App\Comment;
 use App\Http\Controllers\Controller;
-use App\Seller;
 use App\Services\v1\ProductService;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -181,6 +178,28 @@ class ProductController extends Controller
             return response()->make('', 204);
         } catch (ModelNotFoundException $e) {
             throw $e;
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function sectionLoad(Request $request)
+    {
+        $parameters = request()->input();
+
+        try {
+            if ($data = $this->Products->getGroupProducts($parameters))
+                return response()->json([
+                    'error' => false,
+                    'product' => $data
+                ], 201);
+            else
+                return response()->json([
+                    'error' => true
+                ], 201);
         } catch (Exception $e) {
             return response()->json([
                 'error' => true,
