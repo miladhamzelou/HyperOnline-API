@@ -25,10 +25,8 @@ class CategoryController extends Controller
 
     public function sectionLoad(Request $request)
     {
-        $parameters = request()->input();
-
         try {
-            if ($data = $this->Categories->getGroupCategories($parameters))
+            if ($data = $this->Categories->getGroupCategories($request))
                 return response()->json([
                     'error' => false,
                     'category' => $data

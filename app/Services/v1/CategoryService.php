@@ -15,6 +15,7 @@ class CategoryService
     {
         $index = $parameters['index'];
         $level = $parameters['level'];
+        $parent = $parameters['parent'];
 
         $data = [];
         $categories = [];
@@ -22,11 +23,15 @@ class CategoryService
         if ($level == 1) {
             $categories = Category1::orderBy('name', 'asc')->skip(($index - 1) * 10)->take(10)->get();
         } else if ($level == 2) {
-            $parent = $parameters['parent'];
-            $categories = Category2::where("parent_id", $parent)->orderBy('name', 'asc')->skip(($index - 1) * 10)->take(10)->get();
+            if ($parent != 'n')
+                $categories = Category2::where("parent_id", $parent)->orderBy('name', 'asc')->skip(($index - 1) * 10)->take(10)->get();
+            else
+                $categories = Category2::orderBy('name', 'asc')->skip(($index - 1) * 10)->take(10)->get();
         } else if ($level == 3) {
-            $parent = $parameters['parent'];
-            $categories = Category3::where("parent_id", $parent)->orderBy('name', 'asc')->skip(($index - 1) * 10)->take(10)->get();
+            if ($parent != 'n')
+                $categories = Category3::where("parent_id", $parent)->orderBy('name', 'asc')->skip(($index - 1) * 10)->take(10)->get();
+            else
+                $categories = Category3::orderBy('name', 'asc')->skip(($index - 1) * 10)->take(10)->get();
         }
 
         foreach ($categories as $category) {
