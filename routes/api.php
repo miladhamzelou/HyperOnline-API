@@ -61,3 +61,7 @@ Route::resource('/v1/orders', v1\OrderController::class, [
         'edit'
     ]
 ]);
+
+//Route::resource('/v1/categories', v1\CategoryController::class);
+
+Route::post('/v1/categories_all','v1\CategoryController@sectionLoad');
