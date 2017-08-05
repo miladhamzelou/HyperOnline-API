@@ -11,11 +11,11 @@ use App\Category3;
 
 class CategoryService
 {
-    public function getGroupCategories($parameters)
+    public function getGroupCategories($request)
     {
-        $index = $parameters['index'];
-        $level = $parameters['level'];
-        $parent = $parameters['parent'];
+        $index = $request['index'];
+        $level = $request['level'];
+        $parent = $request['parent'];
 
         $data = [];
         $categories = [];

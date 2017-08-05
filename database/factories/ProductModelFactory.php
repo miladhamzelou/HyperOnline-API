@@ -21,8 +21,9 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'point' => $faker->randomFloat(1, 0.0, 9.9),
         'point_count' => $faker->numberBetween(0, 100),
-        'confirmed'=>$faker->numberBetween(0,1),
+        'confirmed' => $faker->numberBetween(0, 1),
         'price' => $faker->numberBetween(1000, 25000),
+        'off' => $faker->numberBetween(0, 75),
         'create_date' => $date
     ];
 });
