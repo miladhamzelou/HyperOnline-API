@@ -28,18 +28,19 @@ class MainController extends Controller
     {
         try {
             $new = $this->Main->getNew();
-            $popular = $this->Main->getPopular();
+            //$popular = $this->Main->getPopular();
             $category = $this->Main->getCategories();
-            $options = $this->Main->getOptions();
-            $most = $this->Main->getMostSell();
-            if ($new && $popular && $category && $options && $most)
+            //$options = $this->Main->getOptions();
+            //$most = $this->Main->getMostSell();
+            //if ($new && $popular && $category && $options && $most)
+            if ($new && $category )
                 return response()->json([
                     'error' => false,
                     'new' => $new,
-                    'popular' => $popular,
+                    //'popular' => $popular,
                     'category' => $category,
-                    'options' => $options,
-                    'most' => $most
+                    //'options' => $options,
+                    //'most' => $most
                 ], 201);
             else
                 return response()->json([

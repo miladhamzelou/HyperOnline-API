@@ -24,7 +24,6 @@ class CreateSellersTable extends Migration
             $table->integer('open_hour');
             $table->integer('close_hour');
             $table->integer('off')->default(0);
-            $table->integer('type');
             $table->integer('closed')->default(0);
             $table->integer('confirmed')->default(0);
             $table->string('phone');
