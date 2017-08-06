@@ -8,7 +8,6 @@ namespace App\Services\v1;
 use App\Common\Utility;
 use App\Product;
 use App\Seller;
-use Illuminate\Support\Facades\Log;
 
 class ProductService
 {
@@ -39,7 +38,11 @@ class ProductService
     public function getGroupProducts($parameters)
     {
         $index = $parameters['index'];
-        $products = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->skip(($index - 1) * 10)->take(10)->get();
+        $category_id = $parameters['cat'];
+        if (strcmp($category_id, "n") == 0)
+            $products = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->skip(($index - 1) * 10)->take(10)->get();
+        else
+            $products = Product::where("confirmed", 1)->where("category_id", $category_id)->orderBy('created_at', 'desc')->skip(($index - 1) * 10)->take(10)->get();
 
         $data = [];
         foreach ($products as $product) {

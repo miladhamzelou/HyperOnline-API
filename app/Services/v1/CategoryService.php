@@ -41,7 +41,8 @@ class CategoryService
                 'image' => $category->image,
                 'point' => $category->point,
                 'point_count' => $category->point_count,
-                'off' => $category->off
+                'off' => $category->off,
+                'level' => $level
             ];
 
             $data[] = $entry;

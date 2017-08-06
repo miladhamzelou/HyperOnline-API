@@ -76,28 +76,25 @@ class MainService
     {
         $option = Option::firstOrFail();
 
-        $data = Category1::orderBy('point', 'desc')->take($option->category_count)->get();
+        $categories = Category1::orderBy('point', 'desc')->take($option->category_count)->get();
 
-        $category = [];
-        foreach ($data as $product) {
+        $data = [];
+        foreach ($categories as $category) {
             $entry = [
-                'unique_id' => $product->unique_id,
-                'seller_id' => $product->seller_id,
-                'name' => $product->name,
-                'image' => $product->image,
-                'point' => $product->point,
-                'point_count' => $product->point_count,
-                'description' => $product->description,
-                'off' => $product->off,
-                'count' => $product->count,
-                'price' => $product->price,
-                'created_at' => $product->create_date
+                'unique_id' => $category->unique_id,
+                'seller_id' => $category->seller_id,
+                'name' => $category->name,
+                'image' => $category->image,
+                'point' => $category->point,
+                'point_count' => $category->point_count,
+                'off' => $category->off,
+                'level' => 1,
             ];
 
-            $category[] = $entry;
+            $data[] = $entry;
         }
 
-        return $category;
+        return $data;
     }
 
     public function getMostSell()

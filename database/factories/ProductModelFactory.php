@@ -24,6 +24,7 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'confirmed' => $faker->numberBetween(0, 1),
         'price' => $faker->numberBetween(1000, 25000),
         'off' => $faker->numberBetween(0, 75),
+        'count' => $faker->numberBetween(0, 50),
         'create_date' => $date
     ];
 });
