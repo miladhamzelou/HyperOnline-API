@@ -22,6 +22,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'salt' => 'f29fcf9931',
         'state' => 'همدان',
         'city' => 'ملایر',
-        'create_date' => $date
+        'create_date' => $date,
+        'created_at' => \Carbon\Carbon::now()
     ];
 });

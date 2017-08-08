@@ -22,6 +22,7 @@ $factory->define(App\Author::class, function (Faker\Generator $faker) {
         'city' => $faker->city,
         'address' => $faker->address,
         'mCode' => $faker->numberBetween(1000000000, 2147483646),
-        'create_date' => $date
+        'create_date' => $date,
+        'created_at' => \Carbon\Carbon::now()
     ];
 });

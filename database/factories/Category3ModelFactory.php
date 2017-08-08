@@ -19,6 +19,7 @@ $factory->define(App\Category3::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'point' => $faker->randomFloat(1, 0.0, 9.9),
         'point_count' => $faker->numberBetween(0, 100),
-        'create_date' => $date
+        'create_date' => $date,
+        'created_at' => \Carbon\Carbon::now()
     ];
 });

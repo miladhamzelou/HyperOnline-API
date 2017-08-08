@@ -29,6 +29,7 @@ $factory->define(App\Seller::class, function (Faker\Generator $faker) {
         'city' => $faker->city,
         'create_date' => $date,
         'location_x' => $faker->latitude,
-        'location_y' => $faker->longitude
+        'location_y' => $faker->longitude,
+        'created_at' => \Carbon\Carbon::now()
     ];
 });

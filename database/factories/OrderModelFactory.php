@@ -46,6 +46,7 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'stuffs' => $stuffs,
         'stuffs_id' => $stuffs_id,
         'price' => $price,
-        'create_date' => $date
+        'create_date' => $date,
+        'created_at' => \Carbon\Carbon::now()
     ];
 });
