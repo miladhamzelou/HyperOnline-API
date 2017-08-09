@@ -29,11 +29,11 @@ class DatabaseSeeder extends Seeder
                     });
             });*/
         factory(App\User::class, 1)->create();
-        factory(App\Author::class, 5)->create();
+        factory(App\Author::class, 1)->create();
         factory(App\Category1::class, 8)->create();
         factory(App\Category2::class, 25)->create();
         factory(App\Category3::class, 50)->create();
-        factory(App\Seller::class, 10)->create();
+        factory(App\Seller::class, 1)->create();
         factory(App\Product::class, 1000)->create();
         factory(App\Order::class, 100)->create();
         factory(App\Option::class, 1)->create();

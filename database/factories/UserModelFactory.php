@@ -15,7 +15,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'unique_id' => str_random(13),
         'name' => 'آرش حاتمی',
-        'email' => 'hatamiarash7@gmail.com',
+        'code' => 'HO-1',
         'phone' => '09182180519',
         'address' => 'خیابان صدوقی',
         'encrypted_password' => 'VfwHcIswcPa6J0ZVJ9D5iKTvzXZmMjlmY2Y5OTMx',

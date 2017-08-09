@@ -14,14 +14,13 @@ $factory->define(App\Author::class, function (Faker\Generator $faker) {
 
     return [
         'unique_id' => str_random(13),
-        'name' => $faker->name,
-        'phone' => $faker->e164PhoneNumber,
-        'mobile' => $faker->e164PhoneNumber,
-        'email' => $faker->email,
-        'state' => $faker->state,
-        'city' => $faker->city,
-        'address' => $faker->address,
-        'mCode' => $faker->numberBetween(1000000000, 2147483646),
+        'name' => "Amir H.Babaei",
+        'phone' => "08138263324",
+        'mobile' => "09188167800",
+        'state' => "Hamedan",
+        'city' => "Hamedan",
+        'address' => "Mahdieh St",
+        'mCode' => "3860467174",
         'create_date' => $date,
         'created_at' => \Carbon\Carbon::now()
     ];
