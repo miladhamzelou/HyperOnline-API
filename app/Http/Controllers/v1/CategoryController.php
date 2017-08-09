@@ -26,10 +26,13 @@ class CategoryController extends Controller
     public function sectionLoad(Request $request)
     {
         try {
-            if ($data = $this->Categories->getGroupCategories($request))
+            $categories = $this->Categories->getGroupCategories($request);
+            $products = $this->Categories->getProducts($request);
+            if ($categories && $products)
                 return response()->json([
                     'error' => false,
-                    'category' => $data
+                    'category' => $categories,
+                    'product' => $products
                 ], 201);
             else
                 return response()->json([
