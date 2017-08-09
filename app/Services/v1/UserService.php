@@ -39,7 +39,7 @@ class UserService
         $final = [
             'unique_id' => $user->unique_id,
             'name' => $user->name,
-            'email' => $user->email,
+            'code' => $user->code,
             'image' => $user->image,
             'phone' => $user->phone,
             'address' => $user->address,
@@ -67,7 +67,10 @@ class UserService
         $user->encrypted_password = $hash["encrypted"];
         $user->salt = $hash["salt"];
         $user->name = $request->input('name');
-        if (app('request')->exists('email')) $user->email = $request->input('email');
+
+        $count = count(User::get()) + 1;
+        $user->code = "HO-" . $count;
+
         $user->phone = $request->input('phone');
         $user->address = $request->input('address');
         $user->state = $request->input('state');
@@ -84,7 +87,7 @@ class UserService
         $password->password = $request->input('password');
         $password->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-                          $user->save();
+        $user->save();
         $password->save();
 
         \App\Facades\CustomLog::info("User Registered : " . $user->name . " Date : " . $user->create_date, "users");
@@ -106,7 +109,7 @@ class UserService
             $final = [
                 'unique_id' => $user->unique_id,
                 'name' => $user->name,
-                'email' => $user->email,
+                'code' => $user->code,
                 'image' => $user->image,
                 'phone' => $user->phone,
                 'address' => $user->address,
@@ -129,10 +132,6 @@ class UserService
     public function updateUser($request, $id)
     {
         $user = User::where('unique_id', $id)->firstOrFail();
-
-        if (app('request')->exists('email')) $user->email = $request->input('email');
-
-        if (app('request')->exists('phone')) $user->phone = $request->input('phone');
 
         if (app('request')->exists('address')) $user->address = $request->input('address');
 
@@ -163,7 +162,7 @@ class UserService
             $entry = [
                 'unique_id' => $user->unique_id,
                 'name' => $user->name,
-                'email' => $user->email,
+                'code' => $user->code,
                 'image' => $user->image,
                 'phone' => $user->phone,
                 'address' => $user->address,
