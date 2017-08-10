@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->integer('count')->default(0);
             $table->integer('confirmed')->default(0);
             $table->integer('price');
+            $table->integer('type');
             $table->string('create_date');
             $table->string('update_date')->nullable();
             $table->timestamps();
