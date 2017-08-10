@@ -17,84 +17,15 @@ class MainService
     public function getNew()
     {
         $option = Option::firstOrFail();
-
         $data = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->take($option->new_count)->get();
-
-        $new = [];
-        foreach ($data as $product) {
-            $entry = [
-                'unique_id' => $product->unique_id,
-                'seller_id' => $product->seller_id,
-                'category_id' => $product->category_id,
-                'name' => $product->name,
-                'image' => $product->image,
-                'point' => $product->point,
-                'point_count' => $product->point_count,
-                'description' => $product->description,
-                'off' => $product->off,
-                'count' => $product->count,
-                'price' => $product->price,
-                'created_at' => $product->create_date
-            ];
-
-            $new[] = $entry;
-        }
-
-        return $new;
+        return $this->filterProduct($data);
     }
 
     public function getPopular()
     {
         $option = Option::firstOrFail();
-
         $data = Product::where("confirmed", 1)->orderBy('point', 'desc')->take($option->popular_count)->get();
-
-        $popular = [];
-        foreach ($data as $product) {
-            $entry = [
-                'unique_id' => $product->unique_id,
-                'seller_id' => $product->seller_id,
-                'category_id' => $product->category_id,
-                'name' => $product->name,
-                'image' => $product->image,
-                'point' => $product->point,
-                'point_count' => $product->point_count,
-                'description' => $product->description,
-                'off' => $product->off,
-                'count' => $product->count,
-                'price' => $product->price,
-                'created_at' => $product->create_date
-            ];
-
-            $popular[] = $entry;
-        }
-
-        return $popular;
-    }
-
-    public function getCategories()
-    {
-        $option = Option::firstOrFail();
-
-        $categories = Category1::orderBy('point', 'desc')->take($option->category_count)->get();
-
-        $data = [];
-        foreach ($categories as $category) {
-            $entry = [
-                'unique_id' => $category->unique_id,
-                'seller_id' => $category->seller_id,
-                'name' => $category->name,
-                'image' => $category->image,
-                'point' => $category->point,
-                'point_count' => $category->point_count,
-                'off' => $category->off,
-                'level' => 1,
-            ];
-
-            $data[] = $entry;
-        }
-
-        return $data;
+        return $this->filterProduct($data);
     }
 
     public function getMostSell()
@@ -125,8 +56,6 @@ class MainService
             foreach ($data as $product) {
                 $entry = [
                     'unique_id' => $product->unique_id,
-                    'seller_id' => $product->seller_id,
-                    'category_id' => $product->category_id,
                     'name' => $product->name,
                     'image' => $product->image,
                     'point' => $product->point,
@@ -135,7 +64,6 @@ class MainService
                     'off' => $product->off,
                     'count' => $product->count,
                     'price' => $product->price,
-                    'created_at' => $product->create_date
                 ];
 
                 $most[] = $entry;
@@ -143,6 +71,30 @@ class MainService
         }
 
         return $most;
+    }
+
+    public function getCategories()
+    {
+        $option = Option::firstOrFail();
+
+        $categories = Category1::orderBy('point', 'desc')->take($option->category_count)->get();
+
+        $data = [];
+        foreach ($categories as $category) {
+            $entry = [
+                'unique_id' => $category->unique_id,
+                'name' => $category->name,
+                'image' => $category->image,
+                'point' => $category->point,
+                'point_count' => $category->point_count,
+                'off' => $category->off,
+                'level' => 1,
+            ];
+
+            $data[] = $entry;
+        }
+
+        return $data;
     }
 
     public function getOptions()
@@ -162,4 +114,44 @@ class MainService
         ];
     }
 
+    public function getCollections()
+    {
+    }
+
+    public function getOffs()
+    {
+        $option = Option::firstOrFail();
+        if ($option->off == 1) {
+            $products = Product::where("confirmed", 1)
+                ->where("off", ">", 1)
+                ->orderBy("updated_at", "desc")
+                ->take($option->off_count)
+                ->get();
+            return $this->filterProduct($products);
+        } else
+            return "n";
+    }
+
+    protected function filterProduct($products)
+    {
+        $data = [];
+
+        foreach ($products as $product) {
+            $entry = [
+                'unique_id' => $product->unique_id,
+                'name' => $product->name,
+                'image' => $product->image,
+                'point' => $product->point,
+                'point_count' => $product->point_count,
+                'description' => $product->description,
+                'off' => $product->off,
+                'count' => $product->count,
+                'price' => $product->price,
+            ];
+
+            $data[] = $entry;
+        }
+
+        return $data;
+    }
 }

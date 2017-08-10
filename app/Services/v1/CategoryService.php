@@ -9,7 +9,6 @@ use App\Category1;
 use App\Category2;
 use App\Category3;
 use App\Product;
-use Illuminate\Support\Facades\Log;
 
 class CategoryService
 {
@@ -55,8 +54,8 @@ class CategoryService
 
     public function getProducts($request)
     {
-        $level = $request['level'];
-        $id = $request['id'];
+        $level = $request['level'] - 1;
+        $id = $request['parent'];
 
         $data = [];
 
@@ -66,22 +65,7 @@ class CategoryService
                 ->orderBy("created_at", "desc")
                 ->get();
 
-            foreach ($products as $product) {
-                $entry = [
-                    'unique_id' => $product->unique_id,
-                    'seller_id' => $product->seller_id,
-                    'name' => $product->name,
-                    'image' => $product->image,
-                    'point' => $product->point,
-                    'point_count' => $product->point_count,
-                    'description' => $product->description,
-                    'off' => $product->off,
-                    'count' => $product->count,
-                    'price' => $product->price
-                ];
-
-                $data[] = $entry;
-            }
+            $data = $this->filterProduct($products);
         } else if ($level == 2) {
             $categories = Category3::where("parent_id", $id)->get();
             foreach ($categories as $category) {
@@ -90,22 +74,7 @@ class CategoryService
                     ->orderBy("created_at", "desc")
                     ->get();
 
-                foreach ($products as $product) {
-                    $entry = [
-                        'unique_id' => $product->unique_id,
-                        'seller_id' => $product->seller_id,
-                        'name' => $product->name,
-                        'image' => $product->image,
-                        'point' => $product->point,
-                        'point_count' => $product->point_count,
-                        'description' => $product->description,
-                        'off' => $product->off,
-                        'count' => $product->count,
-                        'price' => $product->price
-                    ];
-
-                    $data[] = $entry;
-                }
+                $data = $this->filterProduct($products);
             }
         } else if ($level == 1) {
             $temp = [];
@@ -124,24 +93,32 @@ class CategoryService
                     ->orderBy("created_at", "desc")
                     ->get();
 
-                foreach ($products as $product) {
-                    $entry = [
-                        'unique_id' => $product->unique_id,
-                        'seller_id' => $product->seller_id,
-                        'name' => $product->name,
-                        'image' => $product->image,
-                        'point' => $product->point,
-                        'point_count' => $product->point_count,
-                        'description' => $product->description,
-                        'off' => $product->off,
-                        'count' => $product->count,
-                        'price' => $product->price
-                    ];
-
-                    $data[] = $entry;
-                }
+                $data = $this->filterProduct($products);
             }
         }
+        return $data;
+    }
+
+    protected function filterProduct($products)
+    {
+        $data = [];
+
+        foreach ($products as $product) {
+            $entry = [
+                'unique_id' => $product->unique_id,
+                'name' => $product->name,
+                'image' => $product->image,
+                'point' => $product->point,
+                'point_count' => $product->point_count,
+                'description' => $product->description,
+                'off' => $product->off,
+                'count' => $product->count,
+                'price' => $product->price,
+            ];
+
+            $data[] = $entry;
+        }
+
         return $data;
     }
 }
