@@ -188,7 +188,7 @@
                 <hr>
                 <li class="header">بخش اصلی</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active my_font"><a href="#">اطلاعات</a></li>
+                <li class="my_font"><a href="#">اطلاعات</a></li>
                 <li class="treeview">
                     <a href="#">کالا ها
                         <span class="pull-right-container">
@@ -196,8 +196,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">لیست کالا ها</a></li>
-                        <li><a href="#">کالای جدید</a></li>
+                        <li><a href="{{ url('/admin/products/create') }}">کالای جدید</a></li>
+                        <li><a href="{{ url('/admin/products') }}">لیست کالا ها</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -223,15 +223,17 @@
         <section class="content-header">
             <h1>
                 @yield('title')
-                <br><small>@yield('description')</small>
+                @if(Session::has('description'))
+                    <br>
+                    <small>@yield('description')</small>
+                @endif
             </h1>
         </section>
 
         <!-- Main content -->
         <section class="content">
             @yield('info-box')
-
-
+            @yield('list')
         </section>
         <!-- /.content -->
     </div>

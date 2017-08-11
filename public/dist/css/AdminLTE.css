@@ -3145,7 +3145,8 @@ a:focus {
 }
 
 .products-list .product-title {
-    font-weight: 600;
+    /*font-weight: 600;*/
+    font-size: large;
 }
 
 .products-list .product-description {
@@ -3165,6 +3166,10 @@ a:focus {
 
 .product-list-in-box > .item:last-of-type {
     border-bottom-width: 0;
+}
+
+.product-info > span > .label {
+    font-size: 50px;
 }
 
 /*
@@ -5348,6 +5353,8 @@ table.text-center th {
 .label-info,
 .modal-info .modal-body {
     background-color: #00c0ef !important;
+    font-size: 15px;
+    font-weight: normal;
 }
 
 .bg-blue {
