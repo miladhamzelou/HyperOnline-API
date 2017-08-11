@@ -22,4 +22,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+	
+	public function is_admin()
+    {
+        $role = $this->role;
+        if ($role == 'admin')
+            return true;
+        return false;
+    }
 }
