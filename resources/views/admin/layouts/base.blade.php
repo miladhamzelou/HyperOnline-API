@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue-light.css') }}">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -19,7 +19,7 @@
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-green-light sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
         <a href="{{ url('/') }}" class="logo">
@@ -27,9 +27,7 @@
             <span class="logo-lg"><b>Hyper</b>Online</span>
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
+
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown messages-menu">
@@ -126,7 +124,7 @@
                             <!-- The user image in the navbar-->
                             <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
@@ -165,10 +163,7 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
+
                 </ul>
             </div>
         </nav>
@@ -186,30 +181,16 @@
                 </div>
                 <div class="pull-left info">
                     <p>{{ Auth::user()->name }}</p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
                 </div>
             </div>
-
-            <!-- search form (Optional) -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">داشبورد</li>
+                <hr>
+                <li class="header">بخش اصلی</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>اطلاعات</span></a></li>
+                <li class="active my_font"><a href="#">اطلاعات</a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>کالا ها</span>
+                    <a href="#">کالا ها
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -220,7 +201,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>دسته بندی ها</span>
+                    <a href="#"><span>دسته بندی ها</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -242,16 +223,14 @@
         <section class="content-header">
             <h1>
                 @yield('title')
-                <small>@yield('description')</small>
+                <br><small>@yield('description')</small>
             </h1>
         </section>
 
         <!-- Main content -->
-        <section class="content container-fluid">
+        <section class="content">
+            @yield('info-box')
 
-            <!--------------------------
-              | Your Page Content Here |
-              -------------------------->
 
         </section>
         <!-- /.content -->
@@ -262,7 +241,7 @@
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Anything you want
+            <a href="http://arash-hatami.ir" target="_blank">Arash Hatami</a>
         </div>
         <!-- Default to the left -->
         <strong>Copyright &copy; 2017 <a href="http://hyper-online.ir">HyperOnline</a>.</strong> All rights reserved.

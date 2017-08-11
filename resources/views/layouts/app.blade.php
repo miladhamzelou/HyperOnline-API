@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <!-- Site Properties -->
-    <title>ایده شو</title>
+    <title>{{ config('app.name') }}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/mine.css')}}">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 
     <script src="{{ asset('js/npm.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app2.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/profile.js') }}"></script>
     <script src="{{ asset('js/mine.js') }}"></script>
@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand my_font" href="http://arash-hatami.ir">ایده شو</a>
+            <a class="navbar-brand my_font" href="http://arash-hatami.ir">{{ config('app.name') }}</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav my_font">
@@ -58,11 +58,6 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            @if (Auth::user()->can_post())
-                                <li>
-                                    <a class="my_font" href="{{ url('/new-idea') }}">ایده جدید</a>
-                                </li>
-                            @endif
                             <li>
                                 <a class="my_font" href="{{ url('/profile') }}">پروفایل</a>
                             </li>

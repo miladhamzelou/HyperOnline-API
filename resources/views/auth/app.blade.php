@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ایده شو</title>
+    <title>{{ config('app.name') }}</title>
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand my_font" href="http://arash-hatami.ir">ایده شو</a>
+            <a class="navbar-brand my_font" href="http://arash-hatami.ir">{{ config('app.name') }}</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav my_font">
@@ -87,7 +87,7 @@
         @yield('content')
     </div>
 </div>
-<script src="{{ asset('/js/app.css') }}"></script>
+<script src="{{ asset('/js/app2.css') }}"></script>
 <script src="{{ asset('/js/bootstrap.min.css') }}"></script>
 <script src="{{ asset('/js/npm.css') }}"></script>
 <script src="{{ asset('/js/jquery.min.css') }}"></script>

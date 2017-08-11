@@ -9,12 +9,12 @@
                 <hr class="colorgraph">
                 <br>
 
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input id="email" type="email" class="my_font form-control" style="text-align: center" name="email"
-                           value="{{ old('email') }}" placeholder="آدرس ایمیل" required>
+                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                    <input id="phone" type="tel" class="my_font form-control" style="text-align: center" name="phone"
+                           value="{{ old('phone') }}" placeholder="شماره تلفن" required>
 
-                    @if ($errors->has('email'))
-                        <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+                    @if ($errors->has('phone'))
+                        <span class="help-block"><strong>{{ $errors->first('phone') }}</strong></span>
                     @endif
                 </div>
 
@@ -27,24 +27,10 @@
                     @endif
                 </div>
 
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"
-                                   name="remember" {{ old('remember') ? 'checked' : '' }}>
-                            Remember Me :)
-                        </label>
-                    </div>
-                </div>
-
+                <br>
                 <div class="form-group">
                     <button type="submit" class="my_font btn btn-block btn3d btn-lg btn-info">ورود</button>
                 </div>
-
-                <a class="btn btn-link btn-block my_font" href="{{ route('password.request') }}">رمز عبور خود را فراموش
-                    کرده
-                    اید
-                    ؟</a>
             </form>
             <br>
             <div class="flex-center">
