@@ -49,7 +49,7 @@ class MainService
     public function getMostSell()
     {
         $option = Option::firstOrFail();
-        if ($option->most) {
+        if ($option->most_sell) {
             $orders = Order::get();
             $all_stuffs = array();
             foreach ($orders as $order) {
@@ -127,19 +127,15 @@ class MainService
      */
     public function getOptions()
     {
-        $has_event = 0;
-        $has_collection = 0;
-        $data = Category1::get();
-
-        foreach ($data as $product) {
-            if ($product->type == 2) $has_event = 1;
-            if ($product->type == 1) $has_collection = 1;
-        }
-
-        return [
-            'event' => $has_event,
-            'collection' => $has_collection
+        $option = Option::firstOrFail();
+        $data = [
+            'o' => $option->off,
+            'n' => $option->new,
+            'm' => $option->most,
+            'p' => $option->popular,
+            'c' => $option->collection
         ];
+        return $data;
     }
 
     /**

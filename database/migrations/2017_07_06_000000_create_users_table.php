@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->text('address');
             $table->string('encrypted_password');
             $table->string('salt');
+            $table->string('password');
             $table->integer('wallet')->default(0);
             $table->string('state');
             $table->string('city');
@@ -32,6 +33,9 @@ class CreateUsersTable extends Migration
             $table->string('location_y')->nullable();
             $table->string('create_date');
             $table->string('update_date')->nullable();
+            $table->boolean('active')->default(true);
+            $table->enum('role', ['admin', 'user', 'guest'])->default('user');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -32,24 +32,24 @@ class RegisterController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
+        require(app_path() . '/Common/jdf.php');
         $this->middleware('guest');
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -57,15 +57,68 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
+        $count = count(User::get()) + 1;
+        $hash = $this->hashSSHA($data['password']);
+
         return User::create([
+            'unique_id' => uniqid('', false),
+            'code' => "HO-" . $count,
             'name' => $data['name'],
-            'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
+            'salt' => $hash["salt"],
+            'encrypted_password' => $hash["encrypted"],
+            'address' => "hamedan",
+            'state' => "hamedan",
+            'city' => "hamedan",
+            'create_date' => $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime())
         ]);
+    }
+
+    /**
+     * @param $password
+     * @return array
+     */
+    public function hashSSHA($password)
+    {
+        $salt = sha1(rand());
+        $salt = substr($salt, 0, 10);
+        $encrypted = base64_encode(sha1($password . $salt, true) . $salt);
+        $hash = array("salt" => $salt, "encrypted" => $encrypted);
+        return $hash;
+    }
+
+    protected function getCurrentTime()
+    {
+        $now = date("Y-m-d", time());
+        $time = date("H:i:s", time());
+        return $now . ' ' . $time;
+    }
+
+    protected function getDate($date)
+    {
+        $now = explode(' ', $date)[0];
+        $time = explode(' ', $date)[1];
+        list($year, $month, $day) = explode('-', $now);
+        list($hour, $minute, $second) = explode(':', $time);
+        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+        $date = jDate("Y/m/d", $timestamp);
+        return $date;
+    }
+
+    protected function getTime($date)
+    {
+        $now = explode(' ', $date)[0];
+        $time = explode(' ', $date)[1];
+        list($year, $month, $day) = explode('-', $now);
+        list($hour, $minute, $second) = explode(':', $time);
+        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+        $date = jDate("H:i", $timestamp);
+        return $date;
     }
 }
