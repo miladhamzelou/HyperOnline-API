@@ -59,6 +59,11 @@ class UserController extends Controller
             'product_count' => $product_count,
             'order_count' => $order_count,
             'user_count' => $user_count);
-        return View::make('admin.dashboard')->with($data);
+        $weeks = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+        $orders = ['12', '25', '14', '21', '5', '16', '14'];
+        return View::make('admin.dashboard')
+            ->with($data)
+            ->with($weeks)
+            ->with($orders);
     }
 }
