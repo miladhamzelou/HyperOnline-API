@@ -234,7 +234,8 @@
         <!-- Main content -->
         <section class="content">
             @yield('info-box')
-            @yield('chart')
+            @yield('order-chart')
+            @yield('reports')
             @yield('list')
             @yield('add')
             @yield('edit')

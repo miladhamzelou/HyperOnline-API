@@ -13,7 +13,7 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
                         <span class="info-box-icon bg-red">
-                            <i class="icon fa fa-sitemap"></i>
+                            <i class="icon ion ion-ios-pricetags-outline"></i>
                         </span>
                 <div class="info-box-content">
                     <span class="info-box-text">دسته بندی ها</span>
@@ -37,7 +37,7 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
                         <span class="info-box-icon bg-aqua">
-                            <i class="icon fa fa-shopping-basket"></i>
+                            <i class="icon ion-ios-cart"></i>
                         </span>
                 <div class="info-box-content">
                     <span class="info-box-text">سفارشات</span>
@@ -60,21 +60,164 @@
     </div>
 @endsection
 
-@section('chart')
+@section('order-chart')
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h2 class="box-title">گزارشات سفارش ها</h2>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div>
+                            {!! $priceChart->render() !!}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        {!! $countChart->render() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('reports')
     <div class="row">
-        <div class="col-lg-8 col-centered center-block" style="float: none;">
-            <div class="box box-info">
+        <div class="col-lg-3">
+            <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h2 class="box-title">New Product</h2>
+                    <h2 class="box-title">جدیدترین مشتری ها</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
                     <div class="box-body">
-                        <div>
-                            {!! $chart->render() !!}
+                        <div class="table-responsive">
+                            <table class="table no-margin">
+                                <thead>
+                                <tr>
+                                    <th style="font-size:17px; text-align: right; direction: rtl;">آدرس</th>
+                                    <th style="font-size:17px; text-align: right; direction: rtl;">شماره تماس</th>
+                                    <th style="font-size:17px; text-align: right; direction: rtl;">نام</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($users as $user)
+                                    <tr>
+                                        <td style="text-align: right; direction: rtl;">{{ $user->address }}</td>
+                                        </td>
+                                        <td style="text-align: right; direction: rtl;">{{ $user->phone }}</td>
+                                        <td style="text-align: right; direction: rtl;"><a
+                                                    href="{{ url('/admin/users/'.$user->unique_id) }}">{{ $user->name }}</a>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h2 class="box-title">آخرین سفارشات</h2>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table no-margin">
+                                <thead>
+                                <tr>
+                                    <th style="font-size:17px; text-align: right; direction: rtl;">قیمت</th>
+                                    <th style="font-size:17px; text-align: right; direction: rtl;">محصولات</th>
+                                    <th style="font-size:17px; text-align: right; direction: rtl;">نام مشتری</th>
+                                    <th style="font-size:17px; text-align: right; direction: rtl;">کد سفارش</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td style="text-align: right; direction: rtl;">{{ $order->price }} تومان</td>
+                                        <td style="text-align: right; direction: rtl;">{{ $order->stuffs }}</td>
+                                        <td style="text-align: right; direction: rtl;">
+                                            <a href="{{ url('/admin/users/'.$order->user_id) }}">
+                                                {{ $order->user_name }}
+                                            </a>
+                                        </td>
+                                        <td style="text-align: right; direction: rtl;">
+                                            <a href="{{ url('/admin/orders/'.$order->unique_id) }}">
+                                                {{ $order->code }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h2 class="box-title">جدیدترین محصولات</h2>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="box-body">
+                        @if(!$products->count())
+                            <p>There is no products</p>
+                        @else
+                            <ul class="products-list products-list-in-box">
+                                @foreach($products as $product)
+                                    <li class="item">
+                                        <div class="product-img">
+                                            @if(!$product->image)
+                                                <img src="{{ asset('dist/img/default-50x50.gif') }}"
+                                                     alt="{{ $product->name }}">
+                                            @else
+                                                <img src="{{ asset('img/product/' . $product->image) }}"
+                                                     alt="{{ $product->name }}">
+                                            @endif
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="{{ url('/admin/products/'.$product->unique_id) }}"
+                                               class="product-title">
+                                                {{ $product->name }}
+                                                <span class="label label-info pull-right"
+                                                      style="font-weight:normal; font-size:15px; direction: rtl">
+                                                    {{ $product->price }} تومان</span>
+                                                <br>
+                                                <span class="label label-danger pull-right"
+                                                      style="font-weight:normal; font-size:15px; direction: rtl">
+                                                    تعداد : {{ $product->count }}</span>
+                                            </a>
+                                            @if($product->description!="null")
+                                                <span class="product-description">
+                                            {{ $product->description }}
+                                        </span>
+                                            @endif
+                                        </div>
+                                    </li>
+                                    <br>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>

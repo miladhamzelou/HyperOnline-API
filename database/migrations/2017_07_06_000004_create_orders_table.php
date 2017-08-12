@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateOrdersTable extends Migration
 {
@@ -17,12 +17,14 @@ class CreateOrdersTable extends Migration
             $table->string('unique_id', 13)->primary()->unique()->index();
             $table->string('seller_id', 13);
             $table->string('user_id', 13);
+            $table->string('code');
             $table->string('seller_name');
             $table->string('user_name');
             $table->string('user_phone');
             $table->text('stuffs');
             $table->text('stuffs_id');
             $table->integer('price');
+            $table->enum('status', ['abort', 'pending', 'shipped', 'delivered'])->default('pending');
             $table->text('description')->nullable();
             $table->string('create_date');
             $table->string('update_date')->nullable();

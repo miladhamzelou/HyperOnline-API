@@ -56,6 +56,7 @@ class UserController extends Controller
         $days = [];
         $dates = [];
         $prices = [];
+        $counts = [];
         $current_month = date('Y-m');
 
         for ($i = 1; $i <= 31; $i++) {
@@ -70,16 +71,20 @@ class UserController extends Controller
 
         foreach ($dates as $date) {
             $total = 0;
+            $count = 0;
             foreach ($orders as $order) {
                 $converted = explode(' ', $order->created_at)[0];
-                if (!strcmp($date, $converted))
+                if (!strcmp($date, $converted)) {
                     $total += intval($order->price);
+                    $count++;
+                }
             }
             $prices[] = strval($total);
+            $counts[] = $count;
         }
 
-        $chart = app()->chartjs
-            ->name('test')
+        $priceChart = app()->chartjs
+            ->name('prices')
             ->type('line')
             ->size(['width' => 1200, 'height' => 300])
             ->labels($days)
@@ -95,7 +100,35 @@ class UserController extends Controller
                     "data" => $prices
                 ]
             ])
+            ->options([
+                "fontFamily" => "Arial",
+                "fontColor" => "#666"
+            ]);
+
+        $countChart = app()->chartjs
+            ->name('counts')
+            ->type('line')
+            ->size(['width' => 1200, 'height' => 300])
+            ->labels($days)
+            ->datasets([
+                [
+                    "label" => "Total Count",
+                    "backgroundColor" => "rgba(110,38,186,0.31)",
+                    "borderColor" => "rgba(110,38,186,0.7)",
+                    "pointBorderColor" => "rgba(110,38,186,0.7)",
+                    "pointBackgroundColor" => "rgba(110,38,186,0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    "data" => $counts
+                ]
+            ])
             ->options([]);
+
+        //TODO: filter outputs
+        $users = User::orderBy("created_at", "desc")->take(5)->get();
+        $orders = Order::orderBy("created_at", "desc")->take(5)->get();
+        $products = Product::orderBy("created_at", "desc")->take(5)->get();
+
         return view('admin.dashboard', compact(
             'title',
             'description',
@@ -103,7 +136,11 @@ class UserController extends Controller
             'product_count',
             'order_count',
             'user_count',
-            'chart'
+            'priceChart',
+            'countChart',
+            'users',
+            'orders',
+            'products'
         ));
     }
 }

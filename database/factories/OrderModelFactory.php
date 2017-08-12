@@ -3,7 +3,11 @@
  * Copyright (c) 2017 - All Rights Reserved - Arash Hatami
  */
 
-$factory->define(App\Order::class, function (Faker\Generator $faker) {
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Order::class, function (Faker\Generator $faker) use ($autoIncrement) {
+    $autoIncrement->next();
+
     $sellers = \App\Seller::all()->pluck('unique_id')->toArray();
     $users = \App\User::all()->pluck('unique_id')->toArray();
 
@@ -36,17 +40,26 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
     $stuffs = ltrim($stuffs, '-');
     $stuffs_id = ltrim($stuffs_id, '-');
 
+    $status = ['abort', 'pending', 'shipped', 'delivered'];
     return [
         'unique_id' => str_random(13),
         'seller_id' => $seller,
         'user_id' => $user,
+        'code' => "HOS-" . strval($autoIncrement->current()),
         'seller_name' => $seller_name,
         'user_name' => $user_name,
         'user_phone' => $user_phone,
         'stuffs' => $stuffs,
         'stuffs_id' => $stuffs_id,
         'price' => $price,
+        'status' => $faker->randomElement($status),
         'create_date' => $date,
         'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
     ];
 });
+
+function autoIncrement()
+{
+    for ($i = 1; $i < 101; $i++)
+        yield $i;
+}

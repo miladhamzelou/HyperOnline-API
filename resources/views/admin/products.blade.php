@@ -35,10 +35,10 @@
                                             <a href="{{ url('/admin/products/'.$product->unique_id) }}"
                                                class="product-title">
                                                 {{ $product->name }}
-                                                <span class="label label-info pull-right" style="direction: rtl">
+                                                <span class="label label-info pull-right" style="font-weight:normal; font-size:15px; direction: rtl">
                                                     {{ $product->price }} تومان</span>
                                                 <br>
-                                                <span class="label label-danger pull-right" style="direction: rtl">
+                                                <span class="label label-danger pull-right" style="font-weight:normal; font-size:15px; direction: rtl">
                                                     تعداد : {{ $product->count }}</span>
                                             </a>
                                             @if($product->description!="null")
