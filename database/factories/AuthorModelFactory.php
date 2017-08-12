@@ -22,6 +22,6 @@ $factory->define(App\Author::class, function (Faker\Generator $faker) {
         'address' => "Mahdieh St",
         'mCode' => "3860467174",
         'create_date' => $date,
-        'created_at' => \Carbon\Carbon::now()
+        'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = '-29 days')
     ];
 });

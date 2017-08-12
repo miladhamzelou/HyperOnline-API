@@ -47,6 +47,6 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'stuffs_id' => $stuffs_id,
         'price' => $price,
         'create_date' => $date,
-        'created_at' => \Carbon\Carbon::now()
+        'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
     ];
 });

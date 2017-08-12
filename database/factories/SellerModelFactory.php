@@ -27,6 +27,6 @@ $factory->define(App\Seller::class, function (Faker\Generator $faker) {
         'create_date' => $date,
         'location_x' => $faker->latitude,
         'location_y' => $faker->longitude,
-        'created_at' => \Carbon\Carbon::now()
+        'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = '-29 days')
     ];
 });

@@ -20,6 +20,6 @@ $factory->define(App\Category2::class, function (Faker\Generator $faker) {
         'point' => $faker->randomFloat(1, 0.0, 9.9),
         'point_count' => $faker->numberBetween(0, 100),
         'create_date' => $date,
-        'created_at' => \Carbon\Carbon::now()
+        'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = '-29 days')
     ];
 });
