@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue-light.css') }}">
+    @yield('custom-css')
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -233,6 +234,7 @@
         <!-- Main content -->
         <section class="content">
             @yield('info-box')
+            @yield('chart')
             @yield('list')
             @yield('add')
             @yield('edit')
@@ -255,7 +257,7 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-@yield('custom-js)
+@yield('custom-js')
 <!-- jQuery 3 -->
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -264,6 +266,7 @@
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
 <script src="{{ asset('bower_components/fastclick/lib/fastclick.js') }}"></script>
+<script src="{{ asset('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

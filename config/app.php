@@ -176,7 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        // mine
         App\Providers\v1\CommentServiceProvider::class,
         App\Providers\v1\LoginServiceProvider::class,
         App\Providers\v1\SellerServiceProvider::class,
@@ -184,9 +184,9 @@ return [
         App\Providers\v1\OrderServiceProvider::class,
         App\Providers\v1\ProductServiceProvider::class,
         App\Providers\v1\MainServiceProvider::class,
-
         App\Providers\LogProvider::class,
-
+        // libraries
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
     ],
 
     /*

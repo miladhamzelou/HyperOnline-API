@@ -60,52 +60,28 @@
     </div>
 @endsection
 
+@section('chart')
+    <div class="row">
+        <div class="col-lg-8 col-centered center-block" style="float: none;">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h2 class="box-title">New Product</h2>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="box-body">
+                        <div>
+                            {!! $chart->render() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
 @section('custom-js')
-    <script>
-        var salesChartCanvas = $('#ordersChart').get(0).getContext('2d');
-        var salesChart = new Chart(salesChartCanvas);
-        var salesChartData = {
-            labels: [
-                @foreach($weeks as $week)
-                    '{{ $week }}',
-                @endforeach
-            ],
-            datasets: [
-                {
-                    label: 'Products',
-                    fillColor: 'rgb(210, 214, 222)',
-                    strokeColor: 'rgb(210, 214, 222)',
-                    pointColor: 'rgb(210, 214, 222)',
-                    pointStrokeColor: '#c1c7d1',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgb(220,220,220)',
-                    data: [
-                        @foreach($orders as $order)
-                        {{ $order }},
-                        @endforeach
-                    ]
-                }
-            ]
-        };
-        var salesChartOptions = {
-            showScale: true,
-            scaleShowGridLines: false,
-            scaleGridLineColor: 'rgba(0,0,0,.05)',
-            scaleGridLineWidth: 1,
-            scaleShowHorizontalLines: true,
-            scaleShowVerticalLines: true,
-            bezierCurve: true,
-            bezierCurveTension: 0.3,
-            pointDot: false,
-            pointDotRadius: 4,
-            pointDotStrokeWidth: 1,
-            pointHitDetectionRadius: 20,
-            datasetStroke: true,
-            datasetStrokeWidth: 2,
-            datasetFill: true,
-            maintainAspectRatio: true,
-            responsive: true
-        };
-        salesChart.Line(salesChartData, salesChartOptions);
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
 @endsection

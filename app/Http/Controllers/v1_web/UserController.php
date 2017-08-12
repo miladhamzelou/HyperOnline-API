@@ -12,7 +12,6 @@ use App\Product;
 use App\Services\v1\UserService;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -53,17 +52,58 @@ class UserController extends Controller
         $product_count = count(Product::get());
         $order_count = count(Order::get());
         $user_count = count(User::get());
-        $data = array('title' => $title,
-            'description' => $description,
-            'category_count' => $category_count,
-            'product_count' => $product_count,
-            'order_count' => $order_count,
-            'user_count' => $user_count);
-        $weeks = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-        $orders = ['12', '25', '14', '21', '5', '16', '14'];
-        return View::make('admin.dashboard')
-            ->with($data)
-            ->with($weeks)
-            ->with($orders);
+
+        $days = [];
+        $dates = [];
+        $prices = [];
+        $current_month = date('Y-m');
+
+        for ($i = 1; $i <= 31; $i++) {
+            $days[] = $i;
+            // convert to 2 digit day
+            if (strlen($i) == 1)
+                $i = '0' . $i;
+            $dates[] = $current_month . '-' . $i;
+        }
+
+        $orders = Order::orderBy("created_at", "desc")->get();
+
+        foreach ($dates as $date) {
+            $total = 0;
+            foreach ($orders as $order) {
+                $converted = explode(' ', $order->created_at)[0];
+                if (!strcmp($date, $converted))
+                    $total += intval($order->price);
+            }
+            $prices[] = strval($total);
+        }
+
+        $chart = app()->chartjs
+            ->name('test')
+            ->type('line')
+            ->size(['width' => 1200, 'height' => 300])
+            ->labels($days)
+            ->datasets([
+                [
+                    "label" => "Total Price",
+                    "backgroundColor" => "rgba(38,185,154,0.31)",
+                    "borderColor" => "rgba(38,185,154,0.7)",
+                    "pointBorderColor" => "rgba(38,185,154,0.7)",
+                    "pointBackgroundColor" => "rgba(38,185,154,0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    "data" => $prices
+                ]
+            ])
+            ->options([]);
+        return view('admin.dashboard', compact(
+            'title',
+            'description',
+            'category_count',
+            'product_count',
+            'order_count',
+            'user_count',
+            'chart'
+        ));
     }
 }
