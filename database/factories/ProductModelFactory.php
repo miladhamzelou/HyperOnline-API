@@ -27,6 +27,6 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'count' => $faker->numberBetween(0, 50),
         'type' => 0,
         'create_date' => $date,
-        'created_at' => \Carbon\Carbon::now()
+        'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
     ];
 });

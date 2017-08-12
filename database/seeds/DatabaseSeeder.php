@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
                     });
             });*/
-        //factory(App\User::class, 1)->create();
+        factory(App\User::class, 1)->create();
         factory(App\Author::class, 1)->create();
         factory(App\Category1::class, 8)->create();
         factory(App\Category2::class, 25)->create();

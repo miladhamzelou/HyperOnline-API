@@ -188,7 +188,7 @@
                 <hr>
                 <li class="header">بخش اصلی</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="my_font"><a href="#">اطلاعات</a></li>
+                <li class="my_font"><a href="{{ url('/admin') }}">اطلاعات</a></li>
                 <li class="treeview">
                     <a href="#">کالا ها
                         <span class="pull-right-container">
@@ -207,8 +207,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">لیست دسته بندی ها</a></li>
-                        <li><a href="#">دسته بندی جدید</a></li>
+                        <li><a href="{{ url('/admin/categories/create') }}">دسته بندی جدید</a></li>
+                        <li><a href="{{ url('/admin/categories') }}">لیست دسته بندی ها</a></li>
                     </ul>
                 </li>
             </ul>

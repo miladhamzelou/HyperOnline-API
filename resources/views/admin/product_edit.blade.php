@@ -149,7 +149,7 @@
                             <br>
                             <div class="form-group">
                                 <input type="submit" tabindex="7" name="publish"
-                                       class="my_font btn center-block btn3d btn-lg btn-danger" value="Submit">
+                                       class="my_font btn center-block btn3d btn-lg btn-warning" value="Submit">
                             </div>
                         </form>
                     </div>

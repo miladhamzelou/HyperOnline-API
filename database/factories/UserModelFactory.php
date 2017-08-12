@@ -18,11 +18,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'code' => 'HO-1',
         'phone' => '09182180519',
         'address' => 'خیابان صدوقی',
-        'encrypted_password' => 'VfwHcIswcPa6J0ZVJ9D5iKTvzXZmMjlmY2Y5OTMx',
-        'salt' => 'f29fcf9931',
+        'encrypted_password' => '761CC5lvW+K7DJNi2pN13gx1/rw3MzkyYWNjMGVh',
+        'salt' => '7392acc0ea',
+        'password' => '$2y$10$aQ8N5yFeQ1BC.xN/1dQnrehQg43hg75pxNWglZ9CuOwDmEseRcSQa',
         'state' => 'همدان',
         'city' => 'ملایر',
+        'role' => 'admin',
         'create_date' => $date,
+        'active' => '1',
         'created_at' => \Carbon\Carbon::now()
     ];
 });
