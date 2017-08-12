@@ -90,6 +90,56 @@ class ProductController extends Controller
         return redirect('/admin/products')->withMessage($message);
     }
 
+    public function edit($id)
+    {
+        $product = Product::where("unique_id", $id)->firstOrFail();
+        $seller2 = Seller::where("unique_id", $product->seller_id)->firstOrFail();
+        $category2 = Category3::where("unique_id", $product->category_id)->firstOrFail();
+        $sellers_list = array();
+        $sellers = Seller::where("confirmed", 1)->get();
+        foreach ($sellers as $seller)
+            array_push($sellers_list, $seller->name);
+        $categories_list = array();
+        $categories = Category3::get();
+        foreach ($categories as $category)
+            array_push($categories_list, $category->name);
+
+        if (Auth::user()->Role() == "admin") {
+            return view('admin.product_edit')
+                ->withTitle("Edit Product")
+                ->withProduct($product)
+                ->withSellers($sellers_list)
+                ->withSeller_selected($seller2->name)
+                ->withCategories($categories_list)
+                ->withCategory_selected($category2->name);
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
+    }
+
+    public function update(Request $request)
+    {
+        $product = Product::where("unique_id", $request->get('unique_id'))->firstOrFail();
+        if ($product && Auth::user()->Role() == "admin") {
+            $seller = Seller::where("name", $request->get('seller'))->firstOrFail()->unique_id;
+            $category = Category3::where("name", $request->get('category'))->firstOrFail()->unique_id;
+
+            $product->name = $request->get('name');
+            $product->seller_id = $seller;
+            $product->category_id = $category;
+            $product->description = $request->get('description');
+            $product->count = $request->get('count');
+            $product->price = $request->get('price');
+            $product->type = $request->get('type');
+
+            $product->save();
+            $message = "product updated";
+            return redirect('/admin/products')->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
+    }
+
     protected function getCurrentTime()
     {
         $now = date("Y-m-d", time());
