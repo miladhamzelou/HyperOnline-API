@@ -36,8 +36,10 @@
                                                class="product-title">
                                                 {{ $product->name }}
                                                 <span class="label label-info pull-right" style="direction: rtl">
-                                            {{ $product->price }} تومان
-                                        </span>
+                                                    {{ $product->price }} تومان</span>
+                                                <br>
+                                                <span class="label label-danger pull-right" style="direction: rtl">
+                                                    تعداد : {{ $product->count }}</span>
                                             </a>
                                             @if($product->description!="null")
                                                 <span class="product-description">

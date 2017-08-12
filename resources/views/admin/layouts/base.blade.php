@@ -234,6 +234,8 @@
         <section class="content">
             @yield('info-box')
             @yield('list')
+            @yield('add')
+            @yield('edit')
         </section>
         <!-- /.content -->
     </div>
@@ -246,7 +248,8 @@
             <a href="http://arash-hatami.ir" target="_blank">Arash Hatami</a>
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2017 <a href="http://hyper-online.ir">HyperOnline</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2017 <a href="http://hyper-online.ir" target="_blank">HyperOnline</a>.</strong> All
+        rights reserved.
     </footer>
 </div>
 <!-- ./wrapper -->

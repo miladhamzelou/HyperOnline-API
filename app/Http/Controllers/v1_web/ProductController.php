@@ -13,8 +13,10 @@
 namespace app\Http\Controllers\v1_web;
 
 
+use App\Category3;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Seller;
 use App\Services\v1\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,8 +48,21 @@ class ProductController extends Controller
     {
         if (Auth::user()->Role() == "admin") {
             $title = "Create New Product";
+
+            $sellers_list = array();
+            $sellers = Seller::where("confirmed", 1)->get();
+            foreach ($sellers as $seller)
+                array_push($sellers_list, $seller->name);
+
+            $categories_list = array();
+            $categories = Category3::get();
+            foreach ($categories as $category)
+                array_push($categories_list, $category->name);
+
             return view('admin.product_create')
-                ->withTitle($title);
+                ->withTitle($title)
+                ->withSellers($sellers_list)
+                ->withCategories($categories_list);
         } else
             return redirect('/')
                 ->withErrors('Unauthorized Access');
@@ -56,11 +71,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product();
+        $seller = Seller::where("name", $request->get('seller'))->firstOrFail()->unique_id;
+        $category = Category3::where("name", $request->get('category'))->firstOrFail()->unique_id;
 
         $product->unique_id = uniqid('', false);
         $product->name = $request->get('name');
-        $product->seller_id = $request->get('seller_id');
-        $product->category_id = $request->get('category_id');
+        $product->seller_id = $seller;
+        $product->category_id = $category;
         $product->description = $request->get('description');
         $product->count = $request->get('count');
         $product->price = $request->get('price');
