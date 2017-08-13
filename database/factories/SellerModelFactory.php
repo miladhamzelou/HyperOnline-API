@@ -24,6 +24,7 @@ $factory->define(App\Seller::class, function (Faker\Generator $faker) {
         'phone' => "08138263324",
         'state' => "Hamedan",
         'city' => "Hamedan",
+        'confirmed' => '1',
         'create_date' => $date,
         'location_x' => $faker->latitude,
         'location_y' => $faker->longitude,
