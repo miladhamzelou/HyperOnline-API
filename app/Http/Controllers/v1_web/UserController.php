@@ -124,10 +124,14 @@ class UserController extends Controller
             ])
             ->options([]);
 
-        //TODO: filter outputs
         $users = User::orderBy("created_at", "desc")->take(5)->get();
         $orders = Order::orderBy("created_at", "desc")->take(5)->get();
         $products = Product::orderBy("created_at", "desc")->take(5)->get();
+
+        //TODO: filter outputs
+        //$users = $this->filterUser($users);
+        //$orders = $this->filterOrder($orders);
+        //$products = $this->filterProduct($products);
 
         return view('admin.dashboard', compact(
             'title',
@@ -142,5 +146,70 @@ class UserController extends Controller
             'orders',
             'products'
         ));
+    }
+
+    protected function filterUser($users)
+    {
+//        $data = [];
+        $data = array();
+        foreach ($users as $user) {
+            $entry = [
+                'unique_id' => $user->unique_id,
+                'name' => $user->name,
+                'phone' => $user->phone,
+                'address' => $user->address
+            ];
+//            $data[] = $entry;
+            array_push($data, $entry);
+        }
+        return $data;
+    }
+
+    protected function filterOrder($orders)
+    {
+        $data = [];
+        foreach ($orders as $order) {
+            $entry = [
+                'unique_id' => $order->unique_id,
+                'code' => $order->code,
+                'seller_name' => $order->seller_name,
+                'seller_id' => $order->seller_id,
+                'stuffs' => $order->stuffs,
+                'price' => $this->formatMoney($order->price)
+            ];
+            $data[] = $entry;
+        }
+        return $data;
+    }
+
+    protected function filterProduct($products)
+    {
+        $data = [];
+        foreach ($products as $product) {
+            $entry = [
+                'unique_id' => $product->unique_id,
+                'name' => $product->name,
+                'image' => $product->image,
+                'description' => $product->description,
+                'price' => $this->formatMoney($product->price),
+                'count' => $product->count
+            ];
+            $data[] = $entry;
+        }
+        return $data;
+    }
+
+    protected function formatMoney($number, $fractional = false)
+    {
+        if ($fractional)
+            $number = sprintf('%.2f', $number);
+        while (true) {
+            $replaced = preg_replace('/(-?\d+)(\d\d\d)/', '$1,$2', $number);
+            if ($replaced != $number)
+                $number = $replaced;
+            else
+                break;
+        }
+        return $number;
     }
 }

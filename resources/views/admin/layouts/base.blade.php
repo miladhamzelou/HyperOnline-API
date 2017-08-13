@@ -190,6 +190,7 @@
                 <li class="header">بخش اصلی</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="my_font"><a href="{{ url('/admin') }}">اطلاعات</a></li>
+
                 <li class="treeview">
                     <a href="#">کالا ها
                         <span class="pull-right-container">
@@ -201,6 +202,7 @@
                         <li><a href="{{ url('/admin/products') }}">لیست کالا ها</a></li>
                     </ul>
                 </li>
+
                 <li class="treeview">
                     <a href="#"><span>دسته بندی ها</span>
                         <span class="pull-right-container">
@@ -212,6 +214,58 @@
                         <li><a href="{{ url('/admin/categories') }}">لیست دسته بندی ها</a></li>
                     </ul>
                 </li>
+
+                <li class="treeview">
+                    <a href="#">فروشنده ها
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/authors/create') }}">کالای جدید</a></li>
+                        <li><a href="{{ url('/admin/authors') }}">لیست کالا ها</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">فروشگاه ها
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/sellers/create') }}">کالای جدید</a></li>
+                        <li><a href="{{ url('/admin/sellers') }}">لیست کالا ها</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">کاربران
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/users/create') }}">کالای جدید</a></li>
+                        <li><a href="{{ url('/admin/users') }}">لیست کالا ها</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">سفارشات
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/orders/create') }}">کالای جدید</a></li>
+                        <li><a href="{{ url('/admin/orders') }}">لیست کالا ها</a></li>
+                    </ul>
+                </li>
+
+                <hr>
+                <li class="header">تنظیمات</li>
+                <li class="my_font"><a href="{{ url('/admin/database') }}">‍‍پایگاه داده</a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
