@@ -222,8 +222,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/authors/create') }}">کالای جدید</a></li>
-                        <li><a href="{{ url('/admin/authors') }}">لیست کالا ها</a></li>
+                        <li><a href="{{ url('/admin/authors/create') }}">فروشنده جدید</a></li>
+                        <li><a href="{{ url('/admin/authors') }}">لیست فروشنده ها</a></li>
                     </ul>
                 </li>
 
@@ -234,8 +234,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/sellers/create') }}">کالای جدید</a></li>
-                        <li><a href="{{ url('/admin/sellers') }}">لیست کالا ها</a></li>
+                        <li><a href="{{ url('/admin/sellers/create') }}">فروشگاه جدید</a></li>
+                        <li><a href="{{ url('/admin/sellers') }}">لیست فروشگاه ها</a></li>
                     </ul>
                 </li>
 
@@ -246,8 +246,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/users/create') }}">کالای جدید</a></li>
-                        <li><a href="{{ url('/admin/users') }}">لیست کالا ها</a></li>
+                        <li><a href="{{ url('/admin/users/create') }}">کاربر جدید</a></li>
+                        <li><a href="{{ url('/admin/users') }}">لیست کاربر ها</a></li>
                     </ul>
                 </li>
 
@@ -258,8 +258,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/orders/create') }}">کالای جدید</a></li>
-                        <li><a href="{{ url('/admin/orders') }}">لیست کالا ها</a></li>
+                        <li><a href="{{ url('/admin/orders/create') }}">سفارش جدید</a></li>
+                        <li><a href="{{ url('/admin/orders') }}">لیست سفارش ها</a></li>
                     </ul>
                 </li>
 
