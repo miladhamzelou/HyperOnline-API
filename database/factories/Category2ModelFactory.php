@@ -13,9 +13,13 @@ $factory->define(App\Category2::class, function (Faker\Generator $faker) {
     $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
     $date = jdate("Y-m-d:H-i-s", $timestamp);
 
+    $parent_id = $faker->randomElement($categories);
+    $parent_name = \App\Category1::where("unique_id", $parent_id)->firstOrFail()->name;
+
     return [
         'unique_id' => str_random(13),
-        'parent_id' => $faker->randomElement($categories),
+        'parent_id' => $parent_id,
+        'parent_name' => $parent_name,
         'name' => $faker->name,
         'point' => $faker->randomFloat(1, 0.0, 9.9),
         'point_count' => $faker->numberBetween(0, 100),

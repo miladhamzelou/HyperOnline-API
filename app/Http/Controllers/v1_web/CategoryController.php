@@ -37,11 +37,14 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::orderBy('created_at', 'desc')->get();
-        $title = "Categories";
+        $categories1 = Category1::orderBy('created_at', 'desc')->get();
+        $categories2 = Category2::orderBy('created_at', 'desc')->get();
+        $categories3 = Category3::orderBy('created_at', 'desc')->get();
         return view('admin.categories')
-            ->withTitle($title)
-            ->withProducts($categories);
+            ->withTitle("Categories")
+            ->withCategories1($categories1)
+            ->withCategories2($categories2)
+            ->withCategories3($categories3);
     }
 
     public function show($level)

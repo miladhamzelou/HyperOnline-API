@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCategory3sTable extends Migration
 {
@@ -17,6 +17,7 @@ class CreateCategory3sTable extends Migration
             $table->string('unique_id', 13)->primary()->unique()->index();
             $table->string('parent_id', 13);
             $table->string('name');
+            $table->string('parent_name');
             $table->string('image')->nullable();
             $table->float('point', 2, 1)->default(0.0);
             $table->integer('point_count')->default(0);
