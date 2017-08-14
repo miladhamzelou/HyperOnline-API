@@ -27,11 +27,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/products/{id}', 'v1_web\ProductController@edit')->name('product_edit');
     Route::post('/admin/products/update', 'v1_web\ProductController@update')->name('product_update');
 
-    Route::get('/admin/categories/create', 'v1_web\CategoryController@show')->name('category_create');
-    Route::post('/admin/categories/create', 'v1_web\CategoryController@store')->name('category_create');
+    Route::get('/admin/categories/create/{level}', 'v1_web\CategoryController@show')->name('category_create');
+    Route::post('/admin/categories/create/{level}', 'v1_web\CategoryController@store')->name('category_create');
     Route::get('/admin/categories', 'v1_web\CategoryController@index')->name('categories');
-    Route::get('/admin/categories/{id}', 'v1_web\CategoryController@edit')->name('category_edit');
-    Route::post('/admin/categories/update', 'v1_web\CategoryController@update')->name('category_update');
+    Route::get('/admin/categories/{level}/{id}', 'v1_web\CategoryController@edit')->name('category_edit');
+    Route::post('/admin/categories/update/{level}', 'v1_web\CategoryController@update')->name('category_update');
 
     Route::get('/admin/authors/create', 'v1_web\AuthorController@show')->name('author_create');
     Route::post('/admin/authors/create', 'v1_web\AuthorController@store')->name('author_create');

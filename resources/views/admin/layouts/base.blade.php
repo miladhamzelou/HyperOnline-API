@@ -210,7 +210,9 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/categories/create') }}">دسته بندی جدید</a></li>
+                        <li><a href="{{ url('/admin/categories/create/1') }}">دسته بندی جدید − مرحله ۱</a></li>
+                        <li><a href="{{ url('/admin/categories/create/2') }}">دسته بندی جدید − مرحله ۲</a></li>
+                        <li><a href="{{ url('/admin/categories/create/3') }}">دسته بندی جدید − مرحله ۳</a></li>
                         <li><a href="{{ url('/admin/categories') }}">لیست دسته بندی ها</a></li>
                     </ul>
                 </li>
