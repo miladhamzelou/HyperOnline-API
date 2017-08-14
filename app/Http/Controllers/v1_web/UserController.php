@@ -34,7 +34,10 @@ class UserController extends Controller
         if (Auth::guest())
             return view('welcome');
         else
-            return view('home');
+            if (Auth::user()->Role() != "admin")
+                return view('home');
+            else
+                return redirect()->route('admin');
     }
 
     public function profile()
