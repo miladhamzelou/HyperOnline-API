@@ -14,7 +14,7 @@ class CreatePaysTable extends Migration
     public function up()
     {
         Schema::create('pays', function (Blueprint $table) {
-            $table->increments('id')->nullable();
+            $table->increments('id');
             $table->integer('status')->nullable();
             $table->integer('transId')->nullable();
             $table->string('factorNumber')->nullable();
