@@ -9,15 +9,15 @@
         <div class="col-lg-6 col-centered center-block" style="float: none;">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h2 class="box-title">Last Authors</h2>
+                    <h2 class="box-title">Last Sellers</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
                     <div class="box-body">
-                        @if(!$authors->count())
-                            <p>There is no author</p>
+                        @if(!$sellers->count())
+                            <p>There is no seller</p>
                         @else
                             <div class="table-responsive">
                                 <table class="table no-margin">
@@ -29,12 +29,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($authors as $author)
+                                    @foreach($sellers as $seller)
                                         <tr>
-                                            <td style="text-align: right; direction: rtl;">{{ $author->address }}</td>
-                                            <td style="text-align: right; direction: rtl;">{{ $author->phone }}</td>
+                                            <td style="text-align: right; direction: rtl;">{{ $seller->address }}</td>
+                                            <td style="text-align: right; direction: rtl;">{{ $seller->phone }}</td>
                                             <td style="text-align: right; direction: rtl;"><a
-                                                        href="{{ url('/admin/authors/'.$author->unique_id) }}">{{ $author->name }}</a>
+                                                        href="{{ url('/admin/authors/'.$seller->unique_id) }}">{{ $seller->name }}</a>
                                         </tr>
                                     @endforeach
                                     </tbody>
