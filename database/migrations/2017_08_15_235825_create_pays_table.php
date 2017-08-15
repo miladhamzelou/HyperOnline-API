@@ -14,12 +14,12 @@ class CreatePaysTable extends Migration
     public function up()
     {
         Schema::create('pays', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('status');
-            $table->integer('transId');
-            $table->string('factorNumber');
-            $table->string('cardNumber');
-            $table->string('message');
+            $table->increments('id')->nullable();
+            $table->integer('status')->nullable();
+            $table->integer('transId')->nullable();
+            $table->string('factorNumber')->nullable();
+            $table->string('cardNumber')->nullable();
+            $table->string('message')->nullable();
             $table->timestamps();
         });
     }
