@@ -152,17 +152,30 @@ class AdminController
         if (Auth::user()->Role() == "admin") {
             $option = Option::where("unique_id", $request->get('unique_id'))->firstOrFail();
 
-            $option->category = strval($request->get('category'));
+            $category = 0;
+            $off = 0;
+            $new = 0;
+            $most_sell = 0;
+            $popular = 0;
+            $collection = 0;
+            if ($request->get('category') == "on") $category = 1;
+            if ($request->get('off') == "on") $off = 1;
+            if ($request->get('new') == "on") $new = 1;
+            if ($request->get('most_sell') == "on") $most_sell = 1;
+            if ($request->get('popular') == "on") $popular = 1;
+            if ($request->get('collection') == "on") $collection = 1;
+
+            $option->category = $category;
             $option->category_count = $request->get('category_count');
-            $option->off = strval($request->get('off'));
+            $option->off = $off;
             $option->off_count = $request->get('off_count');
-            $option->new = strval($request->get('new'));
+            $option->new = $new;
             $option->new_count = $request->get('new_count');
-            $option->popular = strval($request->get('popular'));
+            $option->popular = $popular;
             $option->popular_count = $request->get('popular_count');
-            $option->most_sell = strval($request->get('most_sell'));
+            $option->most_sell = $most_sell;
             $option->most_sell_count = $request->get('most_sell_count');
-            $option->collection = strval($request->get('collection'));
+            $option->collection = $collection;
             $option->collection_count = $request->get('collection_count');
 
             $option->save();

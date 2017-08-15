@@ -40,13 +40,9 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                @if($option->collection==1)
-                                                    <input type="checkbox" checked id="collection" name="collection"
-                                                           value="1">
-                                                @else
-                                                    <input type="checkbox" id="collection" name="collection" value="0">
-                                                @endif
-                                                نشان داده شود
+                                                <input type="checkbox"
+                                                       @if($option->collection) checked @endif id="collection"
+                                                       name="collection">نشان داده شود
                                             </label>
                                         </div>
                                     </div>
@@ -71,13 +67,9 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                @if($option->most_sell==1)
-                                                    <input type="checkbox" checked id="most_sell" name="most_sell"
-                                                           value="1">
-                                                @else
-                                                    <input type="checkbox" id="most_sell" name="most_sell" value="0">
-                                                @endif
-                                                نشان داده شود
+                                                <input type="checkbox"
+                                                       @if($option->most_sell) checked @endif id="most_sell"
+                                                       name="most_sell">نشان داده شود
                                             </label>
                                         </div>
                                     </div>
@@ -102,13 +94,9 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                @if($option->popular==1)
-                                                    <input type="checkbox" checked id="popular" name="popular"
-                                                           value="1">
-                                                @else
-                                                    <input type="checkbox" id="popular" name="popular" value="0">
-                                                @endif
-                                                نشان داده شود
+                                                <input type="checkbox"
+                                                       @if($option->popular) checked @endif id="popular"
+                                                       name="popular">نشان داده شود
                                             </label>
                                         </div>
                                     </div>
@@ -133,13 +121,9 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                @if($option->new==1)
-                                                    <input type="checkbox" checked id="new" name="new"
-                                                           value="1">
-                                                @else
-                                                    <input type="checkbox" id="new" name="new" value="0">
-                                                @endif
-                                                نشان داده شود
+                                                <input type="checkbox"
+                                                       @if($option->new) checked @endif id="new"
+                                                       name="new">نشان داده شود
                                             </label>
                                         </div>
                                     </div>
@@ -164,13 +148,9 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                @if($option->off==1)
-                                                    <input type="checkbox" checked id="off" name="off"
-                                                           value="1">
-                                                @else
-                                                    <input type="checkbox" id="off" name="off" value="0">
-                                                @endif
-                                                نشان داده شود
+                                                <input type="checkbox"
+                                                       @if($option->off) checked @endif id="off"
+                                                       name="off">نشان داده شود
                                             </label>
                                         </div>
                                     </div>
@@ -196,8 +176,8 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"
-                                                       {{ $option->category==1 ? 'checked' : '' }} id="category"
-                                                       name="category" value="0">نشان داده شود
+                                                       @if($option->category) checked @endif id="category"
+                                                       name="category">نشان داده شود
                                             </label>
                                         </div>
                                     </div>
