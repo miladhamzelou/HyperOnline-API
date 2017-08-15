@@ -116,8 +116,8 @@ class AdminController
             ->options([]);
 
         $users = User::orderBy("created_at", "desc")->take(5)->get();
-        $orders = Order::orderBy("created_at", "desc")->take(5)->get();
-        $products = Product::orderBy("created_at", "desc")->take(5)->get();
+        $orders = $this->fixPrice(Order::orderBy("created_at", "desc")->take(5)->get());
+        $products = $this->fixPrice(Product::orderBy("created_at", "desc")->take(5)->get());
 
         //TODO: filter outputs
         //$users = $this->filterUser($users);
@@ -180,7 +180,8 @@ class AdminController
 
             $option->save();
             $message = "options updated";
-            return redirect('/admin')->withMessage($message);
+            return redirect('/admin')
+                ->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('Unauthorized Access');
@@ -235,6 +236,13 @@ class AdminController
             $data[] = $entry;
         }
         return $data;
+    }
+
+    protected function fixPrice($items)
+    {
+        foreach ($items as $item)
+            $item->price = $this->formatMoney($item->price);
+        return $items;
     }
 
     protected function formatMoney($number, $fractional = false)

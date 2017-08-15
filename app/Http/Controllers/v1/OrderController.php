@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Services\v1\OrderService;
-use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Pay;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    //
+    public function callback(Request $request)
+    {
+        $pay = new Pay();
+        $pay->status = $request->input('status');
+        $pay->transId = $request->input('transId');
+        $pay->factorNumber = $request->input('factorNumber');
+        $pay->cardNumber = $request->input('cardNumber');
+        $pay->message = $request->input('message');
+        $pay->save();
+    }
 }
