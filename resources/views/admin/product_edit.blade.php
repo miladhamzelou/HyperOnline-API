@@ -151,6 +151,8 @@
                                 <input type="submit" tabindex="7" name="publish"
                                        class="my_font btn center-block btn3d btn-lg btn-warning" value="Submit">
                             </div>
+                            <a href="{{ url('admin/products/delete/'.$product->unique_id) }}"
+                               tabindex="4" class="btn btn-danger center-block btn-lg">Delete</a>
                         </form>
                     </div>
                 </div>

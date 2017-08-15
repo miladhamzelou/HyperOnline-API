@@ -185,6 +185,18 @@ class CategoryController extends Controller
     {
         if (Auth::user()->Role() == "admin") {
             if ($level == "1") {
+                $categories = Category2::where("parent_id", $id)->get();
+                foreach ($categories as $category) {
+                    $categories2 = Category3::where("parent_id", $category->unique_id)->get();
+                    foreach ($categories2 as $category2) {
+                        $products = Product::where("category_id", $category2->unique_id)->get();
+                        foreach ($products as $product)
+                            $product->delete();
+                        $category2->delete();
+                    }
+                    $category->delete();
+                }
+
                 $category = Category1::find($id);
                 $category->delete();
             } elseif ($level == "2") {

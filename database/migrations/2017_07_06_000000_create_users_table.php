@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('create_date');
             $table->string('update_date')->nullable();
             $table->boolean('active')->default(true);
-            $table->enum('role', ['admin', 'user', 'guest'])->default('user');
+            $table->enum('role', ['developer', 'admin', 'user', 'guest'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });
