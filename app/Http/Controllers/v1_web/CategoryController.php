@@ -20,7 +20,6 @@ use App\Http\Controllers\Controller;
 use App\Services\v1\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -89,18 +88,20 @@ class CategoryController extends Controller
             $category->save();
         } elseif ($level == "2") {
             $category = new Category2();
-            $parent = Category1::where("name", $request->get('parent'))->firstOrFail()->unique_id;
+            $parent = Category1::where("name", $request->get('parent'))->firstOrFail();
             $category->unique_id = uniqid('', false);
             $category->name = $request->get('name');
-            $category->parent_id = $parent;
+            $category->parent_id = $parent->unique_id;
+            $category->parent_name = $parent->name;
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
             $category->save();
         } elseif ($level == "3") {
             $category = new Category3();
-            $parent = Category2::where("name", $request->get('parent'))->firstOrFail()->unique_id;
+            $parent = Category2::where("name", $request->get('parent'))->firstOrFail();
             $category->unique_id = uniqid('', false);
             $category->name = $request->get('name');
-            $category->parent_id = $parent;
+            $category->parent_id = $parent->unique_id;
+            $category->parent_name = $parent->name;
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
             $category->save();
         }
