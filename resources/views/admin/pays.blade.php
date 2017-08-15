@@ -23,6 +23,7 @@
                                 <table class="table no-margin">
                                     <thead>
                                     <tr>
+                                        <th style="font-size:17px; text-align: right; direction: rtl;">وضعیت</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">شماره کارت</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">شماره فاکتور</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">کد سفارش</th>
@@ -31,7 +32,13 @@
                                     <tbody>
                                     @foreach($pays as $pay)
                                         <tr>
-                                            <td style="text-align: right; direction: rtl;">{{ $pay->cardNumber }}</td>
+                                            @if($pay->status)
+                                                <td style="color:green;text-align: right; direction: ltr;">موفقیت آمیز
+                                                </td>
+                                            @else
+                                                <td style="color:red;text-align: right; direction: ltr;">خطا</td>
+                                            @endif
+                                            <td style="text-align: right; direction: ltr;">{{ $pay->cardNumber }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ $pay->factorNumber }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ $pay->transId }}</td>
                                         </tr>
