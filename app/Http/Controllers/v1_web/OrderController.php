@@ -13,7 +13,15 @@
 namespace app\Http\Controllers\v1_web;
 
 
+use App\Order;
+
 class OrderController
 {
-
+    public function index()
+    {
+        $orders = Order::orderBy("created_at", "desc")->get();
+        return view('admin.orders')
+            ->withTitle("Orders")
+            ->withOrders($orders);
+    }
 }
