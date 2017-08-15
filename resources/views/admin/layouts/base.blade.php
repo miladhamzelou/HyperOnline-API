@@ -267,7 +267,7 @@
 
                 <hr>
                 <li class="header">تنظیمات</li>
-                <li class="my_font"><a href="{{ url('/admin/database') }}">‍‍پایگاه داده</a></li>
+                <li class="my_font"><a href="{{ url('/admin/settings') }}">پایگاه داده</a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>

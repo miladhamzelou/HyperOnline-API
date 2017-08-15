@@ -20,7 +20,8 @@ Route::get('/profile', 'v1_web\UserController@profile')->name('profile');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', 'v1_web\AdminController@admin')->name('admin');
-    Route::get('/admin/settings', 'v1_web\AdminController@settings')->name('setting');
+    Route::get('/admin/settings', 'v1_web\AdminController@settings_get')->name('setting');
+    Route::post('/admin/settings', 'v1_web\AdminController@settings_store')->name('setting');
 
     Route::get('/admin/products/create', 'v1_web\ProductController@show')->name('product_create');
     Route::post('/admin/products/create', 'v1_web\ProductController@store')->name('product_create');

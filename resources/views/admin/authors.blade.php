@@ -9,14 +9,14 @@
         <div class="col-lg-6 col-centered center-block" style="float: none;">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h2 class="box-title">Last Users</h2>
+                    <h2 class="box-title">Last Authors</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
                     <div class="box-body">
-                        @if(!$users->count())
+                        @if(!$authors->count())
                             <p>There is no user</p>
                         @else
                             <div class="table-responsive">
@@ -29,12 +29,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($users as $user)
+                                    @foreach($authors as $author)
                                         <tr>
-                                            <td style="text-align: right; direction: rtl;">{{ $user->address }}</td>
-                                            <td style="text-align: right; direction: rtl;">{{ $user->phone }}</td>
+                                            <td style="text-align: right; direction: rtl;">{{ $author->address }}</td>
+                                            <td style="text-align: right; direction: rtl;">{{ $author->phone }}</td>
                                             <td style="text-align: right; direction: rtl;"><a
-                                                        href="{{ url('/admin/users/'.$user->unique_id) }}">{{ $user->name }}</a>
+                                                        href="{{ url('/admin/authors/'.$author->unique_id) }}">{{ $author->name }}</a>
                                         </tr>
                                     @endforeach
                                     </tbody>

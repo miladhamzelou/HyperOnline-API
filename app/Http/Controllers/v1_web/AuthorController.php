@@ -13,7 +13,15 @@
 namespace app\Http\Controllers\v1_web;
 
 
+use App\Author;
+
 class AuthorController
 {
-
+    public function index()
+    {
+        $authors = Author::orderBy("created_at", "desc")->get();
+        return view('admin.authors')
+            ->withTitle("Authors")
+            ->withAuthors($authors);
+    }
 }

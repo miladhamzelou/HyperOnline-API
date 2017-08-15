@@ -13,9 +13,11 @@
 namespace app\Http\Controllers\v1_web;
 
 use App\Category3;
+use App\Option;
 use App\Order;
 use App\Product;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController
@@ -135,6 +137,40 @@ class AdminController
             'orders',
             'products'
         ));
+    }
+
+    public function settings_get()
+    {
+        $option = Option::firstOrFail();
+        return view('admin.settings')
+            ->withTitle("Change Settings")
+            ->withOption($option);
+    }
+
+    public function settings_store(Request $request)
+    {
+        if (Auth::user()->Role() == "admin") {
+            $option = Option::where("unique_id", $request->get('unique_id'))->firstOrFail();
+
+            $option->category = strval($request->get('category'));
+            $option->category_count = $request->get('category_count');
+            $option->off = strval($request->get('off'));
+            $option->off_count = $request->get('off_count');
+            $option->new = strval($request->get('new'));
+            $option->new_count = $request->get('new_count');
+            $option->popular = strval($request->get('popular'));
+            $option->popular_count = $request->get('popular_count');
+            $option->most_sell = strval($request->get('most_sell'));
+            $option->most_sell_count = $request->get('most_sell_count');
+            $option->collection = strval($request->get('collection'));
+            $option->collection_count = $request->get('collection_count');
+
+            $option->save();
+            $message = "options updated";
+            return redirect('/admin')->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
     }
 
     protected function filterUser($users)
