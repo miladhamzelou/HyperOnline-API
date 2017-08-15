@@ -27,7 +27,7 @@ class AdminController
         if (Auth::guest())
             return view('welcome');
         else
-            if (Auth::user()->Role() != "admin")
+            if (!Auth::user()->isAdmin())
                 return view('home');
             else
                 return redirect()->route('admin');
@@ -35,7 +35,7 @@ class AdminController
 
     public function admin()
     {
-        if (Auth::user()->Role() != "admin")
+        if (!Auth::user()->isAdmin())
             return redirect()->route('profile');
         $title = "صفحه اصلی";
         $description = "خلاصه آمار";
@@ -149,7 +149,7 @@ class AdminController
 
     public function settings_store(Request $request)
     {
-        if (Auth::user()->Role() == "admin") {
+        if (Auth::user()->isAdmin()) {
             $option = Option::where("unique_id", $request->get('unique_id'))->firstOrFail();
 
             $category = 0;

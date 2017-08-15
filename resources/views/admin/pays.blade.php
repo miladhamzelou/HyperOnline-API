@@ -33,7 +33,8 @@
                                     @foreach($pays as $pay)
                                         <tr>
                                             @if($pay->status)
-                                                <td style="color:green;text-align: right; direction: ltr;">موفقیت آمیز
+                                                <td style="color:limegreen;text-align: right; direction: ltr;">موفقیت
+                                                    آمیز
                                                 </td>
                                             @else
                                                 <td style="color:red;text-align: right; direction: ltr;">خطا</td>
