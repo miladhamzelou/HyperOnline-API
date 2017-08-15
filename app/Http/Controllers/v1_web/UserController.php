@@ -5,13 +5,9 @@
 
 namespace App\Http\Controllers\v1_web;
 
-use App\Category3;
 use App\Http\Controllers\Controller;
-use App\Order;
-use App\Product;
 use App\Services\v1\UserService;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -31,13 +27,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::guest())
-            return view('welcome');
-        else
-            if (Auth::user()->Role() != "admin")
-                return view('home');
-            else
-                return redirect()->route('admin');
+        $users = User::orderBy("created_at", "desc")->get();
+        return view('admin.users')
+            ->withTitle("Users")
+            ->withUsers($users);
     }
 
     public function profile()

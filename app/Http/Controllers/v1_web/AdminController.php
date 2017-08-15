@@ -20,6 +20,17 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController
 {
+    public function index()
+    {
+        if (Auth::guest())
+            return view('welcome');
+        else
+            if (Auth::user()->Role() != "admin")
+                return view('home');
+            else
+                return redirect()->route('admin');
+    }
+
     public function admin()
     {
         if (Auth::user()->Role() != "admin")
