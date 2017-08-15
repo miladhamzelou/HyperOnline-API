@@ -262,6 +262,7 @@
                     <ul class="treeview-menu">
                         <li><a href="{{ url('/admin/orders/create') }}">سفارش جدید</a></li>
                         <li><a href="{{ url('/admin/orders') }}">لیست سفارش ها</a></li>
+                        <li><a href="{{ url('/admin/pays') }}">لیست تراکنش ها</a></li>
                     </ul>
                 </li>
 

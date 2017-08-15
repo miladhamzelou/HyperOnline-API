@@ -14,6 +14,7 @@ namespace app\Http\Controllers\v1_web;
 
 
 use App\Order;
+use App\Pay;
 
 class OrderController
 {
@@ -23,5 +24,13 @@ class OrderController
         return view('admin.orders')
             ->withTitle("Orders")
             ->withOrders($orders);
+    }
+
+    public function pays()
+    {
+        $pays = Pay::get();
+        return view('admin.pays')
+            ->withTitle("Pays")
+            ->withPays($pays);
     }
 }
