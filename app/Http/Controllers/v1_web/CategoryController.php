@@ -20,6 +20,7 @@ use App\Http\Controllers\Controller;
 use App\Services\v1\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -111,35 +112,38 @@ class CategoryController extends Controller
     public function edit($level, $id)
     {
         if (Auth::user()->Role() == "admin") {
-            if ($level == "1") {
+            if ($level == 1) {
                 $category = Category1::where("unique_id", $id)->firstOrFail();
                 return view('admin.category_edit')
                     ->withTitle("Edit Category (1)")
-                    ->withCategory($category);
-            } elseif ($level == "2") {
-                $category = Category2::where("unique_id", $id)->firstOrFail();
-                $parent = Category1::where("unique_id", $category->category_id)->firstOrFail();
+                    ->withCategory2($category)
+                    ->withLevel("1");
+            } elseif ($level == 2) {
+                $category2 = Category2::where("unique_id", $id)->firstOrFail();
+                $parent = Category1::where("unique_id", $category2->parent_id)->firstOrFail();
                 $categories_list = array();
                 $categories = Category1::get();
                 foreach ($categories as $category)
                     array_push($categories_list, $category->name);
                 return view('admin.category_edit')
                     ->withTitle("Edit Category (2)")
-                    ->withCategory($category)
-                    ->withParent($parent)
-                    ->withCategories($categories_list);
-            } elseif ($level == "3") {
-                $category = Category3::where("unique_id", $id)->firstOrFail();
-                $parent = Category2::where("unique_id", $category->category_id)->firstOrFail();
+                    ->withCategory_this($parent->name)
+                    ->withCategory2($category2)
+                    ->withCategories($categories_list)
+                    ->withLevel("2");
+            } elseif ($level == 3) {
+                $category2 = Category3::where("unique_id", $id)->firstOrFail();
+                $parent = Category2::where("unique_id", $category2->parent_id)->firstOrFail();
                 $categories_list = array();
                 $categories = Category2::get();
                 foreach ($categories as $category)
                     array_push($categories_list, $category->name);
                 return view('admin.category_edit')
                     ->withTitle("Edit Category (3)")
-                    ->withCategory($category)
-                    ->withParent($parent)
-                    ->withCategories($categories_list);
+                    ->withCategory_this($parent->name)
+                    ->withCategory2($category2)
+                    ->withCategories($categories_list)
+                    ->withLevel("3");
             }
         } else
             return redirect('/')
@@ -150,11 +154,29 @@ class CategoryController extends Controller
     {
         if (Auth::user()->Role() == "admin") {
             if ($level == "1") {
-
+                $category = Category1::where("unique_id", $request->get('unique_id'))->firstOrFail();
+                $category->name = $request->get('name');
+                $category->save();
+                $message = "category updated";
+                return redirect('/admin/categories')->withMessage($message);
             } elseif ($level == "2") {
-
+                $category = Category2::where("unique_id", $request->get('unique_id'))->firstOrFail();
+                $parent = Category1::where("name", $request->get('parent'))->firstOrFail();
+                $category->name = $request->get('name');
+                $category->parent_id = $parent->unique_id;
+                $category->parent_name = $parent->name;
+                $category->save();
+                $message = "category updated";
+                return redirect('/admin/categories')->withMessage($message);
             } elseif ($level == "3") {
-
+                $category = Category3::where("unique_id", $request->get('unique_id'))->firstOrFail();
+                $parent = Category2::where("name", $request->get('parent'))->firstOrFail();
+                $category->name = $request->get('name');
+                $category->parent_id = $parent->unique_id;
+                $category->parent_name = $parent->name;
+                $category->save();
+                $message = "category updated";
+                return redirect('/admin/categories')->withMessage($message);
             }
         } else
             return redirect('/')

@@ -122,7 +122,7 @@
                                     @foreach($categories1 as $category)
                                         <tr>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/categories/2/'.$category->unique_id) }}">
+                                                <a href="{{ url('/admin/categories/1/'.$category->unique_id) }}">
                                                     {{ $category->name }}
                                                 </a>
                                             </td>
