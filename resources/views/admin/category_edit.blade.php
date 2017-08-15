@@ -60,9 +60,10 @@
                             <br>
                             <div class="form-group">
                                 <input type="submit" tabindex="3" name="publish"
-                                       class="my_font btn center-block btn3d btn-lg btn-danger" value="Submit">
+                                       class="my_font btn center-block btn-lg btn-info" value="Submit">
                             </div>
-                            <a href=""
+                            <a href="{{ url('admin/categories/delete/'.$level.'/'.$category2->unique_id) }}"
+                               tabindex="4" class="btn btn-danger center-block btn-lg">Delete</a>
                         </form>
                     </div>
                 </div>

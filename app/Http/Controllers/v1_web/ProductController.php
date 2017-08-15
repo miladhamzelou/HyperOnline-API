@@ -140,6 +140,18 @@ class ProductController extends Controller
                 ->withErrors('Unauthorized Access');
     }
 
+    public function delete($id)
+    {
+        if (Auth::user()->Role() == "admin") {
+            $product = Product::find($id);
+            $product->delete();
+            $message = "product updated";
+            return redirect('/admin/products')->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
+    }
+
     protected function getCurrentTime()
     {
         $now = date("Y-m-d", time());

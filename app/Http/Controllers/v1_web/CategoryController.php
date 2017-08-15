@@ -17,6 +17,7 @@ use App\Category1;
 use App\Category2;
 use App\Category3;
 use App\Http\Controllers\Controller;
+use App\Product;
 use App\Services\v1\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -158,8 +159,6 @@ class CategoryController extends Controller
                 $category = Category1::where("unique_id", $request->get('unique_id'))->firstOrFail();
                 $category->name = $request->get('name');
                 $category->save();
-                $message = "category updated";
-                return redirect('/admin/categories')->withMessage($message);
             } elseif ($level == "2") {
                 $category = Category2::where("unique_id", $request->get('unique_id'))->firstOrFail();
                 $parent = Category1::where("name", $request->get('parent'))->firstOrFail();
@@ -167,8 +166,6 @@ class CategoryController extends Controller
                 $category->parent_id = $parent->unique_id;
                 $category->parent_name = $parent->name;
                 $category->save();
-                $message = "category updated";
-                return redirect('/admin/categories')->withMessage($message);
             } elseif ($level == "3") {
                 $category = Category3::where("unique_id", $request->get('unique_id'))->firstOrFail();
                 $parent = Category2::where("name", $request->get('parent'))->firstOrFail();
@@ -176,9 +173,39 @@ class CategoryController extends Controller
                 $category->parent_id = $parent->unique_id;
                 $category->parent_name = $parent->name;
                 $category->save();
-                $message = "category updated";
-                return redirect('/admin/categories')->withMessage($message);
             }
+            $message = "category updated";
+            return redirect('/admin/categories')->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
+    }
+
+    public function delete($level, $id)
+    {
+        if (Auth::user()->Role() == "admin") {
+            if ($level == "1") {
+                $category = Category1::find($id);
+                $category->delete();
+            } elseif ($level == "2") {
+                $categories = Category3::where("parent_id", $id)->get();
+                foreach ($categories as $category) {
+                    $products = Product::where("category_id", $category->unique_id)->get();
+                    foreach ($products as $product)
+                        $product->delete();
+                    $category->delete();
+                }
+                $category = Category2::find($id);
+                $category->delete();
+            } elseif ($level == "3") {
+                $products = Product::where("category_id", $id)->get();
+                foreach ($products as $product)
+                    $product->delete();
+                $category = Category3::find($id);
+                $category->delete();
+            }
+            $message = "category deleted";
+            return redirect('/admin/categories')->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('Unauthorized Access');
