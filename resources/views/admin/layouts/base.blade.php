@@ -248,7 +248,7 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/users/create') }}">کاربر جدید</a></li>
+{{--                        <li><a href="{{ url('/admin/users/create') }}">کاربر جدید</a></li>--}}
                         <li><a href="{{ url('/admin/users') }}">لیست کاربر ها</a></li>
                     </ul>
                 </li>
@@ -260,7 +260,7 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/orders/create') }}">سفارش جدید</a></li>
+{{--                        <li><a href="{{ url('/admin/orders/create') }}">سفارش جدید</a></li>--}}
                         <li><a href="{{ url('/admin/orders') }}">لیست سفارش ها</a></li>
                         <li><a href="{{ url('/admin/pays') }}">لیست تراکنش ها</a></li>
                     </ul>
@@ -269,6 +269,7 @@
                 <hr>
                 <li class="header">تنظیمات</li>
                 <li class="my_font"><a href="{{ url('/admin/settings') }}">پایگاه داده</a></li>
+                <li class="my_font"><a href="{{ url('/admin/support') }}">پشتیبانی</a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>

@@ -187,6 +187,7 @@ return [
         App\Providers\LogProvider::class,
         // libraries
         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
+        Snowfire\Beautymail\BeautymailServiceProvider::class,
     ],
 
     /*

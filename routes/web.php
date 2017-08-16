@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', 'v1_web\AdminController@admin')->name('admin');
     Route::get('/admin/settings', 'v1_web\AdminController@settings_get')->name('setting');
     Route::post('/admin/settings', 'v1_web\AdminController@settings_store')->name('setting');
+    Route::get('/admin/support', 'v1_web\AdminController@support')->name('support');
+    Route::post('/admin/support', 'v1_web\AdminController@support_send')->name('support');
 
     Route::get('/admin/products/create', 'v1_web\ProductController@show')->name('product_create');
     Route::post('/admin/products/create', 'v1_web\ProductController@store')->name('product_create');

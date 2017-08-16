@@ -19,6 +19,7 @@ use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Snowfire\Beautymail\Beautymail;
 
 class AdminController
 {
@@ -182,6 +183,34 @@ class AdminController
             $message = "options updated";
             return redirect('/admin')
                 ->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
+    }
+
+    public function support()
+    {
+        if (Auth::user()->isAdmin()) {
+            return view('admin.support')
+                ->withTitle("Support");
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
+    }
+
+    public function support_send(Request $request)
+    {
+        if (Auth::user()->isAdmin()) {
+            $title = $request->get('title');
+            $body = $request->get('body');
+
+            $beautymail = app()->make(Beautymail::class);
+            $beautymail->send('emails.support', [], function ($message) {
+                $message
+                    ->from('hatamiarash7@gmail.com')
+                    ->to('hatamiarash7@gmail.com', 'Arash Hatami')
+                    ->subject('Welcome!');
+            });
         } else
             return redirect('/')
                 ->withErrors('Unauthorized Access');
