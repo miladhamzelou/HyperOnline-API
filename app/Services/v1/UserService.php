@@ -46,7 +46,6 @@ class UserService
             'wallet' => $user->wallet,
             'state' => $user->state,
             'city' => $user->city,
-            'confirmed_email' => $user->confirmed_email,
             'confirmed_phone' => $user->confirmed_phone
         ];
 
@@ -116,7 +115,6 @@ class UserService
                 'wallet' => $user->wallet,
                 'state' => $user->state,
                 'city' => $user->city,
-                'confirmed_email' => $user->confirmed_email,
                 'confirmed_phone' => $user->confirmed_phone
             ];
             return $final;
@@ -169,7 +167,6 @@ class UserService
                 'wallet' => $user->wallet,
                 'state' => $user->state,
                 'city' => $user->city,
-                'confirmed_email' => $user->confirmed_email,
                 'confirmed_phone' => $user->confirmed_phone
             ];
 

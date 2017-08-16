@@ -27,7 +27,6 @@ class CreateUsersTable extends Migration
             $table->string('state');
             $table->string('city');
             $table->string('district')->nullable();
-            $table->integer('confirmed_email')->default(0);
             $table->integer('confirmed_phone')->default(0);
             $table->string('location_x')->nullable();
             $table->string('location_y')->nullable();
