@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "565adff90c099c3e68a7e7fef8f24ae5",
-    "content-hash": "78903c72033771e6cafb0c275e4b8e98",
+    "hash": "57897e812aa156988dcdf7dd84b5198d",
+    "content-hash": "7d8622db028848b9065cea6e11180692",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -151,16 +151,16 @@
         },
         {
             "name": "fx3costa/laravelchartjs",
-            "version": "2.2.4",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fxcosta/laravel-chartjs.git",
-                "reference": "ef72b11c4dcc68f0ce8a3fd0b04106a71933150c"
+                "reference": "7083c0810200d8d0f6f183bc61f3752299479e74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fxcosta/laravel-chartjs/zipball/ef72b11c4dcc68f0ce8a3fd0b04106a71933150c",
-                "reference": "ef72b11c4dcc68f0ce8a3fd0b04106a71933150c",
+                "url": "https://api.github.com/repos/fxcosta/laravel-chartjs/zipball/7083c0810200d8d0f6f183bc61f3752299479e74",
+                "reference": "7083c0810200d8d0f6f183bc61f3752299479e74",
                 "shasum": ""
             },
             "require": {
@@ -192,7 +192,7 @@
                 "laravel5",
                 "reports"
             ],
-            "time": "2017-05-24 00:30:07"
+            "time": "2017-08-13 05:35:11"
         },
         {
             "name": "jakub-onderka/php-console-color",

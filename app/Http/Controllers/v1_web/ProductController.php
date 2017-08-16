@@ -46,7 +46,7 @@ class ProductController extends Controller
 
     public function show()
     {
-        if (Auth::user()->Role() == "admin") {
+        if (Auth::user()->isAdmin()) {
             $title = "Create New Product";
 
             $sellers_list = array();
@@ -104,7 +104,7 @@ class ProductController extends Controller
         foreach ($categories as $category)
             array_push($categories_list, $category->name);
 
-        if (Auth::user()->Role() == "admin") {
+        if (Auth::user()->isAdmin()) {
             return view('admin.product_edit')
                 ->withTitle("Edit Product")
                 ->withProduct($product)
@@ -120,7 +120,7 @@ class ProductController extends Controller
     public function update(Request $request)
     {
         $product = Product::where("unique_id", $request->get('unique_id'))->firstOrFail();
-        if ($product && Auth::user()->Role() == "admin") {
+        if ($product && Auth::user()->isAdmin()) {
             $seller = Seller::where("name", $request->get('seller'))->firstOrFail()->unique_id;
             $category = Category3::where("name", $request->get('category'))->firstOrFail()->unique_id;
 
@@ -142,7 +142,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        if (Auth::user()->Role() == "admin") {
+        if (Auth::user()->isAdmin()) {
             $product = Product::find($id);
             $product->delete();
             $message = "product updated";
