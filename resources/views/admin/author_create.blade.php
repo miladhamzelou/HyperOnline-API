@@ -104,8 +104,8 @@
 
                                     <div class="form-group{{ $errors->has('mCode') ? ' has-error' : '' }}">
                                         <label for="mCode" style="text-align: center; direction: rtl;">کد ملی :</label>
-                                        <input id="mCode" type="number" style="text-align: center" tabindex="4"
-                                               class="my_font form-control" value="1"
+                                        <input id="mCode" type="text" style="text-align: center" tabindex="4"
+                                               class="my_font form-control"
                                                name="mCode" required>
 
                                         @if ($errors->has('mCode'))

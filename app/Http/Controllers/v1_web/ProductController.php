@@ -92,6 +92,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        if (Auth::user()->isAdmin()) {
         $product = Product::where("unique_id", $id)->firstOrFail();
         $seller2 = Seller::where("unique_id", $product->seller_id)->firstOrFail();
         $category2 = Category3::where("unique_id", $product->category_id)->firstOrFail();
@@ -104,7 +105,6 @@ class ProductController extends Controller
         foreach ($categories as $category)
             array_push($categories_list, $category->name);
 
-        if (Auth::user()->isAdmin()) {
             return view('admin.product_edit')
                 ->withTitle("Edit Product")
                 ->withProduct($product)

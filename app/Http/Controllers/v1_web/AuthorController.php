@@ -23,7 +23,6 @@ class AuthorController
     public function __construct()
     {
         require(app_path() . '/Common/jdf.php');
-
     }
 
     public function index()
