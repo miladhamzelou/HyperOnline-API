@@ -52,6 +52,7 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) use ($autoI
         'stuffs' => $stuffs,
         'stuffs_id' => $stuffs_id,
         'price' => $price,
+	'hour' => $faker->numberBetween(10, 22),
         'status' => $faker->randomElement($status),
         'create_date' => $date,
         'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
