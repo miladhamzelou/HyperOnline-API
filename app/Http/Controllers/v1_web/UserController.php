@@ -33,8 +33,15 @@ class UserController extends Controller
             ->withUsers($users);
     }
 
-    public function profile()
+    public function info($id)
     {
-
+        $user = User::where("unique_id", $id)->firstOrFail();
+        if ($user->role == "admin") $user->role = "مدیر";
+        if ($user->role == "user") $user->role = "کاربر";
+        if ($user->role == "developer") $user->role = "توسعه دهنده";
+        $user->create_date = str_replace(":", " : ", $user->create_date);
+        return view('admin.user_view')
+            ->withTitle($user->name)
+            ->withUser($user);
     }
 }

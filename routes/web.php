@@ -13,8 +13,8 @@
 
 Route::auth();
 
-Route::get('/', 'v1_web\UserController@index')->name('home');
-Route::get('/home', 'v1_web\UserController@index')->name('home');
+Route::get('/', 'v1_web\AdminController@index')->name('home');
+Route::get('/home', 'v1_web\AdminController@index')->name('home');
 
 Route::get('/profile', 'v1_web\UserController@profile')->name('profile');
 
@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/users/create', 'v1_web\UserController@show')->name('user_create');
     Route::post('/admin/users/create', 'v1_web\UserController@store')->name('user_create');
     Route::get('/admin/users', 'v1_web\UserController@index')->name('users');
-    Route::get('/admin/users/{id}', 'v1_web\UserController@edit')->name('user_edit');
+    Route::get('/admin/users/{id}', 'v1_web\UserController@info')->name('user_edit');
     Route::post('/admin/users/update', 'v1_web\UserController@update')->name('user_update');
     Route::get('/admin/users/delete/{id}', 'v1_web\UserController@delete')->name('user_delete');
 
