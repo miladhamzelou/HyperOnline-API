@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <form role="form" action="/admin/products/create" method="post">
+                        <form role="form" action="/admin/products/create" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }}">
@@ -135,11 +135,22 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="center-block form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                                    <label for="image">Image :</label>
+                                    <input id="image" type="file" tabindex="7"
+                                           name="image">
+
+                                    @if ($errors->has('image'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <hr>
+                                <br>
                             </div>
-                            <hr>
-                            <br>
                             <div class="form-group">
-                                <input type="submit" tabindex="7" name="publish"
+                                <input type="submit" tabindex="8" name="publish"
                                        class="my_font btn center-block btn3d btn-lg btn-danger" value="Submit">
                             </div>
                         </form>

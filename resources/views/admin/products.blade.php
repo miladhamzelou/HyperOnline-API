@@ -27,7 +27,7 @@
                                                 <img src="{{ asset('dist/img/default-50x50.gif') }}"
                                                      alt="{{ $product->name }}">
                                             @else
-                                                <img src="{{ asset('img/product/' . $product->image) }}"
+                                                <img src="{{ asset('images/' . $product->image) }}"
                                                      alt="{{ $product->name }}">
                                             @endif
                                         </div>
