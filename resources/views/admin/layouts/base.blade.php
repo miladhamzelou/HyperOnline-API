@@ -294,11 +294,10 @@
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            <a href="http://arash-hatami.ir" target="_blank">Arash Hatami</a>
+            Design By : <a href="http://arash-hatami.ir" target="_blank">Arash Hatami</a>
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2017 <a href="http://hyper-online.ir" target="_blank">HyperOnline</a>.</strong> All
-        rights reserved.
+        تمامی حقوق این برنامه مطعلق به شرکت هایپرآنلاین می باشد
     </footer>
 </div>
 <!-- ./wrapper -->

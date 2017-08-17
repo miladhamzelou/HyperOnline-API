@@ -50,10 +50,10 @@ class CategoryController extends Controller
 
     public function show($level)
     {
-        if (Auth::user()->Role() == "admin") {
+        if (Auth::user()->isAdmin()) {
             if ($level == "1") {
                 return view('admin.category_create')
-                    ->withTitle("Create New Category (1)")
+                    ->withTitle("ایجاد دسته بندی جدید")
                     ->withLevel("1");
             } elseif ($level == "2") {
                 $categories_list = array();
@@ -61,7 +61,7 @@ class CategoryController extends Controller
                 foreach ($categories as $category)
                     array_push($categories_list, $category->name);
                 return view('admin.category_create')
-                    ->withTitle("Create New Category (2)")
+                    ->withTitle("ایجاد دسته بندی جدید")
                     ->withCategories($categories_list)
                     ->withLevel("2");
             } elseif ($level == "3") {
@@ -70,7 +70,7 @@ class CategoryController extends Controller
                 foreach ($categories as $category)
                     array_push($categories_list, $category->name);
                 return view('admin.category_create')
-                    ->withTitle("Create New Category (3)")
+                    ->withTitle("ایجاد دسته بندی جدید")
                     ->withCategories($categories_list)
                     ->withLevel("3");
             }
@@ -86,6 +86,11 @@ class CategoryController extends Controller
             $category->unique_id = uniqid('', false);
             $category->name = $request->get('name');
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+            $image = $request->file('image');
+            $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('images');
+            $image->move($destinationPath, $input['imagename']);
+            $category->image = $input['imagename'];
             $category->save();
         } elseif ($level == "2") {
             $category = new Category2();
@@ -95,6 +100,11 @@ class CategoryController extends Controller
             $category->parent_id = $parent->unique_id;
             $category->parent_name = $parent->name;
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+            $image = $request->file('image');
+            $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('images');
+            $image->move($destinationPath, $input['imagename']);
+            $category->image = $input['imagename'];
             $category->save();
         } elseif ($level == "3") {
             $category = new Category3();
@@ -104,6 +114,11 @@ class CategoryController extends Controller
             $category->parent_id = $parent->unique_id;
             $category->parent_name = $parent->name;
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+            $image = $request->file('image');
+            $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('images');
+            $image->move($destinationPath, $input['imagename']);
+            $category->image = $input['imagename'];
             $category->save();
         }
         $message = "Category Created";
@@ -113,7 +128,7 @@ class CategoryController extends Controller
 
     public function edit($level, $id)
     {
-        if (Auth::user()->Role() == "admin") {
+        if (Auth::user()->isAdmin()) {
             if ($level == 1) {
                 $category = Category1::where("unique_id", $id)->firstOrFail();
                 return view('admin.category_edit')
@@ -154,7 +169,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, $level)
     {
-        if (Auth::user()->Role() == "admin") {
+        if (Auth::user()->isAdmin()) {
             if ($level == "1") {
                 $category = Category1::where("unique_id", $request->get('unique_id'))->firstOrFail();
                 $category->name = $request->get('name');
@@ -183,7 +198,7 @@ class CategoryController extends Controller
 
     public function delete($level, $id)
     {
-        if (Auth::user()->Role() == "admin") {
+        if (Auth::user()->isAdmin()) {
             if ($level == "1") {
                 $categories = Category2::where("parent_id", $id)->get();
                 foreach ($categories as $category) {
