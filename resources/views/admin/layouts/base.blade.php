@@ -267,7 +267,9 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                @yield('title')
+                <span class="pull-right">@yield('title')</span>
+                <br>
+                <br>
                 @if(Session::has('description'))
                     <br>
                     <small>@yield('description')</small>

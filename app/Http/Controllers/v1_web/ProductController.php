@@ -47,7 +47,7 @@ class ProductController extends Controller
     public function show()
     {
         if (Auth::user()->isAdmin()) {
-            $title = "Create New Product";
+            $title = "اضافه کردن محصول جدید";
 
             $sellers_list = array();
             $sellers = Seller::where("confirmed", 1)->get();
@@ -89,7 +89,6 @@ class ProductController extends Controller
         $destinationPath = public_path('images');
         $image->move($destinationPath, $input['imagename']);
         $product->image = $input['imagename'];
-        //$this->postImage->add($input);
 
         $product->save();
 
