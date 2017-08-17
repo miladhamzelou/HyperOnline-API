@@ -13,7 +13,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     $date = jdate("Y-m-d:H-i-s", $timestamp);
 
     return [
-        'unique_id' => str_random(13),
+        'unique_id' => 'S22exaztIvjWK',
         'name' => 'آرش حاتمی',
         'code' => 'HO-1',
         'phone' => '09182180519',
