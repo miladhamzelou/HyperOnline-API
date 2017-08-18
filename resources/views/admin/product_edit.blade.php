@@ -180,9 +180,13 @@
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-danger center-block btn-lg">
-                                    <a href="{{ url('admin/products/delete/'.$product->unique_id) }}">حذف محصول</a>
-                                </button>
+                                <a class="btn btn-danger center-block btn-lg style="
+                                   href="{{ url('admin/products/delete_photo/'.$product->unique_id) }}">حذف عکس</a>
+                            </div>
+
+                            <div class="form-group">
+                                <a class="btn btn-danger center-block btn-lg style="
+                                   href="{{ url('admin/products/delete/'.$product->unique_id) }}">حذف محصول</a>
                             </div>
                         </form>
                     </div>

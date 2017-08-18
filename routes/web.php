@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/products/{id}', 'v1_web\ProductController@edit')->name('product_edit');
     Route::post('/admin/products/update', 'v1_web\ProductController@update')->name('product_update');
     Route::get('/admin/products/delete/{id}', 'v1_web\ProductController@delete')->name('product_delete');
+    Route::get('/admin/products/delete_photo/{id}', 'v1_web\ProductController@delete_photo')->name('product_delete');
 
     Route::get('/admin/categories/create/{level}', 'v1_web\CategoryController@show')->name('category_create');
     Route::post('/admin/categories/create/{level}', 'v1_web\CategoryController@store')->name('category_create');

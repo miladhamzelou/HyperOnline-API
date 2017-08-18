@@ -173,6 +173,20 @@ class ProductController extends Controller
                 ->withErrors('Unauthorized Access');
     }
 
+    public function delete_photo($id)
+    {
+        if (Auth::user()->isAdmin()) {
+            $product = Product::find($id);
+            File::delete('images/' . $product->image);
+            $product->image = null;
+            $product->save();
+            $message = "عکس محصول ( " . $product->name . " ) حذف شد";
+            return redirect('/admin/products')->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
+    }
+
     protected function fixPrice($items)
     {
         foreach ($items as $item)
