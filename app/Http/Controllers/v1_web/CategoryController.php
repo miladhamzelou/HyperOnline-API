@@ -21,6 +21,8 @@ use App\Product;
 use App\Services\v1\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -86,11 +88,13 @@ class CategoryController extends Controller
             $category->unique_id = uniqid('', false);
             $category->name = $request->get('name');
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
-            $image = $request->file('image');
-            $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('images');
-            $image->move($destinationPath, $input['imagename']);
-            $category->image = $input['imagename'];
+            if (Input::hasFile('image')) {
+                $image = $request->file('image');
+                $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('images');
+                $image->move($destinationPath, $input['imagename']);
+                $category->image = $input['imagename'];
+            }
             $category->save();
         } elseif ($level == "2") {
             $category = new Category2();
@@ -100,11 +104,13 @@ class CategoryController extends Controller
             $category->parent_id = $parent->unique_id;
             $category->parent_name = $parent->name;
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
-            $image = $request->file('image');
-            $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('images');
-            $image->move($destinationPath, $input['imagename']);
-            $category->image = $input['imagename'];
+            if (Input::hasFile('image')) {
+                $image = $request->file('image');
+                $input['imagename'] = 'C2.' . time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('images');
+                $image->move($destinationPath, $input['imagename']);
+                $category->image = $input['imagename'];
+            }
             $category->save();
         } elseif ($level == "3") {
             $category = new Category3();
@@ -114,11 +120,13 @@ class CategoryController extends Controller
             $category->parent_id = $parent->unique_id;
             $category->parent_name = $parent->name;
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
-            $image = $request->file('image');
-            $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('images');
-            $image->move($destinationPath, $input['imagename']);
-            $category->image = $input['imagename'];
+            if (Input::hasFile('image')) {
+                $image = $request->file('image');
+                $input['imagename'] = 'C3.' . time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('images');
+                $image->move($destinationPath, $input['imagename']);
+                $category->image = $input['imagename'];
+            }
             $category->save();
         }
         $message = "Category Created";
@@ -173,6 +181,15 @@ class CategoryController extends Controller
             if ($level == "1") {
                 $category = Category1::where("unique_id", $request->get('unique_id'))->firstOrFail();
                 $category->name = $request->get('name');
+                if (Input::hasFile('image')) {
+                    // first delete old one
+                    File::delete('images/' . $category->image);
+                    $image = $request->file('image');
+                    $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('images');
+                    $image->move($destinationPath, $input['imagename']);
+                    $category->image = $input['imagename'];
+                }
                 $category->save();
             } elseif ($level == "2") {
                 $category = Category2::where("unique_id", $request->get('unique_id'))->firstOrFail();
@@ -180,6 +197,15 @@ class CategoryController extends Controller
                 $category->name = $request->get('name');
                 $category->parent_id = $parent->unique_id;
                 $category->parent_name = $parent->name;
+                if (Input::hasFile('image')) {
+                    // first delete old one
+                    File::delete('images/' . $category->image);
+                    $image = $request->file('image');
+                    $input['imagename'] = 'C2.' . time() . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('images');
+                    $image->move($destinationPath, $input['imagename']);
+                    $category->image = $input['imagename'];
+                }
                 $category->save();
             } elseif ($level == "3") {
                 $category = Category3::where("unique_id", $request->get('unique_id'))->firstOrFail();
@@ -187,6 +213,15 @@ class CategoryController extends Controller
                 $category->name = $request->get('name');
                 $category->parent_id = $parent->unique_id;
                 $category->parent_name = $parent->name;
+                if (Input::hasFile('image')) {
+                    // first delete old one
+                    File::delete('images/' . $category->image);
+                    $image = $request->file('image');
+                    $input['imagename'] = 'C3.' . time() . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('images');
+                    $image->move($destinationPath, $input['imagename']);
+                    $category->image = $input['imagename'];
+                }
                 $category->save();
             }
             $message = "category updated";

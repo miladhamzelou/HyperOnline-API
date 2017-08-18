@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <form role="form" action="/admin/categories/update/{{ $level }}" method="post">
+                        <form role="form" action="/admin/categories/update/{{ $level }}" enctype="multipart/form-data" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="unique_id" value="{{ $category2->unique_id }}">
 
@@ -55,6 +55,31 @@
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                            @if($category2->image)
+                                <hr>
+                                <br>
+                                <img src="{{ asset('images/' . $category2->image) }}" class="center-block"
+                                     alt="{{ $category2->name }}" width="250px" height="250px">
+                                <br>
+                                <br>
+                            @else
+                                <br>
+                            @endif
+                            <div class="center-block form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                                @if($category2->image)
+                                    <label for="image" class="pull-right" style="direction:rtl;">عکس جدید :</label>
+                                @else
+                                    <label for="image" class="pull-right" style="direction:rtl;">عکس :</label>
+                                @endif
+                                <input id="image" type="file" tabindex="7"
+                                       name="image" accept="image/jpeg, image/png, image/gif">
+
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                    @endif
                             </div>
                             <hr>
                             <br>

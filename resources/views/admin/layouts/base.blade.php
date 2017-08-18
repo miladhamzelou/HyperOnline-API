@@ -290,8 +290,8 @@
                         </div>
                     </div>
                 </div>
+                <br>
             @endif
-            <br>
             @if ($errors->any())
                 <div class='flash alert-danger'>
                     <ul class="panel-body">
@@ -302,8 +302,8 @@
                         @endforeach
                     </ul>
                 </div>
+                <br>
             @endif
-
             @yield('info-box')
             @yield('order-chart')
             @yield('reports')

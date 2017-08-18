@@ -17,12 +17,14 @@
                     </div>
                     <div class="box-body">
                         <br>
-                        <form role="form" action="/admin/categories/create/{{ $level }}" enctype="multipart/form-data" method="post">
+                        <form role="form" action="/admin/categories/create/{{ $level }}" enctype="multipart/form-data"
+                              method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             @if($level!="1")
                                 <div class="form-group{{ $errors->has('parent') ? ' has-error' : '' }}">
-                                    <label for="parent" class="pull-right" style="direction:rtl;">دسته بندی والد :</label>
+                                    <label for="parent" class="pull-right" style="direction:rtl;">دسته بندی والد
+                                        :</label>
                                     <select id="parent" type="text" style="text-align: center"
                                             class="my_font form-control" tabindex="1"
                                             name="parent" required>
