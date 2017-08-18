@@ -179,9 +179,11 @@
                                        value="اعمال تغییرات">
                             </div>
 
-                            <div class="form-groupt"></div>
-                            <a href="{{ url('admin/products/delete/'.$product->unique_id) }}"
-                               tabindex="4" class="btn btn-danger center-block btn-lg">حذف محصول</a>
+                            <div class="form-group">
+                                <button class="btn btn-danger center-block btn-lg">
+                                    <a href="{{ url('admin/products/delete/'.$product->unique_id) }}">حذف محصول</a>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
