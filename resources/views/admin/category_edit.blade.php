@@ -16,7 +16,8 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <form role="form" action="/admin/categories/update/{{ $level }}" enctype="multipart/form-data" method="post">
+                        <form role="form" action="/admin/categories/update/{{ $level }}" enctype="multipart/form-data"
+                              method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="unique_id" value="{{ $category2->unique_id }}">
 
@@ -79,7 +80,7 @@
                                     <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
                                     </span>
-                                    @endif
+                                @endif
                             </div>
                             <hr>
                             <br>
@@ -87,8 +88,16 @@
                                 <input type="submit" tabindex="3" name="publish"
                                        class="my_font btn center-block btn-lg btn-info" value="Submit">
                             </div>
-                            <a href="{{ url('admin/categories/delete/'.$level.'/'.$category2->unique_id) }}"
-                               tabindex="4" class="btn btn-danger center-block btn-lg">Delete</a>
+
+                            <div class="form-group">
+                                <a class="btn btn-danger center-block btn-lg style="
+                                   href="{{ url('admin/categories/delete_photo/'.$level.'/'.$category2->unique_id) }}">حذف عکس</a>
+                            </div>
+
+                            <div class="form-group">
+                                <a href="{{ url('admin/categories/delete/'.$level.'/'.$category2->unique_id) }}"
+                                   tabindex="4" class="btn btn-danger center-block btn-lg">حذف دسته بندی</a>
+                            </div>
                         </form>
                     </div>
                 </div>

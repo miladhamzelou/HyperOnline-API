@@ -240,33 +240,82 @@ class CategoryController extends Controller
                     $categories2 = Category3::where("parent_id", $category->unique_id)->get();
                     foreach ($categories2 as $category2) {
                         $products = Product::where("category_id", $category2->unique_id)->get();
-                        foreach ($products as $product)
+                        foreach ($products as $product) {
+                            $this->deletePhoto($product);
                             $product->delete();
+                        }
+                        $this->deletePhoto($category2);
                         $category2->delete();
                     }
+                    $this->deletePhoto($category);
                     $category->delete();
                 }
 
                 $category = Category1::find($id);
+                $this->deletePhoto($category);
                 $category->delete();
             } elseif ($level == "2") {
                 $categories = Category3::where("parent_id", $id)->get();
                 foreach ($categories as $category) {
                     $products = Product::where("category_id", $category->unique_id)->get();
-                    foreach ($products as $product)
+                    foreach ($products as $product) {
+                        $this->deletePhoto($product);
                         $product->delete();
+                    }
+                    $this->deletePhoto($category);
                     $category->delete();
                 }
                 $category = Category2::find($id);
+                $this->deletePhoto($category);
                 $category->delete();
             } elseif ($level == "3") {
                 $products = Product::where("category_id", $id)->get();
-                foreach ($products as $product)
+                foreach ($products as $product) {
+                    $this->deletePhoto($product);
                     $product->delete();
+                }
                 $category = Category3::find($id);
+                $this->deletePhoto($category);
                 $category->delete();
             }
             $message = "category deleted";
+            return redirect('/admin/categories')->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('Unauthorized Access');
+    }
+
+    public function delete_Photo($level, $id)
+    {
+        if (Auth::user()->isAdmin()) {
+            if ($level == "1") {
+                $category = Category1::find($id);
+                if ($category->image) {
+                    $this->deletePhoto($category);
+                    $category->image = null;
+                    $category->save();
+                    $message = "عکس دسته بندی (" . $category->name . " ) حذف شد";
+                } else
+                    $message = "برای دسته بندی (" . $category->name . " ) عکسی ثبت نشده است";
+            } elseif ($level == "2") {
+                $category = Category2::find($id);
+                if ($category->image) {
+                    $this->deletePhoto($category);
+                    $category->image = null;
+                    $category->save();
+                    $message = "عکس دسته بندی (" . $category->name . " ) حذف شد";
+                } else
+                    $message = "برای دسته بندی (" . $category->name . " ) عکسی ثبت نشده است";
+            } elseif ($level == "3") {
+                $category = Category3::find($id);
+                if ($category->image) {
+                    $this->deletePhoto($category);
+                    $category->image = null;
+                    $category->save();
+                    $message = "عکس دسته بندی (" . $category->name . " ) حذف شد";
+                } else
+                    $message = "برای دسته بندی (" . $category->name . " ) عکسی ثبت نشده است";
+            }
             return redirect('/admin/categories')->withMessage($message);
         } else
             return redirect('/')
@@ -300,5 +349,11 @@ class CategoryController extends Controller
         $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
         $date = jDate("H:i", $timestamp);
         return $date;
+    }
+
+    protected function deletePhoto($item)
+    {
+        if ($item->image)
+            File::delete('images/' . $item->image);
     }
 }

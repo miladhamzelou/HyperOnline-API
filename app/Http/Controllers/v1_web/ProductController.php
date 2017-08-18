@@ -165,6 +165,8 @@ class ProductController extends Controller
     {
         if (Auth::user()->isAdmin()) {
             $product = Product::find($id);
+            if ($product->image)
+                File::delete('images/' . $product->image);
             $product->delete();
             $message = "محصول ( " . $product->name . " ) حذف شد";
             return redirect('/admin/products')->withMessage($message);
@@ -177,10 +179,13 @@ class ProductController extends Controller
     {
         if (Auth::user()->isAdmin()) {
             $product = Product::find($id);
-            File::delete('images/' . $product->image);
-            $product->image = null;
-            $product->save();
-            $message = "عکس محصول ( " . $product->name . " ) حذف شد";
+            if ($product->image) {
+                File::delete('images/' . $product->image);
+                $product->image = null;
+                $product->save();
+                $message = "عکس محصول ( " . $product->name . " ) حذف شد";
+            } else
+                $message = "برای محصول ( " . $product->name . " ) عکسی ثبت نشده است";
             return redirect('/admin/products')->withMessage($message);
         } else
             return redirect('/')
