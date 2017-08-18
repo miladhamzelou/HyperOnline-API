@@ -9,7 +9,7 @@
         <div class="col-lg-6 col-centered center-block" style="float: none;">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h2 class="box-title">Last Products</h2>
+                    <h2 class="box-title">لیست محصولات ( به ترتیب تاریخ )</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="box-body">
                         @if(!$products->count())
-                            <p>There is no products</p>
+                            <p>محصولی ثبت نشده است</p>
                         @else
                             <ul class="products-list products-list-in-box">
                                 @foreach($products as $product)

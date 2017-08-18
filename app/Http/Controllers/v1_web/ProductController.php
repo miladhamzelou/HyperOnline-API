@@ -38,10 +38,10 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::orderBy('created_at', 'desc')->take(50)->get();
-        $title = "Products";
+        $title = "محصولات";
         return view('admin.products')
             ->withTitle($title)
-            ->withProducts($products);
+            ->withProducts($this->fixPrice($products));
     }
 
     public function show()
@@ -156,6 +156,27 @@ class ProductController extends Controller
         } else
             return redirect('/')
                 ->withErrors('Unauthorized Access');
+    }
+
+    protected function fixPrice($items)
+    {
+        foreach ($items as $item)
+            $item->price = $this->formatMoney($item->price);
+        return $items;
+    }
+
+    protected function formatMoney($number, $fractional = false)
+    {
+        if ($fractional)
+            $number = sprintf('%.2f', $number);
+        while (true) {
+            $replaced = preg_replace('/(-?\d+)(\d\d\d)/', '$1,$2', $number);
+            if ($replaced != $number)
+                $number = $replaced;
+            else
+                break;
+        }
+        return $number;
     }
 
     protected function getCurrentTime()
