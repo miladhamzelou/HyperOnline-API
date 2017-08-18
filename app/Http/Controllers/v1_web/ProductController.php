@@ -20,6 +20,7 @@ use App\Seller;
 use App\Services\v1\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -137,6 +138,16 @@ class ProductController extends Controller
             $product->count = $request->get('count');
             $product->price = $request->get('price');
             $product->type = $request->get('type');
+
+            if ($product->image) {
+                // first delete old one
+                File::delete('images/' . $product->image);
+                $image = $request->file('image');
+                $input['imagename'] = 'P.' . time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('images');
+                $image->move($destinationPath, $input['imagename']);
+                $product->image = $input['imagename'];
+            }
 
             $product->save();
             $message = "product updated";
