@@ -110,7 +110,7 @@
                                         <input id="description" type="text" style="text-align: center"
                                                tabindex="2"
                                                class="my_font form-control"
-                                               name="description" required value="{{ $product->description }}">
+                                               name="description" value="{{ $product->description }}">
 
                                         @if ($errors->has('description'))
                                             <span class="help-block">
@@ -153,24 +153,33 @@
                                      alt="{{ $product->name }}" width="250px" height="250px">
                                 <br>
                                 <br>
-                                <div class="center-block form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                            @else
+                                <br>
+                            @endif
+                            <div class="center-block form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                                @if($product->image)
                                     <label for="image" class="pull-right" style="direction:rtl;">عکس جدید :</label>
-                                    <input id="image" type="file" tabindex="7"
-                                           name="image" accept="image/jpeg, image/png, image/gif">
+                                @else
+                                    <label for="image" class="pull-right" style="direction:rtl;">عکس :</label>
+                                @endif
+                                <input id="image" type="file" tabindex="7"
+                                       name="image" accept="image/jpeg, image/png, image/gif">
 
-                                    @if ($errors->has('image'))
-                                        <span class="help-block">
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
                                     </span>
-                                    @endif
-                                </div>
-                            @endif
+                                @endif
+                            </div>
                             <hr>
                             <br>
                             <div class="form-group">
                                 <input type="submit" tabindex="7" name="publish"
-                                       class="my_font btn center-block btn3d btn-lg btn-warning" value="اعمال تغییرات">
+                                       class="my_font btn center-block btn3d btn-lg btn-warning"
+                                       value="اعمال تغییرات">
                             </div>
+
+                            <div class="form-groupt"></div>
                             <a href="{{ url('admin/products/delete/'.$product->unique_id) }}"
                                tabindex="4" class="btn btn-danger center-block btn-lg">حذف محصول</a>
                         </form>

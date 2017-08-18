@@ -280,6 +280,30 @@
 
         <!-- Main content -->
         <section class="content">
+            @if (Session::has('message'))
+                <div class="row">
+                    <div class="col-lg-4 col-centered center-block" style="float: none;">
+                        <div class="flash alert-success">
+                            <p class="panel-body" style="font-size:20px; text-align:center; direction: rtl;">
+                                {{ Session::get('message') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            <br>
+            @if ($errors->any())
+                <div class='flash alert-danger'>
+                    <ul class="panel-body">
+                        @foreach ( $errors->all() as $error )
+                            <li>
+                                {{ $error }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @yield('info-box')
             @yield('order-chart')
             @yield('reports')

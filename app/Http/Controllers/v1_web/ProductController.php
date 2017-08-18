@@ -21,6 +21,7 @@ use App\Services\v1\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 
 class ProductController extends Controller
 {
@@ -85,15 +86,17 @@ class ProductController extends Controller
         $product->type = $request->get('type');
         $product->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-        $image = $request->file('image');
-        $input['imagename'] = 'P.' . time() . '.' . $image->getClientOriginalExtension();
-        $destinationPath = public_path('images');
-        $image->move($destinationPath, $input['imagename']);
-        $product->image = $input['imagename'];
+        if (Input::hasFile('image')) {
+            $image = $request->file('image');
+            $input['imagename'] = 'P.' . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('images');
+            $image->move($destinationPath, $input['imagename']);
+            $product->image = $input['imagename'];
+        }
 
         $product->save();
 
-        $message = "product created";
+        $message = "محصول ( " . $product->name . " ) اضافه شد";
         return redirect('/admin/products')->withMessage($message);
     }
 
@@ -113,7 +116,7 @@ class ProductController extends Controller
                 array_push($categories_list, $category->name);
 
             return view('admin.product_edit')
-                ->withTitle("Edit Product")
+                ->withTitle("ویرایش محصول")
                 ->withProduct($product)
                 ->withSellers($sellers_list)
                 ->withSeller_selected($seller2->name)
@@ -139,7 +142,7 @@ class ProductController extends Controller
             $product->price = $request->get('price');
             $product->type = $request->get('type');
 
-            if ($product->image) {
+            if (Input::hasFile('image')) {
                 // first delete old one
                 File::delete('images/' . $product->image);
                 $image = $request->file('image');
@@ -150,8 +153,9 @@ class ProductController extends Controller
             }
 
             $product->save();
-            $message = "product updated";
-            return redirect('/admin/products')->withMessage($message);
+            $message = "محصول ( " . $product->name . " ) به روزرسانی شد";
+            return redirect('/admin/products')
+                ->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('Unauthorized Access');
@@ -162,7 +166,7 @@ class ProductController extends Controller
         if (Auth::user()->isAdmin()) {
             $product = Product::find($id);
             $product->delete();
-            $message = "product updated";
+            $message = "محصول ( " . $product->name . " ) حذف شد";
             return redirect('/admin/products')->withMessage($message);
         } else
             return redirect('/')
