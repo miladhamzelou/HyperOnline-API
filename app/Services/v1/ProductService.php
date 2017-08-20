@@ -25,12 +25,12 @@ class ProductService
      */
     public function getProducts($parameters)
     {
-        if (empty($parameters)) return $this->filterProducts(Product::all());
+        if (empty($parameters)) return $this->filterProducts(Product::orderBy("created_at", "desc")->get());
 
         $withKeys = $this->getWithKeys($parameters);
         $whereClauses = $this->getWhereClauses($parameters);
 
-        $products = Product::with($withKeys)->where($whereClauses)->get();
+        $products = Product::with($withKeys)->where($whereClauses)->orderBy("created_at", "desc")->get();
 
         return $this->filterProducts($products, $withKeys);
     }
@@ -41,7 +41,7 @@ class ProductService
         $category_id = $parameters['cat'];
         if (strcmp($category_id, "n") == 0)
             $products = Product::where("confirmed", 1)
-                ->where("type",0)
+                ->where("type", 0)
                 ->orderBy('created_at', 'desc')
                 ->skip(($index - 1) * 10)
                 ->take(10)
@@ -49,7 +49,7 @@ class ProductService
         else
             $products = Product::where("confirmed", 1)
                 ->where("category_id", $category_id)
-                ->where("type",0)
+                ->where("type", 0)
                 ->orderBy('created_at', 'desc')
                 ->skip(($index - 1) * 10)
                 ->take(10)

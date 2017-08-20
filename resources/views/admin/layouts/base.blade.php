@@ -187,6 +187,7 @@
                     <ul class="treeview-menu">
                         <li><a href="{{ url('/admin/products/create') }}">کالای جدید</a></li>
                         <li><a href="{{ url('/admin/products') }}">لیست کالا ها</a></li>
+                        <li><a href="{{ url('/admin/products_inactive') }}">کالاهای تایید نشده</a></li>
                     </ul>
                 </li>
 

@@ -103,7 +103,7 @@
                                         <input id="description" type="text" style="text-align: center"
                                                tabindex="2"
                                                class="my_font form-control"
-                                               name="description" required>
+                                               name="description">
 
                                         @if ($errors->has('description'))
                                             <span class="help-block">

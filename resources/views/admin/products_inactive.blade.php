@@ -5,22 +5,14 @@
 @endsection
 
 @section('list')
-    @if($inactive>0)
-        <div class="row">
-            <div class="col-lg-4 col-centered center-block" style="float: none;">
-                <div class="flash alert-warning">
-                    <p class="panel-body" style="font-size:20px; text-align:center; direction: rtl;">
-                        <a href="{{ url('/admin/products_inactive') }}" style="color:white;">
-                            محصولات تایید نشده ای وجود دارند
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <br>
-    @endif
     <div class="row">
         <div class="col-lg-6 col-centered center-block" style="float: none;">
+            @if($products->count())
+                <a class="btn btn-success center-block btn-lg"
+                   href="{{ url('/admin/products_active') }}">تایید تمام محصولات</a>
+                <br>
+                <br>
+            @endif
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h2 class="box-title">لیست محصولات ( به ترتیب تاریخ )</h2>
@@ -31,7 +23,8 @@
                     </div>
                     <div class="box-body">
                         @if(!$products->count())
-                            <p>محصولی ثبت نشده است</p>
+                            <br>
+                            <p style="text-align: center">محصول ثبت نشده ای وجود ندارد</p>
                         @else
                             <ul class="products-list products-list-in-box">
                                 @foreach($products as $product)

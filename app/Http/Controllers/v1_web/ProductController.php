@@ -39,10 +39,12 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::orderBy('created_at', 'desc')->take(50)->get();
+        $products = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->get();
+        $inactive = count(Product::where("confirmed", 0)->get());
         $title = "محصولات";
         return view('admin.products')
             ->withTitle($title)
+            ->withInactive($inactive)
             ->withProducts($this->fixPrice($products));
     }
 
@@ -190,6 +192,27 @@ class ProductController extends Controller
         } else
             return redirect('/')
                 ->withErrors('Unauthorized Access');
+    }
+
+    public function inactive()
+    {
+        $products = Product::where("confirmed", 0)->orderBy('created_at', 'desc')->get();
+        $title = "محصولات غیرفعال";
+        return view('admin.products_inactive')
+            ->withTitle($title)
+            ->withProducts($this->fixPrice($products));
+    }
+
+    public function active()
+    {
+        $products = Product::where("confirmed", 0)->get();
+        foreach ($products as $product) {
+            $product->confirmed = 1;
+            $product->save();
+        }
+        $message = "تمام محصولات تایید شدند";
+        return redirect('/admin/products')
+            ->withMessage($message);
     }
 
     protected function fixPrice($items)
