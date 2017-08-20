@@ -111,7 +111,6 @@
                                 @foreach($users as $user)
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">{{ $user->address }}</td>
-                                        </td>
                                         <td style="text-align: right; direction: rtl;">{{ $user->phone }}</td>
                                         <td style="text-align: right; direction: rtl;"><a
                                                     href="{{ url('/admin/users/'.$user->unique_id) }}">{{ $user->name }}</a>
@@ -120,6 +119,9 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="box-footer text-center">
+                        <a href="{{ url('/admin/users') }}">لیست کامل</a>
                     </div>
                 </div>
             </div>
@@ -165,6 +167,9 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="box-footer text-center">
+                        <a href="{{ url('/admin/orders') }}">لیست کامل</a>
                     </div>
                 </div>
             </div>
@@ -218,6 +223,9 @@
                                 @endforeach
                             </ul>
                         @endif
+                    </div>
+                    <div class="box-footer text-center">
+                        <a href="{{ url('/admin/products') }}">لیست کامل</a>
                     </div>
                 </div>
             </div>
