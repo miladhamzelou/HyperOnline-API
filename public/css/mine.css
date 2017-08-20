@@ -8,8 +8,8 @@
     src: url('../fonts/sans.ttf') format('truetype');
 }
 
-.my_font {
-    font-family: "sanss", sans-serif;
+.font {
+    font-family: 'sanss', sans-serif;
 }
 
 .wrapper {

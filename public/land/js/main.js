@@ -22,17 +22,17 @@
 		owl.owlCarousel({
 			items: 1,
 			mouseDrag: false,
-			loop: true,
+			loop: false,
 			margin: 0,
 			responsiveClass: true,
-			nav: true,
-			dots: true,
+			nav: false,
+			dots: false,
 			autoHeight: true,
 			smartSpeed: 500,
-			autoplay: true,
+			autoplay: false,
 			autoplayTimeout: 5000,
 			autoplayHoverPause: true,
-		    navText: [	
+		    navText: [
 		      "<i class='icon-arrow-left2 owl-direction'></i>",
 		      "<i class='icon-arrow-right2 owl-direction'></i>"
 	     	]
