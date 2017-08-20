@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/orders/create', 'v1_web\OrderController@show')->name('order_create');
     Route::post('/admin/orders/create', 'v1_web\OrderController@store')->name('order_create');
     Route::get('/admin/orders', 'v1_web\OrderController@index')->name('orders');
-    Route::get('/admin/orders/{id}', 'v1_web\OrderController@edit')->name('order_edit');
+    Route::get('/admin/orders/{id}', 'v1_web\OrderController@details')->name('order_details');
     Route::post('/admin/orders/update', 'v1_web\OrderController@update')->name('order_update');
     Route::get('/admin/orders/delete/{id}', 'v1_web\OrderController@delete')->name('order_delete');
 

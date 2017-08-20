@@ -3,13 +3,6 @@
  * Copyright (c) 2017 - All Rights Reserved - Arash Hatami
  */
 
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 8/12/17
- * Time: 2:35 AM
- */
-
 namespace app\Http\Controllers\v1_web;
 
 

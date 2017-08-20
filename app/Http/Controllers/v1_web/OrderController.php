@@ -22,15 +22,45 @@ class OrderController
     {
         $orders = Order::orderBy("created_at", "desc")->get();
         return view('admin.orders')
-            ->withTitle("Orders")
-            ->withOrders($orders);
+            ->withTitle("سفارشات")
+            ->withOrders($this->fixPrice($orders));
     }
 
     public function pays()
     {
         $pays = Pay::get();
         return view('admin.pays')
-            ->withTitle("Pays")
+            ->withTitle("تراکنش ها")
             ->withPays($pays);
+    }
+
+    public function details($id)
+    {
+        $order = Order::find($id);
+        $order->price = $this->formatMoney($order->price);
+        return view('admin.order_details')
+            ->withTitle("سفارش")
+            ->withOrder($order);
+    }
+
+    protected function fixPrice($items)
+    {
+        foreach ($items as $item)
+            $item->price = $this->formatMoney($item->price);
+        return $items;
+    }
+
+    protected function formatMoney($number, $fractional = false)
+    {
+        if ($fractional)
+            $number = sprintf('%.2f', $number);
+        while (true) {
+            $replaced = preg_replace('/(-?\d+)(\d\d\d)/', '$1,$2', $number);
+            if ($replaced != $number)
+                $number = $replaced;
+            else
+                break;
+        }
+        return $number;
     }
 }
