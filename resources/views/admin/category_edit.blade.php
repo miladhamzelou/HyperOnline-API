@@ -9,7 +9,7 @@
         <div class="col-lg-4 col-centered center-block" style="float: none;">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h2 class="box-title">Edit Category - Level : {{ $level }}</h2>
+                    <h2 class="box-title">اطلاعات دسته بندی</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
@@ -57,6 +57,20 @@
                                     </span>
                                 @endif
                             </div>
+
+                            <div class="form-group{{ $errors->has('off') ? ' has-error' : '' }}">
+                                <label for="off" class="pull-right" style="direction:rtl;">تخفیف ( درصد )
+                                    :</label>
+                                <input id="off" type="number" style="text-align: center" tabindex="6"
+                                       class="my_font form-control" value="{{ $category2->off }}"
+                                       name="off" required>
+
+                                @if ($errors->has('off'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('off') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                             @if($category2->image)
                                 <hr>
                                 <br>
@@ -86,7 +100,7 @@
                             <br>
                             <div class="form-group">
                                 <input type="submit" tabindex="3" name="publish"
-                                       class="my_font btn center-block btn-lg btn-info" value="Submit">
+                                       class="my_font btn center-block btn-lg btn-info" value="ثبت">
                             </div>
 
                             <div class="form-group">

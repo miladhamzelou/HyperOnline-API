@@ -83,10 +83,12 @@ class CategoryController extends Controller
 
     public function store(Request $request, $level)
     {
+        $name = "";
         if ($level == "1") {
             $category = new Category1();
             $category->unique_id = uniqid('', false);
             $category->name = $request->get('name');
+            $name = $request->get('name');
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
             if (Input::hasFile('image')) {
                 $image = $request->file('image');
@@ -101,6 +103,7 @@ class CategoryController extends Controller
             $parent = Category1::where("name", $request->get('parent'))->firstOrFail();
             $category->unique_id = uniqid('', false);
             $category->name = $request->get('name');
+            $name = $request->get('name');
             $category->parent_id = $parent->unique_id;
             $category->parent_name = $parent->name;
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
@@ -117,6 +120,7 @@ class CategoryController extends Controller
             $parent = Category2::where("name", $request->get('parent'))->firstOrFail();
             $category->unique_id = uniqid('', false);
             $category->name = $request->get('name');
+            $name = $request->get('name');
             $category->parent_id = $parent->unique_id;
             $category->parent_name = $parent->name;
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
@@ -129,7 +133,7 @@ class CategoryController extends Controller
             }
             $category->save();
         }
-        $message = "Category Created";
+        $message = "دسته بندی " . $name . " ایجاد شد";
         return redirect('/admin/categories')
             ->withMessage($message);
     }
@@ -140,7 +144,7 @@ class CategoryController extends Controller
             if ($level == 1) {
                 $category = Category1::where("unique_id", $id)->firstOrFail();
                 return view('admin.category_edit')
-                    ->withTitle("Edit Category (1)")
+                    ->withTitle("ویرایش دسته بندی (1)")
                     ->withCategory2($category)
                     ->withLevel("1");
             } elseif ($level == 2) {
@@ -151,7 +155,7 @@ class CategoryController extends Controller
                 foreach ($categories as $category)
                     array_push($categories_list, $category->name);
                 return view('admin.category_edit')
-                    ->withTitle("Edit Category (2)")
+                    ->withTitle("ویرایش دسته بندی (2)")
                     ->withCategory_this($parent->name)
                     ->withCategory2($category2)
                     ->withCategories($categories_list)
@@ -164,7 +168,7 @@ class CategoryController extends Controller
                 foreach ($categories as $category)
                     array_push($categories_list, $category->name);
                 return view('admin.category_edit')
-                    ->withTitle("Edit Category (3)")
+                    ->withTitle("ویرایش دسته بندی (3)")
                     ->withCategory_this($parent->name)
                     ->withCategory2($category2)
                     ->withCategories($categories_list)
@@ -181,6 +185,7 @@ class CategoryController extends Controller
             if ($level == "1") {
                 $category = Category1::where("unique_id", $request->get('unique_id'))->firstOrFail();
                 $category->name = $request->get('name');
+                $category->off = $request->get('off');
                 if (Input::hasFile('image')) {
                     // first delete old one
                     File::delete('images/' . $category->image);
@@ -197,6 +202,7 @@ class CategoryController extends Controller
                 $category->name = $request->get('name');
                 $category->parent_id = $parent->unique_id;
                 $category->parent_name = $parent->name;
+                $category->off = $request->get('off');
                 if (Input::hasFile('image')) {
                     // first delete old one
                     File::delete('images/' . $category->image);
@@ -213,6 +219,7 @@ class CategoryController extends Controller
                 $category->name = $request->get('name');
                 $category->parent_id = $parent->unique_id;
                 $category->parent_name = $parent->name;
+                $category->off = $request->get('off');
                 if (Input::hasFile('image')) {
                     // first delete old one
                     File::delete('images/' . $category->image);
@@ -224,7 +231,7 @@ class CategoryController extends Controller
                 }
                 $category->save();
             }
-            $message = "category updated";
+            $message = "دسته بندی به روزرسانی شد";
             return redirect('/admin/categories')->withMessage($message);
         } else
             return redirect('/')
