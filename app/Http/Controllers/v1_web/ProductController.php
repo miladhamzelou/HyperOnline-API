@@ -62,7 +62,7 @@ class ProductController extends Controller
                 ->withCategories($categories_list);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function store(Request $request)
@@ -121,7 +121,7 @@ class ProductController extends Controller
                 ->withCategory_selected($category2->name);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function update(Request $request)
@@ -158,7 +158,7 @@ class ProductController extends Controller
                 ->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function delete($id)
@@ -172,7 +172,7 @@ class ProductController extends Controller
             return redirect('/admin/products')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function delete_photo($id)
@@ -189,7 +189,7 @@ class ProductController extends Controller
             return redirect('/admin/products')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function inactive()

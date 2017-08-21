@@ -40,7 +40,7 @@ class AuthorController
                 ->withTitle("Create New Author");
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function store(Request $request)
@@ -64,7 +64,7 @@ class AuthorController
             return redirect('/admin/authors')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function edit($id)
@@ -76,7 +76,7 @@ class AuthorController
                 ->withAuthor($author);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
 
     }
 
@@ -97,7 +97,7 @@ class AuthorController
             return redirect('/admin/authors')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     protected function getCurrentTime()

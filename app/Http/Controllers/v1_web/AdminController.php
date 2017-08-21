@@ -185,7 +185,7 @@ class AdminController
                 ->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function support()
@@ -195,7 +195,7 @@ class AdminController
                 ->withTitle("Support");
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function support_send(Request $request)
@@ -213,7 +213,7 @@ class AdminController
             });
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     protected function filterUser($users)

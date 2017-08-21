@@ -46,7 +46,7 @@ class SellerController
                 ->withAuthors($authors_list);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function store(Request $request)
@@ -74,7 +74,7 @@ class SellerController
             return redirect('/admin/sellers')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function edit($id)
@@ -93,7 +93,7 @@ class SellerController
                 ->withAuthor_selected($author2->name);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function update(Request $request)
@@ -117,7 +117,7 @@ class SellerController
             return redirect('/admin/sellers')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     protected function getCurrentTime()

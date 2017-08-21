@@ -78,7 +78,7 @@ class CategoryController extends Controller
             }
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function store(Request $request, $level)
@@ -176,7 +176,7 @@ class CategoryController extends Controller
             }
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function update(Request $request, $level)
@@ -235,7 +235,7 @@ class CategoryController extends Controller
             return redirect('/admin/categories')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function delete($level, $id)
@@ -289,7 +289,7 @@ class CategoryController extends Controller
             return redirect('/admin/categories')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     public function delete_Photo($level, $id)
@@ -326,7 +326,7 @@ class CategoryController extends Controller
             return redirect('/admin/categories')->withMessage($message);
         } else
             return redirect('/')
-                ->withErrors('Unauthorized Access');
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     protected function getCurrentTime()
