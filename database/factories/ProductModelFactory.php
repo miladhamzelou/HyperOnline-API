@@ -14,6 +14,8 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
     $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
     $date = jdate("Y-m-d:H-i-s", $timestamp);
 
+    $price = $faker->numberBetween(1000, 25000);
+
     return [
         'unique_id' => str_random(13),
         'seller_id' => $faker->randomElement($sellers),
@@ -22,7 +24,8 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'point' => $faker->randomFloat(1, 0.0, 9.9),
         'point_count' => $faker->numberBetween(0, 100),
         'confirmed' => $faker->numberBetween(0, 1),
-        'price' => $faker->numberBetween(1000, 25000),
+        'price' => $price,
+        'price_original' => $price - $faker->numberBetween(100, 500),
         'off' => $faker->numberBetween(0, 75),
         'count' => $faker->numberBetween(0, 50),
         'type' => 0,

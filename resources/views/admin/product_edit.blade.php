@@ -119,8 +119,24 @@
                                         @endif
                                     </div>
 
+                                    <div class="form-group{{ $errors->has('price_original') ? ' has-error' : '' }}">
+                                        <label for="price_original" class="pull-right" style="direction:rtl;">قیمت خرید
+                                            ( تومان )
+                                            :</label>
+                                        <input id="price_original" type="number" style="text-align: center"
+                                               class="my_font form-control" tabindex="4"
+                                               name="price_original" value="{{ $product->price_original }}" required>
+
+                                        @if ($errors->has('price_original'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('price_original') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+
                                     <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-                                        <label for="price" class="pull-right" style="direction: rtl;">قیمت :</label>
+                                        <label for="price" class="pull-right" style="direction: rtl;">قیمت روی جلد (
+                                            تومان ) :</label>
                                         <input id="price" type="number" style="text-align: center"
                                                class="my_font form-control" tabindex="3"
                                                name="price" required value="{{ $product->price }}">
@@ -141,6 +157,20 @@
                                         @if ($errors->has('count'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('count') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group{{ $errors->has('off') ? ' has-error' : '' }}">
+                                        <label for="off" class="pull-right" style="direction:rtl;">تخفیف ( درصد )
+                                            :</label>
+                                        <input id="off" type="number" style="text-align: center" tabindex="6"
+                                               class="my_font form-control" value="{{ $product->off }}"
+                                               name="off" required>
+
+                                        @if ($errors->has('off'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('off') }}</strong>
                                     </span>
                                         @endif
                                     </div>

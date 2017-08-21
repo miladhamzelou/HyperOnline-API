@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProductsTable extends Migration
 {
@@ -26,7 +26,9 @@ class CreateProductsTable extends Migration
             $table->integer('count')->default(0);
             $table->integer('confirmed')->default(0);
             $table->integer('price');
+            $table->integer('price_original');
             $table->integer('type');
+            $table->text('other')->nullable();
             $table->string('create_date');
             $table->string('update_date')->nullable();
             $table->timestamps();

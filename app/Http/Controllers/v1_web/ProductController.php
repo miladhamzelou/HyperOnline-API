@@ -78,6 +78,8 @@ class ProductController extends Controller
         $product->description = $request->get('description');
         $product->count = $request->get('count');
         $product->price = $request->get('price');
+        $product->price_original = $request->get('price_original');
+        $product->off = $request->get('off');
         $product->type = $request->get('type');
         $product->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
@@ -92,7 +94,7 @@ class ProductController extends Controller
         $product->save();
 
         $message = "محصول ( " . $product->name . " ) اضافه شد";
-        return redirect('/admin/products')->withMessage($message);
+        return redirect('/admin/products_inactive')->withMessage($message);
     }
 
     public function edit($id)
@@ -135,7 +137,10 @@ class ProductController extends Controller
             $product->description = $request->get('description');
             $product->count = $request->get('count');
             $product->price = $request->get('price');
+            $product->price_original = $request->get('price_original');
+            $product->off = $request->get('off');
             $product->type = $request->get('type');
+            $product->confirmed = 0;
 
             if (Input::hasFile('image')) {
                 // first delete old one
@@ -149,7 +154,7 @@ class ProductController extends Controller
 
             $product->save();
             $message = "محصول ( " . $product->name . " ) به روزرسانی شد";
-            return redirect('/admin/products')
+            return redirect('/admin/products_inactive')
                 ->withMessage($message);
         } else
             return redirect('/')
