@@ -9,6 +9,7 @@ use App\Category1;
 use App\Option;
 use App\Order;
 use App\Product;
+use App\Seller;
 use Illuminate\Http\Request;
 
 include(app_path() . '/Common/jdf.php');
@@ -213,5 +214,11 @@ class MainService
         }
 
         return $data;
+    }
+
+    public function getSendPrice()
+    {
+        $seller = Seller::firstOrFail();
+        return $seller->send_price;
     }
 }

@@ -34,9 +34,11 @@ class MainController extends Controller
             $most = $this->Main->getMostSell();
             $off = $this->Main->getOffs();
             $collection = $this->Main->getCollections();
+            $send_price = $this->Main->getSendPrice();
             if ($new && $popular && $category && $options && $most)
                 return response()->json([
                     'error' => false,
+                    'send_price' => $send_price,
                     'new' => $new,
                     'popular' => $popular,
                     'category' => $category,
