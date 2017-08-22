@@ -9,6 +9,7 @@ use App\Category1;
 use App\Option;
 use App\Order;
 use App\Product;
+use Illuminate\Http\Request;
 
 include(app_path() . '/Common/jdf.php');
 
@@ -172,6 +173,18 @@ class MainService
             return $this->filterProduct($products);
         } else
             return "n";
+    }
+
+    public function Search(Request $request)
+    {
+        $word = $request->get('word');
+        $products = Product::where('name', 'LIKE', '%' . $word . '%')
+            ->orWhere('description', 'LIKE', '%' . $word . '%')
+            ->get();
+        if (count($products) > 0)
+            return $this->filterProduct($products);
+        else
+            return 0;
     }
 
     /**

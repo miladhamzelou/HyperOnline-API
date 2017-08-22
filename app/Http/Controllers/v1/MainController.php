@@ -57,4 +57,31 @@ class MainController extends Controller
             ], 500);
         }
     }
+
+    public function search(Request $request)
+    {
+        try {
+            $result = $this->Main->Search($request);
+            if ($result != 0)
+                return response()->json([
+                    'error' => false,
+                    'result' => $result
+                ], 201);
+            elseif ($result == 0)
+                return response()->json([
+                    'error' => true,
+                    'error_msg' => "محصول مورد نظر یافت نشد"
+                ], 201);
+            else
+                return response()->json([
+                    'error' => true,
+                    'error_msg' => "something's wrong"
+                ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'error_msg' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
