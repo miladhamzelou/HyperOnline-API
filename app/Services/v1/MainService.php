@@ -5,6 +5,7 @@
 
 namespace App\Services\v1;
 
+use App\Banner;
 use App\Category1;
 use App\Option;
 use App\Order;
@@ -220,5 +221,25 @@ class MainService
     {
         $seller = Seller::firstOrFail();
         return $seller->send_price;
+    }
+
+    public function getBanners()
+    {
+        $banners = Banner::get();
+        if (count($banners) > 0) {
+            $data = [];
+
+            foreach ($banners as $banner) {
+                $entry = [
+                    'title' => $banner->title,
+                    'image' => $banner->image,
+                ];
+
+                $data[] = $entry;
+            }
+
+            return $data;
+        } else
+            return 0;
     }
 }
