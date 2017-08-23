@@ -27,6 +27,7 @@ class CreateOptionsTable extends Migration
             $table->integer('most_sell_count')->default(12);
             $table->integer('collection')->default(1);
             $table->integer('collection_count')->default(12);
+            $table->integer('banner')->default(0);
             $table->timestamps();
         });
     }

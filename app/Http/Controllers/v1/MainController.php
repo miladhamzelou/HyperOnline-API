@@ -36,11 +36,11 @@ class MainController extends Controller
             $collection = $this->Main->getCollections();
             $send_price = $this->Main->getSendPrice();
             $banners = $this->Main->getBanners();
-            if ($new && $popular && $category && $options && $most && $send_price && $banners)
+            if ($new && $popular && $category && $options && $most)
                 return response()->json([
                     'error' => false,
                     'send_price' => $send_price,
-                    'banners' => $banners,
+                    'banner' => $banners,
                     'new' => $new,
                     'popular' => $popular,
                     'category' => $category,

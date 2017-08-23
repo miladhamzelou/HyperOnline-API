@@ -12,6 +12,7 @@ use App\Order;
 use App\Product;
 use App\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 include(app_path() . '/Common/jdf.php');
 
@@ -136,7 +137,8 @@ class MainService
             'n' => $option->new,
             'm' => $option->most,
             'p' => $option->popular,
-            'c' => $option->collection
+            'c' => $option->collection,
+            'b' => $option->banner
         ];
         return $data;
     }
@@ -226,6 +228,7 @@ class MainService
     public function getBanners()
     {
         $banners = Banner::get();
+
         if (count($banners) > 0) {
             $data = [];
 
@@ -237,7 +240,7 @@ class MainService
 
                 $data[] = $entry;
             }
-
+            Log::info($data);
             return $data;
         } else
             return 0;
