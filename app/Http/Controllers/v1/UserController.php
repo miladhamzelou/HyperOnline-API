@@ -63,7 +63,7 @@ class UserController extends Controller
             return response()->json([
                 'tag' => 'validation',
                 'error' => true,
-                'message' => $validator->messages(),
+                'error_msg' => $validator->messages(),
                 'rules' => $failedRules
             ], 500);
         } else {
@@ -76,7 +76,7 @@ class UserController extends Controller
                 return response()->json([
                     'tag' => $request->input('tag'),
                     'error' => true,
-                    'message' => $e->getMessage()
+                    'error_msg' => $e->getMessage()
                 ], 500);
             }
         }
@@ -113,7 +113,7 @@ class UserController extends Controller
             return response()->json([
                 'tag' => 'validation',
                 'error' => true,
-                'message' => $validator->messages(),
+                'error_msg' => $validator->messages(),
                 'rules' => $failedRules
             ], 500);
         } else {
@@ -129,7 +129,7 @@ class UserController extends Controller
                 return response()->json([
                     'tag' => $request->input('tag'),
                     'error' => true,
-                    'message' => $e->getMessage()
+                    'error_msg' => $e->getMessage()
                 ], 500);
             }
         }
@@ -149,7 +149,7 @@ class UserController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'error' => true,
-                'message' => $e->getMessage()
+                'error_msg' => $e->getMessage()
             ], 500);
         }
     }
@@ -165,7 +165,7 @@ class UserController extends Controller
             return response()->json([
                 'tag' => 'validation',
                 'error' => true,
-                'message' => $validator->messages(),
+                'error_msg' => $validator->messages(),
                 'rules' => $failedRules
             ], 500);
         } else {
@@ -181,7 +181,7 @@ class UserController extends Controller
             } catch (Exception $e) {
                 return response()->json([
                     'error' => true,
-                    'message' => $e->getMessage()
+                    'error_msg' => $e->getMessage()
                 ], 500);
             }
         }

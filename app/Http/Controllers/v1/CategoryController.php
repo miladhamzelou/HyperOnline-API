@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Services\v1\CategoryService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -36,12 +37,13 @@ class CategoryController extends Controller
                 ], 201);
             else
                 return response()->json([
-                    'error' => true
+                    'error' => true,
+                    'error_msg' => "something's wrong"
                 ], 201);
         } catch (Exception $e) {
             return response()->json([
                 'error' => true,
-                'message' => $e->getMessage()
+                'error_msg' => $e->getMessage()
             ], 500);
         }
     }

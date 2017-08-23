@@ -99,7 +99,7 @@ class ProductController extends Controller
             return response()->json([
                 'tag' => 'validation',
                 'error' => true,
-                'message' => $validator->messages(),
+                'error_msg' => $validator->messages(),
                 'rules' => $failedRules
             ], 500);
         } else {
@@ -113,7 +113,7 @@ class ProductController extends Controller
                 return response()->json([
                     'tag' => $request->input('tag'),
                     'error' => true,
-                    'message' => $e->getMessage()
+                    'error_msg' => $e->getMessage()
                 ], 500);
             }
         }
@@ -145,7 +145,7 @@ class ProductController extends Controller
             return response()->json([
                 'tag' => 'validation',
                 'error' => true,
-                'message' => $validator->messages(),
+                'error_msg' => $validator->messages(),
                 'rules' => $failedRules
             ], 500);
         } else {
@@ -161,7 +161,7 @@ class ProductController extends Controller
                 return response()->json([
                     'tag' => $request->input('tag'),
                     'error' => true,
-                    'message' => $e->getMessage()
+                    'error_msg' => $e->getMessage()
                 ], 500);
             }
         }
@@ -181,7 +181,7 @@ class ProductController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'error' => true,
-                'message' => $e->getMessage()
+                'error_msg' => $e->getMessage()
             ], 500);
         }
     }
@@ -203,7 +203,7 @@ class ProductController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'error' => true,
-                'message' => $e->getMessage()
+                'error_msg' => $e->getMessage()
             ], 500);
         }
     }
