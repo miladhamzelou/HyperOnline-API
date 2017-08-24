@@ -70,4 +70,5 @@ Route::post('/callback', 'v1\OrderController@callback');
 
 Route::post('/v1/search', 'v1\MainController@search');
 
-Route::post('/verifyPhone', 'v1\UserController@phoneVerification');
+Route::post('/v1/verifyPhone', 'v1\UserController@phoneVerification');
+Route::post('/v1/verifyPhoneOK', 'v1\UserController@phoneVerificationOK');

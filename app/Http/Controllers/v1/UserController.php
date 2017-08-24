@@ -7,6 +7,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Services\v1\UserService;
+use App\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -191,12 +192,36 @@ class UserController extends Controller
     public function phoneVerification(Request $request)
     {
         $phoneNumber = $request->get('phone');
-        $code = mt_rand(1527, 5388);
-        $message = "هایپرآنلاین - کد فعال سازی شما :‌ " . $code;
-        Smsir::send([$message], [$phoneNumber]);
-        return response()->json([
-            'error' => false,
-            'code' => $code + 4611
-        ], 201);
+        $user = User::where("phone", $phoneNumber)->firstOrFail();
+        if ($user) {
+            $code = mt_rand(1527, 5388);
+            $message = "هایپرآنلاین - کد فعال سازی شما :‌ " . $code;
+            Smsir::send([$message], [$phoneNumber]);
+            return response()->json([
+                'error' => false,
+                'code' => $code + 4611
+            ], 201);
+        } else
+            return response()->json([
+                'error' => true,
+                'error_msg' => "این شماره ثبت نشده است"
+            ], 500);
+    }
+
+    public function phoneVerificationOK(Request $request)
+    {
+        $phoneNumber = $request->get('phone');
+        $user = User::where("phone", $phoneNumber)->firstOrFail();
+        if ($user) {
+            $user->confirmed_phone = 1;
+            $user->save();
+            return response()->json([
+                'error' => false
+            ], 201);
+        } else
+            return response()->json([
+                'error' => true,
+                'error_msg' => "این شماره ثبت نشده است"
+            ], 500);
     }
 }
