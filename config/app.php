@@ -188,6 +188,7 @@ return [
         // libraries
         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
+        phplusir\smsir\SmsirServiceProvider::class,
     ],
 
     /*
@@ -235,6 +236,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Smsir' => phplusir\smsir\SmsirFacade::class,
     ],
 
 ];
