@@ -21,7 +21,7 @@ return [
 	'db-log' => true,
 
 	/* Admin Panel Title */
-	'title' => 'مدیریت پیامک ها',
+	'title' => 'هایپرآنلاین',
 	// How many log you want to show in sms-admin panel ?
-	'in-page' => '15'
+	'in-page' => '25'
 ];

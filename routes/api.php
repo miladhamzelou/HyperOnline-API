@@ -68,4 +68,6 @@ Route::post('/v1/categories_all', 'v1\CategoryController@sectionLoad');
 
 Route::post('/callback', 'v1\OrderController@callback');
 
-Route::post('/v1/search','v1\MainController@search');
+Route::post('/v1/search', 'v1\MainController@search');
+
+Route::post('/verifyPhone', 'v1\UserController@phoneVerification');
