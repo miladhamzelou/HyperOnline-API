@@ -3,7 +3,7 @@
  * Copyright (c) 2017 - All Rights Reserved - Arash Hatami
  */
 
-require_once(dirname(__FILE__).'tcpdf/tcpdf.php');
+require_once(dirname(__FILE__).'/tcpdf/tcpdf.php');
 //require(app_path() . '\Common\tcpdf\tcpdf.php');
 
 class MYPDF extends TCPDF
@@ -52,12 +52,11 @@ class MYPDF extends TCPDF
         $total = 0;
         foreach ($data as $row) {
             $this->Cell($w[0], 6, $row[0], 'LR', 0, 'C', $fill);
-            $this->Cell($w[1], 6, $row[1], 'LR', 0, 'C', $fill);
-            $this->Cell($w[2], 6, number_format($row[2]), 'LR', 0, 'C', $fill);
-            $this->Cell($w[3], 6, number_format($row[3]), 'LR', 0, 'C', $fill);
+            $this->Cell($w[1], 6, number_format(floatval($row[1])), 'LR', 0, 'C', $fill);
+            $this->Cell($w[2], 6, number_format(floatval($row[2])), 'LR', 0, 'C', $fill);
             $this->Ln();
             $fill = !$fill;
-            $total += intval($row[3]);
+            $total += intval($row[2]);
         }
         $this->Cell(array_sum($w), 0, '', 'T');
         $this->Ln();

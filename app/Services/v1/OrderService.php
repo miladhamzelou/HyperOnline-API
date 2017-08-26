@@ -4,12 +4,12 @@
  */
 
 namespace App\Services\v1;
-require(app_path() . '\Common\MYPDF.php');
-require(app_path() . '\Common\jdf.php');
-use App\Common\Utility;
+
 use App\Order;
 use App\Seller;
 use App\User;
+use Illuminate\Support\Facades\Log;
+use MYPDF;
 
 class OrderService
 {
@@ -44,37 +44,33 @@ class OrderService
      */
     public function createOrder($request)
     {
-        Utility::stripXSS();
         $order = new Order();
-        $user = User::where('unique_id', $request->input('user_id'))->get()[0];
-        $seller = Seller::where('unique_id', $request->input('seller_id'))->get()[0];
-        $timezone = 0;
-        $now = date("Y-m-d", time() + $timezone);
-        $time = date("H:i:s", time() + $timezone);
-        list($year, $month, $day) = explode('-', $now);
-        list($hour, $minute, $second) = explode(':', $time);
-        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
-        $date = jdate("Y-m-d:H-i-s", $timestamp);
+        $user = User::where('unique_id', $request->get('user'))->firstOrFail();
+        $seller = Seller::where('unique_id', $request->get('seller'))->firstOrFail();
 
-        $order->unique_id = $request->input('unique_id'); // we should use bank's pay id instead of a random uuid
-        $order->seller_id = $request->input('seller_id');
-        $order->user_id = $request->input('user_id');
+        $order->unique_id = uniqid('', false);
+        $order->seller_id = $seller->unique_id;
+        $order->user_id = $user->unique_id;
+        $order->code = $request->get('code');
         $order->seller_name = $seller->name;
         $order->user_name = $user->name;
         $order->user_phone = $user->phone;
-        $order->stuffs = $request->input('stuffs');
-        $order->price = $request->input('price');
-        if (app('request')->exists('description')) $order->description = $request->input('description');
-        $order->create_date = $date;
+        $order->stuffs = $request->get('stuffs');
+        $order->stuffs_id = $request->get('stuffs_id');
+        $order->price = $request->get('price');
+        $order->hour = $request->get('hour');
+        $order->pay_method = $request->get('method');
+        $order->description = $request->get('description');
+        $order->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
         $order->save();
 
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Arash Hatami');
-        $pdf->SetTitle('ZiMia Payment');
-        $pdf->SetSubject('ZiMia');
-        $pdf->SetKeywords('ZiMia, zimia');
+        $pdf->SetAuthor($order->seller_name);
+        $pdf->SetTitle('HyperOnline Payment');
+        $pdf->SetSubject('HyperOnline');
+        $pdf->SetKeywords('HyperOnline');
         $pdf->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' - Code : ' . $order->unique_id, PDF_HEADER_STRING);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -92,19 +88,18 @@ class OrderService
         $html = '<span color="#FF0000">با سلام</span><br />' .
             'از انتخاب و اعتماد شما متشکریم. شرح خرید شما بدین صورت می باشد<br /><br />';
         $pdf->writeHTML($html, true, 0, true, 0);
-        $header = array('نام محصول', 'نوع', 'تعداد', 'قیمت');
-        $data = $pdf->LoadData($_SERVER['DOCUMENT_ROOT'] . 'include/' . $order->user_id . '.txt');
-        $pdf->ColoredTable($header, $data, $order->price);
+        $header = array('نام محصول', 'تعداد', 'قیمت');
+        $data = $pdf->LoadData($_SERVER['DOCUMENT_ROOT'] . 'ftp/orders/' . $order->code . '.txt');
+        $pdf->ColoredTable($header, $data);
         $pdf->Ln();
         $pdf->Ln();
         $pdf->Ln();
         $pdf->Ln();
         $html = 'با ما همراه باشید';
         $pdf->writeHTML($html, true, 0, true, 0);
-        $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'factors/' . $order->unique_id . '.pdf', 'F');
-        // delete factor's data file after factor created
-        if (is_file($_SERVER['DOCUMENT_ROOT'] . 'include/' . $order->user_id . '.txt'))
-            unlink($_SERVER['DOCUMENT_ROOT'] . 'include/' . $order->user_id . '.txt');
+        $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'ftp/factors/' . $order->code . '.pdf', 'F');
+        if (is_file($_SERVER['DOCUMENT_ROOT'] . 'ftp/orders/' . $order->code . '.txt'))
+            unlink($_SERVER['DOCUMENT_ROOT'] . 'ftp/orders/' . $order->code . '.txt');
 
         return true;
     }
@@ -205,5 +200,34 @@ class OrderService
                 $clause[$prop] = $parameters[$prop];
 
         return $clause;
+    }
+
+    protected function getCurrentTime()
+    {
+        $now = date("Y-m-d", time());
+        $time = date("H:i:s", time());
+        return $now . ' ' . $time;
+    }
+
+    protected function getDate($date)
+    {
+        $now = explode(' ', $date)[0];
+        $time = explode(' ', $date)[1];
+        list($year, $month, $day) = explode('-', $now);
+        list($hour, $minute, $second) = explode(':', $time);
+        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+        $date = jDate("Y/m/d", $timestamp);
+        return $date;
+    }
+
+    protected function getTime($date)
+    {
+        $now = explode(' ', $date)[0];
+        $time = explode(' ', $date)[1];
+        list($year, $month, $day) = explode('-', $now);
+        list($hour, $minute, $second) = explode(':', $time);
+        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+        $date = jDate("H:i", $timestamp);
+        return $date;
     }
 }

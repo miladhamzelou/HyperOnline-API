@@ -14,7 +14,7 @@ $factory->define(App\Seller::class, function (Faker\Generator $faker) {
     $date = jdate("Y-m-d:H-i-s", $timestamp);
 
     return [
-        'unique_id' => str_random(13),
+        'unique_id' => "S1",
         'author_id' => $faker->randomElement($authors),
         'name' => "HyperOnline",
         'address' => "Mahdieh St",
