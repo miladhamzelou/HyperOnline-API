@@ -19,3 +19,5 @@ tables.xlsx
 /public/images/*.jpg
 /public/images/*.png
 /public/images/*.gif
+public/ftp/orders/*.txt
+public/ftp/factors/*.pdf
