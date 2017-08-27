@@ -26,6 +26,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'role' => 'admin',
         'create_date' => $date,
         'active' => '1',
+        'confirmed_phone' => '1',
         'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
     ];
 });

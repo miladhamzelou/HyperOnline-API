@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use App\Services\v1\UserService;
 use App\User;
 use Exception;
@@ -228,7 +229,10 @@ class UserController extends Controller
 
     public function pdf()
     {
-        $pdf = PDF::loadView('pdf.factor');
+        $data = [
+            "products" => Product::take(5)->get()
+        ];
+        $pdf = PDF::loadView('pdf.factor', $data);
         return $pdf->stream();
 //        return $pdf->save(public_path().'/ftp/factors/tt.pdf');
     }

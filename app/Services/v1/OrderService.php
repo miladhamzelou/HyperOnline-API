@@ -6,10 +6,10 @@
 namespace App\Services\v1;
 
 use App\Order;
+use App\Product;
 use App\Seller;
 use App\User;
-use Illuminate\Support\Facades\Log;
-use MYPDF;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class OrderService
 {
@@ -65,41 +65,18 @@ class OrderService
 
         $order->save();
 
-        $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor($order->seller_name);
-        $pdf->SetTitle('HyperOnline Payment');
-        $pdf->SetSubject('HyperOnline');
-        $pdf->SetKeywords('HyperOnline');
-        $pdf->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' - Code : ' . $order->unique_id, PDF_HEADER_STRING);
-        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-        $pdf->setHeaderMargin(PDF_MARGIN_HEADER);
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-        $pdf->SetFont('sans', '', 13);
-        $lg = Array();
-        $lg['a_meta_charset'] = 'UTF-8';
-        $lg['a_meta_language'] = 'fa';
-        $lg['w_page'] = 'page';
-        $pdf->setLanguageArray($lg);
-        $pdf->AddPage();
-        $pdf->setRTL(true);
-        $html = '<span color="#FF0000">با سلام</span><br />' .
-            'از انتخاب و اعتماد شما متشکریم. شرح خرید شما بدین صورت می باشد<br /><br />';
-        $pdf->writeHTML($html, true, 0, true, 0);
-        $header = array('نام محصول', 'تعداد', 'قیمت');
-        $data = $pdf->LoadData($_SERVER['DOCUMENT_ROOT'] . 'ftp/orders/' . $order->code . '.txt');
-        $pdf->ColoredTable($header, $data);
-        $pdf->Ln();
-        $pdf->Ln();
-        $pdf->Ln();
-        $pdf->Ln();
-        $html = 'با ما همراه باشید';
-        $pdf->writeHTML($html, true, 0, true, 0);
-        $pdf->Output($_SERVER['DOCUMENT_ROOT'] . 'ftp/factors/' . $order->code . '.pdf', 'F');
-        if (is_file($_SERVER['DOCUMENT_ROOT'] . 'ftp/orders/' . $order->code . '.txt'))
-            unlink($_SERVER['DOCUMENT_ROOT'] . 'ftp/orders/' . $order->code . '.txt');
+        $ids = explode('-', $order->stuffs_id);
+
+        $data = [
+            "products" => Product::whereIn("unique_id", $ids)->get(),
+            "user_name" => $order->user_name,
+            "user_phone" => $order->user_phone,
+            "user_address" => User::where("unique_id", $order->user_id)->firstOrFail()->address,
+            "total" => $order->price,
+            "hour" => $order->hour
+        ];
+        $pdf = PDF::loadView('pdf.factor', $data);
+        $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
 
         return true;
     }
