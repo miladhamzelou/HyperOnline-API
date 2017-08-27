@@ -11,9 +11,9 @@ use App\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use phplusir\smsir\Smsir;
 
 class UserController extends Controller
@@ -228,9 +228,8 @@ class UserController extends Controller
 
     public function pdf()
     {
-        $pdf = App::make('dompdf.wrapper')
-            ->loadView('pdf.factor')
-            ->setWarnings(false)
-            ->save(public_path() . '/ftp/factors/test.pdf');
+        $pdf = PDF::loadView('pdf.factor');
+        return $pdf->stream();
+//        return $pdf->save(public_path().'/ftp/factors/tt.pdf');
     }
 }

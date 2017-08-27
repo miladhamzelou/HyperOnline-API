@@ -9,12 +9,11 @@
   "type": "project",
   "require": {
     "php": ">=5.6.4",
-    "barryvdh/laravel-dompdf": "^0.8.0",
-    "dompdf/dompdf": "^0.8.0",
     "fx3costa/laravelchartjs": "^2.3",
     "guzzlehttp/guzzle": "^6.3",
     "laravel/framework": "5.4.*",
     "laravel/tinker": "~1.0",
+    "niklasravnsborg/laravel-pdf": "^1.5",
     "phplusir/smsir": "^1.4",
     "snowfire/beautymail": "dev-master"
   },

@@ -1,5 +1,7 @@
 <?php
 
+define('_MPDF_TTFONTDATAPATH',__DIR__.'/../storage/framework/pdf/fonts/');
+define('_MPDF_TEMP_PATH',__DIR__.'/../storage/framework/pdf/');
 define('LARAVEL_START', microtime(true));
 
 /*

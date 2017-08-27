@@ -189,7 +189,7 @@ return [
         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
         phplusir\smsir\SmsirServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
     ],
 
     /*
@@ -238,7 +238,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Smsir' => phplusir\smsir\SmsirFacade::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
     ],
 
 ];
