@@ -58,7 +58,7 @@ class MainController extends Controller
             return response()->json([
                 'error' => true,
                 'error_msg' => $e->getMessage()
-            ], 500);
+            ], 201);
         }
     }
 
@@ -85,7 +85,7 @@ class MainController extends Controller
             return response()->json([
                 'error' => true,
                 'error_msg' => $e->getMessage()
-            ], 500);
+            ], 201);
         }
     }
 }

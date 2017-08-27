@@ -11,6 +11,7 @@ use App\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use phplusir\smsir\Smsir;
@@ -205,7 +206,7 @@ class UserController extends Controller
             return response()->json([
                 'error' => true,
                 'error_msg' => "این شماره ثبت نشده است"
-            ], 500);
+            ], 201);
     }
 
     public function phoneVerificationOK(Request $request)
@@ -222,6 +223,14 @@ class UserController extends Controller
             return response()->json([
                 'error' => true,
                 'error_msg' => "این شماره ثبت نشده است"
-            ], 500);
+            ], 201);
+    }
+
+    public function pdf()
+    {
+        $pdf = App::make('dompdf.wrapper')
+            ->loadView('pdf.factor')
+            ->setWarnings(false)
+            ->save(public_path() . '/ftp/factors/test.pdf');
     }
 }

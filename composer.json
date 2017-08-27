@@ -9,6 +9,8 @@
   "type": "project",
   "require": {
     "php": ">=5.6.4",
+    "barryvdh/laravel-dompdf": "^0.8.0",
+    "dompdf/dompdf": "^0.8.0",
     "fx3costa/laravelchartjs": "^2.3",
     "guzzlehttp/guzzle": "^6.3",
     "laravel/framework": "5.4.*",
