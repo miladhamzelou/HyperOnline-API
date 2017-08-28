@@ -9,6 +9,7 @@ use App\Order;
 use App\Product;
 use App\Seller;
 use App\User;
+use Illuminate\Http\Request;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class OrderService
@@ -108,6 +109,12 @@ class OrderService
     {
         $order = Order::where('unique_id', $id)->firstOrFail();
         $order->delete();
+    }
+
+    public function userOrders(Request $request)
+    {
+        $orders = Order::where("user_id", $request->get('unique_id'))->get();
+        return $this->filterOrders($orders);
     }
 
     /**

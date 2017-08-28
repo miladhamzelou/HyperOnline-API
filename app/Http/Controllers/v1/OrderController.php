@@ -60,4 +60,27 @@ class OrderController extends Controller
             ], 201);
         }
     }
+
+    public function userOrders(Request $request)
+    {
+        try {
+            $result = $this->Orders->userOrders($request);
+            if ($result)
+                return response()->json([
+                    'orders' => $result,
+                    'error' => false
+                ], 201);
+            else
+                return response()->json([
+                    'error' => true,
+                    'error_msg' => "something's wrong"
+                ], 201);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'error_msg' => $e->getMessage()
+            ], 201);
+        }
+    }
 }

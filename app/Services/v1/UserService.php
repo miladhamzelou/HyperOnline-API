@@ -148,6 +148,7 @@ class UserService
         $user->delete();
     }
 
+
     /**
      * @param $users
      * @return array

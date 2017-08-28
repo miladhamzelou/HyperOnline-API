@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\Product;
 use App\Services\v1\UserService;
 use App\User;
@@ -225,15 +226,5 @@ class UserController extends Controller
                 'error' => true,
                 'error_msg' => "این شماره ثبت نشده است"
             ], 201);
-    }
-
-    public function pdf()
-    {
-        $data = [
-            "products" => Product::take(5)->get()
-        ];
-        $pdf = PDF::loadView('pdf.factor', $data);
-        return $pdf->stream();
-//        return $pdf->save(public_path().'/ftp/factors/tt.pdf');
     }
 }
