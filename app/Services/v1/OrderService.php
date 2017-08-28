@@ -74,7 +74,8 @@ class OrderService
             "user_phone" => $order->user_phone,
             "user_address" => User::where("unique_id", $order->user_id)->firstOrFail()->address,
             "total" => $order->price,
-            "hour" => $order->hour
+            "hour" => $order->hour,
+            "description" => $order->description
         ];
         $pdf = PDF::loadView('pdf.factor', $data);
         $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
@@ -113,7 +114,9 @@ class OrderService
 
     public function userOrders(Request $request)
     {
-        $orders = Order::where("user_id", $request->get('unique_id'))->get();
+        $orders = Order::where("user_id", $request->get('unique_id'))
+            ->orderBy("created_at", "desc")
+            ->get();
         return $this->filterOrders($orders);
     }
 
@@ -129,11 +132,16 @@ class OrderService
             $entry = [
                 'unique_id' => $order->unique_id,
                 'seller_id' => $order->seller_id,
+                'seller_name' => $order->seller_name,
                 'user_id' => $order->user_id,
                 'stuffs' => $order->stuffs,
                 'price' => $order->price,
+                'code' => $order->code,
+                'hour' => $order->hour,
+                'method' => $order->method,
+                'status' => $order->status,
                 'description' => $order->description,
-                'created_at' => $order->create_date
+                'create_date' => $order->create_date
             ];
 
             if (in_array('seller', $keys))
