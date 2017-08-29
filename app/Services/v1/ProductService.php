@@ -6,6 +6,7 @@
 namespace App\Services\v1;
 
 use App\Common\Utility;
+use App\Order;
 use App\Product;
 use App\Seller;
 
@@ -173,6 +174,85 @@ class ProductService
             $data[] = $entry;
         }
         return $data;
+    }
+
+    public function getProductsWithDetail($request)
+    {
+        $type=$request->get('type');
+        $index=$request->get('index');
+        if ($type == 1) {
+            $products = Product::where("type", 1)
+                ->orderBy("created_at", "desc")
+                ->skip(($index - 1) * 20)
+                ->take(20)
+                ->get();
+        } else if ($type == 2) {
+            $orders = Order::get();
+            $all_stuffs = array();
+            foreach ($orders as $order) {
+                $stuffs = explode('-', $order->stuffs_id);
+                for ($i = 0; $i < sizeof($stuffs); $i++)
+                    array_push($all_stuffs, $stuffs[$i]);
+            }
+
+            $count = array_count_values($all_stuffs);
+            arsort($count);
+            $keys = array_keys($count);
+
+            $final = [];
+            for ($i = 0; $i < 50; $i++)
+                $final[] = $keys[$i];
+
+            $products = [];
+
+            foreach ($final as $id) {
+                $data = Product::where("confirmed", 1)
+                    ->where("unique_id", $id)
+                    ->get();
+
+                foreach ($data as $product) {
+                    $entry = [
+                        'unique_id' => $product->unique_id,
+                        'name' => $product->name,
+                        'image' => $product->image,
+                        'point' => $product->point,
+                        'point_count' => $product->point_count,
+                        'description' => $product->description,
+                        'off' => $product->off,
+                        'count' => $product->count,
+                        'price' => $product->price,
+                    ];
+
+                    $products[] = $entry;
+                }
+            }
+        } else if ($type == 3) {
+            $products = Product::where("confirmed", 1)
+                ->orderBy("created_at", "desc")
+                ->skip(($index - 1) * 20)
+                ->take(20)
+                ->get();
+        } else if ($type == 4) {
+            $products = Product::where("confirmed", 1)
+                ->orderBy("point", "desc")
+                ->skip(($index - 1) * 20)
+                ->take(20)
+                ->get();
+        } else if ($type == 5) {
+            $products = Product::where("confirmed", 1)
+                ->where("off", ">", 1)
+                ->orderBy("created_at", "desc")
+                ->skip(($index - 1) * 20)
+                ->take(20)
+                ->get();
+        } else if ($type == 6) {
+            $products = Product::where("type", 2)
+                ->orderBy("created_at", "desc")
+                ->skip(($index - 1) * 20)
+                ->take(20)
+                ->get();
+        }
+        return $this->filterProducts($products);
     }
 
     /**

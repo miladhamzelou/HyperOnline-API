@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Category2::class, 25)->create();
         factory(App\Category3::class, 50)->create();
         factory(App\Seller::class, 1)->create();
-        factory(App\Product::class, 1000)->create();
+        factory(App\Product::class, 2000)->create();
         factory(App\Order::class, 100)->create();
         factory(App\Option::class, 1)->create();
 

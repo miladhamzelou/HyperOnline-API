@@ -208,6 +208,25 @@ class ProductController extends Controller
         }
     }
 
+    public function getDetails(Request $request){
+        try {
+            if ($data = $this->Products->getProductsWithDetail($request))
+                return response()->json([
+                    'error' => false,
+                    'products' => $data
+                ], 201);
+            else
+                return response()->json([
+                    'error' => true
+                ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'error_msg' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     protected function filterComments($comments)
     {
         $data = [];

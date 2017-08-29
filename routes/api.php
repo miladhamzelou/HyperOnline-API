@@ -72,4 +72,4 @@ Route::post('/v1/search', 'v1\MainController@search');
 
 Route::post('/v1/verifyPhone', 'v1\UserController@phoneVerification');
 Route::post('/v1/verifyPhoneOK', 'v1\UserController@phoneVerificationOK');
-Route::post('/v1/user_orders', 'v1\OrderController@userOrders');
+Route::post('/v1/products_detail', 'v1\ProductController@getDetails');

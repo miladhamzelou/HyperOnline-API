@@ -28,7 +28,7 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'price_original' => $price - $faker->numberBetween(100, 500),
         'off' => $faker->numberBetween(0, 75),
         'count' => $faker->numberBetween(0, 50),
-        'type' => 0,
+        'type' => $faker->numberBetween(0, 2),
         'create_date' => $date,
         'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
     ];
