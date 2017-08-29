@@ -226,6 +226,8 @@ class ProductService
                     $products[] = $entry;
                 }
             }
+
+            return $products;
         } else if ($type == 3) {
             $products = Product::where("confirmed", 1)
                 ->orderBy("created_at", "desc")
