@@ -18,7 +18,7 @@ return [
     ],
 
     'view' => [
-        'senderName'  => null,
+        'senderName'  => "HyperOnline",
         'reminder'    => null,
         'unsubscribe' => null,
         'address'     => null,

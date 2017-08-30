@@ -16,10 +16,11 @@ use App\Category3;
 use App\Option;
 use App\Order;
 use App\Product;
+use App\Support;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Snowfire\Beautymail\Beautymail;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController
 {
@@ -201,16 +202,18 @@ class AdminController
     public function support_send(Request $request)
     {
         if (Auth::user()->isAdmin()) {
-            $title = $request->get('title');
-            $body = $request->get('body');
+            $support = new Support();
+            $support->unique_id = uniqid('', false);
+            $support->section = $request->get('section');
+            $support->body = $request->get('body');
+            if ($request->get('log') == 'on')
+                $support->log = 1;
+            else
+                $support->log = 0;
+            $support->save();
 
-            $beautymail = app()->make(Beautymail::class);
-            $beautymail->send('emails.support', [], function ($message) {
-                $message
-                    ->from('hatamiarash7@gmail.com')
-                    ->to('hatamiarash7@gmail.com', 'Arash Hatami')
-                    ->subject('Welcome!');
-            });
+            Mail::to("hatamiarash7@gmail.com")
+                ->send(new \App\Mail\Support($support));
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');

@@ -59,6 +59,7 @@
                                 <h2 class="fh5co-sub-lead" style="direction: rtl; text-align: justify;">به راحتی و در
                                     عرض چند ثانیه محصولات دلخواه خود را سفارش داده و تحویل بگیرید.</h2>
                                 <p class="font"><a href="#" class="btn btn-primary btn-lg">دانلود از کافه بازار</a></p>
+                                <p class="font"><a href="#" class="btn btn-primary btn-lg">دانلود مستقیم</a></p>
                             </div>
                         </div>
                     </div>

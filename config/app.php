@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -187,9 +187,9 @@ return [
         App\Providers\LogProvider::class,
         // libraries
         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
-        Snowfire\Beautymail\BeautymailServiceProvider::class,
         phplusir\smsir\SmsirServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        Snowfire\Beautymail\BeautymailServiceProvider::class,
     ],
 
     /*

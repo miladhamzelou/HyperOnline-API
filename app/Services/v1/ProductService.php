@@ -226,7 +226,7 @@ class ProductService
                     $products[] = $entry;
                 }
             }
-
+            // we return products at this point because we filter it in loop
             return $products;
         } else if ($type == 3) {
             $products = Product::where("confirmed", 1)

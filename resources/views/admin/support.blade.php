@@ -19,15 +19,15 @@
                         <form role="form" action="/admin/support" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                <label for="title">عنوان :</label>
-                                <input id="title" type="text" style="text-align: center"
+                            <div class="form-group{{ $errors->has('section') ? ' has-error' : '' }}">
+                                <label for="section">بخش مربوطه :</label>
+                                <input id="section" type="text" style="text-align: center"
                                        class="my_font form-control"
-                                       name="title" tabindex="1" required>
+                                       name="section" tabindex="1" required>
 
-                                @if ($errors->has('title'))
+                                @if ($errors->has('section'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
+                                        <strong>{{ $errors->first('section') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -50,7 +50,7 @@
                                     <label>
                                         <input type="checkbox"
                                                id="log" checked
-                                               name="most_sell">فایل لاگ ارسال شود
+                                               name="log">فایل لاگ ارسال شود
                                     </label>
                                 </div>
                             </div>
