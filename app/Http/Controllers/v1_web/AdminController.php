@@ -18,6 +18,7 @@ use App\Order;
 use App\Product;
 use App\Support;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -278,6 +279,34 @@ class AdminController
                     Smsir::send($messages, $phones);
                     break;
                 case "ارسال پوش":
+                    $client = new Client([
+                        'headers' => [
+                            'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
+                            'Content-Type' => 'application/json',
+                            'Accept: application/json'
+                        ]
+                    ]);
+                    $response = $client->post(
+                        'https://panel.pushe.co/api/v1/notifications/',
+                        [
+                            'body' => json_encode([
+                                "applications" => ["ir.hatamiarash.hyperonline"],
+                                "notification" => [
+                                    "title" => "test",
+                                    "content" => "admin panel"
+                                ]
+                            ])
+                        ]
+                    );
+                    if ($response->getStatusCode() == "201") {
+                        $message = "پیام شما با موفقیت ارسال شد";
+                        return redirect('/admin/messages')
+                            ->withMessage($message);
+                    } else {
+                        $message = "خطایی رخ داده است";
+                        return redirect('/admin/messages')
+                            ->withErrors($message);
+                    }
                     break;
             }
             $message = "پیام شما با موفقیت ارسال شد";
