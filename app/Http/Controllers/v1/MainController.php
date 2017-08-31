@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\v1\MainService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use phplusir\smsir\Smsir;
 
 class MainController extends Controller
@@ -92,6 +93,7 @@ class MainController extends Controller
 
     public function downloadLink(Request $request)
     {
+        Log::info($request);
         $user = $request->get('from');
         $message = "هایپرآنلاین" . "\n" . "http://hyper-online.ir";
         Smsir::send([$message], [$user]);
