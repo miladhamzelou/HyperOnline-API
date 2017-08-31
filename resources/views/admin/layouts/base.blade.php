@@ -306,14 +306,18 @@
                 <br>
             @endif
             @if ($errors->any())
-                <div class='flash alert-danger'>
-                    <ul class="panel-body">
-                        @foreach ( $errors->all() as $error )
-                            <li>
-                                {{ $error }}
-                            </li>
-                        @endforeach
-                    </ul>
+                <div class="row">
+                    <div class="col-lg-4 col-centered center-block" style="float: none;">
+                        <div class='flash alert-danger'>
+                            <ul class="panel-body">
+                                @foreach ( $errors->all() as $error )
+                                    <li style="font-size:20px; text-align:center; direction: rtl;">
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <br>
             @endif
