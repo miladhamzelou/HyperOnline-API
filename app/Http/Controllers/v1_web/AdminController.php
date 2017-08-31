@@ -21,6 +21,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use phplusir\smsir\Smsir;
 
 class AdminController
 {
@@ -244,11 +245,47 @@ class AdminController
                 ->withErrors('دسترسی غیرمجاز');
     }
 
-    public function delete_log(){
+    public function delete_log()
+    {
         unlink(storage_path('/logs/laravel.log'));
         $message = "فایل لاگ پاک شد";
         return redirect('/admin/setting')
             ->withMessage($message);
+    }
+
+    public function messages()
+    {
+        if (Auth::user()->isAdmin()) {
+            return view('admin.messages')
+                ->withTitle("پیام ها");
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function messages_send(Request $request)
+    {
+        if (Auth::user()->isAdmin()) {
+            switch ($request->send) {
+                case "ارسال پیامک":
+                    $users = User::where("confirmed_phone", 1)->get();
+                    $phones = array();
+                    $messages = array();
+                    foreach ($users as $user) {
+                        array_push($phones, $user->phone);
+                        array_push($messages, $request->body);
+                    }
+                    Smsir::send($messages, $phones);
+                    break;
+                case "ارسال پوش":
+                    break;
+            }
+            $message = "پیام شما با موفقیت ارسال شد";
+            return redirect('/admin/messages')
+                ->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
     }
 
     protected function filterUser($users)

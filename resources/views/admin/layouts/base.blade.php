@@ -259,6 +259,17 @@
                 <li class="my_font"><a href="{{ url('/admin/database') }}">پایگاه داده</a></li>
                 <li class="my_font"><a href="{{ url('/admin/support') }}">پشتیبانی</a></li>
                 <li class="my_font"><a href="{{ url('/admin/setting') }}">تنظیمات</a></li>
+                <li class="treeview">
+                    <a href="#">پیام ها
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/messages') }}">ارسال پیام</a></li>
+                    </ul>
+                </li>
+
             </ul>
             <!-- /.sidebar-menu -->
         </section>
