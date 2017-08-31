@@ -20,10 +20,14 @@ Route::get('/profile', 'v1_web\UserController@profile')->name('profile');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', 'v1_web\AdminController@admin')->name('admin');
-    Route::get('/admin/settings', 'v1_web\AdminController@settings_get')->name('setting');
-    Route::post('/admin/settings', 'v1_web\AdminController@settings_store')->name('setting');
+    Route::get('/admin/database', 'v1_web\AdminController@database_get')->name('database');
+    Route::post('/admin/database', 'v1_web\AdminController@database_store')->name('database');
     Route::get('/admin/support', 'v1_web\AdminController@support')->name('support');
     Route::post('/admin/support', 'v1_web\AdminController@support_send')->name('support');
+
+    Route::get('/admin/setting', 'v1_web\AdminController@setting')->name('setting');
+    Route::post('/admin/setting', 'v1_web\AdminController@setting_send')->name('setting');
+    Route::get('/admin/setting/delete_log', 'v1_web\AdminController@delete_log')->name('setting');
 
     Route::get('/admin/products/create', 'v1_web\ProductController@show')->name('product_create');
     Route::post('/admin/products/create', 'v1_web\ProductController@store')->name('product_create');

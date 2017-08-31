@@ -141,15 +141,15 @@ class AdminController
         ));
     }
 
-    public function settings_get()
+    public function database_get()
     {
         $option = Option::firstOrFail();
-        return view('admin.settings')
+        return view('admin.database')
             ->withTitle("Change Settings")
             ->withOption($option);
     }
 
-    public function settings_store(Request $request)
+    public function database_store(Request $request)
     {
         if (Auth::user()->isAdmin()) {
             $option = Option::where("unique_id", $request->get('unique_id'))->firstOrFail();
@@ -214,9 +214,41 @@ class AdminController
 
             Mail::to("hatamiarash7@gmail.com")
                 ->send(new \App\Mail\Support($support));
+            $message = "پیام شما ارسال شد";
+            return redirect('/admin')
+                ->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function setting()
+    {
+        if (Auth::user()->isAdmin()) {
+            return view('admin.setting')
+                ->withTitle("تنظیمات");
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function setting_send(Request $request)
+    {
+        if (Auth::user()->isAdmin()) {
+
+            $message = "تنظیمات اعمال شد";
+            return redirect('/admin')
+                ->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function delete_log(){
+        unlink(storage_path('/logs/laravel.log'));
+        $message = "فایل لاگ پاک شد";
+        return redirect('/admin/setting')
+            ->withMessage($message);
     }
 
     protected function filterUser($users)
