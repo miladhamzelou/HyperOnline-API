@@ -266,7 +266,9 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/messages') }}">ارسال پیام</a></li>
+                        <li><a href="{{ url('/admin/messages/sms') }}">ارسال اس ام اس</a></li>
+                        <li><a href="{{ url('/admin/messages/push') }}">ارسال پوش</a></li>
+                        <li><a href="{{ url('/admin/messages') }}">گزارشات</a></li>
                     </ul>
                 </li>
 

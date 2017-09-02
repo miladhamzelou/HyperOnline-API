@@ -254,67 +254,76 @@ class AdminController
             ->withMessage($message);
     }
 
-    public function messages()
+    public function messages_sms()
     {
         if (Auth::user()->isAdmin()) {
-            return view('admin.messages')
-                ->withTitle("پیام ها");
+            return view('admin.messages_sms')
+                ->withTitle("ارسال اس ام اس");
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
     }
 
-    public function messages_send(Request $request)
+    public function messages_push()
     {
         if (Auth::user()->isAdmin()) {
-            switch ($request->send) {
-                case "ارسال پیامک":
-                    $users = User::where("confirmed_phone", 1)->get();
-                    $phones = array();
-                    $messages = array();
-                    foreach ($users as $user) {
-                        array_push($phones, $user->phone);
-                        array_push($messages, $request->body);
-                    }
-                    Smsir::send($messages, $phones);
-                    break;
-                case "ارسال پوش":
-                    $client = new Client([
-                        'headers' => [
-                            'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
-                            'Content-Type' => 'application/json',
-                            'Accept: application/json'
-                        ]
-                    ]);
-                    $response = $client->post(
-                        'https://panel.pushe.co/api/v1/notifications/',
-                        [
-                            'body' => json_encode([
-                                "applications" => ["ir.hatamiarash.hyperonline"],
-                                "notification" => [
-                                    "title" => "test",
-                                    "content" => "admin panel"
-                                ]
-                            ])
-                        ]
-                    );
-                    if ($response->getStatusCode() == "201") {
-                        $message = "پیام شما با موفقیت ارسال شد";
-                        return redirect('/admin/messages')
-                            ->withMessage($message);
-                    } else {
-                        $message = "خطایی رخ داده است";
-                        return redirect('/admin/messages')
-                            ->withErrors($message);
-                    }
-                    break;
+            return view('admin.messages_push')
+                ->withTitle("ارسال پوش");
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function messages_send_sms(Request $request)
+    {
+        if (Auth::user()->isAdmin()) {
+            $users = User::where("confirmed_phone", 1)->get();
+            $phones = array();
+            $messages = array();
+            foreach ($users as $user) {
+                array_push($phones, $user->phone);
+                array_push($messages, $request->body);
             }
+            Smsir::send($messages, $phones);
+
             $message = "پیام شما با موفقیت ارسال شد";
             return redirect('/admin/messages')
                 ->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function messages_send_push(Request $request)
+    {
+        $client = new Client([
+            'headers' => [
+                'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
+                'Content-Type' => 'application/json',
+                'Accept: application/json'
+            ]
+        ]);
+        $response = $client->post(
+            'https://panel.pushe.co/api/v1/notifications/',
+            [
+                'body' => json_encode([
+                    "applications" => ["ir.hatamiarash.hyperonline"],
+                    "notification" => [
+                        "title" => $request->get('title'),
+                        "content" => $request->get('body')
+                    ]
+                ])
+            ]
+        );
+        if ($response->getStatusCode() == "201") {
+            $message = "پیام شما با موفقیت ارسال شد";
+            return redirect('/admin/messages')
+                ->withMessage($message);
+        } else {
+            $message = "خطایی رخ داده است";
+            return redirect('/admin/messages')
+                ->withErrors($message);
+        }
     }
 
     protected function filterUser($users)

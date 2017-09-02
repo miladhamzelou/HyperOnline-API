@@ -78,5 +78,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/pays', 'v1_web\OrderController@pays')->name('pays');
 
     Route::get('/admin/messages', 'v1_web\AdminController@messages')->name('messages');
-    Route::post('/admin/messages', 'v1_web\AdminController@messages_send')->name('messages');
+    Route::get('/admin/messages/sms', 'v1_web\AdminController@messages_sms')->name('messages');
+    Route::get('/admin/messages/push', 'v1_web\AdminController@messages_push')->name('messages');
+    Route::post('/admin/messages/sms', 'v1_web\AdminController@messages_send_sms')->name('messages');
+    Route::post('/admin/messages/push', 'v1_web\AdminController@messages_send_push')->name('messages');
 });
