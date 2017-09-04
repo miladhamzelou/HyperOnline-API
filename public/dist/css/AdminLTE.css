@@ -364,12 +364,28 @@ a:focus {
     padding: 15px 15px 0 15px;
 }
 
+.content-header .row {
+    padding: 0 15px 0 15px;
+}
+
 .content-header > h1 {
     margin: 0;
     font-size: 24px;
 }
 
 .content-header > h1 > small {
+    font-size: 15px;
+    display: inline-block;
+    padding-left: 4px;
+    font-weight: 300;
+}
+
+.content-header .row > h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.content-header .row > h1 > small {
     font-size: 15px;
     display: inline-block;
     padding-left: 4px;
