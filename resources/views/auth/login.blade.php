@@ -5,12 +5,12 @@
         <div class="wrapper">
             <form role="form" method="POST" action="{{ route('login') }}" class="form-signin">
                 {{ csrf_field() }}
-                <h3 class="form-signin-heading my_font">سلام ... خوش آمدید !!<br>جهت ورود اطلاعات خود را وارد کنید</h3>
+                <h3 class="form-signin-heading font">سلام ... خوش آمدید !!<br>جهت ورود اطلاعات خود را وارد کنید</h3>
                 <hr class="colorgraph">
                 <br>
 
                 <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                    <input id="phone" type="tel" class="my_font form-control" style="text-align: center" name="phone"
+                    <input id="phone" type="tel" class="font form-control" style="text-align: center" name="phone"
                            value="{{ old('phone') }}" placeholder="شماره تلفن" required>
 
                     @if ($errors->has('phone'))
@@ -20,7 +20,7 @@
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <input id="password" type="password" style="text-align: center" placeholder="رمز عبور"
-                           class="my_font form-control" name="password" required>
+                           class="font form-control" name="password" required>
 
                     @if ($errors->has('password'))
                         <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
@@ -29,7 +29,7 @@
 
                 <br>
                 <div class="form-group">
-                    <button type="submit" class="my_font btn btn-block btn3d btn-lg btn-info">ورود</button>
+                    <button type="submit" class="font btn btn-block btn3d btn-lg btn-info">ورود</button>
                 </div>
             </form>
             <br>
