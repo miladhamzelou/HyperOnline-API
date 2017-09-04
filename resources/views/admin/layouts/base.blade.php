@@ -303,11 +303,14 @@
                             </ul>
                         </div>
                         <input type="hidden" name="search_param" value="all" id="search_param">
-                        <input type="text" class="form-control" name="word" style="text-align: right; direction: rtl" placeholder="عبارت جستجو ...">
-                        <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span
-                                class="glyphicon glyphicon-search"></span></button>
-                </span>
+                        <input type="text" class="form-control" id="word" name="word"
+                               style="text-align: right; direction: rtl"
+                               placeholder="عبارت جستجو ...">
+                        <span class="input-group-btn" id="search">
+                                    <button class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                            </span>
                     </div>
                 </div>
 

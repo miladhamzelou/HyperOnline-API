@@ -21,6 +21,7 @@ use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use phplusir\smsir\Smsir;
 
@@ -324,6 +325,26 @@ class AdminController
             return redirect('/admin/messages')
                 ->withErrors($message);
         }
+    }
+
+    public function search(Request $request)
+    {
+        $parameter = $request->get('search_param');
+        $word = $request->get('word');
+
+        Log::info($parameter . '-' . $word);
+
+//        $products = Product::where("confirmed", 1)
+//            ->where('name', 'LIKE', '%' . $word . '%')
+//            ->orWhere('description', 'LIKE', '%' . $word . '%')
+//            ->get();
+//        $inactive = count(Product::where("confirmed", 0)
+//            ->get());
+//        $title = "محصولات";
+//        return view('admin.products')
+//            ->withTitle($title)
+//            ->withInactive($inactive)
+//            ->withProducts($this->fixPrice($products));
     }
 
     protected function filterUser($users)
