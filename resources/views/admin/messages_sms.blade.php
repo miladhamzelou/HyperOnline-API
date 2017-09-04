@@ -23,7 +23,7 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="text-right form-group{{ $errors->has('body') ? ' has-error' : '' }}">
-                                <label for="body">متن پیام :</label>
+                                <label for="body" style="direction: rtl">متن پیام :</label>
                                 <textarea id="body" type="text" style="text-align: center"
                                           class="my_font form-control"
                                           name="body" tabindex="1" required></textarea>
