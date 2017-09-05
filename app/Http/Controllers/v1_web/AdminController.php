@@ -361,7 +361,6 @@ class AdminController
         } else if ($parameter == "comments") {
         } else if ($parameter == "authors") {
         } else if ($parameter == "sellers") {
-        } else if ($parameter == "all") {
         }
         $message = "خطایی رخ داده است";
         return back()
