@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#3c8dbc"/>
+    <meta name="csrf-token" content="{!! Session::token() !!}">
     <title>{{ config('app.name') }} - Admin</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -295,7 +296,7 @@
                                 <li><a href="#category1">دسته بندی مرحله اول</a></li>
                                 <li><a href="#category2">دسته بندی مرحله دوم</a></li>
                                 <li><a href="#category3">دسته بندی مرحله سوم</a></li>
-                                <li><a href="#user">کاربران</a></li>
+                                <li><a href="#users">کاربران</a></li>
                                 <li><a href="#orders">سفارشات</a></li>
                                 <li><a href="#comments">نظرات</a></li>
                                 <li><a href="#authors">فروشنده ها</a></li>

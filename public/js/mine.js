@@ -10,14 +10,15 @@ $(document).ready(function (e) {
     $("#search").click(function () {
         var parameter = document.getElementById('search_param').value;
         var word = document.getElementById('word').value;
+        var token = $('meta[name=csrf-token]').attr('content');
 
         $.post('search', {
-         _token: $('meta[name=csrf-token]').attr('content'),
-         parameter: parameter,
-         word: word
-         })
-         .fail(function (xhr, ajaxOptions, thrownError) {
-         alert(xhr.status + " " + thrownError);
-         })
+            _token: token,
+            parameter: parameter,
+            word: word
+        })
+            .fail(function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + " " + thrownError);
+            });
     });
 });

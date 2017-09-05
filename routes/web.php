@@ -85,4 +85,4 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::post('search', 'v1_web\AdminController@search');
-Route::get('search', 'v1_web\AdminController@search');
+//Route::get('search', 'v1_web\AdminController@search');
