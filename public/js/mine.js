@@ -12,9 +12,17 @@ $(document).ready(function (e) {
         var word = document.getElementById('word').value;
 
         if (!word)
-            alert("عبارتی را برای جستجو وارد کنید");
+            swal(
+                'Oooopse...',
+                'عبارتی را برای جستجو وارد کنید',
+                'error'
+            );
         else if (parameter === "all")
-            alert("فیلتر را تنظیم کنید");
+            swal(
+                'Oooopse...',
+                'فیلتر را تنظیم کنید',
+                'error'
+            );
         else
             document.location.href = "search?"
                 + "&word=" + word

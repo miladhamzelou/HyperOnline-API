@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue-light.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.css') }}">
     @yield('custom-css')
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -393,10 +394,10 @@
 <script src="{{ asset('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 
+<script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+
 <script src="{{ asset('js/mine.js') }}"></script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 </body>
 </html>
