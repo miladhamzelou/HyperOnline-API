@@ -12,20 +12,12 @@ $(document).ready(function (e) {
         var word = document.getElementById('word').value;
 
         if (!word)
-            swal(
-                'Oooopse...',
-                'عبارتی را برای جستجو وارد کنید',
-                'error'
-            );
+            alert("عبارتی را برای جستجو وارد کنید");
         else if (parameter === "all")
-            swal(
-                'Oooopse...',
-                'فیلتر را تنظیم کنید',
-                'error'
-            );
+            alert("فیلتر را تنظیم کنید");
         else
             document.location.href = "search?"
-                + "&word=" + word
-                + "&parameter=" + parameter
+                + "word=" + word
+                + "&parameter=" + parameter;
     });
 });

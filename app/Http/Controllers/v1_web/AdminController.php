@@ -12,10 +12,12 @@
 
 namespace app\Http\Controllers\v1_web;
 
+use App\Author;
 use App\Category3;
 use App\Option;
 use App\Order;
 use App\Product;
+use App\Seller;
 use App\Support;
 use App\User;
 use GuzzleHttp\Client;
@@ -332,6 +334,8 @@ class AdminController
         $parameter = $request->get('parameter');
         $word = $request->get('word');
 
+        Log::info("search : " . $parameter . ' ' . $word . ' ' . $request);
+
         if ($parameter == "products") {
             $products = Product::where("confirmed", 1)
                 ->where('name', 'LIKE', '%' . $word . '%')
@@ -360,11 +364,25 @@ class AdminController
                 ->withOrders($this->fixPrice($orders));
         } else if ($parameter == "comments") {
         } else if ($parameter == "authors") {
+            $authors = Author::where('name', 'LIKE', '%' . $word . '%')
+                ->orWhere('phone', 'LIKE', '%' . $word . '%')
+                ->get();
+
+            return view('admin.authors')
+                ->withTitle("Authors")
+                ->withAuthors($authors);
         } else if ($parameter == "sellers") {
+            $sellers = Seller::where('name', 'LIKE', '%' . $word . '%')
+                ->orWhere('phone', 'LIKE', '%' . $word . '%')
+                ->get();
+            return view('admin.sellers')
+                ->withTitle("Sellers")
+                ->withSellers($sellers);
+        } else {
+            $message = "خطایی رخ داده است";
+            return back()
+                ->withErrors($message);
         }
-        $message = "خطایی رخ داده است";
-        return back()
-            ->withErrors($message);
     }
 
     protected function filterUser($users)
