@@ -10,15 +10,9 @@ $(document).ready(function (e) {
     $("#search").click(function () {
         var parameter = document.getElementById('search_param').value;
         var word = document.getElementById('word').value;
-        var token = $('meta[name=csrf-token]').attr('content');
 
-        $.post('search', {
-            _token: token,
-            parameter: parameter,
-            word: word
-        })
-            .fail(function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + " " + thrownError);
-            });
+        document.location.href = "search?"
+            + "&word=" + word
+            + "&parameter=" + parameter
     });
 });

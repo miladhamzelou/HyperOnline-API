@@ -84,5 +84,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/messages/push', 'v1_web\AdminController@messages_send_push')->name('messages');
 });
 
-Route::post('search', 'v1_web\AdminController@search');
-//Route::get('search', 'v1_web\AdminController@search');
+Route::post('search', 'v1_web\AdminController@search')->name('search');
+Route::get('search', 'v1_web\AdminController@search')->name('search');

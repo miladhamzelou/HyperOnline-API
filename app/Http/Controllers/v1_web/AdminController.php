@@ -338,6 +338,8 @@ class AdminController
             ->get();
         $inactive = count(Product::where("confirmed", 0)
             ->get());
+
+        Log::info("products\n" . $products);
         $title = "محصولات";
         return view('admin.products')
             ->withTitle($title)

@@ -31,7 +31,8 @@
                     </div>
                     <div class="box-body">
                         @if(!$products->count())
-                            <p>محصولی ثبت نشده است</p>
+                            <br>
+                            <p style="text-align: center; direction: rtl;">محصولی یافت نشد</p>
                         @else
                             <ul class="products-list products-list-in-box">
                                 @foreach($products as $product)
