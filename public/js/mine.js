@@ -11,8 +11,13 @@ $(document).ready(function (e) {
         var parameter = document.getElementById('search_param').value;
         var word = document.getElementById('word').value;
 
-        document.location.href = "search?"
-            + "&word=" + word
-            + "&parameter=" + parameter
+        if (!word)
+            alert("عبارتی را برای جستجو وارد کنید");
+        else if (parameter === "all")
+            alert("فیلتر را تنظیم کنید");
+        else
+            document.location.href = "search?"
+                + "&word=" + word
+                + "&parameter=" + parameter
     });
 });

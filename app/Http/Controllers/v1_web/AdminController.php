@@ -332,19 +332,40 @@ class AdminController
         $parameter = $request->get('parameter');
         $word = $request->get('word');
 
-        $products = Product::where("confirmed", 1)
-            ->where('name', 'LIKE', '%' . $word . '%')
-            ->orWhere('description', 'LIKE', '%' . $word . '%')
-            ->get();
-        $inactive = count(Product::where("confirmed", 0)
-            ->get());
+        if ($parameter == "products") {
+            $products = Product::where("confirmed", 1)
+                ->where('name', 'LIKE', '%' . $word . '%')
+                ->orWhere('description', 'LIKE', '%' . $word . '%')
+                ->get();
+            $inactive = count(Product::where("confirmed", 0)
+                ->get());
 
-        Log::info("products\n" . $products);
-        $title = "محصولات";
-        return view('admin.products')
-            ->withTitle($title)
-            ->withInactive($inactive)
-            ->withProducts($this->fixPrice($products));
+            Log::info("products\n" . $products);
+            $title = "محصولات";
+            return view('admin.products')
+                ->withTitle($title)
+                ->withInactive($inactive)
+                ->withProducts($this->fixPrice($products));
+        } else if ($parameter == "category1") {
+        } else if ($parameter == "category2") {
+        } else if ($parameter == "category3") {
+        } else if ($parameter == "users") {
+        } else if ($parameter == "orders") {
+            $orders = Order::where('user_name', 'LIKE', '%' . $word . '%')
+                ->orWhere('stuffs', 'LIKE', '%' . $word . '%')
+                ->orWhere('code', 'LIKE', '%' . $word . '%')
+                ->get();
+            return view('admin.orders')
+                ->withTitle("سفارشات")
+                ->withOrders($this->fixPrice($orders));
+        } else if ($parameter == "comments") {
+        } else if ($parameter == "authors") {
+        } else if ($parameter == "sellers") {
+        } else if ($parameter == "all") {
+        }
+        $message = "خطایی رخ داده است";
+        return back()
+            ->withErrors($message);
     }
 
     protected function filterUser($users)
