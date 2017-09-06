@@ -10,14 +10,23 @@ $(document).ready(function (e) {
     $("#search").click(function () {
         var parameter = document.getElementById('search_param').value;
         var word = document.getElementById('word').value;
+        // var token = $('meta[name=csrf-token]').attr('content');
 
-        if (!word)
-            alert("عبارتی را برای جستجو وارد کنید");
-        else if (parameter === "all")
-            alert("فیلتر را تنظیم کنید");
-        else
+        if (word && parameter !== "all")
             document.location.href = "search?"
                 + "word=" + word
                 + "&parameter=" + parameter;
+        else if (!word)
+            swal(
+                'Oooopse...',
+                'عبارتی را برای جستجو وارد کنید',
+                'error'
+            );
+        else if (parameter === "all")
+            swal(
+                'Oooopse...',
+                'فیلتر را تنظیم کنید',
+                'error'
+            );
     });
 });

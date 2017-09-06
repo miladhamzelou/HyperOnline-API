@@ -334,8 +334,6 @@ class AdminController
         $parameter = $request->get('parameter');
         $word = $request->get('word');
 
-        Log::info("search : " . $parameter . ' ' . $word . ' ' . $request);
-
         if ($parameter == "products") {
             $products = Product::where("confirmed", 1)
                 ->where('name', 'LIKE', '%' . $word . '%')
