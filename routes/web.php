@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/messages/push', 'v1_web\AdminController@messages_push')->name('messages');
     Route::post('/admin/messages/sms', 'v1_web\AdminController@messages_send_sms')->name('messages');
     Route::post('/admin/messages/push', 'v1_web\AdminController@messages_send_push')->name('messages');
-});
 
-Route::post('search', 'v1_web\AdminController@search');
-Route::get('search', 'v1_web\AdminController@search');
+    Route::post('search', 'v1_web\AdminController@search');
+    Route::get('search', 'v1_web\AdminController@search');
+});

@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $categories2 = Category2::orderBy('created_at', 'desc')->get();
         $categories3 = Category3::orderBy('created_at', 'desc')->get();
         return view('admin.categories')
-            ->withTitle("Categories")
+            ->withTitle("دسته بندی ها")
             ->withCategories1($categories1)
             ->withCategories2($categories2)
             ->withCategories3($categories3);

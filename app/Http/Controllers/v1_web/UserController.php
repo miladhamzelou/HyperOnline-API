@@ -29,7 +29,7 @@ class UserController extends Controller
     {
         $users = User::orderBy("created_at", "desc")->get();
         return view('admin.users')
-            ->withTitle("Users")
+            ->withTitle("کاربران")
             ->withUsers($users);
     }
 

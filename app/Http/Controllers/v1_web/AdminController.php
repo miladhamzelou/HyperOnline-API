@@ -13,6 +13,8 @@
 namespace app\Http\Controllers\v1_web;
 
 use App\Author;
+use App\Category1;
+use App\Category2;
 use App\Category3;
 use App\Option;
 use App\Order;
@@ -343,22 +345,51 @@ class AdminController
                 ->get());
 
             Log::info("products\n" . $products);
-            $title = "محصولات";
             return view('admin.products')
-                ->withTitle($title)
+                ->withTitle("جستجو - محصولات")
                 ->withInactive($inactive)
                 ->withProducts($this->fixPrice($products));
         } else if ($parameter == "category1") {
+            $categories1 = Category1::where('name', 'LIKE', '%' . $word . '%')->get();
+            $categories2 = Category2::where('name', "0")->get();
+            $categories3 = Category3::where('name', "0")->get();
+            return view('admin.categories')
+                ->withTitle("جستجو - دسته بندی ها")
+                ->withCategories1($categories1)
+                ->withCategories2($categories2)
+                ->withCategories3($categories3);
         } else if ($parameter == "category2") {
+            $categories1 = Category1::where('name', "0")->get();
+            $categories2 = Category2::where('name', 'LIKE', '%' . $word . '%')->get();
+            $categories3 = Category3::where('name', "0")->get();
+            return view('admin.categories')
+                ->withTitle("جستجو - دسته بندی ها")
+                ->withCategories1($categories1)
+                ->withCategories2($categories2)
+                ->withCategories3($categories3);
         } else if ($parameter == "category3") {
+            $categories1 = Category1::where('name', "0")->get();
+            $categories2 = Category2::where('name', "0")->get();
+            $categories3 = Category3::where('name', 'LIKE', '%' . $word . '%')->get();
+            return view('admin.categories')
+                ->withTitle("جستجو - دسته بندی ها")
+                ->withCategories1($categories1)
+                ->withCategories2($categories2)
+                ->withCategories3($categories3);
         } else if ($parameter == "users") {
+            $users = User::where('name', 'LIKE', '%' . $word . '%')
+                ->orWhere('phone', 'LIKE', '%' . $word . '%')
+                ->get();
+            return view('admin.users')
+                ->withTitle("جستجو - کاربران")
+                ->withUsers($users);
         } else if ($parameter == "orders") {
             $orders = Order::where('user_name', 'LIKE', '%' . $word . '%')
                 ->orWhere('stuffs', 'LIKE', '%' . $word . '%')
                 ->orWhere('code', 'LIKE', '%' . $word . '%')
                 ->get();
             return view('admin.orders')
-                ->withTitle("سفارشات")
+                ->withTitle("جستجو - سفارشات")
                 ->withOrders($this->fixPrice($orders));
         } else if ($parameter == "comments") {
         } else if ($parameter == "authors") {
@@ -367,14 +398,14 @@ class AdminController
                 ->get();
 
             return view('admin.authors')
-                ->withTitle("Authors")
+                ->withTitle("جستجو - فروشنده ها")
                 ->withAuthors($authors);
         } else if ($parameter == "sellers") {
             $sellers = Seller::where('name', 'LIKE', '%' . $word . '%')
                 ->orWhere('phone', 'LIKE', '%' . $word . '%')
                 ->get();
             return view('admin.sellers')
-                ->withTitle("Sellers")
+                ->withTitle("جستجو - فروشگاه ها")
                 ->withSellers($sellers);
         } else {
             $message = "خطایی رخ داده است";

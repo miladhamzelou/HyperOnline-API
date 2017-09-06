@@ -299,7 +299,7 @@
                                 <li><a href="#category3">دسته بندی مرحله سوم</a></li>
                                 <li><a href="#users">کاربران</a></li>
                                 <li><a href="#orders">سفارشات</a></li>
-                                <li><a href="#comments">نظرات</a></li>
+                                {{--<li><a href="#comments">نظرات</a></li>--}}
                                 <li><a href="#authors">فروشنده ها</a></li>
                                 <li><a href="#sellers">فروشگاه ها</a></li>
                             </ul>

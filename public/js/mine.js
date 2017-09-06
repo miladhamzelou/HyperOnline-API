@@ -14,7 +14,7 @@ $(document).ready(function (e) {
 
         if (word && parameter !== "all")
             document.location.href = "search?"
-                + "word=" + word
+                + "&word=" + word
                 + "&parameter=" + parameter;
         else if (!word)
             swal(

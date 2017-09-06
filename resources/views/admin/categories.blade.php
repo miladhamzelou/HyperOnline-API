@@ -17,7 +17,8 @@
                     </div>
                     <div class="box-body">
                         @if(!$categories3->count())
-                            <p>There is no products</p>
+                            <br>
+                            <p style="text-align: center;">دسته بندی وجود ندارد</p>
                         @else
                             <div class="table-responsive">
                                 <table class="table no-margin">
@@ -63,7 +64,8 @@
                     </div>
                     <div class="box-body">
                         @if(!$categories2->count())
-                            <p>There is no products</p>
+                            <br>
+                            <p style="text-align: center;">دسته بندی وجود ندارد</p>
                         @else
                             <div class="table-responsive">
                                 <table class="table no-margin">
@@ -109,7 +111,8 @@
                     </div>
                     <div class="box-body">
                         @if(!$categories1->count())
-                            <p>There is no products</p>
+                            <br>
+                            <p style="text-align: center;">دسته بندی وجود ندارد</p>
                         @else
                             <div class="table-responsive">
                                 <table class="table no-margin">
