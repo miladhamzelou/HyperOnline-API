@@ -17,6 +17,9 @@ class CreateBannersTable extends Migration
             $table->string('unique_id', 13)->primary()->unique()->index();
             $table->string('image');
             $table->string('title');
+            $table->text('link');
+            $table->string('type', 1);
+            $table->integer('size');
             $table->timestamps();
         });
     }

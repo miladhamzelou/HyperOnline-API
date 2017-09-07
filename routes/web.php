@@ -14,7 +14,8 @@
 Route::auth();
 
 Route::get('/', 'v1_web\AdminController@index')->name('home');
-Route::get('/home', 'v1_web\AdminController@index')->name('home');
+Route::get('/home', 'v1\market\MainController@index')->name('home');
+Route::get('/market', 'v1\market\MainController@index')->name('market');
 
 Route::get('/profile', 'v1_web\UserController@profile')->name('profile');
 

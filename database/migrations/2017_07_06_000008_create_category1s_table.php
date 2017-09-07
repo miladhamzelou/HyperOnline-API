@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCategory1sTable extends Migration
 {
@@ -15,6 +15,7 @@ class CreateCategory1sTable extends Migration
     {
         Schema::create('category1s', function (Blueprint $table) {
             $table->string('unique_id', 13)->primary()->unique()->index();
+            $table->string('parent_id', 13)->default('0');
             $table->string('name');
             $table->string('image')->nullable();
             $table->float('point', 2, 1)->default(0.0);
