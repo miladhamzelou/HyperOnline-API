@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'yekan';
+    src: url('persian-fonts/yekan.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'sanss';
+    src: url('persian-fonts/sans.ttf') format('truetype');
+}
+
+.font {
+    font-family: 'sanss', sans-serif;
+}
