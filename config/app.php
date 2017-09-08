@@ -185,6 +185,7 @@ return [
         App\Providers\v1\ProductServiceProvider::class,
         App\Providers\v1\MainServiceProvider::class,
         App\Providers\LogProvider::class,
+        App\Providers\v1\ViewComposerServiceProvider::class,
         // libraries
         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
         phplusir\smsir\SmsirServiceProvider::class,
