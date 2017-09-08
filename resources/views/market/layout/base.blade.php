@@ -155,19 +155,32 @@
                         <li><a class="home_link" title="خانه" href="index.html"><span>خانه</span></a></li>
                         <li class="mega-menu dropdown"><a>دسته ها</a>
                             <div class="dropdown-menu">
-                                <div class="column col-lg-2 col-md-3"><a href="category.html">البسه</a>
-                                    <div>
-                                        <ul>
-                                            <li><a href="category.html">آقایان <span>&rsaquo;</span></a>
-                                                <div class="dropdown-menu">
-                                                    <ul>
-                                                        <li><a href="category.html">زیردسته ها</a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                @foreach($categories as $c1)
+                                    <div class="column col-lg-2 col-md-3"><a href="category.html">{{ $c1['name'] }}</a>
+                                        <div>
+                                            <ul>
+                                                @foreach($c1['child'] as $c2)
+                                                    @if($c2['child'])
+                                                        <li><a href="category.html">{{ $c2['name'] }}
+                                                                <span>&rsaquo;</span></a>
+                                                            <div class="dropdown-menu">
+                                                                <ul>
+                                                                    @foreach($c2['child'] as $c3)
+                                                                        <li>
+                                                                            <a href="category.html">{{ $c3['name'] }}</a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    @else
+                                                        <li><a href="category.html">{{ $c2['name'] }}</a></li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </li>
                         <li class="contact-link"><a href="contact-us.html">تماس با ما</a></li>
@@ -185,7 +198,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="feature-box fbox_1">
                         <div class="title">ارسال رایگان</div>
-                        <p>برای خرید های بیش از 100 هزار تومان</p>
+                        <p>برای خرید های بیش از 35 هزار تومان</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
@@ -514,6 +527,7 @@
             </div>
             <div id="back-top"><a data-toggle="tooltip" title="بازگشت به بالا" href="javascript:void(0)"
                                   class="backtotop"><i class="fa fa-chevron-up"></i></a></div>
+        </div>
     </footer>
     <!--Footer End-->
 </div>
