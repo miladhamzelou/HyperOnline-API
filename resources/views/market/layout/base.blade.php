@@ -265,17 +265,17 @@
                                                                                           src="{{ asset('market/image/socialicons/facebook.png')}}"
                                                                                           alt="Facebook"
                                                                                           title="Facebook"></a> <a
-                                href="{{ url('') }}" target="_blank"> <img data-toggle="tooltip"
+                                href="{{ $social['twitter'] }}" target="_blank"> <img data-toggle="tooltip"
                                                                src="{{ asset('market/image/socialicons/twitter.png')}}"
-                                                               alt="Twitter" title="Twitter"> </a> <a href="{{ url('') }}"
+                                                               alt="Twitter" title="Twitter"> </a> <a href="{{ $social['google'] }}"
                                                                                                       target="_blank">
                             <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/google_plus.png')}}"
                                  alt="Google+"
-                                 title="Google+"> </a> <a href="{{ url('') }}" target="_blank"> <img data-toggle="tooltip"
+                                 title="Google+"> </a> <a href="{{ $social['pinterest'] }}" target="_blank"> <img data-toggle="tooltip"
                                                                                          src="{{ asset('market/image/socialicons/pinterest.png')}}"
                                                                                          alt="Pinterest"
                                                                                          title="Pinterest"> </a> <a
-                                href="{{ url('') }}" target="_blank"> <img data-toggle="tooltip"
+                                href="{{ url('feed') }}" target="_blank"> <img data-toggle="tooltip"
                                                                src="{{ asset('market/image/socialicons/rss.png')}}"
                                                                alt="RSS" title="RSS"> </a></div>
                 </div>
