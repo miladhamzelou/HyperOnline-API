@@ -4,58 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2b9fa928865c895dc7ce479b8e35c3ed",
-    "content-hash": "a0cd12bb3ec3733abfd3e5bf3a36e925",
+    "hash": "5f53ef53f99c09e95060f4c1642ed72e",
+    "content-hash": "178c988cb2df2ac8fd52f46ab285f1d2",
     "packages": [
-        {
-            "name": "darryldecode/cart",
-            "version": "3.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/darryldecode/laravelshoppingcart.git",
-                "reference": "4e5716f0214978e19bab76fd023aa979e8a478ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/darryldecode/laravelshoppingcart/zipball/4e5716f0214978e19bab76fd023aa979e8a478ec",
-                "reference": "4e5716f0214978e19bab76fd023aa979e8a478ec",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/translation": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/validation": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0",
-                "symfony/var-dumper": "2.7.*@dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Darryldecode\\": "src/Darryldecode"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Darryl Fernandez",
-                    "email": "engrdarrylfernandez@gmail.com"
-                }
-            ],
-            "description": "Laravel 5 Shopping cart",
-            "keywords": [
-                "cart",
-                "laravel",
-                "shopping cart"
-            ],
-            "time": "2017-03-09 09:22:00"
-        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -200,20 +151,20 @@
         },
         {
             "name": "fx3costa/laravelchartjs",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fxcosta/laravel-chartjs.git",
-                "reference": "7083c0810200d8d0f6f183bc61f3752299479e74"
+                "reference": "64a16f2cc1bdd14e57228d336a7e870cf7fb2aeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fxcosta/laravel-chartjs/zipball/7083c0810200d8d0f6f183bc61f3752299479e74",
-                "reference": "7083c0810200d8d0f6f183bc61f3752299479e74",
+                "url": "https://api.github.com/repos/fxcosta/laravel-chartjs/zipball/64a16f2cc1bdd14e57228d336a7e870cf7fb2aeb",
+                "reference": "64a16f2cc1bdd14e57228d336a7e870cf7fb2aeb",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.*",
+                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
                 "php": ">=5.6.4"
             },
             "type": "library",
@@ -241,7 +192,67 @@
                 "laravel5",
                 "reports"
             ],
-            "time": "2017-08-13 05:35:11"
+            "time": "2017-09-08 14:50:55"
+        },
+        {
+            "name": "gloudemans/shoppingcart",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
+                "reference": "095a260a7cdd3575b39044738c5db2d50c984e55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/095a260a7cdd3575b39044738c5db2d50c984e55",
+                "reference": "095a260a7cdd3575b39044738c5db2d50c984e55",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/events": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/session": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.0",
+                "orchestra/testbench": "~3.1",
+                "phpunit/phpunit": "~5.0|~6.0"
+            },
+            "suggest": {
+                "gloudemans/notify": "Simple flash notifications for Laravel"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Gloudemans\\Shoppingcart\\ShoppingcartServiceProvider"
+                    ],
+                    "aliases": {
+                        "Cart": "Gloudemans\\Shoppingcart\\Facades\\Cart"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gloudemans\\Shoppingcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Gloudemans",
+                    "email": "info@robgloudemans.nl"
+                }
+            ],
+            "description": "Laravel Shoppingcart",
+            "keywords": [
+                "laravel",
+                "shoppingcart"
+            ],
+            "time": "2017-09-02 08:44:31"
         },
         {
             "name": "guzzlehttp/guzzle",
