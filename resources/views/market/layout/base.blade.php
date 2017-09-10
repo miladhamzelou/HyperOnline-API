@@ -153,7 +153,7 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                         <li><a class="home_link" title="خانه" href="{{ url('') }}"><span>خانه</span></a></li>
-                        <li class="mega-menu dropdown"><a>دسته ها</a>
+                        {{--<li class="mega-menu dropdown"><a>دسته ها</a>
                             <div class="dropdown-menu">
                                 @foreach($categories as $c1)
                                     <div class="column col-lg-2 col-md-3"><a href="{{ url('category/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
@@ -182,7 +182,45 @@
                                     </div>
                                 @endforeach
                             </div>
+                        </li>--}}
+
+
+                        <li class="mega-menu dropdown"><a>دسته ها</a>
+                            <div class="dropdown-menu">
+                                @foreach($categories as $c1)
+                                    @if($c1['level']==1)
+                                    <div class="column col-lg-2 col-md-3"><a href="{{ url('category/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
+                                        <div>
+                                            <ul>
+                                                @foreach($categories as $c2)
+                                                    @if($c2['level']==2 && $c2['parent_id']==$c1['unique_id'])
+                                                        <li><a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}
+                                                                <span>&rsaquo;</span></a>
+                                                            <div class="dropdown-menu">
+                                                                <ul>
+                                                                    @foreach($categories as $c3)
+                                                                        @if($c3['level']==3 && $c3['parent_id']==$c2['unique_id'])
+                                                                        <li>
+                                                                            <a href="{{ url('category/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a>
+                                                                        </li>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    {{--@else
+                                                        <li><a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}</a></li>--}}
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    @endif
+                                @endforeach
+                            </div>
                         </li>
+
+
                         <li class="contact-link"><a href="{{ url('contact-us') }}">تماس با ما</a></li>
                         <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank">تخفیف خورده ها !!</a></li>
                     </ul>

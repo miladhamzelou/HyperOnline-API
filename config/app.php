@@ -192,7 +192,6 @@ return [
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        Baum\Providers\BaumServiceProvider::class,
     ],
 
     /*
