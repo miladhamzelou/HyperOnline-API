@@ -35,6 +35,11 @@ require __DIR__.'/../bootstrap/autoload.php';
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+ini_set("display_errors", 1);
+ini_set('memory_limit','2G');
+
 /*
 |--------------------------------------------------------------------------
 | Run The Application
