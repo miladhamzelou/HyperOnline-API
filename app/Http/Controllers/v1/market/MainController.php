@@ -9,7 +9,6 @@ use App\Category3;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\View;
 
 class MainController extends Controller
 {
@@ -34,12 +33,13 @@ class MainController extends Controller
         return $result;
     }
 
-    function buildTree(array $items) {
+    function buildTree(array $items)
+    {
         $tree = [];
 
-        foreach($items as $item) {
-            $pid  = $item['parent_id'];
-            $id   = $item['unique_id'];
+        foreach ($items as $item) {
+            $pid = $item['parent_id'];
+            $id = $item['unique_id'];
             $name = $item['name'];
 
             // Create or add child information to the parent node
@@ -49,7 +49,7 @@ class MainController extends Controller
                 $tree[$pid]["child"][] = $id;
             else
                 // create the first child to this parent
-                $tree[$pid] = array("child"=>array($id));
+                $tree[$pid] = array("child" => array($id));
 
             // Create or add name information for current node
             if (isset($tree[$id]))
@@ -58,7 +58,7 @@ class MainController extends Controller
                 $tree[$id]["name"] = $name;
             else
                 // create the current node and give it a name
-                $tree[$id] = array( "name"=>$name );
+                $tree[$id] = array("name" => $name);
         }
 
         return $tree;
@@ -86,7 +86,8 @@ class MainController extends Controller
         //return $this->buildTree($array);
     }
 
-    function filterCategory($category){
+    function filterCategory($category)
+    {
         $data = [];
         foreach ($category as $item) {
             $entry = [
@@ -99,7 +100,8 @@ class MainController extends Controller
         return $data;
     }
 
-    function filterCategory2($category){
+    function filterCategory2($category)
+    {
         $data = [];
         foreach ($category as $item) {
             $entry = [
@@ -134,5 +136,28 @@ class MainController extends Controller
                 $this->createTree($tree[$key]['child'], $parents_arr);
             }
         }
+    }
+
+
+    public function buildNested()
+    {
+        $cat1 = Category1::get();
+        foreach ($cat1 as $item) {
+            $root = Category::create(['name' => $item->name]);
+            $cat2 = Category2::where("parent_id", $item->unique_id)->get();
+            foreach ($cat2 as $cat2_item) {
+                $child = $root->children()->create(['name' => $cat2_item->name]);
+
+                $cat3 = Category3::where("parent_id", $cat2_item->unique_id)->get();
+                foreach ($cat3 as $cat3_item) {
+                    $child2 = $child->children()->create(['name' => $cat3_item->name]);
+                    $child2->save();
+                }
+                $child->save();
+            }
+        }
+
+
+        $root->save();
     }
 }
