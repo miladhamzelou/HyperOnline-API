@@ -8,6 +8,7 @@ use App\Category2;
 use App\Category3;
 use App\Http\Controllers\Controller;
 use App\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class MainController extends Controller
 {
@@ -16,9 +17,24 @@ class MainController extends Controller
         $new = $this->getNew();
         $cat = $this->getCategories();
 
+        Cart::destroy();
+        Cart::add([
+            ['id' => '1', 'name' => 'محصول اول', 'qty' => 2, 'price' => 10000],
+            ['id' => '2', 'name' => 'محصول دوم', 'qty' => 3, 'price' => 5500]
+        ]);
+
+        $cart = [
+            'items'=>Cart::content(),
+            'count'=>Cart::count(),
+            'total'=>Cart::total(0),
+            'tax'=>Cart::tax(0),
+            'subtotal'=>Cart::subtotal(0)
+        ];
+
         return view('market.layout.base')
             ->withNew($new)
-            ->withCategories($cat);
+            ->withCategories($cat)
+            ->withCart($cart);
     }
 
     protected function getNew()

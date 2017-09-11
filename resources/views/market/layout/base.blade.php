@@ -55,8 +55,8 @@
                     <!-- Logo Start -->
                     <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12 inner">
                         <div id="logo"><a href="{{ url('') }}"><img class="img-responsive"
-                                                                 src="{{ asset('market/image/logo.png')}}"
-                                                                 title="MarketShop" alt="MarketShop"/></a></div>
+                                                                    src="{{ asset('market/image/logo.png')}}"
+                                                                    title="MarketShop" alt="MarketShop"/></a></div>
                     </div>
                     <!-- Logo End -->
                     <!-- Mini Cart Start-->
@@ -65,39 +65,28 @@
                             <button type="button" data-toggle="dropdown" data-loading-text="Loading..."
                                     class="heading dropdown-toggle">
                                 <span class="cart-icon pull-left flip"></span>
-                                <span id="cart-total">2 آیتم - 132000 تومان</span></button>
+                                <span id="cart-total">{{ $cart['count'].' کالا - '.$cart['total'].' تومان' }}</span>
+                            </button>
                             <ul class="dropdown-menu">
                                 <li>
                                     <table class="table">
                                         <tbody>
+                                        @foreach($cart['items'] as $item)
                                         <tr>
                                             <td class="text-center"><a href="product.html"><img class="img-thumbnail"
                                                                                                 title="کفش راحتی مردانه"
                                                                                                 alt="کفش راحتی مردانه"
                                                                                                 src="{{ asset('market/image/product/sony_vaio_1-50x50.jpg')}}"></a>
                                             </td>
-                                            <td class="text-left"><a href="product.html">کفش راحتی مردانه</a></td>
-                                            <td class="text-right">x 1</td>
-                                            <td class="text-right">32000 تومان</td>
+                                            <td class="text-left"><a href="product.html">{{ $item->name }}</a></td>
+                                            <td class="text-right">{{ 'x ' . $item->qty }}</td>
+                                            <td class="text-right">{{ $item->subtotal . ' تومان' }}</td>
                                             <td class="text-center">
                                                 <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
                                                         type="button"><i class="fa fa-times"></i></button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center"><a href="product.html"><img class="img-thumbnail"
-                                                                                                title="تبلت ایسر"
-                                                                                                alt="تبلت ایسر"
-                                                                                                src="{{ asset('market/image/product/samsung_tab_1-50x50.jpg')}}"></a>
-                                            </td>
-                                            <td class="text-left"><a href="product.html">تبلت ایسر</a></td>
-                                            <td class="text-right">x 1</td>
-                                            <td class="text-right">98000 تومان</td>
-                                            <td class="text-center">
-                                                <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
-                                                        type="button"><i class="fa fa-times"></i></button>
-                                            </td>
-                                        </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </li>
@@ -107,19 +96,15 @@
                                             <tbody>
                                             <tr>
                                                 <td class="text-right"><strong>جمع کل</strong></td>
-                                                <td class="text-right">132000 تومان</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>کسر هدیه</strong></td>
-                                                <td class="text-right">4000 تومان</td>
+                                                <td class="text-right">{{ $cart['subtotal'] . ' تومان' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>مالیات</strong></td>
-                                                <td class="text-right">11880 تومان</td>
+                                                <td class="text-right">{{ $cart['tax'] . ' تومان' }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>قابل پرداخت</strong></td>
-                                                <td class="text-right">139880 تومان</td>
+                                                <td class="text-right">{{ $cart['total'] . ' تومان' }}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -146,75 +131,45 @@
             </div>
         </header>
         <!-- Header End-->
-        <!-- Main آقایانu Start-->
+        <!-- Main Start-->
         <div class="container">
             <nav id="menu" class="navbar">
                 <div class="navbar-header"><span class="visible-xs visible-sm"> منو <b></b></span></div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                         <li><a class="home_link" title="خانه" href="{{ url('') }}"><span>خانه</span></a></li>
-                        {{--<li class="mega-menu dropdown"><a>دسته ها</a>
-                            <div class="dropdown-menu">
-                                @foreach($categories as $c1)
-                                    <div class="column col-lg-2 col-md-3"><a href="{{ url('category/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
-                                        <div>
-                                            <ul>
-                                                @foreach($c1['child'] as $c2)
-                                                    @if($c2['child'])
-                                                        <li><a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}
-                                                                <span>&rsaquo;</span></a>
-                                                            <div class="dropdown-menu">
-                                                                <ul>
-                                                                    @foreach($c2['child'] as $c3)
-                                                                        <li>
-                                                                            <a href="{{ url('category/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a>
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                                                    @else
-                                                        <li><a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}</a></li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </li>--}}
-
-
                         <li class="mega-menu dropdown"><a>دسته ها</a>
                             <div class="dropdown-menu">
                                 @foreach($categories as $c1)
                                     @if($c1['level']==1)
-                                    <div class="column col-lg-2 col-md-3"><a href="{{ url('category/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
-                                        <div>
-                                            <ul>
-                                                @foreach($categories as $c2)
-                                                    @if($c2['level']==2 && $c2['parent_id']==$c1['unique_id'])
-                                                        <li><a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}
-                                                                <span>&rsaquo;</span></a>
-                                                            <div class="dropdown-menu">
-                                                                <ul>
-                                                                    @foreach($categories as $c3)
-                                                                        @if($c3['level']==3 && $c3['parent_id']==$c2['unique_id'])
-                                                                        <li>
-                                                                            <a href="{{ url('category/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a>
-                                                                        </li>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                                                    {{--@else
-                                                        <li><a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}</a></li>--}}
-                                                    @endif
-                                                @endforeach
-                                            </ul>
+                                        <div class="column col-lg-2 col-md-3"><a
+                                                    href="{{ url('category/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
+                                            <div>
+                                                <ul>
+                                                    @foreach($categories as $c2)
+                                                        @if($c2['level']==2 && $c2['parent_id']==$c1['unique_id'])
+                                                            <li>
+                                                                <a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}
+                                                                    <span>&rsaquo;</span></a>
+                                                                <div class="dropdown-menu">
+                                                                    <ul>
+                                                                        @foreach($categories as $c3)
+                                                                            @if($c3['level']==3 && $c3['parent_id']==$c2['unique_id'])
+                                                                                <li>
+                                                                                    <a href="{{ url('category/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a>
+                                                                                </li>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                            {{--@else
+                                                                <li><a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}</a></li>--}}
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
                                     @endif
                                 @endforeach
                             </div>
@@ -222,7 +177,8 @@
 
 
                         <li class="contact-link"><a href="{{ url('contact-us') }}">تماس با ما</a></li>
-                        <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank">تخفیف خورده ها !!</a></li>
+                        <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank">تخفیف خورده ها !!</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -238,8 +194,8 @@
         <div class="container">
             <div class="row">
                 <!-- Left Part Start-->
-                @yield('right-panel')
-                <!-- Left Part End-->
+            @yield('right-panel')
+            <!-- Left Part End-->
                 <!--Middle Part Start-->
                 <div id="content" class="col-sm-9">
                     @yield('content')
@@ -297,25 +253,29 @@
             <div class="container">
                 <div id="powered" class="clearfix">
                     <div class="powered_text pull-left flip">
-                        <p>کپی رایت © {{ date("Y") }} − کلیه ی حقوق مادی و معنوی این سایت مربوط به هایپرآنلاین می باشد</p>
+                        <p>کپی رایت © {{ date("Y") }} − کلیه ی حقوق مادی و معنوی این سایت مربوط به هایپرآنلاین می
+                            باشد</p>
                     </div>
-                    <div class="social pull-right flip"><a href="{{ $social['facebook'] }}" target="_blank"> <img data-toggle="tooltip"
-                                                                                          src="{{ asset('market/image/socialicons/facebook.png')}}"
-                                                                                          alt="Facebook"
-                                                                                          title="Facebook"></a> <a
+                    <div class="social pull-right flip"><a href="{{ $social['facebook'] }}" target="_blank"> <img
+                                    data-toggle="tooltip"
+                                    src="{{ asset('market/image/socialicons/facebook.png')}}"
+                                    alt="Facebook"
+                                    title="Facebook"></a> <a
                                 href="{{ $social['twitter'] }}" target="_blank"> <img data-toggle="tooltip"
-                                                               src="{{ asset('market/image/socialicons/twitter.png')}}"
-                                                               alt="Twitter" title="Twitter"> </a> <a href="{{ $social['google'] }}"
-                                                                                                      target="_blank">
+                                                                                      src="{{ asset('market/image/socialicons/twitter.png')}}"
+                                                                                      alt="Twitter" title="Twitter">
+                        </a> <a href="{{ $social['google'] }}"
+                                target="_blank">
                             <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/google_plus.png')}}"
                                  alt="Google+"
-                                 title="Google+"> </a> <a href="{{ $social['pinterest'] }}" target="_blank"> <img data-toggle="tooltip"
-                                                                                         src="{{ asset('market/image/socialicons/pinterest.png')}}"
-                                                                                         alt="Pinterest"
-                                                                                         title="Pinterest"> </a> <a
+                                 title="Google+"> </a> <a href="{{ $social['pinterest'] }}" target="_blank"> <img
+                                    data-toggle="tooltip"
+                                    src="{{ asset('market/image/socialicons/pinterest.png')}}"
+                                    alt="Pinterest"
+                                    title="Pinterest"> </a> <a
                                 href="{{ url('feed') }}" target="_blank"> <img data-toggle="tooltip"
-                                                               src="{{ asset('market/image/socialicons/rss.png')}}"
-                                                               alt="RSS" title="RSS"> </a></div>
+                                                                               src="{{ asset('market/image/socialicons/rss.png')}}"
+                                                                               alt="RSS" title="RSS"> </a></div>
                 </div>
                 <div class="bottom-row">
                     <div class="custom-text text-center">
