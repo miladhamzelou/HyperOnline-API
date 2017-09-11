@@ -30,37 +30,6 @@ class MainController extends Controller
         return $result;
     }
 
-    function buildTree(array $items)
-    {
-        $tree = [];
-
-        foreach ($items as $item) {
-            $pid = $item['parent_id'];
-            $id = $item['unique_id'];
-            $name = $item['name'];
-
-            // Create or add child information to the parent node
-            if (isset($tree[$pid]))
-                // a node for the parent exists
-                // add another child id to this parent
-                $tree[$pid]["child"][] = $id;
-            else
-                // create the first child to this parent
-                $tree[$pid] = array("child" => array($id));
-
-            // Create or add name information for current node
-            if (isset($tree[$id]))
-                // a node for the id exists:
-                // set the name of current node
-                $tree[$id]["name"] = $name;
-            else
-                // create the current node and give it a name
-                $tree[$id] = array("name" => $name);
-        }
-
-        return $tree;
-    }
-
     protected function getCategories()
     {
         $array = array();
@@ -139,5 +108,36 @@ class MainController extends Controller
 
 
         $root->save();
+    }
+
+    function buildTree(array $items)
+    {
+        $tree = [];
+
+        foreach ($items as $item) {
+            $pid = $item['parent_id'];
+            $id = $item['unique_id'];
+            $name = $item['name'];
+
+            // Create or add child information to the parent node
+            if (isset($tree[$pid]))
+                // a node for the parent exists
+                // add another child id to this parent
+                $tree[$pid]["child"][] = $id;
+            else
+                // create the first child to this parent
+                $tree[$pid] = array("child" => array($id));
+
+            // Create or add name information for current node
+            if (isset($tree[$id]))
+                // a node for the id exists:
+                // set the name of current node
+                $tree[$id]["name"] = $name;
+            else
+                // create the current node and give it a name
+                $tree[$id] = array("name" => $name);
+        }
+
+        return $tree;
     }*/
 }
