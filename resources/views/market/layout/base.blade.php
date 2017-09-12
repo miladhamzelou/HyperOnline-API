@@ -285,7 +285,7 @@
                 </div>
                 <div class="bottom-row">
                     <div class="custom-text text-center">
-                        <p>طراحی شده توسط : آرش حاتمی</p>
+                        {{--<p>طراحی شده توسط : آرش حاتمی</p>--}}
                     </div>
                 </div>
             </div>

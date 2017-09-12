@@ -219,7 +219,7 @@
         </div>
         <!-- Banner End -->
         <!-- دسته ها محصولات Slider Start -->
-        <h3 class="subtitle">زیبایی و سلامت - <a class="viewall" href="category.html">نمایش همه</a></h3>
+        <h3 class="subtitle">دسته بندی تصادفی - <a class="viewall" href="category.html">نمایش همه</a></h3>
         <div class="owl-carousel latest_category_carousel">
             <div class="product-thumb">
                 <div class="image"><a href="product.html"><img
@@ -237,7 +237,7 @@
         </div>
         <!-- دسته ها محصولات Slider End -->
         <!-- Brand محصولات Slider Start-->
-        <h3 class="subtitle">اپل - <a class="viewall" href="category.html">نمایش همه</a></h3>
+        <h3 class="subtitle">دسته بندی تصادفی - <a class="viewall" href="category.html">نمایش همه</a></h3>
         <div class="owl-carousel latest_brands_carousel">
             <div class="product-thumb">
                 <div class="image"><a href="product.html"><img
