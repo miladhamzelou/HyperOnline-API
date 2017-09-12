@@ -40,8 +40,15 @@
                     </div>
                     <div id="top-links" class="nav pull-right flip">
                         <ul>
-                            <li><a href="{{ url('login') }}">ورود</a></li>
-                            <li><a href="{{ url('register') }}">ثبت نام</a></li>
+                            @if(Auth::check())
+                                @if(\App\User::isAdmin())
+                                    <li><a href="{{ url('login') }}">پروفایل</a></li>
+                                @endif
+                                <li><a href="{{ url('login') }}">پروفایل</a></li>
+                            @else
+                                <li><a href="{{ url('login') }}">ورود</a></li>
+                                <li><a href="{{ url('register') }}">ثبت نام</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -72,21 +79,22 @@
                                     <table class="table">
                                         <tbody>
                                         @foreach($cart['items'] as $item)
-                                        <tr>
-                                            <td class="text-center"><a href="product.html"><img class="img-thumbnail"
-                                                                                                title="کفش راحتی مردانه"
-                                                                                                alt="کفش راحتی مردانه"
-                                                                                                src="{{ asset('market/image/product/sony_vaio_1-50x50.jpg')}}"></a>
-                                            </td>
-                                            <td class="text-left"><a href="product.html">{{ $item->name }}</a></td>
-                                            <td class="text-right">{{ 'x ' . $item->qty }}</td>
-                                            <td class="text-right">{{ $item->subtotal . ' تومان' }}</td>
-                                            <td class="text-center">
-                                                <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
-                                                        type="button"><i class="fa fa-times"></i></button>
-                                            </td>
-                                        </tr>
-                                            @endforeach
+                                            <tr>
+                                                <td class="text-center"><a href="product.html"><img
+                                                                class="img-thumbnail"
+                                                                title="کفش راحتی مردانه"
+                                                                alt="کفش راحتی مردانه"
+                                                                src="{{ asset('market/image/product/sony_vaio_1-50x50.jpg')}}"></a>
+                                                </td>
+                                                <td class="text-left"><a href="product.html">{{ $item->name }}</a></td>
+                                                <td class="text-right">{{ 'x ' . $item->qty }}</td>
+                                                <td class="text-right">{{ $item->subtotal . ' تومان' }}</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
+                                                            type="button"><i class="fa fa-times"></i></button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </li>
