@@ -33,13 +33,10 @@ class AdminController
 {
     public function index()
     {
-        if (Auth::guest())
-            return view('welcome');
+        if (Auth::user()->isAdmin())
+            return redirect()->route('admin');
         else
-            if (!Auth::user()->isAdmin())
-                return view('home');
-            else
-                return redirect()->route('admin');
+            return redirect()->route('home');
     }
 
     public function admin()
