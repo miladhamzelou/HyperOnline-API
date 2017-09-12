@@ -44,7 +44,7 @@
                                 @if($admin)
                                     <li><a href="{{ url('admin') }}" target="_blank">پنل ادمین</a></li>
                                 @endif
-                                <li><a href="{{ url('login') }}" target="_blank">پروفایل</a></li>
+                                <li><a href="{{ url('profile') }}" target="_blank">پروفایل</a></li>
                             @else
                                 <li><a href="{{ url('login') }}">ورود</a></li>
                                 <li><a href="{{ url('register') }}">ثبت نام</a></li>
@@ -195,9 +195,7 @@
     </div>
     <div id="container">
         <!-- Feature Box Start-->
-        <div class="container">
             @yield('feature-box')
-        </div>
         <!-- Feature Box End-->
         <div class="container">
             <div class="row">
@@ -205,9 +203,9 @@
             @yield('right-panel')
             <!-- Left Part End-->
                 <!--Middle Part Start-->
-                <div id="content" class="col-sm-9">
+
                     @yield('content')
-                </div>
+
                 <!--Middle Part End-->
             </div>
         </div>

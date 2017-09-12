@@ -34,7 +34,7 @@ class MainController extends Controller
 
         $isAdmin = Auth::user()->isAdmin() ? 1 : 0;
 
-        return view('market.layout.base')
+        return view('market.home')
             ->withNew($new)
             ->withCategories($cat)
             ->withCart($cart)
