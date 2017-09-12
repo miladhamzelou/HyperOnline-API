@@ -33,7 +33,7 @@ class AdminController
 {
     public function index()
     {
-        if (!Auth::guest())
+        if (Auth::check())
             if (Auth::user()->isAdmin())
                 return redirect()->route('admin');
             else
