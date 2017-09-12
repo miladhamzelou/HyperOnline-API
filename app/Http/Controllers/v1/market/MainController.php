@@ -32,7 +32,10 @@ class MainController extends Controller
             'subtotal' => Cart::subtotal(0)
         ];
 
-        $isAdmin = Auth::user()->isAdmin() ? 1 : 0;
+        if (Auth::check())
+            $isAdmin = Auth::user()->isAdmin() ? 1 : 0;
+        else
+            $isAdmin = 0;
 
         return view('market.home')
             ->withNew($new)
