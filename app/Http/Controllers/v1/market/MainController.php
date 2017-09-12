@@ -24,11 +24,11 @@ class MainController extends Controller
         ]);
 
         $cart = [
-            'items'=>Cart::content(),
-            'count'=>Cart::count(),
-            'total'=>Cart::total(0),
-            'tax'=>Cart::tax(0),
-            'subtotal'=>Cart::subtotal(0)
+            'items' => Cart::content(),
+            'count' => Cart::count(),
+            'total' => Cart::total(0),
+            'tax' => Cart::tax(0),
+            'subtotal' => Cart::subtotal(0)
         ];
 
         return view('market.layout.base')

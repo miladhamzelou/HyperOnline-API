@@ -176,6 +176,7 @@
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
                 <hr>
+                <li class="my_font"><a href="{{ url('/home') }}" target="_blank">مشاهده فروشگاه</a></li>
                 <li class="header">بخش اصلی</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="my_font"><a href="{{ url('/admin') }}">اطلاعات</a></li>
