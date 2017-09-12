@@ -41,10 +41,10 @@
                     <div id="top-links" class="nav pull-right flip">
                         <ul>
                             @if(Auth::check())
-                                @if(\App\User::isAdmin())
-                                    <li><a href="{{ url('login') }}">پروفایل</a></li>
+                                @if($admin)
+                                    <li><a href="{{ url('admin') }}" target="_blank">پنل ادمین</a></li>
                                 @endif
-                                <li><a href="{{ url('login') }}">پروفایل</a></li>
+                                <li><a href="{{ url('login') }}" target="_blank">پروفایل</a></li>
                             @else
                                 <li><a href="{{ url('login') }}">ورود</a></li>
                                 <li><a href="{{ url('register') }}">ثبت نام</a></li>

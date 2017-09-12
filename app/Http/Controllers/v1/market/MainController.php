@@ -9,6 +9,7 @@ use App\Category3;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -31,10 +32,13 @@ class MainController extends Controller
             'subtotal' => Cart::subtotal(0)
         ];
 
+        $isAdmin = Auth::user()->isAdmin() ? 1 : 0;
+
         return view('market.layout.base')
             ->withNew($new)
             ->withCategories($cat)
-            ->withCart($cart);
+            ->withCart($cart)
+            ->withAdmin($isAdmin);
     }
 
     protected function getNew()
