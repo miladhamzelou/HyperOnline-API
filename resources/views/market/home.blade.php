@@ -68,17 +68,29 @@
         </div>
         <h3 class="subtitle">پرفروش ها</h3>
         <div class="side-item">
-            <div class="product-thumb clearfix">
-                <div class="image"><a href="product.html"><img
-                                src="{{ asset('market/image/product/apple_cinema_30-50x50.jpg')}}"
-                                class="img-responsive"/></a></div>
-                <div class="caption">
-                    <h4><a href="product.html">تی شرت کتان مردانه</a></h4>
-                    <p class="price"><span class="price-new">110000 تومان</span> <span
-                                class="price-old">122000 تومان</span>
-                        <span class="saving">-10%</span></p>
+            @foreach($most as $m)
+                <div class="product-thumb clearfix">
+                    <div class="image">
+                        <a href="">
+                            <img src="{{ asset('market/image/no_image.jpg') }}"
+                                 class="img-responsive"/>
+                        </a>
+                    </div>
+                    <div class="caption">
+                        <h4><a href="">{{ $m['name']  }}</a></h4>
+                        @if($m['off']  > 0)
+                            <p class="price"><span
+                                        class="price-new">{{ round($m['price'] - ($m['price']  * $m['off']  / 100)) . ' تومان' }}</span>
+                                <span class="price-old">{{ $m['price']  . ' تومان' }}</span>
+                                <span class="saving">{{ $m['off']  }}%-</span>
+                            </p>
+                        @else
+                            <p class="price"><span class="price-new">{{ $m['price']  . ' تومان' }}</span>
+                            </p>
+                        @endif
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
         <h3 class="subtitle">جدیدترین</h3>
         <div class="side-item">
@@ -132,25 +144,27 @@
         <!-- Featured محصولات Start-->
         <h3 class="subtitle">ویژه</h3>
         <div class="owl-carousel product_carousel">
-            <div class="product-thumb clearfix">
-                <div class="image"><a href="product.html"><img
-                                src="{{ asset('market/image/product/apple_cinema_30-200x200.jpg')}}"
-                                alt="تی شرت کتان مردانه"
-                                title="تی شرت کتان مردانه" class="img-responsive"/></a></div>
-                <div class="caption">
-                    <h4><a href="product.html">تی شرت کتان مردانه</a></h4>
-                    <p class="price">
-                        <span class="price-old">122000 تومان</span>
-                        <br>
-                        <span class="price-new">110000 تومان</span>
-                        <span class="saving" style="direction: rtl">10%-</span>
-                    </p>
+            @foreach($off as $product)
+                <div class="product-thumb clearfix">
+                    <div class="image"><a href=""><img
+                                    src="{{ asset('market/image/no_image.jpg') }}"
+                                    alt="تی شرت کتان مردانه"
+                                    title="تی شرت کتان مردانه" class="img-responsive"/></a></div>
+                    <div class="caption">
+                        <h4><a href="">{{ $product['name'] }}</a></h4>
+                        <p class="price">
+                            <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
+                            <br>
+                            <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
+                            <span class="saving">{{ $product['off'] }}%-</span>
+                        </p>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-primary" type="button" onClick="cart.add('42');">
+                            <span>افزودن به سبد</span></button>
+                    </div>
                 </div>
-                <div class="button-group">
-                    <button class="btn-primary" type="button" onClick="cart.add('42');">
-                        <span>افزودن به سبد</span></button>
-                </div>
-            </div>
+            @endforeach
         </div>
         <!-- Featured محصولات End-->
         <!-- Banner Start-->
@@ -173,34 +187,53 @@
         <!-- Banner End-->
         <!-- دسته ها محصولات Slider Start-->
         <div class="category-module" id="latest_category">
-            <h3 class="subtitle">الکترونیکی - <a class="viewall" href="category.tpl">نمایش همه</a></h3>
+            <h3 class="subtitle">{{ $rand3['name'] }} - <a class="viewall" href="{{ url('category/2/'. $rand3['id']) }}">نمایش همه</a></h3>
             <div class="category-module-content">
                 <ul id="sub-cat" class="tabs">
-                    <li><a href="#tab-cat1">لپ تاپ</a></li>
-                    <li><a href="#tab-cat2">رومیزی</a></li>
-                    <li><a href="#tab-cat3">دوربین</a></li>
-                    <li><a href="#tab-cat4">موبایل و تبلت</a></li>
-                    <li><a href="#tab-cat5">صوتی و تصویری</a></li>
-                    <li><a href="#tab-cat6">لوازم خانگی</a></li>
+                    @foreach($rand3['subs'] as $cat)
+                        <li><a href="#{{ $cat['unique_id'] }}">{{ $cat['name'] }}</a></li>
+                    @endforeach
                 </ul>
-                <div id="tab-cat1" class="tab_content">
-                    <div class="owl-carousel latest_category_tabs">
-                        <div class="product-thumb">
-                            <div class="image"><a href="product.html"><img
-                                            src="{{ asset('market/image/product/iphone_6-200x200.jpg')}}"
-                                            alt="کرم مو آقایان" title="کرم مو آقایان"
-                                            class="img-responsive"/></a></div>
-                            <div class="caption">
-                                <h4><a href="product.html">کرم مو آقایان</a></h4>
-                                <p class="price"> 42300 تومان </p>
-                            </div>
-                            <div class="button-group">
-                                <button class="btn-primary" type="button" onClick="">
-                                    <span>افزودن به سبد</span></button>
-                            </div>
+                @foreach($rand3['subs'] as $cat)
+                    <div id="{{ $cat['unique_id'] }}" class="tab_content">
+                        <div class="owl-carousel latest_category_tabs">
+                            @foreach($rand3['products'] as $product)
+                                {{--@if($product['category_id'] == $cat['unique_id'])--}}
+                                    <div class="product-thumb">
+                                        <div class="image"><a href=""><img
+                                                        src="{{ asset('market/image/no_image.jpg') }}"
+                                                        alt=" کتاب آموزش باغبانی "
+                                                        title=" کتاب آموزش باغبانی "
+                                                        class="img-responsive"/></a></div>
+                                        <div>
+                                            <div class="caption">
+                                                <h4><a href="">{{ $product['name'] }}</a></h4>
+                                                <p class="description">{{ $product['description'] }}</p>
+                                                @if($product['off'] > 0)
+                                                    <p class="price"><span
+                                                                class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
+                                                        <br>
+                                                        <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
+                                                        <span class="saving">{{ $product['off'] }}%-</span>
+                                                    </p>
+                                                @else
+                                                    <p class="price"><span
+                                                                class="price-new">{{ $product['price'] . ' تومان' }}</span>
+                                                    </p>
+                                                @endif
+                                            </div>
+                                            <div class="button-group">
+                                                <button class="btn-primary" type="button" onClick="">
+                                                    <span>افزودن به سبد</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{--@endif--}}
+                            @endforeach
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
         <!-- دسته ها محصولات Slider End-->
@@ -219,39 +252,75 @@
         </div>
         <!-- Banner End -->
         <!-- دسته ها محصولات Slider Start -->
-        <h3 class="subtitle">دسته بندی تصادفی - <a class="viewall" href="category.html">نمایش همه</a></h3>
+        <h3 class="subtitle">{{ $rand1['name'] }} - <a class="viewall" href="{{ url('category/3/'. $rand1['id']) }}">نمایش
+                همه</a></h3>
         <div class="owl-carousel latest_category_carousel">
-            <div class="product-thumb">
-                <div class="image"><a href="product.html"><img
-                                src="{{ asset('market/image/product/iphone_6-200x200.jpg')}}"
-                                alt="کرم مو آقایان" title="کرم مو آقایان"
-                                class="img-responsive"/></a></div>
-                <div class="caption">
-                    <h4><a href="product.html">کرم مو آقایان</a></h4>
-                    <p class="price"> 42300 تومان </p>
+            @foreach($rand1['products'] as $product)
+                <div class="product-thumb">
+                    <div class="image"><a href=""><img src="{{ asset('market/image/no_image.jpg') }}"
+                                                       alt=" کتاب آموزش باغبانی "
+                                                       title=" کتاب آموزش باغبانی "
+                                                       class="img-responsive"/></a></div>
+                    <div>
+                        <div class="caption">
+                            <h4><a href="">{{ $product['name'] }}</a></h4>
+                            <p class="description">{{ $product['description'] }}</p>
+                            @if($product['off'] > 0)
+                                <p class="price"><span
+                                            class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
+                                    <br>
+                                    <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
+                                    <span class="saving">{{ $product['off'] }}%-</span>
+                                </p>
+                            @else
+                                <p class="price"><span
+                                            class="price-new">{{ $product['price'] . ' تومان' }}</span>
+                                </p>
+                            @endif
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
-                </div>
-            </div>
+            @endforeach
         </div>
         <!-- دسته ها محصولات Slider End -->
         <!-- Brand محصولات Slider Start-->
-        <h3 class="subtitle">دسته بندی تصادفی - <a class="viewall" href="category.html">نمایش همه</a></h3>
-        <div class="owl-carousel latest_brands_carousel">
-            <div class="product-thumb">
-                <div class="image"><a href="product.html"><img
-                                src="{{ asset('market/image/product/iphone_6-200x200.jpg')}}"
-                                alt="کرم مو آقایان" title="کرم مو آقایان"
-                                class="img-responsive"/></a></div>
-                <div class="caption">
-                    <h4><a href="product.html">کرم مو آقایان</a></h4>
-                    <p class="price"> 42300 تومان </p>
+        <h3 class="subtitle">{{ $rand2['name'] }} - <a class="viewall" href="{{ url('category/3/'. $rand2['id']) }}">نمایش
+                همه</a></h3>
+        <div class="owl-carousel latest_category_carousel">
+            @foreach($rand2['products'] as $product)
+                <div class="product-thumb">
+                    <div class="image"><a href=""><img src="{{ asset('market/image/no_image.jpg') }}"
+                                                       alt=" کتاب آموزش باغبانی "
+                                                       title=" کتاب آموزش باغبانی "
+                                                       class="img-responsive"/></a></div>
+                    <div>
+                        <div class="caption">
+                            <h4><a href="">{{ $product['name'] }}</a></h4>
+                            <p class="description">{{ $product['description'] }}</p>
+                            @if($product['off'] > 0)
+                                <p class="price"><span
+                                            class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
+                                    <br>
+                                    <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
+                                    <span class="saving">{{ $product['off'] }}%-</span>
+                                </p>
+                            @else
+                                <p class="price"><span
+                                            class="price-new">{{ $product['price'] . ' تومان' }}</span>
+                                </p>
+                            @endif
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span></button>
-                </div>
-            </div>
+            @endforeach
         </div>
         <!-- Brand محصولات Slider End -->
     </div>

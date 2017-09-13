@@ -33,12 +33,12 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) use ($autoI
     $stuffs_id = "";
     foreach ($product as $item) {
         $stuffs .= '-' . $item->name;
-        $stuffs_id .= '-' . $item->unique_id;
+        $stuffs_id .= ',' . $item->unique_id;
         $price += $item->price;
     }
     // remove first '-' in string
-    $stuffs = ltrim($stuffs, '-');
-    $stuffs_id = ltrim($stuffs_id, '-');
+    $stuffs = ltrim($stuffs, ',');
+    $stuffs_id = ltrim($stuffs_id, ',');
 
     $status = ['abort', 'pending', 'shipped', 'delivered'];
     return [

@@ -151,20 +151,20 @@
                                 @foreach($categories as $c1)
                                     @if($c1['level']==1)
                                         <div class="column col-lg-2 col-md-3"><a
-                                                    href="{{ url('category/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
+                                                    href="{{ url('category/1/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
                                             <div>
                                                 <ul>
                                                     @foreach($categories as $c2)
                                                         @if($c2['level']==2 && $c2['parent_id']==$c1['unique_id'])
                                                             <li>
-                                                                <a href="{{ url('category/'. $c2['unique_id']) }}">{{ $c2['name'] }}
+                                                                <a href="{{ url('category/2/'. $c2['unique_id']) }}">{{ $c2['name'] }}
                                                                     <span>&rsaquo;</span></a>
                                                                 <div class="dropdown-menu">
                                                                     <ul>
                                                                         @foreach($categories as $c3)
                                                                             @if($c3['level']==3 && $c3['parent_id']==$c2['unique_id'])
                                                                                 <li>
-                                                                                    <a href="{{ url('category/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a>
+                                                                                    <a href="{{ url('category/3/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a>
                                                                                 </li>
                                                                             @endif
                                                                         @endforeach

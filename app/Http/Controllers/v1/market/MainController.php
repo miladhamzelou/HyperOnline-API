@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers\v1\market;
 
-use App\Category;
 use App\Category1;
 use App\Category2;
 use App\Category3;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Services\v1\market\MainService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
+    protected $mService;
+
+    public function __construct(MainService $service)
+    {
+        $this->mService = $service;
+    }
+
     public function index()
     {
-        $new = $this->getNew();
-        $cat = $this->getCategories();
+        $new = $this->mService->getNew();
+        $cat = $this->mService->getCategories();
 
         Cart::destroy();
         Cart::add([
@@ -37,54 +44,23 @@ class MainController extends Controller
         else
             $isAdmin = 0;
 
+        $most = $this->mService->getMostSell();
+
+        $cat1 = $this->mService->getRandomCategory();
+        $cat2 = $this->mService->getRandomCategory();
+        $cat3 = $this->mService->getRandomCategory2();
+        $off = $this->mService->getOff();
+
         return view('market.home')
             ->withNew($new)
             ->withCategories($cat)
             ->withCart($cart)
+            ->withMost($most)
+            ->withRand1($cat1)
+            ->withRand2($cat2)
+            ->withRand3($cat3)
+            ->withOff($off)
             ->withAdmin($isAdmin);
-    }
-
-    protected function getNew()
-    {
-        $result = Product::where("confirmed", 1)
-            ->orderBy("created_at", "desc")
-            ->take(10)
-            ->get();
-        return $result;
-    }
-
-    protected function getCategories()
-    {
-        $array = array();
-
-        $cat1 = $this->filterCategory(Category1::get()->toArray(), 1);
-        foreach ($cat1 as $category1) {
-            array_push($array, $category1);
-            $cat2 = $this->filterCategory(Category2::where("parent_id", $category1['unique_id'])->get()->toArray(), 2);
-            foreach ($cat2 as $category2) {
-                array_push($array, $category2);
-                $cat3 = $this->filterCategory(Category3::where("parent_id", $category2['unique_id'])->get()->toArray(), 3);
-                foreach ($cat3 as $category3)
-                    array_push($array, $category3);
-            }
-        }
-
-        return $array;
-    }
-
-    function filterCategory($category, $level)
-    {
-        $data = [];
-        foreach ($category as $item) {
-            $entry = [
-                'unique_id' => $item['unique_id'],
-                'parent_id' => $item['parent_id'],
-                'name' => $item['name'],
-                'level' => $level
-            ];
-            $data[] = $entry;
-        }
-        return $data;
     }
 
     /*function MakeTree($arr)
