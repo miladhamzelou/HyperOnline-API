@@ -23,7 +23,6 @@ class MainController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
@@ -38,7 +37,7 @@ class MainController extends Controller
             $collection = $this->Main->getCollections();
             $send_price = $this->Main->getSendPrice();
             $banners = $this->Main->getBanners();
-            if ($new && $popular && $category && $options && $most)
+            if (1)
                 return response()->json([
                     'error' => false,
                     'send_price' => $send_price,
