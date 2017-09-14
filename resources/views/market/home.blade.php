@@ -97,7 +97,7 @@
             @foreach($new as $product)
                 <div class="product-thumb clearfix">
                     <div class="image">
-                        <a href="product.html">
+                        <a href="">
                             @if($product->image)
                                 <img src="{{ asset('images/') . $product->image }}" class="img-responsive"/>
                             @else
@@ -107,7 +107,7 @@
                         </a>
                     </div>
                     <div class="caption">
-                        <h4><a href="product.html">{{ $product->name }}</a></h4>
+                        <h4><a href="">{{ $product->name }}</a></h4>
                         @if($product->off > 0)
                             <p class="price"><span
                                         class="price-new">{{ round($product->price - ($product->price * $product->off / 100)) . ' تومان' }}</span>
@@ -146,10 +146,15 @@
         <div class="owl-carousel product_carousel">
             @foreach($off as $product)
                 <div class="product-thumb clearfix">
-                    <div class="image"><a href=""><img
-                                    src="{{ asset('market/image/no_image.jpg') }}"
-                                    alt="تی شرت کتان مردانه"
-                                    title="تی شرت کتان مردانه" class="img-responsive"/></a></div>
+                    <div class="image">
+                        <a href="">
+                            @if($product['image'])
+                                <img src="{{ asset('images/' . $product['image']) }}" class="img-responsive"/>
+                            @else
+                                <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
+                            @endif
+                        </a>
+                    </div>
                     <div class="caption">
                         <h4><a href="">{{ $product['name'] }}</a></h4>
                         <p class="price">
@@ -200,11 +205,16 @@
                             @foreach($rand3['products'] as $product)
                                 {{--@if($product['category_id'] == $cat['unique_id'])--}}
                                     <div class="product-thumb">
-                                        <div class="image"><a href=""><img
-                                                        src="{{ asset('market/image/no_image.jpg') }}"
-                                                        alt=" کتاب آموزش باغبانی "
-                                                        title=" کتاب آموزش باغبانی "
-                                                        class="img-responsive"/></a></div>
+                                        <div class="image">
+                                            <a href="">
+                                                @if($product['image'])
+                                                    <img src="{{ asset('images/') . $product['image'] }}" class="img-responsive"/>
+                                                @else
+                                                    <img src="{{ asset('market/image/no_image.jpg') }}"
+                                                         class="img-responsive"/>
+                                                @endif
+                                            </a>
+                                        </div>
                                         <div>
                                             <div class="caption">
                                                 <h4><a href="">{{ $product['name'] }}</a></h4>
@@ -257,10 +267,16 @@
         <div class="owl-carousel latest_category_carousel">
             @foreach($rand1['products'] as $product)
                 <div class="product-thumb">
-                    <div class="image"><a href=""><img src="{{ asset('market/image/no_image.jpg') }}"
-                                                       alt=" کتاب آموزش باغبانی "
-                                                       title=" کتاب آموزش باغبانی "
-                                                       class="img-responsive"/></a></div>
+                    <div class="image">
+                        <a href="">
+                            @if($product['image'])
+                                <img src="{{ asset('images/') . $product['image'] }}" class="img-responsive"/>
+                            @else
+                                <img src="{{ asset('market/image/no_image.jpg') }}"
+                                     class="img-responsive"/>
+                            @endif
+                        </a>
+                    </div>
                     <div>
                         <div class="caption">
                             <h4><a href="">{{ $product['name'] }}</a></h4>
@@ -293,10 +309,16 @@
         <div class="owl-carousel latest_category_carousel">
             @foreach($rand2['products'] as $product)
                 <div class="product-thumb">
-                    <div class="image"><a href=""><img src="{{ asset('market/image/no_image.jpg') }}"
-                                                       alt=" کتاب آموزش باغبانی "
-                                                       title=" کتاب آموزش باغبانی "
-                                                       class="img-responsive"/></a></div>
+                    <div class="image">
+                        <a href="">
+                            @if($product['image'])
+                                <img src="{{ asset('images/') . $product['image'] }}" class="img-responsive"/>
+                            @else
+                                <img src="{{ asset('market/image/no_image.jpg') }}"
+                                     class="img-responsive"/>
+                            @endif
+                        </a>
+                    </div>
                     <div>
                         <div class="caption">
                             <h4><a href="">{{ $product['name'] }}</a></h4>

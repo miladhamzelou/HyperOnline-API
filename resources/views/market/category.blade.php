@@ -193,8 +193,8 @@
                             <div class="image">
                                 <a href="">
                                     @if($product['image'])
-                                    <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
-                                        @else
+                                        <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
+                                    @else
                                         <img src="{{ asset('images/' . $product['image']) }}" class="img-responsive"/>
                                     @endif
                                 </a>
@@ -217,7 +217,8 @@
                                     @endif
                                 </div>
                                 <div class="button-group">
-                                    <a href="javascript:void(0);" onClick="addCart(document.getElementById('uid').value)">
+                                    <a href="javascript:void(0);"
+                                       onClick="addCart(document.getElementById('uid').value)">
                                         <button class="btn-primary" type="button">
                                             <span>افزودن به سبد</span>
                                         </button>
