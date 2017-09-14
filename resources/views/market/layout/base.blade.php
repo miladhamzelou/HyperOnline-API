@@ -61,7 +61,7 @@
                 <div class="table-container">
                     <!-- Logo Start -->
                     <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12 inner">
-                        <div id="logo"><a href="{{ url('') }}"><img class="img-responsive"
+                        <div id="logo"><a href="{{ url('home') }}"><img class="img-responsive"
                                                                     src="{{ asset('market/image/logo.png')}}"
                                                                     title="MarketShop" alt="MarketShop"/></a></div>
                     </div>
@@ -145,7 +145,7 @@
                 <div class="navbar-header"><span class="visible-xs visible-sm"> منو <b></b></span></div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a class="home_link" title="خانه" href="{{ url('') }}"><span>خانه</span></a></li>
+                        <li><a class="home_link" title="خانه" href="{{ url('home') }}"><span>خانه</span></a></li>
                         <li class="mega-menu dropdown"><a>دسته ها</a>
                             <div class="dropdown-menu">
                                 @foreach($categories as $c1)
