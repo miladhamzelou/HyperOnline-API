@@ -193,9 +193,10 @@
                             <div class="image">
                                 <a href="">
                                     @if($product['image'])
-                                        <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
+                                        <img src="{{ asset('images/') . $product['image'] }}" class="img-responsive"/>
                                     @else
-                                        <img src="{{ asset('images/' . $product['image']) }}" class="img-responsive"/>
+                                        <img src="{{ asset('market/image/no_image.jpg') }}"
+                                             class="img-responsive"/>
                                     @endif
                                 </a>
                             </div>
