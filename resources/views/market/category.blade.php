@@ -43,17 +43,17 @@
             <ul id="cat_accordion">
                 @foreach($categories as $c1)
                     @if($c1['level']==1)
-                        <li><a href="category.html">{{ $c1['name'] }}</a>
+                        <li><a href="{{ url('category/1/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
                             <span class="down"></span>
                             <ul>
                                 @foreach($categories as $c2)
                                     @if($c2['level']==2 && $c2['parent_id']==$c1['unique_id'])
-                                        <li><a href="category.html">{{ $c2['name'] }}</a>
+                                        <li><a href="{{ url('category/2/'. $c2['unique_id']) }}">{{ $c2['name'] }}</a>
                                             <span class="down"></span>
                                             <ul>
                                                 @foreach($categories as $c3)
                                                     @if($c3['level']==3 && $c3['parent_id']==$c2['unique_id'])
-                                                        <li><a href="category.html">{{ $c3['name'] }}</a></li>
+                                                        <li><a href="{{ url('category/3/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a></li>
                                                     @endif
                                                 @endforeach
                                             </ul>
@@ -98,24 +98,23 @@
                 <div class="product-thumb clearfix">
                     <div class="image">
                         <a href="">
-                            @if($product->image)
-                                <img src="{{ asset('images/') . $product->image }}" class="img-responsive"/>
-                            @else
-                                <img src="{{ asset('market/image/no_image.jpg') }}"
-                                     class="img-responsive"/>
+                            @if($product['image'])
+                                <img src="{{ asset('images').'/' . $product['image'] }}"
+                                     class="img-responsive"/>                            @else
+                                <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
                             @endif
                         </a>
                     </div>
                     <div class="caption">
-                        <h4><a href="">{{ $product->name }}</a></h4>
-                        @if($product->off > 0)
+                        <h4><a href="">{{ $product['name'] }}</a></h4>
+                        @if($product['off'] > 0)
                             <p class="price"><span
-                                        class="price-new">{{ round($product->price - ($product->price * $product->off / 100)) . ' تومان' }}</span>
-                                <span class="price-old">{{ $product->price . ' تومان' }}</span>
-                                <span class="saving">{{ $product->off }}%-</span>
+                                        class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
+                                <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
+                                <span class="saving">{{ $product['off'] }}%-</span>
                             </p>
                         @else
-                            <p class="price"><span class="price-new">{{ $product->price . ' تومان' }}</span>
+                            <p class="price"><span class="price-new">{{ $product['price'] . ' تومان' }}</span>
                             </p>
                         @endif
                     </div>
