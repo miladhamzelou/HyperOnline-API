@@ -98,24 +98,23 @@
                 <div class="product-thumb clearfix">
                     <div class="image">
                         <a href="">
-                            @if($product->image)
-                                <img src="{{ asset('images/') . $product->image }}" class="img-responsive"/>
-                            @else
-                                <img src="{{ asset('market/image/no_image.jpg') }}"
-                                     class="img-responsive"/>
+                            @if($product['image'])
+                                <img src="{{ asset('images').'/' . $product['image'] }}"
+                                     class="img-responsive"/>                            @else
+                                <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
                             @endif
                         </a>
                     </div>
                     <div class="caption">
-                        <h4><a href="">{{ $product->name }}</a></h4>
-                        @if($product->off > 0)
+                        <h4><a href="">{{ $product['name'] }}</a></h4>
+                        @if($product['off'] > 0)
                             <p class="price"><span
-                                        class="price-new">{{ round($product->price - ($product->price * $product->off / 100)) . ' تومان' }}</span>
-                                <span class="price-old">{{ $product->price . ' تومان' }}</span>
-                                <span class="saving">{{ $product->off }}%-</span>
+                                        class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
+                                <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
+                                <span class="saving">{{ $product['off'] }}%-</span>
                             </p>
                         @else
-                            <p class="price"><span class="price-new">{{ $product->price . ' تومان' }}</span>
+                            <p class="price"><span class="price-new">{{ $product['price'] . ' تومان' }}</span>
                             </p>
                         @endif
                     </div>
@@ -192,7 +191,9 @@
         <!-- Banner End-->
         <!-- دسته ها محصولات Slider Start-->
         <div class="category-module" id="latest_category">
-            <h3 class="subtitle">{{ $rand3['name'] }} - <a class="viewall" href="{{ url('category/2/'. $rand3['id']) }}">نمایش همه</a></h3>
+            <h3 class="subtitle">{{ $rand3['name'] }} - <a class="viewall"
+                                                           href="{{ url('category/2/'. $rand3['id']) }}">نمایش همه</a>
+            </h3>
             <div class="category-module-content">
                 <ul id="sub-cat" class="tabs">
                     @foreach($rand3['subs'] as $cat)
@@ -204,41 +205,41 @@
                         <div class="owl-carousel latest_category_tabs">
                             @foreach($rand3['products'] as $product)
                                 {{--@if($product['category_id'] == $cat['unique_id'])--}}
-                                    <div class="product-thumb">
-                                        <div class="image">
-                                            <a href="">
-                                                @if($product['image'])
-                                                    <img src="{{ asset('images').'/' . $product['image'] }}"
-                                                         class="img-responsive"/>                                                @else
-                                                    <img src="{{ asset('market/image/no_image.jpg') }}"
-                                                         class="img-responsive"/>
-                                                @endif
-                                            </a>
+                                <div class="product-thumb">
+                                    <div class="image">
+                                        <a href="">
+                                            @if($product['image'])
+                                                <img src="{{ asset('images').'/' . $product['image'] }}"
+                                                     class="img-responsive"/>                                                @else
+                                                <img src="{{ asset('market/image/no_image.jpg') }}"
+                                                     class="img-responsive"/>
+                                            @endif
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <div class="caption">
+                                            <h4><a href="">{{ $product['name'] }}</a></h4>
+                                            <p class="description">{{ $product['description'] }}</p>
+                                            @if($product['off'] > 0)
+                                                <p class="price"><span
+                                                            class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
+                                                    <br>
+                                                    <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
+                                                    <span class="saving">{{ $product['off'] }}%-</span>
+                                                </p>
+                                            @else
+                                                <p class="price"><span
+                                                            class="price-new">{{ $product['price'] . ' تومان' }}</span>
+                                                </p>
+                                            @endif
                                         </div>
-                                        <div>
-                                            <div class="caption">
-                                                <h4><a href="">{{ $product['name'] }}</a></h4>
-                                                <p class="description">{{ $product['description'] }}</p>
-                                                @if($product['off'] > 0)
-                                                    <p class="price"><span
-                                                                class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
-                                                        <br>
-                                                        <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
-                                                        <span class="saving">{{ $product['off'] }}%-</span>
-                                                    </p>
-                                                @else
-                                                    <p class="price"><span
-                                                                class="price-new">{{ $product['price'] . ' تومان' }}</span>
-                                                    </p>
-                                                @endif
-                                            </div>
-                                            <div class="button-group">
-                                                <button class="btn-primary" type="button" onClick="">
-                                                    <span>افزودن به سبد</span>
-                                                </button>
-                                            </div>
+                                        <div class="button-group">
+                                            <button class="btn-primary" type="button" onClick="">
+                                                <span>افزودن به سبد</span>
+                                            </button>
                                         </div>
                                     </div>
+                                </div>
                                 {{--@endif--}}
                             @endforeach
                         </div>

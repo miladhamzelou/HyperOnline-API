@@ -17,7 +17,7 @@ class MainService
             ->orderBy("created_at", "desc")
             ->take(10)
             ->get();
-        return $result;
+        return $this->filterProduct($result);
     }
 
     public function getCategories()
