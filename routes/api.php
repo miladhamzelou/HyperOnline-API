@@ -62,15 +62,11 @@ Route::resource('/v1/orders', v1\OrderController::class, [
     ]
 ]);
 
-//Route::resource('/v1/categories', v1\CategoryController::class);
-
 Route::post('/v1/categories_all', 'v1\CategoryController@sectionLoad');
-
 Route::post('/callback', 'v1\OrderController@callback');
-
 Route::post('/v1/search', 'v1\MainController@search');
-
 Route::post('/v1/verifyPhone', 'v1\UserController@phoneVerification');
 Route::post('/v1/verifyPhoneOK', 'v1\UserController@phoneVerificationOK');
 Route::post('/v1/products_detail', 'v1\ProductController@getDetails');
 Route::post('/v1/downloadLink', 'v1\MainController@downloadLink');
+Route::post('/v1/getProduct','v1\ProductController@getProduct');

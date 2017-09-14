@@ -203,6 +203,7 @@ class MainService
         $data = [];
         foreach ($products as $product) {
             $entry = [
+                'unique_id' => $product['unique_id'],
                 'name' => $product['name'],
                 'image' => $product['image'],
                 'description' => $product['description'],

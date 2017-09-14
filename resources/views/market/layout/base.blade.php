@@ -302,6 +302,7 @@
 <script type="text/javascript" src="{{ asset('market/js/jquery.dcjqaccordion.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('market/js/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('market/js/custom.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/mine.js')}}"></script>
 <!-- JS Part End-->
 </body>
 </html>

@@ -72,8 +72,8 @@
                 <div class="product-thumb clearfix">
                     <div class="image">
                         <a href="">
-                                <img src="{{ asset('market/image/no_image.jpg') }}"
-                                     class="img-responsive"/>
+                            <img src="{{ asset('market/image/no_image.jpg') }}"
+                                 class="img-responsive"/>
                         </a>
                     </div>
                     <div class="caption">
@@ -90,7 +90,7 @@
                         @endif
                     </div>
                 </div>
-                @endforeach
+            @endforeach
         </div>
         <h3 class="subtitle">جدیدترین</h3>
         <div class="side-item">
@@ -187,32 +187,41 @@
                 <p>محصولی در این دسته بندی وجود ندارد</p>
             @else
                 @foreach($products as $product)
+                    <input type="hidden" id="uid" value="{{ $product['unique_id'] }}">
                     <div class="product-layout product-list col-xs-12">
                         <div class="product-thumb">
-                            <div class="image"><a href=""><img src="{{ asset('market/image/no_image.jpg') }}"
-                                                               alt=" کتاب آموزش باغبانی "
-                                                               title=" کتاب آموزش باغبانی "
-                                                               class="img-responsive"/></a></div>
+                            <div class="image">
+                                <a href="">
+                                    @if($product['image'])
+                                    <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
+                                        @else
+                                        <img src="{{ asset('images/' . $product['image']) }}" class="img-responsive"/>
+                                    @endif
+                                </a>
+                            </div>
                             <div>
                                 <div class="caption">
                                     <h4><a href="">{{ $product['name'] }}</a></h4>
                                     <p class="description">{{ $product['description'] }}</p>
                                     @if($product['off'] > 0)
-                                        <p class="price"><span
-                                                    class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
+                                        <p class="price">
+                                            <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
                                             <br>
                                             <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
                                             <span class="saving">{{ $product['off'] }}%-</span>
                                         </p>
                                     @else
-                                        <p class="price"><span
-                                                    class="price-new">{{ $product['price'] . ' تومان' }}</span>
+                                        <p class="price">
+                                            <span class="price-new">{{ $product['price'] . ' تومان' }}</span>
                                         </p>
                                     @endif
                                 </div>
                                 <div class="button-group">
-                                    <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span>
-                                    </button>
+                                    <a href="javascript:void(0);" onClick="addCart(document.getElementById('uid').value)">
+                                        <button class="btn-primary" type="button">
+                                            <span>افزودن به سبد</span>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

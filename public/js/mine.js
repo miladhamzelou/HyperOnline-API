@@ -30,3 +30,32 @@ $(document).ready(function (e) {
             );
     });
 });
+
+function addCart($id) {
+    var http = new XMLHttpRequest();
+    var url = "/api/v1/getProduct";
+    var params = "id=" + $id;
+    http.open("POST", url, true);
+    // http.setRequestHeader("Content-Type", "application/json");
+    http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    http.onreadystatechange = function () {
+        if (http.readyState === 4 && http.status === 200) {
+            alert(http.response);
+        } else
+            alert(http.status + ' ' + http.response)
+    };
+    http.send(params);
+
+    swal({
+        title: 'تعداد را تعیین کنید',
+        type: 'question',
+        input: 'range',
+        inputAttributes: {
+            min: 8,
+            max: 120,
+            step: 1
+        },
+        inputValue: 25
+    })
+}

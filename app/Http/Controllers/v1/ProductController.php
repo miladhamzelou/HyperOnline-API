@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use App\Services\v1\ProductService;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -208,7 +209,8 @@ class ProductController extends Controller
         }
     }
 
-    public function getDetails(Request $request){
+    public function getDetails(Request $request)
+    {
         try {
             if ($data = $this->Products->getProductsWithDetail($request))
                 return response()->json([
@@ -244,5 +246,12 @@ class ProductController extends Controller
             }
         }
         return $data;
+    }
+
+    public function getProduct(Request $request)
+    {
+        $id = $request->get("id");
+        $data = Product::where("unique_id", $id)->firstOrFail();
+        return response()->json($data);
     }
 }
