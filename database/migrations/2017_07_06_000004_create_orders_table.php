@@ -23,7 +23,9 @@ class CreateOrdersTable extends Migration
             $table->string('user_phone');
             $table->text('stuffs');
             $table->text('stuffs_id');
+            $table->text('stuffs_count');
             $table->integer('price');
+            $table->integer('price_original');
             $table->integer('hour');
             $table->enum('pay_method', ['online', 'place']);
             $table->enum('status', ['abort', 'pending', 'shipped', 'delivered'])->default('pending');

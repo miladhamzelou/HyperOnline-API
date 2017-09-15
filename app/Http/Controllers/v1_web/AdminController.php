@@ -414,6 +414,11 @@ class AdminController
         }
     }
 
+    public function accounting(){
+        return view('admin.accounting')
+            ->withTitle("حسابداری");
+    }
+
     protected function filterUser($users)
     {
 //        $data = [];
