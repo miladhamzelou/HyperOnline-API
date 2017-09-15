@@ -43,6 +43,7 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) use ($autoI
     // remove first '-' in string
     $stuffs = ltrim($stuffs, ',');
     $stuffs_id = ltrim($stuffs_id, ',');
+    $stuffs_count = ltrim($stuffs_count, ',');
 
     $status = ['abort', 'pending', 'shipped', 'delivered'];
     return [

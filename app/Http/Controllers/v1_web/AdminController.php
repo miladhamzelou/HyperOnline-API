@@ -414,9 +414,34 @@ class AdminController
         }
     }
 
-    public function accounting(){
+    public function accounting()
+    {
+        $orders = Order::where('status', '!=', 'abort')->get();
+        $total_price = 0;
+        $total_price_original = 0;
+        $total_send = 0;
+        $total_count = 0;
+
+        foreach ($orders as $order) {
+            $total_price += $order->price;
+            $total_price_original += $order->price_original;
+            $total_send += $order->price_send;
+            $count = explode(',', $order->stuffs_count);
+            foreach ($count as $i)
+                $total_count += $i;
+        }
+
+        $prices = [
+            'TotalPrice' => $this->formatMoney($total_price),
+            'TotalOriginal' => $this->formatMoney($total_price_original),
+            'TotalSend' => $this->formatMoney($total_send),
+            'TotalBenefit' => $this->formatMoney($total_price - $total_price_original),
+        ];
+
         return view('admin.accounting')
-            ->withTitle("حسابداری");
+            ->withTitle("حسابداری")
+            ->withPrices($prices)
+            ->withCount($total_count);
     }
 
     protected function filterUser($users)
