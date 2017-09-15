@@ -38,6 +38,13 @@ class OrderController
     public function details($id)
     {
         $order = Order::find($id);
+        $stuff = explode(',', $order->stuffs);
+        $stuff_count = explode(',', $order->stuffs_count);
+        $final = "";
+        foreach (array_values($stuff) as $i => $value) {
+            $final .= $value . ' ( ' . $stuff_count[$i] . ' عدد ) - ';
+        }
+        $order->stuffs = substr($final, 0, -3);
         $order->price = $this->formatMoney($order->price);
         return view('admin.order_details')
             ->withTitle("سفارش")
