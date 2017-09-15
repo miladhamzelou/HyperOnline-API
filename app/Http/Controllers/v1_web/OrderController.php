@@ -38,13 +38,7 @@ class OrderController
     public function details($id)
     {
         $order = Order::find($id);
-        $stuff = explode(',', $order->stuffs);
-        $stuff_count = explode(',', $order->stuffs_count);
-        $final = "";
-        foreach (array_values($stuff) as $i => $value) {
-            $final .= $value . ' ( ' . $stuff_count[$i] . ' عدد ) - ';
-        }
-        $order->stuffs = substr($final, 0, -3);
+        $this->addCount($order);
         $order->price = $this->formatMoney($order->price);
         return view('admin.order_details')
             ->withTitle("سفارش")
@@ -53,16 +47,19 @@ class OrderController
 
     protected function fix($items)
     {
-        foreach ($items as $item) {
-            $stuff = explode(',', $item->stuffs);
-            $stuff_count = explode(',', $item->stuffs_count);
-            $final = "";
-            foreach (array_values($stuff) as $i => $value) {
-                $final .= $value . ' ( ' . $stuff_count[$i] . ' عدد ) - ';
-            }
-            $item->stuffs = substr($final, 0, -3);
-        }
+        foreach ($items as $item)
+            $this->addCount($item);
         return $this->fixPrice($items);
+    }
+
+    protected function addCount(&$item){
+        $stuff = explode(',', $item->stuffs);
+        $stuff_count = explode(',', $item->stuffs_count);
+        $final = "";
+        foreach (array_values($stuff) as $i => $value) {
+            $final .= $value . ' ( ' . $stuff_count[$i] . ' عدد ) - ';
+        }
+        $item->stuffs = substr($final, 0, -3);
     }
 
     protected function fixPrice($items)
