@@ -416,19 +416,24 @@ class AdminController
 
     public function accounting()
     {
-        $orders = Order::where('status', '!=', 'abort')->get();
-        $total_price = 0;
-        $total_price_original = 0;
-        $total_send = 0;
-        $total_count = 0;
+        $orders = Order::get();
+        $total_price = $total_price_original = $total_send = $total_count = 0;
+        $total_order = $total_abort = $total_pending = $total_delivered = $total_shipped = 0;
 
         foreach ($orders as $order) {
-            $total_price += $order->price;
-            $total_price_original += $order->price_original;
-            $total_send += $order->price_send;
-            $count = explode(',', $order->stuffs_count);
-            foreach ($count as $i)
-                $total_count += $i;
+            if ($order->status != "abort") {
+                $total_price += $order->price;
+                $total_price_original += $order->price_original;
+                $total_send += $order->price_send;
+                $count = explode(',', $order->stuffs_count);
+                foreach ($count as $i)
+                    $total_count += $i;
+                if ($order->status == "pending") $total_pending += 1;
+                elseif ($order->status == "shipped") $total_shipped += 1;
+                elseif ($order->status == "delivered") $total_delivered += 1;
+            } else
+                $total_abort += 1;
+            $total_order += 1;
         }
 
         $prices = [
@@ -438,9 +443,18 @@ class AdminController
             'TotalBenefit' => $this->formatMoney($total_price - $total_price_original),
         ];
 
+        $status = [
+            'delivered' => $total_delivered,
+            'shipped' => $total_shipped,
+            'pending' => $total_pending,
+            'abort' => $total_abort,
+            'total' => $total_order
+        ];
+
         return view('admin.accounting')
             ->withTitle("حسابداری")
             ->withPrices($prices)
+            ->withStatus($status)
             ->withCount($total_count);
     }
 
