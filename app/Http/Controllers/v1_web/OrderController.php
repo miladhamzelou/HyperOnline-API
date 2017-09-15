@@ -21,6 +21,7 @@ class OrderController
     public function index()
     {
         $orders = Order::orderBy("created_at", "desc")->get();
+
         return view('admin.orders')
             ->withTitle("سفارشات")
             ->withOrders($this->fixPrice($orders));
@@ -45,8 +46,11 @@ class OrderController
 
     protected function fixPrice($items)
     {
-        foreach ($items as $item)
+        foreach ($items as $item) {
             $item->price = $this->formatMoney($item->price);
+            $item->price_send= $this->formatMoney($item->price_send);
+        }
+
         return $items;
     }
 
