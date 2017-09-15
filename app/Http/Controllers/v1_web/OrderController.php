@@ -48,7 +48,7 @@ class OrderController
     {
         foreach ($items as $item) {
             $item->price = $this->formatMoney($item->price);
-            $item->price_send= $this->formatMoney($item->price_send);
+            $item->price_send = $this->formatMoney($item->price_send);
         }
 
         return $items;

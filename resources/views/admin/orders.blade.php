@@ -24,6 +24,7 @@
                                 <table class="table no-margin">
                                     <thead>
                                     <tr>
+                                        <th style="font-size:17px; text-align: right; direction: rtl;">وضعیت</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">سود</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">قیمت</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">محصولات</th>
@@ -34,6 +35,15 @@
                                     <tbody>
                                     @foreach($orders as $order)
                                         <tr>
+                                            @if($order->status=="abort")
+                                                <td style="text-align: right; direction: rtl; color: red;">لغو شده</td>
+                                            @elseif($order->status=="delivered")
+                                                <td style="text-align: right; direction: rtl; color: green">تحویل شده</td>
+                                            @elseif($order->status=="shipped")
+                                                <td style="text-align: right; direction: rtl; color: darkviolet">ارسال شده</td>
+                                            @elseif($order->status=="pending")
+                                                <td style="text-align: right; direction: rtl; color: orange">درحال انتظار</td>
+                                            @endif
                                             <td style="text-align: right; direction: rtl;">{{ (str_replace(',','',$order->price) - str_replace(',','',$order->price_original)) . ' تومان' }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ $order->price . ' تومان' }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ $order->stuffs }}</td>
