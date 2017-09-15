@@ -87,6 +87,3 @@ Route::post('/search', 'v1_web\AdminController@search');
 Route::get('/search', 'v1_web\AdminController@search');
 
 Route::get('category/{level}/{id}','v1\market\CategoryController@index');
-
-Route::post('/downloadLink', 'v1\MainController@downloadLink');
-Route::get('/downloadLink', 'v1\MainController@downloadLink');
