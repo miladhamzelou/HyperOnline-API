@@ -125,7 +125,7 @@ class AdminController
             ->options([]);
 
         $users = User::orderBy("created_at", "desc")->take(5)->get();
-        $orders = $this->fixPrice(Order::orderBy("created_at", "desc")->take(5)->get());
+        $orders = $this->fix(Order::where("status","!=","abort")->orderBy("created_at", "desc")->take(5)->get());
         $products = $this->fixPrice(Product::orderBy("created_at", "desc")->take(5)->get());
 
         //TODO: filter outputs
@@ -507,6 +507,24 @@ class AdminController
             $data[] = $entry;
         }
         return $data;
+    }
+
+    protected function fix($items)
+    {
+        foreach ($items as $item)
+            $this->addCount($item);
+        return $this->fixPrice($items);
+    }
+
+    protected function addCount(&$item)
+    {
+        $stuff = explode(',', $item->stuffs);
+        $stuff_count = explode(',', $item->stuffs_count);
+        $final = "";
+        foreach (array_values($stuff) as $i => $value) {
+            $final .= $value . ' ( ' . $stuff_count[$i] . ' عدد ) - ';
+        }
+        $item->stuffs = substr($final, 0, -3);
     }
 
     protected function fixPrice($items)
