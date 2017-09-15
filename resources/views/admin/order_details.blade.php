@@ -21,6 +21,7 @@
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">فروشنده : </strong>{{ $order->seller_name }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">نام مشتری : </strong>{{ $order->user_name }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">تلفن مشتری : </strong>{{ $order->user_phone }}</p><br>
+                        <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">آدرس مشتری : </strong>{{ $address }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">کالا ها : </strong>{{ $order->stuffs }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">قیمت : </strong>{{ $order->price . ' تومان' }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">ساعت تحویل : </strong>{{ $order->hour }}</p><br>

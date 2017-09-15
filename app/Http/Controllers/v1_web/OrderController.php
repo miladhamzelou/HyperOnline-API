@@ -15,6 +15,7 @@ namespace app\Http\Controllers\v1_web;
 
 use App\Order;
 use App\Pay;
+use App\User;
 
 class OrderController
 {
@@ -40,8 +41,12 @@ class OrderController
         $order = Order::find($id);
         $this->addCount($order);
         $order->price = $this->formatMoney($order->price);
+        $order->pay_method = ($order->pay_method == "online") ? "آنلاین" : "در محل";
+        $user = User::where("unique_id", $order->user_id)->firstOrFail();
+        $address = $user->state . ' - ' . $user->city . ' ///////// ' . $user->address;
         return view('admin.order_details')
             ->withTitle("سفارش")
+            ->withAddress($address)
             ->withOrder($order);
     }
 
@@ -52,7 +57,8 @@ class OrderController
         return $this->fixPrice($items);
     }
 
-    protected function addCount(&$item){
+    protected function addCount(&$item)
+    {
         $stuff = explode(',', $item->stuffs);
         $stuff_count = explode(',', $item->stuffs_count);
         $final = "";
