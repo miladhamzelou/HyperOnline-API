@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->text('stuffs_id');
             $table->text('stuffs_count');
             $table->integer('price');
+            $table->integer('price_send');
             $table->integer('price_original');
             $table->integer('hour');
             $table->enum('pay_method', ['online', 'place']);

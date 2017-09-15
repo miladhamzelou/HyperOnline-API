@@ -29,12 +29,16 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) use ($autoI
     $product = \App\Product::inRandomOrder()->take($count)->get();
 
     $price = 0;
+    $price_original = 0;
     $stuffs = "";
     $stuffs_id = "";
+    $stuffs_count = "";
     foreach ($product as $item) {
-        $stuffs .= '-' . $item->name;
+        $stuffs .= ',' . $item->name;
         $stuffs_id .= ',' . $item->unique_id;
+        $stuffs_count .= ',' . ($item->count - 1);
         $price += $item->price;
+        $price_original += $item->price_original;
     }
     // remove first '-' in string
     $stuffs = ltrim($stuffs, ',');
@@ -51,8 +55,11 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) use ($autoI
         'user_phone' => $user_phone,
         'stuffs' => $stuffs,
         'stuffs_id' => $stuffs_id,
+        'stuffs_count' => $stuffs_count,
         'price' => $price,
-	'hour' => $faker->numberBetween(10, 22),
+        'price_send' => 1000,
+        'price_original' => $price_original,
+        'hour' => $faker->numberBetween(10, 22),
         'status' => $faker->randomElement($status),
         'create_date' => $date,
         'created_at' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now')
