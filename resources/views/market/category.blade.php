@@ -53,7 +53,9 @@
                                             <ul>
                                                 @foreach($categories as $c3)
                                                     @if($c3['level']==3 && $c3['parent_id']==$c2['unique_id'])
-                                                        <li><a href="{{ url('category/3/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a></li>
+                                                        <li>
+                                                            <a href="{{ url('category/3/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a>
+                                                        </li>
                                                     @endif
                                                 @endforeach
                                             </ul>
@@ -131,10 +133,10 @@
             <div class="category-list-thumb row">
                 @foreach($sub as $category)
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-                        <a href="{{ url('category/'. $level++ .'/'. $category['unique_id']) }}">
+                        <a href="{{ url('category/'. ($level+1) .'/'. $category['unique_id']) }}">
                             <img src="{{ asset('market/image/no_image.jpg') }}" alt="لپ تاپ (6)"/>
                         </a>
-                        <a href="{{ url('category/'. $level++ .'/'. $category['unique_id']) }}">{{ $category['name'] }}</a>
+                        <a href="{{ url('category/'. ($level+1) .'/'. $category['unique_id']) }}">{{ $category['name'] }}</a>
                     </div>
                 @endforeach
             </div>
