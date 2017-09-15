@@ -71,7 +71,8 @@ class ProductController extends Controller
         $seller = Seller::where("name", $request->get('seller'))->firstOrFail()->unique_id;
         $category = Category3::where("name", $request->get('category'))->firstOrFail()->unique_id;
 
-        $product->unique_id = uniqid('', false);
+        $uid = uniqid('', false);
+        $product->unique_id = $uid;
         $product->name = $request->get('name');
         $product->seller_id = $seller;
         $product->category_id = $category;
@@ -85,7 +86,7 @@ class ProductController extends Controller
 
         if (Input::hasFile('image')) {
             $image = $request->file('image');
-            $input['imagename'] = 'P.' . time() . '.' . $image->getClientOriginalExtension();
+            $input['imagename'] = 'P.' . $uid . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('images');
             $image->move($destinationPath, $input['imagename']);
             $product->image = $input['imagename'];
@@ -146,7 +147,7 @@ class ProductController extends Controller
                 // first delete old one
                 File::delete('images/' . $product->image);
                 $image = $request->file('image');
-                $input['imagename'] = 'P.' . time() . '.' . $image->getClientOriginalExtension();
+                $input['imagename'] = 'P.' . $product->unique_id . '.' . $image->getClientOriginalExtension();
                 $destinationPath = public_path('images');
                 $image->move($destinationPath, $input['imagename']);
                 $product->image = $input['imagename'];

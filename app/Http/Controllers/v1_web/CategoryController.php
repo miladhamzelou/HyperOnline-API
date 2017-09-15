@@ -84,15 +84,16 @@ class CategoryController extends Controller
     public function store(Request $request, $level)
     {
         $name = "";
+        $uid = uniqid('', false);
         if ($level == "1") {
             $category = new Category1();
-            $category->unique_id = uniqid('', false);
+            $category->unique_id = $uid;
             $category->name = $request->get('name');
             $name = $request->get('name');
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
             if (Input::hasFile('image')) {
                 $image = $request->file('image');
-                $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
+                $input['imagename'] = 'C1.' . $uid . '.' . $image->getClientOriginalExtension();
                 $destinationPath = public_path('images');
                 $image->move($destinationPath, $input['imagename']);
                 $category->image = $input['imagename'];
@@ -101,7 +102,7 @@ class CategoryController extends Controller
         } elseif ($level == "2") {
             $category = new Category2();
             $parent = Category1::where("name", $request->get('parent'))->firstOrFail();
-            $category->unique_id = uniqid('', false);
+            $category->unique_id = $uid;
             $category->name = $request->get('name');
             $name = $request->get('name');
             $category->parent_id = $parent->unique_id;
@@ -109,7 +110,7 @@ class CategoryController extends Controller
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
             if (Input::hasFile('image')) {
                 $image = $request->file('image');
-                $input['imagename'] = 'C2.' . time() . '.' . $image->getClientOriginalExtension();
+                $input['imagename'] = 'C2.' . $uid . '.' . $image->getClientOriginalExtension();
                 $destinationPath = public_path('images');
                 $image->move($destinationPath, $input['imagename']);
                 $category->image = $input['imagename'];
@@ -118,7 +119,7 @@ class CategoryController extends Controller
         } elseif ($level == "3") {
             $category = new Category3();
             $parent = Category2::where("name", $request->get('parent'))->firstOrFail();
-            $category->unique_id = uniqid('', false);
+            $category->unique_id = $uid;
             $category->name = $request->get('name');
             $name = $request->get('name');
             $category->parent_id = $parent->unique_id;
@@ -126,7 +127,7 @@ class CategoryController extends Controller
             $category->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
             if (Input::hasFile('image')) {
                 $image = $request->file('image');
-                $input['imagename'] = 'C3.' . time() . '.' . $image->getClientOriginalExtension();
+                $input['imagename'] = 'C3.' . $uid . '.' . $image->getClientOriginalExtension();
                 $destinationPath = public_path('images');
                 $image->move($destinationPath, $input['imagename']);
                 $category->image = $input['imagename'];
@@ -190,7 +191,7 @@ class CategoryController extends Controller
                     // first delete old one
                     File::delete('images/' . $category->image);
                     $image = $request->file('image');
-                    $input['imagename'] = 'C1.' . time() . '.' . $image->getClientOriginalExtension();
+                    $input['imagename'] = 'C1.' . $category->unique_id . '.' . $image->getClientOriginalExtension();
                     $destinationPath = public_path('images');
                     $image->move($destinationPath, $input['imagename']);
                     $category->image = $input['imagename'];
@@ -207,7 +208,7 @@ class CategoryController extends Controller
                     // first delete old one
                     File::delete('images/' . $category->image);
                     $image = $request->file('image');
-                    $input['imagename'] = 'C2.' . time() . '.' . $image->getClientOriginalExtension();
+                    $input['imagename'] = 'C2.' . $category->unique_id . '.' . $image->getClientOriginalExtension();
                     $destinationPath = public_path('images');
                     $image->move($destinationPath, $input['imagename']);
                     $category->image = $input['imagename'];
@@ -224,7 +225,7 @@ class CategoryController extends Controller
                     // first delete old one
                     File::delete('images/' . $category->image);
                     $image = $request->file('image');
-                    $input['imagename'] = 'C3.' . time() . '.' . $image->getClientOriginalExtension();
+                    $input['imagename'] = 'C3.' . $category->unique_id . '.' . $image->getClientOriginalExtension();
                     $destinationPath = public_path('images');
                     $image->move($destinationPath, $input['imagename']);
                     $category->image = $input['imagename'];
