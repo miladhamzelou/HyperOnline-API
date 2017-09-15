@@ -46,7 +46,7 @@
                                             @endif
                                             <td style="text-align: right; direction: rtl;">{{ (str_replace(',','',$order->price) - str_replace(',','',$order->price_original)) . ' تومان' }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ $order->price . ' تومان' }}</td>
-                                            <td style="text-align: right; direction: rtl;">{{ $order->stuffs }}</td>
+                                            <td style="text-align: right; direction: rtl;">{{ str_replace(','," - ",$order->stuffs) }}</td>
                                             <td style="text-align: right; direction: rtl;">
                                                 <a href="{{ url('/admin/users/' . $order->user_id) }}">
                                                     {{ $order->user_name }}

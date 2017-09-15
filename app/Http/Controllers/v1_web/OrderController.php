@@ -24,7 +24,7 @@ class OrderController
 
         return view('admin.orders')
             ->withTitle("سفارشات")
-            ->withOrders($this->fixPrice($orders));
+            ->withOrders($this->fix($orders));
     }
 
     public function pays()
@@ -42,6 +42,20 @@ class OrderController
         return view('admin.order_details')
             ->withTitle("سفارش")
             ->withOrder($order);
+    }
+
+    protected function fix($items)
+    {
+        foreach ($items as $item) {
+            $stuff = explode(',', $item->stuffs);
+            $stuff_count = explode(',', $item->stuffs_count);
+            $final = "";
+            foreach (array_values($stuff) as $i => $value) {
+                $final .= $value . ' ( ' . $stuff_count[$i] . ' عدد ) - ';
+            }
+            $item->stuffs = substr($final, 0, -3);
+        }
+        return $this->fixPrice($items);
     }
 
     protected function fixPrice($items)
