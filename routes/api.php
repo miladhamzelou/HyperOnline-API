@@ -69,4 +69,5 @@ Route::post('/v1/verifyPhone', 'v1\UserController@phoneVerification');
 Route::post('/v1/verifyPhoneOK', 'v1\UserController@phoneVerificationOK');
 Route::post('/v1/products_detail', 'v1\ProductController@getDetails');
 Route::post('/v1/downloadLink', 'v1\MainController@downloadLink');
+Route::get('/v1/downloadLink', 'v1\MainController@downloadLink');
 Route::post('/v1/getProduct','v1\ProductController@getProduct');
