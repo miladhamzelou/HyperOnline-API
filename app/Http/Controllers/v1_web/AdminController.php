@@ -264,7 +264,11 @@ class AdminController
     public function messages()
     {
         $sms = Sms::get();
-        return $sms;
+        $push = Push::get();
+        return view('admin.messages')
+            ->withTitle("گزارشات پیام ها")
+            ->withSms($sms)
+            ->withPush($push);
     }
 
     public function messages_sms()
@@ -335,7 +339,7 @@ class AdminController
             $message = "پیام شما با موفقیت ارسال شد";
             $push = new Push();
             $push->title = $title;
-            $push->body =$body;
+            $push->body = $body;
             $push->save();
             return redirect('/admin/messages')
                 ->withMessage($message);
