@@ -14,8 +14,8 @@ class ExtendProducts extends Migration
     public function up()
     {
         Schema::table('products', function(Blueprint $table) {
-            $table->integer('sell')->nullable();
-            $table->boolean('special')->nullable();
+            $table->integer('sell')->default(0);
+            $table->boolean('special')->default(false);
         });
     }
 
