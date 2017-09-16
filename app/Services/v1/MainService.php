@@ -53,47 +53,7 @@ class MainService
     public function getMostSell()
     {
         $option = Option::firstOrFail();
-//        if ($option->most_sell) {
-//            $orders = Order::get();
-//            $all_stuffs = array();
-//            foreach ($orders as $order) {
-//                $stuffs = explode(',', $order->stuffs_id);
-//                for ($i = 0; $i < sizeof($stuffs); $i++)
-//                    array_push($all_stuffs, $stuffs[$i]);
-//            }
-//
-//            $count = array_count_values($all_stuffs);
-//            arsort($count);
-//            $keys = array_keys($count);
-//
-//            $final = [];
-//            for ($i = 0; $i < $option->most_sell_count; $i++)
-//                $final[] = $keys[$i];
-//
-//            $most = [];
-//
-//            foreach ($final as $id) {
-//                $data = Product::where("confirmed", 1)->where("unique_id", $id)->get();
-//
-//                foreach ($data as $product) {
-//                    $entry = [
-//                        'unique_id' => $product->unique_id,
-//                        'name' => $product->name,
-//                        'image' => $product->image,
-//                        'point' => $product->point,
-//                        'point_count' => $product->point_count,
-//                        'description' => $product->description,
-//                        'off' => $product->off,
-//                        'count' => $product->count,
-//                        'price' => $product->price,
-//                    ];
-//
-//                    $most[] = $entry;
-//                }
-//            }
-//
-//            return $most;
-//        }
+
         if($option->most_sell){
             $most = Product::where("confirmed",1)
                 ->orderBy("sell","desc")
