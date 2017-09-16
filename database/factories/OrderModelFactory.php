@@ -39,6 +39,9 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) use ($autoI
         $stuffs_count .= ',' . ($item->count - 1);
         $price += $item->price;
         $price_original += $item->price_original;
+
+        $item->sell = $item->sell + 1;
+        $item->save();
     }
     // remove first '-' in string
     $stuffs = ltrim($stuffs, ',');
