@@ -67,9 +67,14 @@ class OrderService
         $order->save();
 
         $ids = explode('-', $order->stuffs_id);
+        $products = Product::whereIn("unique_id", $ids)->get();
+        foreach ($products as $product) {
+            $product->sell = $product->sell + 1;
+            $product->save();
+        }
 
         $data = [
-            "products" => Product::whereIn("unique_id", $ids)->get(),
+            "products" => $products,
             "user_name" => $order->user_name,
             "user_phone" => $order->user_phone,
             "user_address" => User::where("unique_id", $order->user_id)->firstOrFail()->address,
