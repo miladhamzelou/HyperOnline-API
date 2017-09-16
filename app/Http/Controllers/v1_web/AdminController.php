@@ -336,6 +336,7 @@ class AdminController
             $push = new Push();
             $push->title = $title;
             $push->body =$body;
+            $push->save();
             return redirect('/admin/messages')
                 ->withMessage($message);
         } else {
