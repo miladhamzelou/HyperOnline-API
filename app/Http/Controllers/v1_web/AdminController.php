@@ -20,6 +20,7 @@ use App\Option;
 use App\Order;
 use App\Product;
 use App\Seller;
+use App\Sms;
 use App\Support;
 use App\User;
 use GuzzleHttp\Client;
