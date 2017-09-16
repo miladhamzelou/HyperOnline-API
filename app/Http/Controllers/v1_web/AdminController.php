@@ -260,6 +260,11 @@ class AdminController
             ->withMessage($message);
     }
 
+    public function messages(){
+        $sms = Sms::get();
+        return $sms;
+    }
+
     public function messages_sms()
     {
         if (Auth::user()->isAdmin()) {
