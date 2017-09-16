@@ -70,6 +70,7 @@ class OrderService
         $products = Product::whereIn("unique_id", $ids)->get();
         foreach ($products as $product) {
             $product->sell = $product->sell + 1;
+            $product->count = $product->count - 1;
             $product->save();
         }
 
