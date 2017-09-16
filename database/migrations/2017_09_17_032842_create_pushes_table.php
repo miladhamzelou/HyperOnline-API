@@ -15,7 +15,6 @@ class CreatePushesTable extends Migration
     {
         Schema::create('pushes', function (Blueprint $table) {
             $table->increments('id');
-            $table->text("to");
             $table->string("title");
             $table->string("body");
             $table->timestamps();

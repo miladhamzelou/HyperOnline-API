@@ -19,6 +19,7 @@ use App\Category3;
 use App\Option;
 use App\Order;
 use App\Product;
+use App\Push;
 use App\Seller;
 use App\Sms;
 use App\Support;
@@ -126,7 +127,7 @@ class AdminController
             ->options([]);
 
         $users = User::orderBy("created_at", "desc")->take(5)->get();
-        $orders = $this->fix(Order::where("status","!=","abort")->orderBy("created_at", "desc")->take(5)->get());
+        $orders = $this->fix(Order::where("status", "!=", "abort")->orderBy("created_at", "desc")->take(5)->get());
         $products = $this->fixPrice(Product::orderBy("created_at", "desc")->take(5)->get());
 
         //TODO: filter outputs
@@ -260,7 +261,8 @@ class AdminController
             ->withMessage($message);
     }
 
-    public function messages(){
+    public function messages()
+    {
         $sms = Sms::get();
         return $sms;
     }
@@ -307,6 +309,9 @@ class AdminController
 
     public function messages_send_push(Request $request)
     {
+        $title = $request->get('title');
+        $body = $request->get('body');
+
         $client = new Client([
             'headers' => [
                 'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
@@ -320,14 +325,17 @@ class AdminController
                 'body' => json_encode([
                     "applications" => ["ir.hatamiarash.hyperonline"],
                     "notification" => [
-                        "title" => $request->get('title'),
-                        "content" => $request->get('body')
+                        "title" => $title,
+                        "content" => $body
                     ]
                 ])
             ]
         );
         if ($response->getStatusCode() == "201") {
             $message = "پیام شما با موفقیت ارسال شد";
+            $push = new Push();
+            $push->title = $title;
+            $push->body =$body;
             return redirect('/admin/messages')
                 ->withMessage($message);
         } else {
