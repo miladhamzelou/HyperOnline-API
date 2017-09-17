@@ -38,7 +38,7 @@ class CategoryController extends Controller
             else
                 return response()->json([
                     'error' => true,
-                    'error_msg' => "something's wrong"
+                    'error_msg' => "محصولی ثبت نشده است"
                 ], 201);
         } catch (Exception $e) {
             return response()->json([
