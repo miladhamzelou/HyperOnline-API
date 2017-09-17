@@ -67,7 +67,7 @@ class OrderService
         $order->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
 
-        $ids = explode('-', $order->stuffs_id);
+        $ids = explode(',', $order->stuffs_id);
         $products = Product::whereIn("unique_id", $ids)->get();
         $price_original = 0;
         foreach ($products as $product) {
