@@ -52,6 +52,16 @@ class CategoryService
         return $data;
     }
 
+    public function getGroupCategories2($request)
+    {
+        $index = $request['index'];
+        $categories = Category1::orderBy('name', 'asc')
+            ->skip(($index - 1) * 10)
+            ->take(10)
+            ->get();
+        return $categories;
+    }
+
     public function getProducts($request)
     {
         $level = $request['level'] - 1;

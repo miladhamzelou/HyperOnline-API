@@ -104,7 +104,7 @@ class MainService
         $data = [
             'o' => $option->off,
             'n' => $option->new,
-            'm' => $option->most,
+            'm' => $option->most_sell,
             'p' => $option->popular,
             'c' => $option->collection,
             'b' => $option->banner

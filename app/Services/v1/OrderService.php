@@ -58,21 +58,26 @@ class OrderService
         $order->user_phone = $user->phone;
         $order->stuffs = $request->get('stuffs');
         $order->stuffs_id = $request->get('stuffs_id');
+        $order->stuffs_count = $request->get('stuffs_count');
         $order->price = $request->get('price');
+        $order->price_send = 2500;
         $order->hour = $request->get('hour');
         $order->pay_method = $request->get('method');
         $order->description = $request->get('description');
         $order->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-        $order->save();
 
         $ids = explode('-', $order->stuffs_id);
         $products = Product::whereIn("unique_id", $ids)->get();
+        $price_original = 0;
         foreach ($products as $product) {
             $product->sell = $product->sell + 1;
             $product->count = $product->count - 1;
+            $price_original += $product->price;
             $product->save();
         }
+        $order->price_original = $price_original;
+        $order->save();
 
         $data = [
             "products" => $products,

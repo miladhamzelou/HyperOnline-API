@@ -62,6 +62,7 @@ Route::resource('/v1/orders', v1\OrderController::class, [
     ]
 ]);
 
+Route::post('/v1/categories', 'v1\CategoryController@getCategories');
 Route::post('/v1/categories_all', 'v1\CategoryController@sectionLoad');
 Route::post('/callback', 'v1\OrderController@callback');
 Route::post('/v1/search', 'v1\MainController@search');

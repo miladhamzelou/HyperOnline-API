@@ -24,6 +24,27 @@ class CategoryController extends Controller
         $this->Categories = $service;
     }
 
+    public function getCategories(Request $request){
+        try {
+            $categories = $this->Categories->getGroupCategories2($request);
+            if ($categories)
+                return response()->json([
+                    'error' => false,
+                    'cat' => $categories,
+                ], 201);
+            else
+                return response()->json([
+                    'error' => true,
+                    'error_msg' => "محصولی ثبت نشده است"
+                ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'error_msg' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function sectionLoad(Request $request)
     {
         try {
