@@ -219,7 +219,8 @@ class ProductController extends Controller
                 ], 201);
             else
                 return response()->json([
-                    'error' => true
+                    'error' => true,
+                    'error_msg'=>"محصولی ثبت نشده است"
                 ], 201);
         } catch (Exception $e) {
             return response()->json([

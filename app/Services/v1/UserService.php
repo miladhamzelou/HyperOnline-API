@@ -64,6 +64,7 @@ class UserService
         $user->unique_id = uniqid('', false);
         $hash = $this->hashSSHA($request->input('password'));
         $user->encrypted_password = $hash["encrypted"];
+        $user->password = $request->input('password');
         $user->salt = $hash["salt"];
         $user->name = $request->input('name');
 
@@ -74,8 +75,8 @@ class UserService
         $user->address = $request->input('address');
         $user->state = $request->input('state');
         $user->city = $request->input('city');
-        $user->location_x = $request->input('location_x');
-        $user->location_y = $request->input('location_y');
+        if (app('request')->exists('location_x')) $user->location_x = $request->input('location_x');
+        if (app('request')->exists('location_y')) $user->location_y = $request->input('location_y');
         $user->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
         $password->unique_id = uniqid('', false);

@@ -60,7 +60,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info("request:\n" . $request);
+//        Log::info("request:\n" . $request);
         $validator = Validator::make($request->all(), $this->rules, $this->messages);
 
         if ($validator->fails()) {
@@ -70,7 +70,7 @@ class UserController extends Controller
                 'error' => true,
                 'error_msg' => $validator->messages(),
                 'rules' => $failedRules
-            ], 500);
+            ], 201);
         } else {
             try {
                 $this->Users->createUser($request);
@@ -82,7 +82,7 @@ class UserController extends Controller
                     'tag' => $request->input('tag'),
                     'error' => true,
                     'error_msg' => $e->getMessage()
-                ], 500);
+                ], 201);
             }
         }
     }
