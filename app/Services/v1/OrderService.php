@@ -58,9 +58,9 @@ class OrderService
         $order->user_phone = $user->phone;
         $order->stuffs = $request->get('stuffs');
         $order->stuffs_id = $request->get('stuffs_id');
-        $order->stuffs_count = $request->get('stuffs_count');
-        $order->price = $request->get('price');
-        $order->price_send = 2500;
+        $order->stuffs_count = ltrim($request->get('stuffs_count'), ',');
+        //$order->price = $request->get('price');
+        $order->price_send = 5000;
         $order->hour = $request->get('hour');
         $order->pay_method = $request->get('method');
         $order->description = $request->get('description');
@@ -68,19 +68,31 @@ class OrderService
 
 
         $ids = explode(',', $order->stuffs_id);
-        $products = Product::whereIn("unique_id", $ids)->get();
+        $products = array();
+        array_pop($ids);
+        foreach ($ids as $id) {
+            $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
+            array_push($products, $p);
+        }
         $price_original = 0;
-        foreach ($products as $product) {
+        $tPrice = 0;
+        $counts = explode(',', $order->stuffs_count);
+        foreach ($products as $index => $pr) {
+            $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
             $product->sell = $product->sell + 1;
             $product->count = $product->count - 1;
-            $price_original += $product->price;
+            $price_original += $product->price_original * $counts[$index];
+            $tPrice += $product->price * $counts[$index];
             $product->save();
         }
+        if ($tPrice < 35000) $tPrice += 5000;
+        $order->price = $tPrice;
         $order->price_original = $price_original;
         $order->save();
 
         $data = [
             "products" => $products,
+            "counts" => $counts,
             "user_name" => $order->user_name,
             "user_phone" => $order->user_phone,
             "user_address" => User::where("unique_id", $order->user_id)->firstOrFail()->address,
