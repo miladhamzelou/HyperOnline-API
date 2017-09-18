@@ -107,7 +107,7 @@
                                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                         <label for="description" class="pull-right" style="direction: rtl;">توضیحات
                                             :</label>
-                                        <input id="description" type="text" style="text-align: center"
+                                        <input id="description" type="text" style="text-align: center; direction: rtl"
                                                tabindex="2"
                                                class="my_font form-control"
                                                name="description" value="{{ $product->description }}">

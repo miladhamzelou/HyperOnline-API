@@ -213,7 +213,7 @@
                                                     تعداد : {{ $product->count }}</span>
                                             </a>
                                             @if($product->description!="null")
-                                                <span class="product-description">
+                                                <span class="product-description" style="direction: rtl">
                                             {{ $product->description }}
                                         </span>
                                             @endif
