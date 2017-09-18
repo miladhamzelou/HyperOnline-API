@@ -9,6 +9,7 @@ use App\Category1;
 use App\Category2;
 use App\Category3;
 use App\Product;
+use Illuminate\Support\Facades\Log;
 
 class CategoryService
 {
@@ -84,7 +85,8 @@ class CategoryService
                     ->orderBy("created_at", "desc")
                     ->get();
 
-                $data = $this->filterProduct($products);
+                foreach ($products as $product)
+                    $data[]=$product;
             }
         } else if ($level == 1) {
             $temp = [];
@@ -96,14 +98,14 @@ class CategoryService
                 }
             }
 
-
             foreach ($temp as $cat) {
                 $products = Product::where("category_id", $cat)
                     ->where("confirmed", 1)
                     ->orderBy("created_at", "desc")
                     ->get();
 
-                $data = $this->filterProduct($products);
+                foreach ($products as $product)
+                    $data[] = $product;
             }
         }
         return $data;

@@ -50,6 +50,7 @@ class CategoryController extends Controller
         try {
             $categories = $this->Categories->getGroupCategories($request);
             $products = $this->Categories->getProducts($request);
+
             if ($categories && $products)
                 return response()->json([
                     'error' => false,
