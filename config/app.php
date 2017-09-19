@@ -191,7 +191,7 @@ return [
         phplusir\smsir\SmsirServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class
     ],
 
     /*
@@ -241,6 +241,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Smsir' => phplusir\smsir\SmsirFacade::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
-        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
     ],
 ];

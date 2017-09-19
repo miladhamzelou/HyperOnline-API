@@ -9,8 +9,8 @@
   "type": "project",
   "require": {
     "php": ">=5.6.4",
+    "darryldecode/cart": "~3.0",
     "fx3costa/laravelchartjs": "^2.3",
-    "gloudemans/shoppingcart": "^2.4",
     "guzzlehttp/guzzle": "^6.3",
     "laravel/framework": "5.4.*",
     "laravel/tinker": "~1.0",

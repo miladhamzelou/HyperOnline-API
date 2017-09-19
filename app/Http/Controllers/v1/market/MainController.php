@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\v1\market;
 
-use App\Category1;
-use App\Category2;
-use App\Category3;
 use App\Http\Controllers\Controller;
-use App\Product;
 use App\Services\v1\market\MainService;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
@@ -31,12 +27,16 @@ class MainController extends Controller
 //            ['id' => '2', 'name' => 'محصول دوم', 'qty' => 3, 'price' => 5500]
 //        ]);
 
+        \Cart::add(455, 'Sample Item', 100.99, 2, array());
+
+        $cartCollection = \Cart::getContent();
+        Log::info($cartCollection);
         $cart = [
-            'items' => Cart::content(),
-            'count' => Cart::count(),
-            'total' => Cart::total(0),
-            'tax' => Cart::tax(0),
-            'subtotal' => Cart::subtotal(0)
+            'items' => $cartCollection,
+            'count' => $cartCollection->count(),
+            'total' => \Cart::getTotal(),
+            'tax' => 0,
+            'subtotal' => \Cart::getSubTotal()
         ];
 
         if (Auth::check())
