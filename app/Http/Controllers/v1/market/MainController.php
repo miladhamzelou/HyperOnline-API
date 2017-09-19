@@ -25,11 +25,11 @@ class MainController extends Controller
         $new = $this->mService->getNew();
         $cat = $this->mService->getCategories();
 
-        Cart::destroy();
-        Cart::add([
-            ['id' => '1', 'name' => 'محصول اول', 'qty' => 2, 'price' => 10000],
-            ['id' => '2', 'name' => 'محصول دوم', 'qty' => 3, 'price' => 5500]
-        ]);
+//        Cart::destroy();
+//        Cart::add([
+//            ['id' => '1', 'name' => 'محصول اول', 'qty' => 2, 'price' => 10000],
+//            ['id' => '2', 'name' => 'محصول دوم', 'qty' => 3, 'price' => 5500]
+//        ]);
 
         $cart = [
             'items' => Cart::content(),

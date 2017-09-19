@@ -33,29 +33,38 @@ $(document).ready(function (e) {
 
 function addCart($id) {
     var http = new XMLHttpRequest();
-    var url = "/api/v1/getProduct";
-    var params = "id=" + $id;
-    http.open("POST", url, true);
-    // http.setRequestHeader("Content-Type", "application/json");
-    http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var url = "/api/v1/getProductByID/" + $id;
+    http.open("GET", url, true);
 
     http.onreadystatechange = function () {
         if (http.readyState === 4 && http.status === 200) {
-            alert(http.response);
-        } else
-            alert(http.status + ' ' + http.response)
-    };
-    http.send(params);
+            var product = JSON.parse(http.responseText);
 
-    swal({
-        title: 'تعداد را تعیین کنید',
-        type: 'question',
-        input: 'range',
-        inputAttributes: {
-            min: 8,
-            max: 120,
-            step: 1
-        },
-        inputValue: 25
-    })
+            swal({
+                title: product.name + '\n' + 'تعداد را تعیین کنید',
+                input: 'range',
+                confirmButtonText: 'ثبت',
+                inputAttributes: {
+                    min: 1,
+                    max: product.count,
+                    step: 1
+                },
+                inputValue: 1
+            }).then(function (c) {
+                var http2 = new XMLHttpRequest();
+                var p = "id=" + product.unique_id + "&count=" + c;
+                url = "/api/v1/addToCart?" + p;
+                http2.open("GET", url, true);
+                http2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                http2.send(null);
+                http2.onreadystatechange = function () {
+                    if (http2.readyState === 4 && http2.status === 200) {
+                        window.location.href="http://localhost/home";
+                    }
+                }
+            })
+        }
+    };
+    http.send(null);
+
 }

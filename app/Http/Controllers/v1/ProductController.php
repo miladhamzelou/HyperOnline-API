@@ -9,8 +9,11 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Services\v1\ProductService;
 use Exception;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -220,7 +223,7 @@ class ProductController extends Controller
             else
                 return response()->json([
                     'error' => true,
-                    'error_msg'=>"محصولی ثبت نشده است"
+                    'error_msg' => "محصولی ثبت نشده است"
                 ], 201);
         } catch (Exception $e) {
             return response()->json([
@@ -249,10 +252,25 @@ class ProductController extends Controller
         return $data;
     }
 
-    public function getProduct(Request $request)
+    public function getProduct($id)
     {
-        $id = $request->get("id");
         $data = Product::where("unique_id", $id)->firstOrFail();
         return response()->json($data);
+    }
+
+    public function addToCart(Request $request)
+    {
+        $id = $request->get('id');
+        $count = $request->get('count');
+
+        $product = Product::where("unique_id", $id)->firstOrFail();
+
+        Cart::add([[
+            'id' => $product->unique_id,
+            'name' => $product->name,
+            'qty' => $count,
+            'price' => $product->price - ($product->price * $product->off / 100)
+        ]]);
+        return $product;
     }
 }

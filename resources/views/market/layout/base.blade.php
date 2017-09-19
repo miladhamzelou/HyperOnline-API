@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/stylesheet-rtl.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive-rtl.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css')}}"/>
+    <link rel="stylesheet" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.css') }}">
     <!-- CSS Part End-->
 </head>
 <body>
@@ -303,6 +304,7 @@
 <script type="text/javascript" src="{{ asset('market/js/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('market/js/custom.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/mine.js')}}"></script>
+<script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <!-- JS Part End-->
 </body>
 </html>
