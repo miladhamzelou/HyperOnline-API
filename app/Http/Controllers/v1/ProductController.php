@@ -12,8 +12,6 @@ use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -265,12 +263,12 @@ class ProductController extends Controller
 
         $product = Product::where("unique_id", $id)->firstOrFail();
 
-        Cart::add([[
-            'id' => $product->unique_id,
-            'name' => $product->name,
-            'qty' => $count,
-            'price' => $product->price - ($product->price * $product->off / 100)
-        ]]);
+        Cart::add(
+            $product->unique_id,
+            $product->name,
+            $count,
+            $product->price - ($product->price * $product->off / 100)
+        );
         return $product;
     }
 }
