@@ -59,7 +59,7 @@ function addCart($id) {
                 http2.send(null);
                 http2.onreadystatechange = function () {
                     if (http2.readyState === 4 && http2.status === 200) {
-                        window.location.href = "http://localhost/home";
+                        window.location.href = "http://hyper-online.ir/home";
                     }
                 }
             })
@@ -87,7 +87,7 @@ function removeCart($id) {
         http.send(null);
         http.onreadystatechange = function () {
             if (http.readyState === 4 && http.status === 200) {
-                window.location.href = "http://localhost/home";
+                window.location.href = "http://hyper-online.ir/home";
             }
         }
     })
