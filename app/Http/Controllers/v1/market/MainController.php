@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\v1\market;
 
 use App\Http\Controllers\Controller;
+use App\Pay;
 use App\Services\v1\market\MainService;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
@@ -54,80 +55,81 @@ class MainController extends Controller
             ->withAdmin($isAdmin);
     }
 
-    /*function MakeTree($arr)
+    public function checkout()
     {
-        $parents_arr = array();
-        foreach ($arr as $key => $value) {
-            $parents_arr[$value['parent_id']][$value['unique_id']] = $value;
-        }
-        $tree = $parents_arr['0'];
-        $this->createTree($tree, $parents_arr);
-        return $tree;
+        $cat = $this->mService->getCategories();
+
+        $cart = [
+            'items' => Cart::content(),
+            'count' => Cart::content()->count(),
+            'total' => Cart::total(),
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal()
+        ];
+        return view('market.checkout')
+            ->withCategories($cat)
+            ->withCart($cart);
     }
 
-    function createTree(&$tree, $parents_arr)
+    public function pay()
     {
-        foreach ($tree as $key => $value) {
-            if (!isset($value['child'])) {
-                $tree[$key]['child'] = array();
-            }
-            if (array_key_exists($key, $parents_arr)) {
-                $tree[$key]['child'] = $parents_arr[$key];
-                $this->createTree($tree[$key]['child'], $parents_arr);
-            }
-        }
+        $client = new Client();
+        $res = $client->request(
+            'POST',
+            'https://pay.ir/payment/send',
+            [
+                'json' => [
+                    'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
+                    'amount' => '1000',
+                    'redirect' => "http://hyper-online.ir/callback",
+                    'factorNumber' => '1'
+                ]
+            ]);
+        $transId = json_decode($res->getBody(), true)['transId'];
+        return redirect('https://pay.ir/payment/gateway/' . $transId);
     }
 
-    public function buildNested()
+    public function callback(Request $request)
     {
-        $cat1 = Category1::get();
-        foreach ($cat1 as $item) {
-            $root = Category::create(['name' => $item->name]);
-            $cat2 = Category2::where("parent_id", $item->unique_id)->get();
-            foreach ($cat2 as $cat2_item) {
-                $child = $root->children()->create(['name' => $cat2_item->name]);
+        $pay = new Pay();
+        if (app('request')->exists('status')) $pay->status = $request->input('status');
+        if (app('request')->exists('transId')) $pay->transId = $request->input('transId');
+        if (app('request')->exists('factorNumber')) $pay->factorNumber = $request->input('factorNumber');
+        if (app('request')->exists('cardNumber')) $pay->cardNumber = $request->input('cardNumber');
+        if (app('request')->exists('message')) $pay->message = $request->input('message');
+        $pay->save();
 
-                $cat3 = Category3::where("parent_id", $cat2_item->unique_id)->get();
-                foreach ($cat3 as $cat3_item) {
-                    $child2 = $child->children()->create(['name' => $cat3_item->name]);
-                    $child2->save();
-                }
-                $child->save();
-            }
-        }
+        $cat = $this->mService->getCategories();
 
+        $client = new Client();
+        $res = $client->request(
+            'POST',
+            'https://pay.ir/payment/verify',
+            [
+                'json' => [
+                    'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
+                    'transId' => $pay->transId
+                ]
+            ]);
+        $status = json_decode($res->getBody(), true)['status'];
 
-        $root->save();
+        if ($status == 1) {
+            Cart::destroy();
+            $result = "پرداخت انجام شد";
+        } else
+            $result = "مشکلی رخ داده است";
+
+        $cart = [
+            'items' => Cart::content(),
+            'count' => Cart::content()->count(),
+            'total' => Cart::total(),
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal()
+        ];
+
+        return view('market.report')
+            ->withCategories($cat)
+            ->withCart($cart)
+            ->withResult($result);
     }
-
-    function buildTree(array $items)
-    {
-        $tree = [];
-
-        foreach ($items as $item) {
-            $pid = $item['parent_id'];
-            $id = $item['unique_id'];
-            $name = $item['name'];
-
-            // Create or add child information to the parent node
-            if (isset($tree[$pid]))
-                // a node for the parent exists
-                // add another child id to this parent
-                $tree[$pid]["child"][] = $id;
-            else
-                // create the first child to this parent
-                $tree[$pid] = array("child" => array($id));
-
-            // Create or add name information for current node
-            if (isset($tree[$id]))
-                // a node for the id exists:
-                // set the name of current node
-                $tree[$id]["name"] = $name;
-            else
-                // create the current node and give it a name
-                $tree[$id] = array("name" => $name);
-        }
-
-        return $tree;
-    }*/
 }

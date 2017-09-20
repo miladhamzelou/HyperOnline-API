@@ -88,7 +88,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::post('/search', 'v1_web\AdminController@search');
 Route::get('/search', 'v1_web\AdminController@search');
 
-Route::get('category/{level}/{id}','v1\market\CategoryController@index');
-
+Route::get('category/{level}/{id}', 'v1\market\CategoryController@index');
 Route::get('/addToCart', 'v1\ProductController@addToCart');
 Route::get('/removeFromCart', 'v1\ProductController@removeFromCart');
+Route::get('/checkout', 'v1\market\MainController@checkout')->name('checkout');
+Route::get('/pay', 'v1\market\MainController@pay')->name('pay');
+Route::post('/callback', 'v1\market\MainController@callback');

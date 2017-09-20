@@ -63,8 +63,8 @@
                     <!-- Logo Start -->
                     <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12 inner">
                         <div id="logo"><a href="{{ url('home') }}"><img class="img-responsive"
-                                                                    src="{{ asset('market/image/logo.png')}}"
-                                                                    title="MarketShop" alt="MarketShop"/></a></div>
+                                                                        src="{{ asset('market/image/logo.png')}}"
+                                                                        title="MarketShop" alt="MarketShop"/></a></div>
                     </div>
                     <!-- Logo End -->
                     <!-- Mini Cart Start-->
@@ -85,9 +85,12 @@
                                                 <td class="text-center">
                                                     <a href="product.html">
                                                         @if($item->options['image'])
-                                                            <img class="img-thumbnail" src="{{ asset('images').'/' . $item->options['image'] }}" >
+                                                            <img class="img-thumbnail"
+                                                                 src="{{ asset('images').'/' . $item->options['image'] }}" width="50" height="50">
                                                         @else
-                                                            <img class="img-thumbnail" src="{{ asset('market/image/no_image.jpg')}}" width="50" height="50">
+                                                            <img class="img-thumbnail"
+                                                                 src="{{ asset('market/image/no_image.jpg')}}"
+                                                                 width="50" height="50">
                                                         @endif
                                                     </a>
                                                 </td>
@@ -97,7 +100,8 @@
                                                 <td class="text-center">
                                                     <a href="javascript:void(0);"
                                                        onClick="removeCart(document.getElementById('{{ $item->rowId }}').value)">
-                                                        <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
+                                                        <button class="btn btn-danger btn-xs remove" title="حذف"
+                                                                onClick=""
                                                                 type="button"><i class="fa fa-times"></i></button>
                                                     </a>
                                                 </td>
@@ -115,7 +119,7 @@
                                                 <td class="text-right">{{ $cart['subtotal'] . ' تومان' }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-right"><strong>مالیات</strong></td>
+                                                <td class="text-right"><strong>مالیات / هزینه ارسال</strong></td>
                                                 <td class="text-right">{{ $cart['tax'] . ' تومان' }}</td>
                                             </tr>
                                             <tr>
@@ -198,22 +202,13 @@
                 </div>
             </nav>
         </div>
-        <!-- Main آقایانu End-->
     </div>
     <div id="container">
-        <!-- Feature Box Start-->
-            @yield('feature-box')
-        <!-- Feature Box End-->
+        @yield('feature-box')
         <div class="container">
             <div class="row">
-                <!-- Left Part Start-->
-            @yield('right-panel')
-            <!-- Left Part End-->
-                <!--Middle Part Start-->
-
-                    @yield('content')
-
-                <!--Middle Part End-->
+                @yield('right-panel')
+                @yield('content')
             </div>
         </div>
     </div>
