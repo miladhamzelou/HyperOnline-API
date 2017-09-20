@@ -80,19 +80,26 @@
                                     <table class="table">
                                         <tbody>
                                         @foreach($cart['items'] as $item)
+                                            <input type="hidden" id="uid" value="{{ $item->id }}">
                                             <tr>
-                                                <td class="text-center"><a href="product.html"><img
-                                                                class="img-thumbnail"
-                                                                title="کفش راحتی مردانه"
-                                                                alt="کفش راحتی مردانه"
-                                                                src="{{ asset('market/image/product/sony_vaio_1-50x50.jpg')}}"></a>
+                                                <td class="text-center">
+                                                    <a href="product.html">
+                                                        @if($item->options['image'])
+                                                            <img class="img-thumbnail" src="{{ asset('images').'/' . $item->options['image'] }}" >
+                                                        @else
+                                                            <img class="img-thumbnail" src="{{ asset('market/image/no_image.jpg')}}" width="50" height="50">
+                                                        @endif
+                                                    </a>
                                                 </td>
                                                 <td class="text-left"><a href="product.html">{{ $item->name }}</a></td>
                                                 <td class="text-right">{{ 'x ' . $item->qty }}</td>
                                                 <td class="text-right">{{ $item->subtotal . ' تومان' }}</td>
                                                 <td class="text-center">
-                                                    <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
-                                                            type="button"><i class="fa fa-times"></i></button>
+                                                    <a href="javascript:void(0);"
+                                                       onClick="removeCart(document.getElementById('uid').value)">
+                                                        <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
+                                                                type="button"><i class="fa fa-times"></i></button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

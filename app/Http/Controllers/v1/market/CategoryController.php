@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1\market;
 
 use App\Http\Controllers\Controller;
 use App\Services\v1\market\MainService;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
@@ -20,19 +21,12 @@ class CategoryController extends Controller
         $new = $this->mService->getNew();
         $cat = $this->mService->getCategories();
 
-        //Cart::destroy();
-//        Cart::add([
-//            ['id' => '1', 'name' => 'محصول اول', 'qty' => 2, 'price' => 10000],
-//            ['id' => '2', 'name' => 'محصول دوم', 'qty' => 3, 'price' => 5500]
-//        ]);
-
-        $cartCollection = \Cart::getContent();
         $cart = [
-            'items' => $cartCollection,
-            'count' => $cartCollection->count(),
-            'total' => \Cart::getTotal(),
-            'tax' => 0,
-            'subtotal' => \Cart::getSubTotal()
+            'items' => Cart::content(),
+            'count' => Cart::count(),
+            'total' => Cart::total(),
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal()
         ];
 
         if (Auth::check())

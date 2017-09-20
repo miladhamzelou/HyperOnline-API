@@ -53,7 +53,7 @@ function addCart($id) {
             }).then(function (c) {
                 var http2 = new XMLHttpRequest();
                 var p = "id=" + product.unique_id + "&count=" + c;
-                url = "/api/v1/addToCart?" + p;
+                url = "/addToCart?" + p;
                 http2.open("GET", url, true);
                 http2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 http2.send(null);

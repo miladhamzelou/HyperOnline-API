@@ -9,9 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Services\v1\ProductService;
 use Exception;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -263,12 +263,15 @@ class ProductController extends Controller
 
         $product = Product::where("unique_id", $id)->firstOrFail();
 
-        \Cart::add(456, 'Sample Item2', 100.99, 2, array());
-//        Cart::add([
-//            ['id' => '3', 'name' => 'محصول سوم', 'qty' => 2, 'price' => 10000],
-//            ['id' => '4', 'name' => 'محصول چهارم', 'qty' => 3, 'price' => 5500]
-//        ]);
-        Log::info(\Cart::getContent());
+        Cart::add(
+            $product->unique_id,
+            $product->name,
+            $count,
+            $product->price - ($product->price * $product->off / 100),
+            [
+                'image'=>$product->image
+            ]
+        );
 
         return $product;
     }
