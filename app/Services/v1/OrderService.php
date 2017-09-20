@@ -80,7 +80,7 @@ class OrderService
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
             $product->sell = $product->sell + 1;
-            $product->count = $product->count - 1;
+//            $product->count = $product->count - 1;
             $price_original += $product->price_original * $counts[$index];
             $tPrice += $product->price * $counts[$index];
             $product->save();
