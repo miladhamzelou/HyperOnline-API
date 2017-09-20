@@ -7,6 +7,7 @@ use App\Pay;
 use App\Services\v1\market\MainService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
