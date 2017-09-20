@@ -92,7 +92,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-left"><a href="product.html">{{ $item->name }}</a></td>
-                                                <td class="text-right">{{ 'x ' . $item->qty }}</td>
+                                                <td class="text-right">{{ $item->qty . ' عدد' }}</td>
                                                 <td class="text-right">{{ $item->subtotal . ' تومان' }}</td>
                                                 <td class="text-center">
                                                     <a href="javascript:void(0);"

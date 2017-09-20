@@ -24,7 +24,7 @@ class MainController extends Controller
 
         $cart = [
             'items' => Cart::content(),
-            'count' => Cart::count(),
+            'count' => Cart::content()->count(),
             'total' => Cart::total(),
             'tax' => Cart::tax(),
             'subtotal' => Cart::subtotal()
