@@ -269,10 +269,17 @@ class ProductController extends Controller
             $count,
             $product->price - ($product->price * $product->off / 100),
             [
-                'image'=>$product->image
+                'image' => $product->image
             ]
         );
 
         return $product;
+    }
+
+    public function removeFromCart(Request $request)
+    {
+        $id = $request->get('id');
+        Cart::remove($id);
+        return ['o' => 'k'];
     }
 }

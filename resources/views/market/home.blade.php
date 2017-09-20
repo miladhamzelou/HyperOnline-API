@@ -149,6 +149,7 @@
             <div class="owl-carousel product_carousel">
                 @foreach($off as $product)
                     <div class="product-thumb clearfix">
+                        <input type="hidden" id="{{ $product['unique_id'] }}" value="{{ $product['unique_id'] }}">
                         <div class="image">
                             <a href="">
                                 @if($product['image'])
@@ -168,8 +169,12 @@
                             </p>
                         </div>
                         <div class="button-group">
-                            <button class="btn-primary" type="button" onClick="cart.add('42');">
-                                <span>افزودن به سبد</span></button>
+                            <a href="javascript:void(0);"
+                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value)">
+                                <button class="btn-primary" type="button">
+                                    <span>افزودن به سبد</span>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 @endforeach
@@ -211,6 +216,7 @@
                             @foreach($rand3['products'] as $product)
                                 {{--@if($product['category_id'] == $cat['unique_id'])--}}
                                 <div class="product-thumb">
+                                    <input type="hidden" id="{{ $product['unique_id'] }}" value="{{ $product['unique_id'] }}">
                                     <div class="image">
                                         <a href="">
                                             @if($product['image'])
@@ -240,9 +246,12 @@
                                             @endif
                                         </div>
                                         <div class="button-group">
-                                            <button class="btn-primary" type="button" onClick="">
-                                                <span>افزودن به سبد</span>
-                                            </button>
+                                            <a href="javascript:void(0);"
+                                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value)">
+                                                <button class="btn-primary" type="button">
+                                                    <span>افزودن به سبد</span>
+                                                </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -274,6 +283,7 @@
         <div class="owl-carousel latest_category_carousel">
             @foreach($rand1['products'] as $product)
                 <div class="product-thumb">
+                    <input type="hidden" id="{{ $product['unique_id'] }}" value="{{ $product['unique_id'] }}">
                     <div class="image">
                         <a href="">
                             @if($product['image'])
@@ -303,8 +313,12 @@
                             @endif
                         </div>
                         <div class="button-group">
-                            <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span>
-                            </button>
+                            <a href="javascript:void(0);"
+                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value)">
+                                <button class="btn-primary" type="button">
+                                    <span>افزودن به سبد</span>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -317,6 +331,7 @@
         <div class="owl-carousel latest_category_carousel">
             @foreach($rand2['products'] as $product)
                 <div class="product-thumb">
+                    <input type="hidden" id="{{ $product['unique_id'] }}" value="{{ $product['unique_id'] }}">
                     <div class="image">
                         <a href="">
                             @if($product['image'])
@@ -345,8 +360,12 @@
                             @endif
                         </div>
                         <div class="button-group">
-                            <button class="btn-primary" type="button" onClick=""><span>افزودن به سبد</span>
-                            </button>
+                            <a href="javascript:void(0);"
+                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value)">
+                                <button class="btn-primary" type="button">
+                                    <span>افزودن به سبد</span>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

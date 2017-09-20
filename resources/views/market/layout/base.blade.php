@@ -80,7 +80,7 @@
                                     <table class="table">
                                         <tbody>
                                         @foreach($cart['items'] as $item)
-                                            <input type="hidden" id="uid" value="{{ $item->id }}">
+                                            <input type="hidden" id="{{ $item->rowId }}" value="{{ $item->rowId }}">
                                             <tr>
                                                 <td class="text-center">
                                                     <a href="product.html">
@@ -96,7 +96,7 @@
                                                 <td class="text-right">{{ $item->subtotal . ' تومان' }}</td>
                                                 <td class="text-center">
                                                     <a href="javascript:void(0);"
-                                                       onClick="removeCart(document.getElementById('uid').value)">
+                                                       onClick="removeCart(document.getElementById('{{ $item->rowId }}').value)">
                                                         <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
                                                                 type="button"><i class="fa fa-times"></i></button>
                                                     </a>

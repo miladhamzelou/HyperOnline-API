@@ -59,12 +59,36 @@ function addCart($id) {
                 http2.send(null);
                 http2.onreadystatechange = function () {
                     if (http2.readyState === 4 && http2.status === 200) {
-                        window.location.href="http://localhost/home";
+                        window.location.href = "http://localhost/home";
                     }
                 }
             })
         }
     };
     http.send(null);
+}
 
+function removeCart($id) {
+    swal({
+        title: 'آیا مطمپن هستید ؟',
+        text: "محصول از سبد خرید حذف خواهد شد",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'حذف',
+        cancelButtonText: 'لغو'
+    }).then(function () {
+        var http = new XMLHttpRequest();
+        var p = "id=" + $id;
+        url = "/removeFromCart?" + p;
+        http.open("GET", url, true);
+        http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        http.send(null);
+        http.onreadystatechange = function () {
+            if (http.readyState === 4 && http.status === 200) {
+                window.location.href = "http://localhost/home";
+            }
+        }
+    })
 }
