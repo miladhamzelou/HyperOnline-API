@@ -80,6 +80,7 @@ class OrderService
         }
         $price_original = 0;
         $tPrice = 0;
+        Log::info($order->stuffs_count);
         $counts = explode(',', $order->stuffs_count);
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
