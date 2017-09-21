@@ -72,8 +72,9 @@
                         <div id="cart">
                             <button type="button" data-toggle="dropdown" data-loading-text="Loading..."
                                     class="heading dropdown-toggle">
-                                <span class="cart-icon pull-left flip"></span>
-                                <span id="cart-total">{{ $cart['count'].' کالا - '.$cart['total'].' تومان' }}</span>
+                                <a href="{{ url('checkout') }}" class="btn btn-primary" style="background-color: #00A000">تکمیل خرید&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span id="cart-total">{{ $cart['count'].' کالا - '.$cart['total'].' تومان' }}</span>
+                                </a>
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
@@ -86,7 +87,8 @@
                                                     <a href="product.html">
                                                         @if($item->options['image'])
                                                             <img class="img-thumbnail"
-                                                                 src="{{ asset('images').'/' . $item->options['image'] }}" width="50" height="50">
+                                                                 src="{{ asset('images').'/' . $item->options['image'] }}"
+                                                                 width="50" height="50">
                                                         @else
                                                             <img class="img-thumbnail"
                                                                  src="{{ asset('market/image/no_image.jpg')}}"
