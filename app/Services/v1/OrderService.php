@@ -60,7 +60,6 @@ class OrderService
         $order->stuffs = ltrim(rtrim($request->get('stuffs'), ','), ',');
         $order->stuffs_id = ltrim(rtrim($request->get('stuffs_id'), ','), ',');
         $order->stuffs_count = ltrim(rtrim($request->get('stuffs_count'), ','), ',');
-        //$order->price = $request->get('price');
         $order->price_send = 5000;
         $order->hour = $request->get('hour');
         $order->pay_method = $request->get('method');
@@ -69,7 +68,6 @@ class OrderService
 
 
         $ids = explode(',', $order->stuffs_id);
-        Log::info($ids);
         $products = array();
         foreach ($ids as $id) {
                 $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
@@ -77,9 +75,7 @@ class OrderService
         }
         $price_original = 0;
         $tPrice = 0;
-        Log::info($order->stuffs_count);
         $counts = explode(',', $order->stuffs_count);
-        Log::info($counts);
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
             $product->sell = $product->sell + 1;
@@ -105,7 +101,6 @@ class OrderService
         ];
         $pdf = PDF::loadView('pdf.factor', $data);
         $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
-        Log::info("order ok");
 
         return true;
     }
