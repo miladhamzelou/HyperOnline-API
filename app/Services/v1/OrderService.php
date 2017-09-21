@@ -69,6 +69,7 @@ class OrderService
 
 
         $ids = explode(',', $order->stuffs_id);
+        Log::info($ids);
         $products = array();
         array_pop($ids);
         foreach ($ids as $id) {
