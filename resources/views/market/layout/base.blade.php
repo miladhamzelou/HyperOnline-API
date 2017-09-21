@@ -32,10 +32,9 @@
                     <div class="pull-left flip left-top">
                         <div class="links">
                             <ul>
-                                <li class="mobile"><i class="fa fa-phone"></i>081-32221002</li>
-                                <li class="email"><a href="mailto:hyperonlineir@gmail.com"><i
+                                <li class="mobile" style="font-size: 20px">081-32221002</li>
+                                <li class="email" style="font-size: 20px"><a href="mailto:hyperonlineir@gmail.com"><i
                                                 class="fa fa-envelope"></i>hyperonlineir@gmail.com</a></li>
-                                <li><a href="{{ url('checkout') }}">تسویه حساب</a></li>
                             </ul>
                         </div>
                     </div>
@@ -43,12 +42,12 @@
                         <ul>
                             @if(Auth::check())
                                 @if($admin)
-                                    <li><a href="{{ url('admin') }}" target="_blank">پنل ادمین</a></li>
+                                    <li><a href="{{ url('admin') }}" target="_blank" style="font-size: 20px">پنل ادمین</a></li>
                                 @endif
-                                <li><a href="{{ url('profile') }}" target="_blank">پروفایل</a></li>
+                                <li><a href="{{ url('profile') }}" target="_blank" style="font-size: 20px">پروفایل</a></li>
                             @else
-                                <li><a href="{{ url('login') }}">ورود</a></li>
-                                <li><a href="{{ url('register') }}">ثبت نام</a></li>
+                                <li><a href="{{ url('login') }}" style="font-size: 20px">ورود</a></li>
+                                <li><a href="{{ url('register') }}" style="font-size: 20px">ثبت نام</a></li>
                             @endif
                         </ul>
                     </div>
@@ -72,7 +71,7 @@
                         <div id="cart">
                             <button type="button" data-toggle="dropdown" data-loading-text="Loading..."
                                     class="heading dropdown-toggle">
-                                <a href="{{ url('checkout') }}" class="btn btn-primary" style="background-color: #00A000">تکمیل خرید&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="{{ url('checkout') }}" class="btn btn-primary" style="font-size: 18px; background-color: #00A000">تکمیل خرید&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span id="cart-total">{{ $cart['count'].' کالا - '.$cart['total'].' تومان' }}</span>
                                 </a>
                             </button>
