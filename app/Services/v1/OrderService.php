@@ -73,15 +73,14 @@ class OrderService
         $products = array();
         array_pop($ids);
         foreach ($ids as $id) {
-            if ($id) {
                 $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
                 array_push($products, $p);
-            }
         }
         $price_original = 0;
         $tPrice = 0;
         Log::info($order->stuffs_count);
         $counts = explode(',', $order->stuffs_count);
+        Log::info($counts);
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
             $product->sell = $product->sell + 1;
