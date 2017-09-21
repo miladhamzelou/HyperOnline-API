@@ -159,7 +159,7 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                         <li><a class="home_link" title="خانه" href="{{ url('home') }}"><span>خانه</span></a></li>
-                        <li class="mega-menu dropdown"><a>دسته ها</a>
+                        <li class="mega-menu dropdown"><a style="font-size: 22px">دسته بندی ها</a>
                             <div class="dropdown-menu">
                                 @foreach($categories as $c1)
                                     @if($c1['level']==1)
@@ -196,9 +196,7 @@
                             </div>
                         </li>
 
-
-                        <li class="contact-link"><a href="{{ url('contact-us') }}">تماس با ما</a></li>
-                        <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank">تخفیف خورده ها !!</a>
+                        <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank" style="font-size: 22px">تخفیف خورده ها !!</a>
                         </li>
                     </ul>
                 </div>
