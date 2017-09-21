@@ -158,7 +158,8 @@
                 <div class="navbar-header"><span class="visible-xs visible-sm"> منو <b></b></span></div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a class="home_link" title="خانه" href="{{ url('home') }}"><span>خانه</span></a></li>
+                        <li><a title="خانه" style="font-size: 22px" href="{{ url('home') }}"><span>خانه</span></a></li>
+                        <li><a style="font-size: 22px" disabled><span>/</span></a></li>
                         <li class="mega-menu dropdown"><a style="font-size: 22px">دسته بندی ها</a>
                             <div class="dropdown-menu">
                                 @foreach($categories as $c1)
