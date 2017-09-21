@@ -444,7 +444,7 @@ class AdminController
                 $total_price += $order->price;
                 $total_price_original += $order->price_original;
                 $total_send += $order->price_send;
-                $order->stuffs_count = rtrim($order->stuffs_count, ',');
+//                $order->stuffs_count = rtrim($order->stuffs_count, ',');
                 Log::info($order->stuffs_count);
                 $count = explode(',', $order->stuffs_count);
                 foreach ($count as $i)

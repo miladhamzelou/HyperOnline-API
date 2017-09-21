@@ -57,8 +57,8 @@ class OrderService
         $order->seller_name = $seller->name;
         $order->user_name = $user->name;
         $order->user_phone = $user->phone;
-        $order->stuffs = $request->get('stuffs');
-        $order->stuffs_id = $request->get('stuffs_id');
+        $order->stuffs = ltrim($request->get('stuffs'));
+        $order->stuffs_id = ltrim($request->get('stuffs_id'));
         $order->stuffs_count = ltrim($request->get('stuffs_count'), ',');
         //$order->price = $request->get('price');
         $order->price_send = 5000;
