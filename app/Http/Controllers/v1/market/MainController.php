@@ -9,7 +9,6 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
@@ -36,7 +35,7 @@ class MainController extends Controller
         $isAdmin = 0;
 
         if (Auth::check())
-            if (Auth::user()->isAdmin()==1)
+            if (Auth::user()->isAdmin() == 1)
                 $isAdmin = 1;
 
         $most = $this->mService->getMostSell();
@@ -63,7 +62,7 @@ class MainController extends Controller
         $isAdmin = 0;
 
         if (Auth::check())
-            if (Auth::user()->isAdmin()==1)
+            if (Auth::user()->isAdmin() == 1)
                 $isAdmin = 1;
 
         $cat = $this->mService->getCategories();
@@ -137,9 +136,16 @@ class MainController extends Controller
             'subtotal' => Cart::subtotal()
         ];
 
+        $isAdmin = 0;
+
+        if (Auth::check())
+            if (Auth::user()->isAdmin() == 1)
+                $isAdmin = 1;
+
         return view('market.report')
             ->withCategories($cat)
             ->withCart($cart)
+            ->withAdmin($isAdmin)
             ->withResult($result);
     }
 }
