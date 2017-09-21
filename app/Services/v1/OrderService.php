@@ -73,8 +73,10 @@ class OrderService
         $products = array();
         array_pop($ids);
         foreach ($ids as $id) {
-            $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
-            array_push($products, $p);
+            if ($id) {
+                $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
+                array_push($products, $p);
+            }
         }
         $price_original = 0;
         $tPrice = 0;
