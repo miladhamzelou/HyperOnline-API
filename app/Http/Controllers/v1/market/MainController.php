@@ -60,6 +60,12 @@ class MainController extends Controller
 
     public function checkout()
     {
+        $isAdmin = 0;
+
+        if (Auth::check())
+            if (Auth::user()->isAdmin()==1)
+                $isAdmin = 1;
+
         $cat = $this->mService->getCategories();
 
         $cart = [
@@ -71,6 +77,7 @@ class MainController extends Controller
         ];
         return view('market.checkout')
             ->withCategories($cat)
+            ->withAdmin($isAdmin)
             ->withCart($cart);
     }
 
