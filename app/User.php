@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -30,9 +31,9 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        if ($this->role == "admin" || $this->role = "developer")
-            return true;
+        if ($this->role == "admin")
+            return 1;
         else
-            return false;
+            return 0;
     }
 }

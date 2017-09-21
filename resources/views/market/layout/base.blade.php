@@ -44,7 +44,12 @@
                                 @if($admin)
                                     <li><a href="{{ url('admin') }}" target="_blank" style="font-size: 20px">پنل ادمین</a></li>
                                 @endif
-                                <li><a href="{{ url('profile') }}" target="_blank" style="font-size: 20px">پروفایل</a></li>
+                                <li><a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-size: 20px">خروج</a></li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                          style="display: none">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    </form>
                             @else
                                 <li><a href="{{ url('login') }}" style="font-size: 20px">ورود</a></li>
                                 <li><a href="{{ url('register') }}" style="font-size: 20px">ثبت نام</a></li>
