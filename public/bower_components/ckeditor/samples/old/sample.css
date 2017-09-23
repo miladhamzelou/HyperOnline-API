@@ -216,7 +216,7 @@ pre.samples
 
 .description
 {
-	border: 1px dotted #B7B7B7;
+	/*border: 1px dotted #B7B7B7;*/
 	margin-bottom: 10px;
 	padding: 10px 10px 0;
 	overflow: hidden;

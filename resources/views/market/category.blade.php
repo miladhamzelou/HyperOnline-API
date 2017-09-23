@@ -80,6 +80,7 @@
                     </div>
                     <div class="caption">
                         <h4><a href="">{{ $m['name']  }}</a></h4>
+                        <h6 class="description" style="color: grey">{{ $m['description'] }}</h6>
                         @if($m['off']  > 0)
                             <p class="price"><span
                                         class="price-new">{{ round($m['price'] - ($m['price']  * $m['off']  / 100)) . ' تومان' }}</span>
@@ -109,6 +110,7 @@
                     </div>
                     <div class="caption">
                         <h4><a href="">{{ $product['name'] }}</a></h4>
+                        <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
                         @if($product['off'] > 0)
                             <p class="price"><span
                                         class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
@@ -205,13 +207,13 @@
                             <div>
                                 <div class="caption">
                                     <h4><a href="">{{ $product['name'] }}</a></h4>
-                                    <p class="description">{{ $product['description'] }}</p>
+                                    <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
                                     @if($product['off'] > 0)
                                         <p class="price">
                                             <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
                                             <br>
                                             <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
-                                            <span class="saving">{{ $product['off'] }}%-</span>
+                                            {{--<span class="saving">{{ $product['off'] }}%-</span>--}}
                                         </p>
                                     @else
                                         <p class="price">

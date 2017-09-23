@@ -1254,7 +1254,7 @@ a:focus {
 }
 
 .product-grid .product-thumb .description, .product-grid .product-thumb .price-tax, .owl-carousel .product-thumb .price-tax {
-    display: none;
+    /*display: none;*/
 }
 
 .product-grid .product-thumb .button-group .add-to-links button, .owl-carousel .product-thumb .button-group .add-to-links button {

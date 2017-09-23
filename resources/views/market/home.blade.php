@@ -38,38 +38,10 @@
 
 @section('right-panel')
     <aside id="column-left" class="col-sm-3 hidden-xs">
-        <h3 class="subtitle">دسته ها</h3>
-        <div class="box-category">
-            <ul id="cat_accordion">
-                @foreach($categories as $c1)
-                    @if($c1['level']==1)
-                        <li>
-                            <a href="{{ url('category/1/'. $c1['unique_id']) }}">{{ $c1['name'] }}</a>
-                            <span class="down"></span>
-                            <ul>
-                                @foreach($categories as $c2)
-                                    @if($c2['level']==2 && $c2['parent_id']==$c1['unique_id'])
-                                        <li>
-                                            <a href="{{ url('category/2/'. $c2['unique_id']) }}">{{ $c2['name'] }}</a>
-                                            <span class="down"></span>
-                                            <ul>
-                                                @foreach($categories as $c3)
-                                                    @if($c3['level']==3 && $c3['parent_id']==$c2['unique_id'])
-                                                        <li>
-                                                            <a href="{{ url('category/3/'. $c3['unique_id']) }}">{{ $c3['name'] }}</a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endif
-                @endforeach
-            </ul>
-        </div>
+        <a href="#">
+            <img src="{{ asset('market/image/banner/small-banner-265x350.jpg') }}" class="img-responsive"/>
+        </a>
+        <br>
         <h3 class="subtitle">پرفروش ها</h3>
         <div class="side-item">
             @foreach($most as $m)
@@ -81,11 +53,12 @@
                     </div>
                     <div class="caption">
                         <h4><a href="">{{ $m['name']  }}</a></h4>
+                        <h6 class="description" style="color: grey">{{ $m['description'] }}</h6>
                         @if($m['off']  > 0)
                             <p class="price">
                                 <span class="price-new">{{ round($m['price'] - ($m['price']  * $m['off']  / 100)) . ' تومان' }}</span>
                                 <span class="price-old">{{ $m['price']  . ' تومان' }}</span>
-                                <span class="saving">{{ $m['off']  }}%-</span>
+                                {{--<span class="saving">{{ $m['off']  }}%-</span>--}}
                             </p>
                         @else
                             <p class="price"><span class="price-new">{{ $m['price']  . ' تومان' }}</span>
@@ -110,11 +83,12 @@
                     </div>
                     <div class="caption">
                         <h4><a href="">{{ $product['name'] }}</a></h4>
+                        <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
                         @if($product['off'] > 0)
                             <p class="price">
                                 <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
                                 <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
-                                <span class="saving">{{ $product['off'] }}%-</span>
+                                {{--<span class="saving">{{ $product['off'] }}%-</span>--}}
                             </p>
                         @else
                             <p class="price"><span class="price-new">{{ $product['price'] . ' تومان' }}</span>
@@ -161,11 +135,12 @@
                         </div>
                         <div class="caption">
                             <h4><a href="">{{ $product['name'] }}</a></h4>
+                            <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
                             <p class="price">
                                 <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
                                 <br>
                                 <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
-                                <span class="saving">{{ $product['off'] }}%-</span>
+                                {{--<span class="saving">{{ $product['off'] }}%-</span>--}}
                             </p>
                         </div>
                         <div class="button-group">
@@ -216,7 +191,8 @@
                             @foreach($rand3['products'] as $product)
                                 {{--@if($product['category_id'] == $cat['unique_id'])--}}
                                 <div class="product-thumb">
-                                    <input type="hidden" id="{{ $product['unique_id'] }}" value="{{ $product['unique_id'] }}">
+                                    <input type="hidden" id="{{ $product['unique_id'] }}"
+                                           value="{{ $product['unique_id'] }}">
                                     <div class="image">
                                         <a href="">
                                             @if($product['image'])
@@ -231,13 +207,13 @@
                                     <div>
                                         <div class="caption">
                                             <h4><a href="">{{ $product['name'] }}</a></h4>
-                                            <p class="description">{{ $product['description'] }}</p>
+                                            <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
                                             @if($product['off'] > 0)
                                                 <p class="price">
                                                     <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
                                                     <br>
                                                     <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
-                                                    <span class="saving">{{ $product['off'] }}%-</span>
+                                                    {{--<span class="saving">{{ $product['off'] }}%-</span>--}}
                                                 </p>
                                             @else
                                                 <p class="price">
@@ -298,13 +274,13 @@
                     <div>
                         <div class="caption">
                             <h4><a href="">{{ $product['name'] }}</a></h4>
-                            <p class="description">{{ $product['description'] }}</p>
+                            <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
                             @if($product['off'] > 0)
                                 <p class="price">
                                     <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
                                     <br>
                                     <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
-                                    <span class="saving">{{ $product['off'] }}%-</span>
+                                    {{--<span class="saving">{{ $product['off'] }}%-</span>--}}
                                 </p>
                             @else
                                 <p class="price"><span
@@ -346,13 +322,13 @@
                     <div>
                         <div class="caption">
                             <h4><a href="">{{ $product['name'] }}</a></h4>
-                            <p class="description">{{ $product['description'] }}</p>
+                            <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
                             @if($product['off'] > 0)
                                 <p class="price">
                                     <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
                                     <br>
                                     <span class="price-old">{{ $product['price'] . ' تومان' }}</span>
-                                    <span class="saving">{{ $product['off'] }}%-</span>
+                                    {{--<span class="saving">{{ $product['off'] }}%-</span>--}}
                                 </p>
                             @else
                                 <p class="price"><span class="price-new">{{ $product['price'] . ' تومان' }}</span>
