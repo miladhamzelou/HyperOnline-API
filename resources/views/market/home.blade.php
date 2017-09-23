@@ -39,7 +39,7 @@
 @section('right-panel')
     <aside id="column-left" class="col-sm-3 hidden-xs">
         <a href="#">
-            <img src="{{ asset('market/image/banner/small-banner-265x350.jpg') }}" class="img-responsive"/>
+            <img src="{{ asset('market/image/banner/download.jpg') }}" title="download" class="img-responsive"/>
         </a>
         <br>
         <h3 class="subtitle">پرفروش ها</h3>
