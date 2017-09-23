@@ -539,8 +539,8 @@ class AdminController
 
     protected function addCount(&$item)
     {
-        $stuff = explode(',', $item->stuffs);
-        $stuff_count = explode(',', $item->stuffs_count);
+        $stuff = explode(',', ltrim(rtrim($item->stuffs, ','), ','));
+        $stuff_count = explode(',', ltrim(rtrim($item->stuffs_count, ','), ','));
         $final = "";
         foreach (array_values($stuff) as $i => $value) {
             $final .= $value . ' ( ' . $stuff_count[$i] . ' عدد ) - ';
