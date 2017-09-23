@@ -445,8 +445,7 @@ class AdminController
                 $total_price_original += $order->price_original;
                 $total_send += $order->price_send;
 //                $order->stuffs_count = rtrim($order->stuffs_count, ',');
-                Log::info($order->stuffs_count);
-                $count = explode(',', $order->stuffs_count);
+                $count = explode(',', ltrim(rtrim($order->stuffs_count, ','), ','));
                 foreach ($count as $i)
                     $total_count += $i;
                 if ($order->status == "pending") $total_pending += 1;
