@@ -85,8 +85,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/admin/accounting', 'v1_web\AdminController@accounting')->name('accounting');
 });
-Route::post('/search', 'v1_web\AdminController@search');
+
 Route::get('/search', 'v1_web\AdminController@search');
+Route::get('/admin/search', 'v1_web\AdminController@search');
 
 Route::get('category/{level}/{id}', 'v1\market\CategoryController@index');
 Route::get('/addToCart', 'v1\ProductController@addToCart');
