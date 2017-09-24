@@ -194,6 +194,7 @@ class MainService
             $entry = [
                 'unique_id' => $item['unique_id'],
                 'parent_id' => $item['parent_id'],
+                'image'=>$item['image'],
                 'name' => $item['name'],
                 'level' => $level
             ];
