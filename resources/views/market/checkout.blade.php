@@ -58,8 +58,8 @@
             </div>
         </div>
         <div class="buttons">
-            <div class="pull-left"><a href="{{ url('home') }}" class="btn btn-default">ادامه خرید</a></div>
-            <div class="pull-right"><a href="{{ url('pay') }}" class="btn btn-primary">پرداخت</a></div>
+            <div class="pull-right"><a href="{{ url('pay') }}" class="btn btn-primary" style="font-size: 18px">پرداخت</a></div>
+            <div class="pull-right"><a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px">ادامه خرید</a></div>
         </div>
     </div>
 @endsection

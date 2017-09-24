@@ -136,7 +136,13 @@
                 @foreach($sub as $category)
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
                         <a href="{{ url('category/'. ($level+1) .'/'. $category['unique_id']) }}">
-                            <img src="{{ asset('market/image/no_image.jpg') }}" alt="لپ تاپ (6)"/>
+                            @if($product['image'])
+                                <img src="{{ asset('images').'/' . $category['image'] }}"
+                                     class="img-responsive"/>
+                            @else
+                                <img src="{{ asset('market/image/no_image.jpg') }}"
+                                     class="img-responsive"/>
+                            @endif
                         </a>
                         <a href="{{ url('category/'. ($level+1) .'/'. $category['unique_id']) }}">{{ $category['name'] }}</a>
                     </div>
