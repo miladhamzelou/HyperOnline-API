@@ -136,7 +136,7 @@
                 @foreach($sub as $category)
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
                         <a href="{{ url('category/'. ($level+1) .'/'. $category['unique_id']) }}">
-                            @if($product['image'])
+                            @if($category['image'])
                                 <img src="{{ asset('images').'/' . $category['image'] }}"
                                      class="img-responsive"/>
                             @else
