@@ -7,6 +7,7 @@
     <link href="{{ asset('market/image/favicon.png')}}" rel="icon"/>
     <title>هایپرآنلاین</title>
     <meta name="description" content="سامانه فروش محصولات آنلاین">
+    <meta name="samandehi" content="487553811"/>
     <!-- CSS Part Start-->
     <link rel="stylesheet" type="text/css" href="{{ asset('market/js/bootstrap/css/bootstrap.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/js/bootstrap/css/bootstrap-rtl.min.css')}}"/>
