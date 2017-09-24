@@ -13,7 +13,8 @@
 
 Route::auth();
 
-Route::get('/', 'v1_web\AdminController@index')->name('root');
+//Route::get('/', 'v1_web\AdminController@index')->name('root');
+Route::get('/', 'v1\market\MainController@index')->name('root');
 Route::get('/home', 'v1\market\MainController@index')->name('home');
 
 Route::get('/profile', 'v1_web\UserController@profile')->name('profile');
