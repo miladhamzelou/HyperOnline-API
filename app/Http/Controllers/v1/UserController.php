@@ -6,8 +6,6 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Order;
-use App\Product;
 use App\Services\v1\UserService;
 use App\User;
 use Exception;
@@ -15,7 +13,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use phplusir\smsir\Smsir;
 
 class UserController extends Controller
@@ -60,7 +57,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-//        Log::info("request:\n" . $request);
         $validator = Validator::make($request->all(), $this->rules, $this->messages);
 
         if ($validator->fails()) {
@@ -73,10 +69,15 @@ class UserController extends Controller
             ], 201);
         } else {
             try {
-                $this->Users->createUser($request);
-                return response()->json([
-                    'error' => false
-                ], 201);
+                if ($this->Users->createUser($request)) {
+                    return response()->json([
+                        'error' => false
+                    ], 201);
+                } else
+                    return response()->json([
+                        'error' => true,
+                        'error_msg' => "Register Error"
+                    ], 201);
             } catch (Exception $e) {
                 return response()->json([
                     'tag' => $request->input('tag'),

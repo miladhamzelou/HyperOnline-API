@@ -54,7 +54,7 @@ class UserService
 
     /**
      * @param $request
-     * @return bool
+     * @return boolean
      */
     public function createUser($request)
     {
@@ -90,7 +90,7 @@ class UserService
         $user->save();
         $password->save();
 
-        \App\Facades\CustomLog::info("User Registered : " . $user->name . " Date : " . $user->create_date, "users");
+        \App\Facades\CustomLog::info("User Registered : " . $user->name . " : " . $user->create_date, "users");
 
         return true;
     }
@@ -105,7 +105,7 @@ class UserService
         $hash = $this->checkHashSSHA($user->salt, $request->input('password'));
         if ($hash == $user->encrypted_password) {
             $date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
-            \App\Facades\CustomLog::info("User Authorized : " . $user->name . " Date : " . $date, "users");
+            \App\Facades\CustomLog::info("User Authorized : " . $user->name . " : " . $date, "users");
             $final = [
                 'unique_id' => $user->unique_id,
                 'name' => $user->name,
