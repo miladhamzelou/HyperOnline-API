@@ -117,7 +117,8 @@ class UserService
                 'wallet' => $user->wallet,
                 'state' => $user->state,
                 'city' => $user->city,
-                'confirmed_phone' => $user->confirmed_phone
+                'confirmed_phone' => $user->confirmed_phone,
+                'confirmed_info' => $user->confirmed_info
             ];
             return $final;
         } else

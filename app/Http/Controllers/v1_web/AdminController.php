@@ -350,6 +350,68 @@ class AdminController
         }
     }
 
+    public function messages_send_confirm(Request $request)
+    {
+        $title = "تکمیل حساب";
+        $body = $request->get('body');
+        $id = $request->get('id');
+        $user = User::where("unique_id",$id)->firstOrFail();
+
+        $client = new Client([
+            'headers' => [
+                'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
+                'Content-Type' => 'application/json',
+                'Accept: application/json'
+            ]
+        ]);
+        $response = $client->post(
+            'https://panel.pushe.co/api/v1/notifications/',
+            [
+                'body' => json_encode([
+                    "applications" => ["ir.hatamiarash.hyperonline"],
+                    "filter" => [
+                        "imei" => [$user->pushe]
+                    ],
+                    "notification" => [
+                        "title" => $title,
+                        "content" => $body
+                    ]
+                ])
+            ]
+        );
+        if ($response->getStatusCode() == "201") {
+            $message = "پیام شما با موفقیت ارسال شد";
+            $push = new Push();
+            $push->title = $title;
+            $push->body = $body;
+            $push->save();
+
+            return redirect('/admin/users/' . $id)
+                ->withMessage($message);
+        } else {
+            $message = "خطایی رخ داده است";
+            return redirect('/admin/messages')
+                ->withErrors($message);
+        }
+    }
+
+    public function confirmInfo($id, $code)
+    {
+        $user = User::where("unique_id", $id)->firstOrFail();
+        $user->confirmed_info = $code;
+        $user->save();
+        if ($user->role == "admin") $user->role = "مدیر";
+        if ($user->role == "user") $user->role = "کاربر";
+        if ($user->role == "developer") $user->role = "توسعه دهنده";
+        $user->create_date = str_replace(":", " : ", $user->create_date);
+        if ($code == 0)
+            $msg = "تاییده لغو شد";
+        else
+            $msg = "کاربر تایید شد";
+        return redirect('/admin/users/' . $id)
+            ->withMessage($msg);
+    }
+
     public function search(Request $request)
     {
         $parameter = $request->get('parameter');

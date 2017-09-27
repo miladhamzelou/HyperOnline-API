@@ -84,6 +84,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/messages/sms', 'v1_web\AdminController@messages_send_sms')->name('messages');
     Route::post('/admin/messages/push', 'v1_web\AdminController@messages_send_push')->name('messages');
 
+    Route::post('/admin/confirm/message', 'v1_web\AdminController@messages_send_confirm')->name('messages');
+    Route::get('/admin/confirm/{id}/{code}', 'v1_web\AdminController@confirmInfo')->name('confirm');
+
     Route::get('/admin/accounting', 'v1_web\AdminController@accounting')->name('accounting');
 });
 

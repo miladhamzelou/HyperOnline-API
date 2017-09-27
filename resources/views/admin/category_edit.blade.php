@@ -104,7 +104,7 @@
                             </div>
 
                             <div class="form-group">
-                                <a class="btn btn-danger center-block btn-lg style="
+                                <a class="btn btn-danger center-block btn-lg"
                                    href="{{ url('admin/categories/delete_photo/'.$level.'/'.$category2->unique_id) }}">حذف عکس</a>
                             </div>
 

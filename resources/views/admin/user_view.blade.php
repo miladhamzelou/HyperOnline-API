@@ -9,7 +9,7 @@
         <div class="col-lg-6 col-centered center-block" style="float: none;">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h2 class="box-title">User Information</h2>
+                    <h2 class="box-title">اطلاعات کاربر</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
@@ -54,6 +54,14 @@
                                     <tr>
                                         <td style="@if($user->confirmed_phone)color:limegreen;@else color:red;@endif text-align: right; direction: rtl;">
                                             @if($user->confirmed_phone)
+                                                تایید شده
+                                            @else
+                                                تایید نشده
+                                            @endif</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="@if($user->confirmed_info)color:limegreen;@else color:red;@endif text-align: right; direction: rtl;">
+                                            @if($user->confirmed_info)
                                                 تایید شده
                                             @else
                                                 تایید نشده
@@ -133,6 +141,9 @@
                                         <td style="text-align: right; direction: rtl;">تایید تلفن همراه</td>
                                     </tr>
                                     <tr>
+                                        <td style="text-align: right; direction: rtl;">تایید اطلاعات</td>
+                                    </tr>
+                                    <tr>
                                         <td style="text-align: right; direction: rtl;">آخرین مختصات</td>
                                     </tr>
                                     <tr>
@@ -157,6 +168,57 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-centered center-block" style="float: none;">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h2 class="box-title">تایید اطلاعات</h2>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="box-body">
+                        <br>
+                        <br>
+                        <a class="btn btn-success pull-right btn-lg" tabindex="1"
+                           href="{{ url('admin/confirm/' . $user->unique_id . '/1') }}">تایید</a>
+                        <a class="btn btn-danger pull-right btn-lg" tabindex="2"
+                           href="{{ url('admin/confirm/' . $user->unique_id . '/0') }}">عدم تایید</a>
+                        <br>
+                        <br>
+                        <br>
+                        <h3 style="text-align: center">ارسال پیام</h3>
+                        <br>
+                        <form role="form" action="/admin/confirm/message" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="id" value="{{ $user->unique_id }}">
+
+                            <div class="text-right form-group{{ $errors->has('body') ? ' has-error' : '' }}">
+                                <label for="body" style="direction: rtl">متن پیام :</label>
+                                <textarea id="body" type="text" style="text-align: center; direction: rtl"
+                                          class="my_font form-control"
+                                          name="body" tabindex="3" required></textarea>
+
+                                @if ($errors->has('body'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('body') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <br>
+                            <div class="form-group">
+                                <input type="submit" tabindex="4" name="send"
+                                       class="my_font btn center-block btn-lg btn-success" value="ارسال">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
