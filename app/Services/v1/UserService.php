@@ -75,6 +75,7 @@ class UserService
         $user->address = $request->input('address');
         $user->state = $request->input('state');
         $user->city = $request->input('city');
+        $user->pushe = $request->input('pushe');
         if (app('request')->exists('location_x')) $user->location_x = $request->input('location_x');
         if (app('request')->exists('location_y')) $user->location_y = $request->input('location_y');
         $user->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
