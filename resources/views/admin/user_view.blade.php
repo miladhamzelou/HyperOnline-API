@@ -6,7 +6,7 @@
 
 @section('add')
     <div class="row">
-        <div class="col-lg-6 col-centered center-block" style="float: none;">
+        <div class="col-lg-9 col-centered center-block" style="float: none;">
             <div class="box box-danger">
                 <div class="box-header with-border">
                     <h2 class="box-title">اطلاعات کاربر</h2>
@@ -175,7 +175,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6 col-centered center-block" style="float: none;">
+        <div class="col-lg-9 col-centered center-block" style="float: none;">
             <div class="box box-info">
                 <div class="box-header with-border">
                     <h2 class="box-title">تایید اطلاعات</h2>
