@@ -72,3 +72,4 @@ Route::post('/v1/products_detail', 'v1\ProductController@getDetails');
 Route::post('/v1/downloadLink', 'v1\MainController@downloadLink');
 Route::get('/v1/downloadLink', 'v1\MainController@downloadLink');
 Route::get('/v1/getProductByID/{id}', 'v1\ProductController@getProduct');
+Route::post('/v1/user_orders', 'v1\OrderController@userOrders');
