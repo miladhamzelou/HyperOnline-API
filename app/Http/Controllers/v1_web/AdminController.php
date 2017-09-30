@@ -31,6 +31,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use phplusir\smsir\Smsir;
 
+require(app_path() . '/Common/jdf.php');
+
 class AdminController
 {
     public function index()
@@ -355,7 +357,7 @@ class AdminController
         $title = "تکمیل حساب";
         $body = $request->get('body');
         $id = $request->get('id');
-        $user = User::where("unique_id",$id)->firstOrFail();
+        $user = User::where("unique_id", $id)->firstOrFail();
 
         $client = new Client([
             'headers' => [
@@ -374,7 +376,20 @@ class AdminController
                     ],
                     "notification" => [
                         "title" => $title,
-                        "content" => $body
+                        "content" => "۱ پیام جدید دریافت شد",
+                        "wake_screen" => true,
+                        "action" => [
+                            "url" => "",
+                            "action_type" => "A"
+                        ],
+                    ],
+                    "custom_content" => [
+                        "type" => "1",
+                        "msg" => [
+                            "title" => $title,
+                            "body" => $body,
+                            "date" => $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime())
+                        ]
                     ]
                 ])
             ]
@@ -628,5 +643,34 @@ class AdminController
                 break;
         }
         return $number;
+    }
+
+    protected function getCurrentTime()
+    {
+        $now = date("Y-m-d", time());
+        $time = date("H:i:s", time());
+        return $now . ' ' . $time;
+    }
+
+    protected function getDate($date)
+    {
+        $now = explode(' ', $date)[0];
+        $time = explode(' ', $date)[1];
+        list($year, $month, $day) = explode('-', $now);
+        list($hour, $minute, $second) = explode(':', $time);
+        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+        $date = jDate("Y/m/d", $timestamp);
+        return $date;
+    }
+
+    protected function getTime($date)
+    {
+        $now = explode(' ', $date)[0];
+        $time = explode(' ', $date)[1];
+        list($year, $month, $day) = explode('-', $now);
+        list($hour, $minute, $second) = explode(':', $time);
+        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+        $date = jDate("H:i", $timestamp);
+        return $date;
     }
 }
