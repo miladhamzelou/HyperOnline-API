@@ -89,7 +89,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/admin/accounting', 'v1_web\AdminController@accounting')->name('accounting');
 
-    Route::get('/admin/banners/create', 'v1_web\AdminController@banner_show')->name('banner_create');
+    Route::get('/admin/banners/create', 'v1_web\AdminController@banner_show')->name('banner_show');
     Route::post('/admin/banners/create', 'v1_web\AdminController@banner_create')->name('banner_create');
     Route::get('/admin/banners', 'v1_web\AdminController@banners')->name('banners');
 });

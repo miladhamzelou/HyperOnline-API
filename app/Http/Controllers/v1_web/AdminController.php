@@ -13,6 +13,7 @@
 namespace app\Http\Controllers\v1_web;
 
 use App\Author;
+use App\Banner;
 use App\Category1;
 use App\Category2;
 use App\Category3;
@@ -27,6 +28,7 @@ use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use phplusir\smsir\Smsir;
@@ -557,10 +559,45 @@ class AdminController
             ->withCount($total_count);
     }
 
-    public function banner_show(){
+    public function banner_show()
+    {
         if (Auth::user()->isAdmin()) {
             return view('admin.banner_create')
                 ->withTitle("بنر جدید");
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function banner_create(Request $request)
+    {
+        $banner = new Banner();
+        $uid = uniqid('', false);
+        $banner->unique_id = $uid;
+        $banner->title = $request->get('title');
+        $banner->type = $request->get('type');
+
+        if (Input::hasFile('image')) {
+            $image = $request->file('image');
+            $input['imagename'] = 'B.' . $uid . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('images');
+            $image->move($destinationPath, $input['imagename']);
+            $banner->image = $input['imagename'];
+        }
+
+        $banner->save();
+
+        $message = "بنر اضافه شد";
+        return redirect('/admin/banners')->withMessage($message);
+    }
+
+    public function banners()
+    {
+        if (Auth::user()->isAdmin()) {
+            $banners = Banner::where("type", 0)->get();
+            return view('admin.banners')
+                ->withBanners($banners)
+                ->withTitle("بنر ها");
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');

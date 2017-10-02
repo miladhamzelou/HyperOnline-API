@@ -9,7 +9,7 @@
         <div class="col-lg-6 col-centered center-block" style="float: none;">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h2 class="box-title">اطلاعات کالا</h2>
+                    <h2 class="box-title">اطلاعات بنر</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>

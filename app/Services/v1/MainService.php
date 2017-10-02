@@ -8,7 +8,6 @@ namespace App\Services\v1;
 use App\Banner;
 use App\Category1;
 use App\Option;
-use App\Order;
 use App\Product;
 use App\Seller;
 use Illuminate\Http\Request;
@@ -54,15 +53,14 @@ class MainService
     {
         $option = Option::firstOrFail();
 
-        if($option->most_sell){
-            $most = Product::where("confirmed",1)
-                ->orderBy("sell","desc")
+        if ($option->most_sell) {
+            $most = Product::where("confirmed", 1)
+                ->orderBy("sell", "desc")
                 ->take($option->most_sell_count)
                 ->get();
 
             return $this->filterProduct($most);
-        }
-        else
+        } else
             return "n";
     }
 
@@ -196,7 +194,7 @@ class MainService
 
     public function getBanners()
     {
-        $banners = Banner::get();
+        $banners = Banner::where("type", 0)->get();
 
         if (count($banners) > 0) {
             $data = [];
