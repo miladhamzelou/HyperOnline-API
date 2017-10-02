@@ -17,6 +17,14 @@ npm-debug.log
 >>>>>>> 044dd7de3c582bec4747ab9adc74c98c9605eaa5
 tables.xlsx
 /public/images/*.*
+/public/images/*.JPG
+/public/images/*.png
+/public/images/*.PNG
+/public/images/*.jpg
+/public/images/*.bmp
+/public/images/*.BMP
+/public/images/*.jpeg
+/public/images/*.JPEG
 public/ftp/orders/*.txt
 public/ftp/factors/*.pdf
 /public/arash
