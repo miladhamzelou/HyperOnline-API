@@ -26,6 +26,8 @@ public/images/*.BMP
 public/images/*.jpeg
 public/images/*.JPEG
 public/images/*
+public/images/*.*.*
+public/images/*.*.jpeg
 
 /public/images/*.*
 /public/images/*.JPG
@@ -37,6 +39,8 @@ public/images/*
 /public/images/*.jpeg
 /public/images/*.JPEG
 /public/images/*
+/public/images/*.*.*
+/public/images/*.*.jpeg
 
 public/ftp/orders/*.txt
 public/ftp/factors/*.pdf
