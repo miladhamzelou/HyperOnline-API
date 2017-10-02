@@ -25,6 +25,7 @@ tables.xlsx
 /public/images/*.BMP
 /public/images/*.jpeg
 /public/images/*.JPEG
+/public/images/*
 public/ftp/orders/*.txt
 public/ftp/factors/*.pdf
 /public/arash
