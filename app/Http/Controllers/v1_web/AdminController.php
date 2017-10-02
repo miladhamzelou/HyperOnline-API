@@ -508,6 +508,8 @@ class AdminController
             return back()
                 ->withErrors($message);
         }
+        return back()
+            ->withErrors("خطایی رخ داده است");
     }
 
     public function accounting()
