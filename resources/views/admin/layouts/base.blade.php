@@ -256,10 +256,22 @@
                     </ul>
                 </li>
 
-                <li class="my_font"><a href="{{ url('/admin/accounting') }}">حسابداری</a></li>
+                <li class="treeview">
+                    <a href="#">بنر ها
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        {{--                        <li><a href="{{ url('/admin/orders/create') }}">سفارش جدید</a></li>--}}
+                        <li><a href="{{ url('/admin/banners/create') }}">بنر جدید</a></li>
+                        <li><a href="{{ url('/admin/banners') }}">مشاهده بنر ها</a></li>
+                    </ul>
+                </li>
 
                 <hr>
                 <li class="header">امکانات</li>
+                <li class="my_font"><a href="{{ url('/admin/accounting') }}">حسابداری</a></li>
                 <li class="my_font"><a href="{{ url('/admin/database') }}">پایگاه داده</a></li>
                 <li class="my_font"><a href="{{ url('/admin/support') }}">پشتیبانی</a></li>
                 <li class="my_font"><a href="{{ url('/admin/setting') }}">تنظیمات</a></li>
