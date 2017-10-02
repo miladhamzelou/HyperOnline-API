@@ -42,6 +42,8 @@ public/images/*.*.jpeg
 /public/images/*.*.*
 /public/images/*.*.jpeg
 
+public/images/P.T8-16.jpeg
+
 public/ftp/orders/*.txt
 public/ftp/factors/*.pdf
 /public/arash
