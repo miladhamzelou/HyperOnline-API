@@ -557,6 +557,15 @@ class AdminController
             ->withCount($total_count);
     }
 
+    public function banner_show(){
+        if (Auth::user()->isAdmin()) {
+            return view('admin.banner_create')
+                ->withTitle("بنر جدید");
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
+    }
+
     protected function filterUser($users)
     {
 //        $data = [];

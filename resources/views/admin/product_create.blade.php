@@ -85,7 +85,7 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <label for="Name" class="pull-right" style="direction:rtl;">نام :</label>
+                                        <label for="name" class="pull-right" style="direction:rtl;">نام :</label>
                                         <input id="name" type="text" style="text-align: center"
                                                class="my_font form-control"
                                                name="name" tabindex="1" required>
