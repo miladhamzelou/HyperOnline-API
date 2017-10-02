@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <form role="form" action="/admin/settings" method="post">
+                        <form role="form" action="/admin/setting" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="unique_id" value="{{ $option->unique_id }}">
                             <br>
@@ -183,7 +183,16 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <br>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"
+                                               @if($option->banner) checked @endif id="banner"
+                                               name="banner">نشان دادن بنرها در اپلیکیشن
+                                    </label>
+                                </div>
+                            </div>
                             <hr>
                             <br>
                             <div class="form-group">

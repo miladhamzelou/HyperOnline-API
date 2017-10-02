@@ -248,9 +248,25 @@ class AdminController
     public function setting_send(Request $request)
     {
         if (Auth::user()->isAdmin()) {
+            $option = Option::first();
+
+            $option->category = ($request->get('category') == "on") ? 1 : 0;
+            $option->category_count = $request->get('category_count');
+            $option->off = ($request->get('off') == "on") ? 1 : 0;
+            $option->off_count = $request->get('off_count');
+            $option->new = ($request->get('new') == "on") ? 1 : 0;
+            $option->new_count = $request->get('new_count');
+            $option->popular = ($request->get('popular') == "on") ? 1 : 0;
+            $option->popular_count = $request->get('popular_count');
+            $option->most_sell = ($request->get('most_sell') == "on") ? 1 : 0;
+            $option->most_sell_count = $request->get('most_sell_count');
+            $option->collection = ($request->get('collection') == "on") ? 1 : 0;
+            $option->collection_count = $request->get('collection_count');
+            $option->banner = ($request->get('banner') == "on") ? 1 : 0;
+            $option->save();
 
             $message = "تنظیمات اعمال شد";
-            return redirect('/admin')
+            return redirect('/admin/database')
                 ->withMessage($message);
         } else
             return redirect('/')
