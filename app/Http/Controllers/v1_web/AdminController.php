@@ -433,12 +433,8 @@ class AdminController
         $user = User::where("unique_id", $id)->firstOrFail();
         $user->confirmed_info = $code;
         $user->save();
-        if ($user->role == "admin") $user->role = "مدیر";
-        if ($user->role == "user") $user->role = "کاربر";
-        if ($user->role == "developer") $user->role = "توسعه دهنده";
-        $user->create_date = str_replace(":", " : ", $user->create_date);
         if ($code == 0)
-            $msg = "تاییده لغو شد";
+            $msg = "تاییدیه لغو شد";
         else
             $msg = "کاربر تایید شد";
         return redirect('/admin/users/' . $id)
