@@ -377,55 +377,12 @@ class AdminController
         $id = $request->get('id');
         $user = User::where("unique_id", $id)->firstOrFail();
 
-        $client = new Client([
-            'headers' => [
-                'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
-                'Content-Type' => 'application/json',
-                'Accept: application/json'
-            ]
-        ]);
-        $response = $client->post(
-            'https://panel.pushe.co/api/v1/notifications/',
-            [
-                'body' => json_encode([
-                    "applications" => ["ir.hatamiarash.hyperonline"],
-                    "filter" => [
-                        "imei" => [$user->pushe]
-                    ],
-                    "notification" => [
-                        "title" => $title,
-                        "content" => "۱ پیام جدید دریافت شد",
-                        "wake_screen" => true,
-                        "action" => [
-                            "url" => "",
-                            "action_type" => "A"
-                        ],
-                    ],
-                    "custom_content" => [
-                        "type" => "1",
-                        "msg" => [
-                            "title" => $title,
-                            "body" => $body,
-                            "date" => $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime())
-                        ]
-                    ]
-                ])
-            ]
-        );
-        if ($response->getStatusCode() == "201") {
-            $message = "پیام شما با موفقیت ارسال شد";
-            $push = new Push();
-            $push->title = $title;
-            $push->body = $body;
-            $push->save();
-
+        if ($this->sendPush($user->pushe, $title, $body))
             return redirect('/admin/users/' . $id)
-                ->withMessage($message);
-        } else {
-            $message = "خطایی رخ داده است";
+                ->withMessage("پیام شما با موفقیت ارسال شد");
+        else
             return redirect('/admin/messages')
-                ->withErrors($message);
-        }
+                ->withErrors("خطایی رخ داده است");
     }
 
     public function confirmInfo($id, $code)
@@ -433,10 +390,12 @@ class AdminController
         $user = User::where("unique_id", $id)->firstOrFail();
         $user->confirmed_info = $code;
         $user->save();
-        if ($code == 0)
+        if ($code == 0) {
             $msg = "تاییدیه لغو شد";
-        else
+        } else {
             $msg = "کاربر تایید شد";
+            $this->sendPush($user->pushe, "اطلاعات حساب", "حساب شما تایید شد");
+        }
         return redirect('/admin/users/' . $id)
             ->withMessage($msg);
     }
@@ -732,5 +691,53 @@ class AdminController
         $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
         $date = jDate("H:i", $timestamp);
         return $date;
+    }
+
+    protected function sendPush($id, $title, $body)
+    {
+        $client = new Client([
+            'headers' => [
+                'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
+                'Content-Type' => 'application/json',
+                'Accept: application/json'
+            ]
+        ]);
+        $response = $client->post(
+            'https://panel.pushe.co/api/v1/notifications/',
+            [
+                'body' => json_encode([
+                    "applications" => ["ir.hatamiarash.hyperonline"],
+                    "filter" => [
+                        "imei" => [$id]
+                    ],
+                    "notification" => [
+                        "title" => $title,
+                        "content" => "۱ پیام جدید دریافت شد",
+                        "wake_screen" => true,
+                        "action" => [
+                            "url" => "",
+                            "action_type" => "A"
+                        ],
+                    ],
+                    "custom_content" => [
+                        "type" => "1",
+                        "msg" => [
+                            "title" => $title,
+                            "body" => $body,
+                            "date" => $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime())
+                        ]
+                    ]
+                ])
+            ]
+        );
+        if ($response->getStatusCode() == "201") {
+            $push = new Push();
+            $push->title = $title;
+            $push->body = $body;
+            $push->save();
+
+            return true;
+        } else
+            return false;
     }
 }
