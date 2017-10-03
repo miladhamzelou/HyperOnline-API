@@ -66,7 +66,6 @@ class OrderService
         $order->description = $request->get('description');
         $order->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-
         $ids = explode(',', $order->stuffs_id);
         $products = array();
         foreach ($ids as $id) {
