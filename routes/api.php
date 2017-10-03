@@ -73,3 +73,4 @@ Route::post('/v1/downloadLink', 'v1\MainController@downloadLink');
 Route::get('/v1/downloadLink', 'v1\MainController@downloadLink');
 Route::get('/v1/getProductByID/{id}', 'v1\ProductController@getProduct');
 Route::post('/v1/user_orders', 'v1\OrderController@userOrders');
+Route::post('/v1/checkConfirm', 'v1\UserController@checkConfirm');

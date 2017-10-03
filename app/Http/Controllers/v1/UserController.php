@@ -228,4 +228,26 @@ class UserController extends Controller
                 'error_msg' => "این شماره ثبت نشده است"
             ], 201);
     }
+
+    public function checkConfirm(Request $request)
+    {
+        $phoneNumber = $request->get('phone');
+        $user = User::where("phone", $phoneNumber)->firstOrFail();
+        if ($user) {
+            if ($user->confirmed_info == "1")
+                return response()->json([
+                    'error' => false,
+                    'c' => 'OK'
+                ], 201);
+            else
+                return response()->json([
+                    'error' => false,
+                    'c' => 'NOK'
+                ], 201);
+        } else
+            return response()->json([
+                'error' => true,
+                'error_msg' => "این شماره ثبت نشده است"
+            ], 201);
+    }
 }
