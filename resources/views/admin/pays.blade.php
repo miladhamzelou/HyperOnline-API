@@ -23,6 +23,7 @@
                                 <table class="table no-margin">
                                     <thead>
                                     <tr>
+                                        <th style="font-size:17px; text-align: right; direction: rtl;">زمان</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">وضعیت</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">شماره کارت</th>
                                         <th style="font-size:17px; text-align: right; direction: rtl;">شماره فاکتور</th>
@@ -32,6 +33,7 @@
                                     <tbody>
                                     @foreach($pays as $pay)
                                         <tr>
+                                            <td style="text-align: right; direction: ltr;">{{ $pay->created_at }}</td>
                                             @if($pay->status)
                                                 <td style="color:limegreen;text-align: right; direction: ltr;">موفقیت
                                                     آمیز

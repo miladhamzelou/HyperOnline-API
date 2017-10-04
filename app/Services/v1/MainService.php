@@ -138,7 +138,7 @@ class MainService
         if ($option->off) {
             $products = Product::where("confirmed", 1)
                 ->where("off", ">", 1)
-                ->orderBy("updated_at", "desc")
+                ->orderBy("off", "desc")
                 ->take($option->off_count)
                 ->get();
             return $this->filterProduct($products);
