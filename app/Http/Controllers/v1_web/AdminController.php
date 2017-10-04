@@ -715,8 +715,8 @@ class AdminController
                         "content" => "۱ پیام جدید دریافت شد",
                         "wake_screen" => true,
                         "action" => [
-                            "url" => "",
-                            "action_type" => "A"
+                            "action_data" => "Activity_Inbox",
+                            "action_type" => "T"
                         ],
                     ],
                     "custom_content" => [
