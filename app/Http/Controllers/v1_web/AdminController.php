@@ -28,6 +28,7 @@ use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -546,6 +547,8 @@ class AdminController
         $uid = uniqid('', false);
         $banner->unique_id = $uid;
         $banner->title = $request->get('title');
+        $banner->link = $request->get('link');
+        $banner->size = 0;
         $banner->type = $request->get('type');
 
         if (Input::hasFile('image')) {
@@ -569,6 +572,56 @@ class AdminController
             return view('admin.banners')
                 ->withBanners($banners)
                 ->withTitle("بنر ها");
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function banner_edit($id)
+    {
+        $banner = Banner::where("unique_id", $id)->firstOrFail();
+        return view('admin.banner_edit')
+            ->withTitle("ویرایش بنر")
+            ->withBanner($banner);
+    }
+
+    public function banner_update(Request $request)
+    {
+        if (Auth::user()->isAdmin()) {
+            $id = $request->get("unique_id");
+            $banner = Banner::where("unique_id", $id)->firstOrFail();
+            $banner->title = $request->get("title");
+            $banner->link = $request->get("link");
+
+            if (Input::hasFile('image')) {
+                // first delete old one
+                File::delete('images/' . $banner->image);
+                $image = $request->file('image');
+                $input['imagename'] = 'B.' . $banner->unique_id . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('images');
+                $image->move($destinationPath, $input['imagename']);
+                $banner->image = $input['imagename'];
+            }
+
+            $banner->save();
+            $message = "بنر به روزرسانی شد";
+            return redirect('/admin/banners')
+                ->withMessage($message);
+        } else
+            return redirect('/')
+                ->withErrors('دسترسی غیرمجاز');
+    }
+
+    public function banner_delete($id)
+    {
+        if (Auth::user()->isAdmin()) {
+            $banner = Banner::find($id);
+            if ($banner->image)
+                File::delete('images/' . $banner->image);
+            $banner->delete();
+            $message = "بنر حذف شد";
+            return redirect('/admin/banners')
+                ->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');

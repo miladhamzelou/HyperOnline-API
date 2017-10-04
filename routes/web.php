@@ -92,6 +92,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/banners/create', 'v1_web\AdminController@banner_show')->name('banner_show');
     Route::post('/admin/banners/create', 'v1_web\AdminController@banner_create')->name('banner_create');
     Route::get('/admin/banners', 'v1_web\AdminController@banners')->name('banners');
+    Route::get('/admin/banners/{id}', 'v1_web\AdminController@banner_edit')->name('banner_edit');
+    Route::post('/admin/banners/update', 'v1_web\AdminController@banner_update')->name('banner_update');
+    Route::get('/admin/banners/delete/{id}', 'v1_web\AdminController@banner_delete')->name('banner_delete');
 });
 
 Route::get('/search', 'v1_web\AdminController@search');

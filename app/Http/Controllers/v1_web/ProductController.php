@@ -170,7 +170,8 @@ class ProductController extends Controller
                 File::delete('images/' . $product->image);
             $product->delete();
             $message = "محصول ( " . $product->name . " ) حذف شد";
-            return redirect('/admin/products')->withMessage($message);
+            return redirect('/admin/products')
+                ->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
