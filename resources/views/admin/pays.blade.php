@@ -9,7 +9,7 @@
         <div class="col-lg-7 col-centered center-block" style="float: none;">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h2 class="box-title">Last Pays</h2>
+                    <h2 class="box-title">آخرین تراکنش ها</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
