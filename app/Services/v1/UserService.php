@@ -7,6 +7,7 @@ namespace App\Services\v1;
 
 use App\Password;
 use App\User;
+use Illuminate\Support\Facades\Log;
 
 include(app_path() . '/Common/jdf.php');
 
@@ -58,6 +59,7 @@ class UserService
      */
     public function createUser($request)
     {
+        Log::info("create user");
         $user = new User();
         $password = new Password();
 
@@ -149,6 +151,15 @@ class UserService
     {
         $user = User::where('unique_id', $id)->firstOrFail();
         $user->delete();
+    }
+
+    public function checkExists($request)
+    {
+        $user = User::where("phone", $request->get('phone'))->first();
+        if ($user)
+            return true;
+        else
+            return false;
     }
 
 

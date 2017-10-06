@@ -11,7 +11,6 @@ use App\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use phplusir\smsir\Smsir;
 
@@ -59,33 +58,39 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), $this->rules, $this->messages);
 
-        if ($validator->fails()) {
-            $failedRules = $validator->failed();
-            return response()->json([
-                'tag' => 'validation',
-                'error' => true,
-                'error_msg' => $validator->messages(),
-                'rules' => $failedRules
-            ], 201);
-        } else {
-            try {
-                if ($this->Users->createUser($request)) {
-                    return response()->json([
-                        'error' => false
-                    ], 201);
-                } else
-                    return response()->json([
-                        'error' => true,
-                        'error_msg' => "Register Error"
-                    ], 201);
-            } catch (Exception $e) {
+        if (!$this->Users->checkExists($request)) {
+            if ($validator->fails()) {
+                $failedRules = $validator->failed();
                 return response()->json([
-                    'tag' => $request->input('tag'),
+                    'tag' => 'validation',
                     'error' => true,
-                    'error_msg' => $e->getMessage()
+                    'error_msg' => $validator->messages(),
+                    'rules' => $failedRules
                 ], 201);
+            } else {
+                try {
+                    if ($this->Users->createUser($request)) {
+                        return response()->json([
+                            'error' => false
+                        ], 201);
+                    } else
+                        return response()->json([
+                            'error' => true,
+                            'error_msg' => "Register Error"
+                        ], 201);
+                } catch (Exception $e) {
+                    return response()->json([
+                        'tag' => $request->input('tag'),
+                        'error' => true,
+                        'error_msg' => $e->getMessage()
+                    ], 201);
+                }
             }
-        }
+        } else
+            return response()->json([
+                'error' => true,
+                'error_msg' => "این شماره قبلا ثبت شده است"
+            ], 201);
     }
 
     /**
