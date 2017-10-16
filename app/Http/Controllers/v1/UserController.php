@@ -7,10 +7,12 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Services\v1\UserService;
+use App\Support;
 use App\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use phplusir\smsir\Smsir;
 
@@ -107,46 +109,6 @@ class UserController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), array(
-            'unique_id' => 'required',
-            'phone' => 'numeric|userPhone',
-            'email' => 'email'
-        ));
-
-        if ($validator->fails()) {
-            $failedRules = $validator->failed();
-            return response()->json([
-                'tag' => 'validation',
-                'error' => true,
-                'error_msg' => $validator->messages(),
-                'rules' => $failedRules
-            ], 500);
-        } else {
-            try {
-                $this->Users->updateUser($request, $id);
-                return response()->json([
-                    'tag' => $request->input('tag'),
-                    'error' => false
-                ], 201);
-            } catch (ModelNotFoundException $e) {
-                throw $e;
-            } catch (Exception $e) {
-                return response()->json([
-                    'tag' => $request->input('tag'),
-                    'error' => true,
-                    'error_msg' => $e->getMessage()
-                ], 500);
-            }
-        }
-    }
-
-    /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
@@ -178,7 +140,7 @@ class UserController extends Controller
                 'error' => true,
                 'error_msg' => $validator->messages(),
                 'rules' => $failedRules
-            ], 500);
+            ], 201);
         } else {
             try {
                 if ($this->Users->checkUser($request))
@@ -187,13 +149,14 @@ class UserController extends Controller
                     ], 201);
                 else
                     return response()->json([
-                        'error' => true
-                    ], 409);
+                        'error' => true,
+                        'error_msg' => "Login Problem"
+                    ], 201);
             } catch (Exception $e) {
                 return response()->json([
                     'error' => true,
                     'error_msg' => $e->getMessage()
-                ], 500);
+                ], 201);
             }
         }
     }
@@ -254,5 +217,38 @@ class UserController extends Controller
                 'error' => true,
                 'error_msg' => "این شماره ثبت نشده است"
             ], 201);
+    }
+
+    public function updateUser(Request $request)
+    {
+        try {
+            $name = $request->get("name");
+            $id = $request->get("uid");
+            $address = $request->get("address");
+
+            $user = User::where("unique_id", $id)->firstOrFail();
+            $user->name = $name;
+            $user->address = $address;
+            $user->confirmed_info = 0;
+            $user->save();
+
+            $support = new Support();
+            $support->unique_id = uniqid('', false);
+            $support->section = "اطلاعات کاربر";
+            $support->body = "کاربر " . $user->name . " اطلاعات خود را تغییر داد. حساب کاربری نیاز به تایید دارد";
+            $support->log = 0;
+
+            Mail::to("hatamiarash7@gmail.com")
+                ->send(new \App\Mail\Support($support));
+
+            return response()->json([
+                'error' => false,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'error_msg' => $e->getMessage()
+            ], 201);
+        }
     }
 }

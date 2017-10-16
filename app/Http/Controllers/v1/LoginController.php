@@ -41,7 +41,7 @@ class LoginController extends Controller
             return response()->json([
                 'error' => true,
                 'error_msg' => $validator->messages()
-            ], 500);
+            ], 201);
         } else {
             try {
                 if ($data = $this->Users->checkUser($request))
@@ -57,8 +57,9 @@ class LoginController extends Controller
             } catch (Exception $e) {
                 return response()->json([
                     'error' => true,
-                    'error_msg' => $e->getMessage()
-                ], 500);
+                    'error_msg' => 'اطلاعات وارد شده صحیح نمی باشد'
+//                    'error_msg' => $e->getMessage()
+                ], 201);
             }
         }
     }

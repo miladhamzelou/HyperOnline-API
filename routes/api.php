@@ -22,7 +22,8 @@ Route::post('/v1/products_all', 'v1\ProductController@sectionLoad');
 Route::resource('/v1/users', v1\UserController::class, [
     'except' => [
         'create',
-        'edit'
+        'edit',
+        'update'
     ]
 ]);
 
@@ -73,4 +74,5 @@ Route::post('/v1/downloadLink', 'v1\MainController@downloadLink');
 Route::get('/v1/downloadLink', 'v1\MainController@downloadLink');
 Route::get('/v1/getProductByID/{id}', 'v1\ProductController@getProduct');
 Route::post('/v1/user_orders', 'v1\OrderController@userOrders');
+Route::post('/v1/user_update', 'v1\UserController@updateUser');
 Route::post('/v1/checkConfirm', 'v1\UserController@checkConfirm');
