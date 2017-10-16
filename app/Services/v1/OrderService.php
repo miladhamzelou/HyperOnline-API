@@ -8,10 +8,12 @@ namespace App\Services\v1;
 use App\Order;
 use App\Product;
 use App\Seller;
+use App\Support;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
+use phplusir\smsir\Smsir;
 
 class OrderService
 {
@@ -69,8 +71,8 @@ class OrderService
         $ids = explode(',', $order->stuffs_id);
         $products = array();
         foreach ($ids as $id) {
-                $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
-                array_push($products, $p);
+            $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
+            array_push($products, $p);
         }
         $price_original = 0;
         $tPrice = 0;
@@ -100,6 +102,20 @@ class OrderService
         ];
         $pdf = PDF::loadView('pdf.factor', $data);
         $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
+
+        $support = new Support();
+        $support->unique_id = uniqid('', false);
+        $support->section = "سفارش جدید";
+        $support->body = "سفارش جدید ثبت شد";
+        $support->log = 0;
+        Mail::to("hatamiarash7@gmail.com")
+            ->send(new \App\Mail\Order($support));
+
+//        $phones = array();
+//        $messages = array();
+//        array_push($phones, "09182180519");
+//        array_push($messages, "سفارش جدید ثبت شد");
+//        Smsir::send($messages, $phones);
 
         return true;
     }
