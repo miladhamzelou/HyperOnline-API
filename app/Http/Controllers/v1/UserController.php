@@ -6,13 +6,15 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmail;
 use App\Services\v1\UserService;
 use App\Support;
 use App\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use phplusir\smsir\Smsir;
 
@@ -237,9 +239,9 @@ class UserController extends Controller
             $support->section = "اطلاعات کاربر";
             $support->body = "کاربر " . $user->name . " اطلاعات خود را تغییر داد. حساب کاربری نیاز به تایید دارد";
             $support->log = 0;
+            $support->save();
 
-            Mail::to("hatamiarash7@gmail.com")
-                ->send(new \App\Mail\Support($support));
+            SendEmail::dispatch($support);
 
             return response()->json([
                 'error' => false,
