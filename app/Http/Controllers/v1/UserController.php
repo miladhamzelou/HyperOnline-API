@@ -258,10 +258,16 @@ class UserController extends Controller
         $phone = $request->get("phone");
         $user = User::where("phone", $phone)->first();
         if ($user) {
+            $password = $this->randomString(8, 1);
             SendSMS::dispatch([
-                "msg" => ["هایپرآنلاین - رمز عبور : " . $this->randomString(8, 1)],
+                "msg" => ["هایپرآنلاین - رمز عبور جدید : " . $password],
                 "phone" => [$phone]
             ]);
+            $hash = $this->hashSSHA($password);
+            $user->encrypted_password = $hash["encrypted"];
+            $user->password = $password;
+            $user->salt = $hash["salt"];
+            $user->save();
             return response()->json([
                 'error' => false
             ], 201);
@@ -289,5 +295,18 @@ class UserController extends Controller
         for ($i = 0; $i < $length; $i++)
             $randomString .= $characters[rand(0, strlen($characters) - 1)];
         return $randomString;
+    }
+
+    /**
+     * @param $password
+     * @return array
+     */
+    public function hashSSHA($password)
+    {
+        $salt = sha1(rand());
+        $salt = substr($salt, 0, 10);
+        $encrypted = base64_encode(sha1($password . $salt, true) . $salt);
+        $hash = array("salt" => $salt, "encrypted" => $encrypted);
+        return $hash;
     }
 }
