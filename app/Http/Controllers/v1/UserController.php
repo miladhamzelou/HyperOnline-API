@@ -278,6 +278,27 @@ class UserController extends Controller
             ], 201);
     }
 
+    public function updatePassword(Request $request)
+    {
+        $id = $request->get("uid");
+        $user = User::where("unique_id", $id)->first();
+        if ($user) {
+            $password = $request->get("password");
+            $hash = $this->hashSSHA($password);
+            $user->encrypted_password = $hash["encrypted"];
+            $user->password = $password;
+            $user->salt = $hash["salt"];
+            $user->save();
+            return response()->json([
+                'error' => false
+            ], 201);
+        } else
+            return response()->json([
+                'error' => true,
+                'error_msg' => "چنین کاربری وجود ندارد"
+            ], 201);
+    }
+
     private function randomString($length = 10, $hard)
     {
         $characters = '';
