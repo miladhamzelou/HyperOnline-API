@@ -76,3 +76,4 @@ Route::get('/v1/getProductByID/{id}', 'v1\ProductController@getProduct');
 Route::post('/v1/user_orders', 'v1\OrderController@userOrders');
 Route::post('/v1/user_update', 'v1\UserController@updateUser');
 Route::post('/v1/checkConfirm', 'v1\UserController@checkConfirm');
+Route::post('/v1/resetPassword', 'v1\UserController@resetPassword');

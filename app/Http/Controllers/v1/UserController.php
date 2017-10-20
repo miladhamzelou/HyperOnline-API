@@ -7,14 +7,13 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmail;
+use App\Jobs\SendSMS;
 use App\Services\v1\UserService;
 use App\Support;
 use App\User;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use phplusir\smsir\Smsir;
 
@@ -252,5 +251,43 @@ class UserController extends Controller
                 'error_msg' => $e->getMessage()
             ], 201);
         }
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $phone = $request->get("phone");
+        $user = User::where("phone", $phone)->first();
+        if ($user) {
+            SendSMS::dispatch([
+                "msg" => ["هایپرآنلاین - رمز عبور : " . $this->randomString(8, 1)],
+                "phone" => [$phone]
+            ]);
+            return response()->json([
+                'error' => false
+            ], 201);
+        } else
+            return response()->json([
+                'error' => true,
+                'error_msg' => "این شماره ثبت نشده است"
+            ], 201);
+    }
+
+    private function randomString($length = 10, $hard)
+    {
+        $characters = '';
+        if ($hard == 0)
+            $characters = '0123456789';
+        elseif ($hard == 1)
+            $characters = '0123456789abc';
+        else if ($hard == 2)
+            $characters = '0123456789' . 'abcdefghijklmnopqrstuvwxyz';
+        elseif ($hard == 3)
+            $characters = '0123456789' . 'abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        elseif ($hard == 4)
+            $characters = '0123456789' . 'abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '!@#$%&';
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++)
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        return $randomString;
     }
 }

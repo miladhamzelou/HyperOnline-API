@@ -16,21 +16,12 @@ class SendEmail implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $support;
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
+
     public function __construct(Support $support)
     {
         $this->support = $support;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         Mail::to("hatamiarash7@gmail.com")
