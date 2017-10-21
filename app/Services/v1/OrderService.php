@@ -112,7 +112,7 @@ class OrderService
         SendEmail::dispatch([
             "to" => "hyper.online.h@gmail.com",
             "body" => "سفارش جدید ثبت شد"
-        ]);
+        ], 1);
         SendSMS::dispatch([
             "msg" => ["سفارش جدید ثبت شد"],
             "phone" => ["09188167800"]

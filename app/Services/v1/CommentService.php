@@ -35,7 +35,7 @@ class CommentService
         SendEmail::dispatch([
             "to" => "hyper.online.h@gmail.com",
             "body" => "نظر جدید ثبت شد"
-        ]);
+        ], 0);
 
         return true;
     }

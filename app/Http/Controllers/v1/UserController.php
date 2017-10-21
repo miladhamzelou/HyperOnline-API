@@ -235,7 +235,7 @@ class UserController extends Controller
             SendEmail::dispatch([
                 "to" => "hyper.online.h@gmail.com",
                 "body" => "کاربر " . '* ' . $user->name . ' *' . " اطلاعات خود را تغییر داد. حساب کاربری نیاز به تایید دارد"
-            ]);
+            ], 0);
 
             return response()->json([
                 'error' => false,

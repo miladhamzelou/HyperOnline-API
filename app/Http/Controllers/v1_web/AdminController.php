@@ -17,6 +17,7 @@ use App\Banner;
 use App\Category1;
 use App\Category2;
 use App\Category3;
+use App\Jobs\SendEmail;
 use App\Option;
 use App\Order;
 use App\Product;
@@ -31,7 +32,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use phplusir\smsir\Smsir;
 
 require(app_path() . '/Common/jdf.php');
@@ -226,8 +226,14 @@ class AdminController
                 $support->log = 0;
             $support->save();
 
-            Mail::to("hatamiarash7@gmail.com")
-                ->send(new \App\Mail\Support($support));
+            SendEmail::dispatch([
+                "to" => "hatamiarash7@gmail.com",
+                "body" => $support->body,
+                "title" => $support->section,
+                "log" => $support->log
+            ], 2);
+
+
             $message = "پیام شما ارسال شد";
             return redirect('/admin')
                 ->withMessage($message);
