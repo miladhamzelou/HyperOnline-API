@@ -39,7 +39,7 @@ class OrderController
     public function details($id)
     {
         $order = Order::find($id);
-        $this->addCount($order);
+        $this->addInfo($order);
         $order->price = $this->formatMoney($order->price);
         $order->pay_method = ($order->pay_method == "online") ? "آنلاین" : "در محل";
         $user = User::where("unique_id", $order->user_id)->firstOrFail();
@@ -53,19 +53,20 @@ class OrderController
     protected function fix($items)
     {
         foreach ($items as $item)
-            $this->addCount($item);
+            $this->addInfo($item);
         return $this->fixPrice($items);
     }
 
-    protected function addCount(&$item)
+    protected function addInfo(&$item)
     {
         $stuff = explode(',', $item->stuffs);
         $stuff_count = explode(',', $item->stuffs_count);
+        $stuff_desc = explode(',', $item->stuffs_desc);
         $final = "";
         foreach (array_values($stuff) as $i => $value) {
-            $final .= $value . ' ( ' . $stuff_count[$i] . ' عدد ) - ';
+            $final .= $value . ' ( ' . $stuff_desc[$i] . ' )( ' . $stuff_count[$i] . ' عدد ) :--: ';
         }
-        $item->stuffs = substr($final, 0, -3);
+        $item->stuffs = substr($final, 0, -6);
     }
 
     protected function fixPrice($items)

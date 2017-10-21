@@ -290,8 +290,8 @@ class AdminController
 
     public function messages()
     {
-        $sms = Sms::get();
-        $push = Push::get();
+        $sms = Sms::orderBy("created_at","desc")->get();
+        $push = Push::orderBy("created_at","desc")->get();
         return view('admin.messages')
             ->withTitle("گزارشات پیام ها")
             ->withSms($sms)

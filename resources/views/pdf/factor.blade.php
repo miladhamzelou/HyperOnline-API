@@ -43,17 +43,21 @@
     </tr>
     @foreach($products as $index => $product)
         <tr>
-            <td>{{ $product['name'] }}</td>
+            <td>{{ $product['name'] . ' ( ' . $desc[$index] . ' )' }}</td>
             <td>{{ $counts[$index] }}</td>
-            <td>{{ $product['price']*$counts[$index].' تومان' }}</td>
-            <td>{{ (($product['price'])- ($product['price']* $product['off'] / 100))*$counts[$index].' تومان' }}</td>
+            <td>{{ $product['price'] * $counts[$index] . ' تومان' }}</td>
+            <td>{{ (($product['price']) - ($product['price'] * $product['off'] / 100)) * $counts[$index] . ' تومان' }}</td>
         </tr>
     @endforeach
 </table>
 <br>
 <p class="mine"><strong>مشخصات مشتری : </strong>{{ $user_name.' - '.$user_phone.' - '. $user_address }}</p>
 <p class="mine"><strong>مجموع خرید : </strong>{{ $total.' تومان' }}</p>
-<p class="mine"><strong>توضیحات : </strong>{{ $description }}</p>
+@if($order['desc'])
+    <p class="mine"><strong>توضیحات : </strong>{{ $description }}</p>
+@else
+    <p class="mine"><strong>توضیحات : </strong>ندارد</p>
+@endif
 <p class="mine"><strong>ساعت ارسال : </strong>{{ $hour }}</p>
 </body>
 </html>

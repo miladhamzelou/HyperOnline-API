@@ -77,25 +77,32 @@ class OrderService
         $price_original = 0;
         $tPrice = 0;
         $counts = explode(',', $order->stuffs_count);
+        $desc = '';
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
             $product->sell = $product->sell + 1;
 //            $product->count = $product->count - 1;
             $price_original += $product->price_original * $counts[$index];
             $tPrice += $product->price * $counts[$index];
+            if ($product->description)
+                $desc .= $product->description . ',';
             $product->save();
         }
         if ($tPrice < 35000) $tPrice += 5000;
         $order->price = $tPrice;
         $order->price_original = $price_original;
+        $order->stuffs_desc = ltrim(rtrim($desc, ','), ',');
         $order->save();
+
+        $address = User::where("unique_id", $order->user_id)->firstOrFail()->address;
 
         $data = [
             "products" => $products,
             "counts" => $counts,
+            "desc" => explode(',', $order->stuffs_desc),
             "user_name" => $order->user_name,
             "user_phone" => $order->user_phone,
-            "user_address" => User::where("unique_id", $order->user_id)->firstOrFail()->address,
+            "user_address" => $address,
             "total" => $order->price,
             "hour" => $order->hour,
             "description" => $order->description
@@ -109,16 +116,39 @@ class OrderService
         $support->body = "سفارش جدید ثبت شد";
         $support->log = 0;
 
+        $this->addInfo($order);
         SendEmail::dispatch([
             "to" => "hyper.online.h@gmail.com",
-            "body" => "سفارش جدید ثبت شد"
+            "body" => "سفارش جدید ثبت شد",
+            "order" => [
+                "user_name" => $order->user_name,
+                "user_phone" => $order->user_phone,
+                "stuffs" => $order->stuffs,
+                "hour" => $order->hour,
+                "price" => $order->price,
+                "desc" => $order->description,
+                "address" => $address
+            ]
         ], 1);
+
         SendSMS::dispatch([
             "msg" => ["سفارش جدید ثبت شد"],
             "phone" => ["09188167800"]
         ]);
 
         return true;
+    }
+
+    protected function addInfo(&$item)
+    {
+        $stuff = explode(',', $item->stuffs);
+        $stuff_count = explode(',', $item->stuffs_count);
+        $stuff_desc = explode(',', $item->stuffs_desc);
+        $final = "";
+        foreach (array_values($stuff) as $i => $value) {
+            $final .= $value . ' ( ' . $stuff_desc[$i] . ' )( ' . $stuff_count[$i] . ' عدد ) :--: ';
+        }
+        $item->stuffs = substr($final, 0, -6);
     }
 
     /**

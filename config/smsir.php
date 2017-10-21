@@ -23,5 +23,5 @@ return [
 	/* Admin Panel Title */
 	'title' => 'هایپرآنلاین',
 	// How many log you want to show in sms-admin panel ?
-	'in-page' => '25'
+	'in-page' => '100'
 ];

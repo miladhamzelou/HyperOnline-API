@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\Normal;
 use App\Mail\Order;
 use App\Mail\Support;
 use Illuminate\Bus\Queueable;
@@ -44,13 +45,12 @@ class SendEmail implements ShouldQueue
     {
         Mail::to($data['to'])
             ->cc("hatamiarash7@gmail.com")
-            ->queue(new Order($data));
+            ->queue(new Normal($data));
     }
 
     private function supportEmail($data)
     {
         Mail::to($data['to'])
-            ->cc("hatamiarash7@gmail.com")
             ->queue(new Support($data));
     }
 }

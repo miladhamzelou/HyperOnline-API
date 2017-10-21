@@ -21,7 +21,8 @@ class Order extends Mailable
     {
         return $this->view('emails.order')
             ->with([
-                "body" => $this->email['body']
+                "body" => $this->email['body'],
+                "order" => $this->email['order']
             ]);
     }
 }
