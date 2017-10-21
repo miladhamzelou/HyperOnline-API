@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Jobs\SendEmail;
 use App\Jobs\SendSMS;
 use App\Services\v1\UserService;
-use App\Support;
 use App\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -233,14 +232,10 @@ class UserController extends Controller
             $user->confirmed_info = 0;
             $user->save();
 
-            $support = new Support();
-            $support->unique_id = uniqid('', false);
-            $support->section = "اطلاعات کاربر";
-            $support->body = "کاربر " . $user->name . " اطلاعات خود را تغییر داد. حساب کاربری نیاز به تایید دارد";
-            $support->log = 0;
-            $support->save();
-
-            SendEmail::dispatch($support);
+            SendEmail::dispatch([
+                "to" => "hyper.online.h@gmail.com",
+                "body" => "کاربر " . '* ' . $user->name . ' *' . " اطلاعات خود را تغییر داد. حساب کاربری نیاز به تایید دارد"
+            ]);
 
             return response()->json([
                 'error' => false,
