@@ -53,7 +53,7 @@
 <br>
 <p class="mine"><strong>مشخصات مشتری : </strong>{{ $user_name.' - '.$user_phone.' - '. $user_address }}</p>
 <p class="mine"><strong>مجموع خرید : </strong>{{ $total.' تومان' }}</p>
-@if($order['desc'])
+@if($description)
     <p class="mine"><strong>توضیحات : </strong>{{ $description }}</p>
 @else
     <p class="mine"><strong>توضیحات : </strong>ندارد</p>
