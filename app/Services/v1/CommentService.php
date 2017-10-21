@@ -6,6 +6,7 @@
 namespace App\Services\v1;
 
 use App\Comment;
+use App\Jobs\SendEmail;
 use App\User;
 
 
@@ -30,6 +31,11 @@ class CommentService
         $comment->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
         $comment->save();
+
+        SendEmail::dispatch([
+            "to" => "hyper.online.h@gmail.com",
+            "body" => "نظر جدید ثبت شد"
+        ]);
 
         return true;
     }
