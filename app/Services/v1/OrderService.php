@@ -5,15 +5,15 @@
 
 namespace App\Services\v1;
 
+use App\Jobs\SendEmail;
+use App\Jobs\SendSMS;
 use App\Order;
 use App\Product;
 use App\Seller;
 use App\Support;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
-use phplusir\smsir\Smsir;
 
 class OrderService
 {
@@ -108,14 +108,15 @@ class OrderService
         $support->section = "سفارش جدید";
         $support->body = "سفارش جدید ثبت شد";
         $support->log = 0;
-        Mail::to("hatamiarash7@gmail.com")
-            ->send(new \App\Mail\Order($support));
 
-//        $phones = array();
-//        $messages = array();
-//        array_push($phones, "09182180519");
-//        array_push($messages, "سفارش جدید ثبت شد");
-//        Smsir::send($messages, $phones);
+        SendEmail::dispatch([
+            "to" => "hyper.online.h@gmail.com",
+            "body" => "سفارش جدید ثبت شد"
+        ]);
+        SendSMS::dispatch([
+            "msg" => ["سفارش جدید ثبت شد"],
+            "phone" => ["09188167800"]
+        ]);
 
         return true;
     }

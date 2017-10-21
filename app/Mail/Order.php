@@ -10,18 +10,18 @@ class Order extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $support;
+    protected $email;
 
-    public function __construct(\App\Support $support)
+    public function __construct($email)
     {
-        $this->support = $support;
+        $this->email = $email;
     }
 
     public function build()
     {
         return $this->view('emails.order')
             ->with([
-                "body" => $this->support->body
+                "body" => $this->email['body']
             ]);
     }
 }
