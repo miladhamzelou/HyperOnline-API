@@ -14,6 +14,13 @@
             width: 100%;
         }
 
+        .table2 {
+            text-align: center;
+            direction: rtl;
+            border-collapse: collapse;
+            width: 25%;
+        }
+
         th {
             background-color: red;
             color: white;
@@ -29,11 +36,13 @@
     </style>
 </head>
 <body>
-<h1 class="mine">با سلام</h1>
-<h3 class="mine">
-    از انتخاب و اعتماد شما متشکریم. شرح خرید شما بدین صورت می باشد :
-</h3>
-<br>
+<p class="mine" style="text-align: center;"><strong>هایپرآنلاین - فاکتور فروش</strong></p>
+<p class="mine"><strong>شماره فاکتور : </strong>{{ $code }}</p>
+<p class="mine"><strong>تاریخ : </strong>{{ $date }}</p>
+<hr>
+<p class="mine"><strong>آقای / خانم : </strong>{{ $user_name }}</p>
+<p class="mine"><strong>کد مشتری : </strong>{{ $user_code }}</p>
+<p class="mine"><strong>آدرس مشتری : </strong>{{ $user_address }}</p>
 <table>
     <tr>
         <th>نام</th>
@@ -51,17 +60,44 @@
     @endforeach
 </table>
 <br>
-<p class="mine"><strong>مشخصات مشتری : </strong>{{ $user_name.' - '.$user_phone.' - '. $user_address }}</p>
-<p class="mine"><strong>مجموع خرید : </strong>{{ $total.' تومان' }}</p>
-@if($description)
-    <p class="mine"><strong>توضیحات : </strong>{{ $description }}</p>
-@else
-    <p class="mine"><strong>توضیحات : </strong>ندارد</p>
-@endif
-@if($hour==18)
-    <p class="mine"><strong>ساعت ارسال : </strong>18:30 الی 19:30</p>
-@else
-    <p class="mine"><strong>ساعت ارسال : </strong>{{ $hour.' الی '.$hour }}</p>
-@endif
+<table class="table2">
+    <tr>
+        <td>جمع کل</td>
+        <td>1000 تومان</td>
+    </tr>
+    <tr>
+        <td>سود شما از این خرید</td>
+        <td>1000 تومان</td>
+    </tr>
+    <tr>
+        <td>هزینه ارسال و بسته بندی</td>
+        <td>1000 تومان</td>
+    </tr>
+    <tr>
+        <td>مبلغ قابل پرداخت</td>
+        <td>{{ $total.' تومان' }}</td>
+    </tr>
+</table>
+<p class="mine"><strong>ساعت ارسال کالای شما : </strong>کالای شما از ساعت 18 الی 19 درب منزل شما تحویل می گردد.</p>
+<table>
+    <tr>
+        <td>توضیحات</td>
+        @if($description)
+            <td>با عرض سلام و خسته نباشید. متشکرم.</td>
+        @else
+            <td>-</td>
+        @endif
+    </tr>
+</table>
+<br>
+<p class="mine" style="text-align: center;">امضا فروشنده&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;امضا خریدار</p>
+<br>
+<p><strong>از حسن انتخاب شما متشکریم</strong></p>
 </body>
 </html>

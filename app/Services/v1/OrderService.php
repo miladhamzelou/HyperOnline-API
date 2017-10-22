@@ -96,18 +96,19 @@ class OrderService
         $order->stuffs_desc = ltrim(rtrim($desc, ','), ',');
         $order->save();
 
-        $address = User::where("unique_id", $order->user_id)->firstOrFail()->address;
-
         $data = [
             "products" => $products,
             "counts" => $counts,
             "desc" => explode(',', $order->stuffs_desc),
             "user_name" => $order->user_name,
             "user_phone" => $order->user_phone,
-            "user_address" => $address,
+            "user_code" => $user->code,
+            "user_address" => $user->state . '-' . $user->city . ' : ' . $user->address,
             "total" => $order->price,
             "hour" => $order->hour,
-            "description" => $order->description
+            "description" => $order->description,
+            "date" => $order->create_date,
+            "code" => $order->code
         ];
         $pdf = PDF::loadView('pdf.factor', $data);
         $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
@@ -130,7 +131,6 @@ class OrderService
                 "hour" => $order->hour,
                 "price" => $order->price,
                 "desc" => $order->description,
-                "address" => $address
             ]
         ], 1);
 
