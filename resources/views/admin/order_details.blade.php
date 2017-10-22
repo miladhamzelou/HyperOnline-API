@@ -50,8 +50,15 @@
                         @endif
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">کد
                                 : </strong>{{ $order->code }}</p><br>
-                        <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">توضیحات
-                                : </strong>{{ $order->description }}</p><br>
+                        @if($order->description)
+                            <p style="text-align: justify; direction: rtl;"><strong
+                                        style="color:#3c8dbc; font-size: 19px;">توضیحات
+                                    : </strong>{{ $order->description }}</p><br>
+                        @else
+                            <p style="text-align: justify; direction: rtl;"><strong
+                                        style="color:#3c8dbc; font-size: 19px;">توضیحات
+                                    : </strong>ندارد</p><br>
+                        @endif
                         <p style="text-align: right; direction: ltr"><strong style="color:#3c8dbc; font-size: 19px;">تاریخ
                                 / ساعت : </strong>{{ $order->create_date }}</p><br>
                         <br>
