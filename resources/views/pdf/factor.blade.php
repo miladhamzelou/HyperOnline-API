@@ -58,6 +58,10 @@
 @else
     <p class="mine"><strong>توضیحات : </strong>ندارد</p>
 @endif
-<p class="mine"><strong>ساعت ارسال : </strong>{{ $hour }}</p>
+@if($hour==18)
+    <p class="mine"><strong>ساعت ارسال : </strong>18:30 الی 19:30</p>
+@else
+    <p class="mine"><strong>ساعت ارسال : </strong>{{ $hour.' الی '.$hour }}</p>
+@endif
 </body>
 </html>
