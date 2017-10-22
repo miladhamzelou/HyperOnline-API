@@ -16,6 +16,7 @@ namespace app\Http\Controllers\v1_web;
 use App\Order;
 use App\Pay;
 use App\User;
+use Illuminate\Http\Response;
 
 class OrderController
 {
@@ -91,5 +92,14 @@ class OrderController
                 break;
         }
         return $number;
+    }
+
+    public function downloadFactor($id)
+    {
+        $file = public_path() . "/ftp/factors/" . $id . ".pdf";
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return response()->download($file, $id . '.pdf', $headers);
     }
 }

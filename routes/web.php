@@ -106,3 +106,4 @@ Route::get('/removeFromCart', 'v1\ProductController@removeFromCart');
 Route::get('/checkout', 'v1\market\MainController@checkout')->name('checkout');
 Route::get('/pay', 'v1\market\MainController@pay')->name('pay');
 Route::post('/callback', 'v1\market\MainController@callback');
+Route::get('/admin/downloadFactor/{id}', 'v1_web\OrderController@downloadFactor');
