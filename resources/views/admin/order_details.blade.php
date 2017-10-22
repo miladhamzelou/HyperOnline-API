@@ -32,8 +32,13 @@
                                 ها : </strong>{{ $order->stuffs }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">قیمت
                                 : </strong>{{ $order->price . ' تومان' }}</p><br>
-                        <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">ساعت
-                                تحویل : </strong>{{ $order->hour }}</p><br>
+                        @if($order->hour==18)
+                            <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">ساعت
+                                    تحویل : </strong> الی </p><br>
+                        @else
+                            <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">ساعت
+                                    تحویل : </strong>{{ $order->hour }}</p><br>
+                        @endif
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">روش
                                 پرداخت : </strong>{{ $order->pay_method }}</p><br>
                         @if($order->status=="abort")
