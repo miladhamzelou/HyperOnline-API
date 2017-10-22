@@ -38,6 +38,9 @@
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">کد : </strong>{{ $order->code }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">توضیحات : </strong>{{ $order->description }}</p><br>
                         <p style="text-align: right; direction: ltr"><strong style="color:#3c8dbc; font-size: 19px;">تاریخ / ساعت : </strong>{{ $order->create_date }}</p><br>
+                        <br>
+                        <a class="btn btn-success pull-right btn-lg" tabindex="1"
+                           href="{{ url('admin/downloadOrder/' . $user->unique_id) }}">دانلود فاکتور</a>
                     </div>
                 </div>
             </div>

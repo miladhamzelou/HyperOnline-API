@@ -86,6 +86,8 @@ class OrderService
             $tPrice += $product->price * $counts[$index];
             if ($product->description)
                 $desc .= $product->description . ',';
+            else
+                $desc .= '-,';
             $product->save();
         }
         if ($tPrice < 35000) $tPrice += 5000;
