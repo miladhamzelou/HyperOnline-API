@@ -123,6 +123,7 @@ class OrderService
             "to" => "hyper.online.h@gmail.com",
             "body" => "سفارش جدید ثبت شد",
             "order" => [
+                "code" => $order->code,
                 "user_name" => $order->user_name,
                 "user_phone" => $order->user_phone,
                 "stuffs" => $order->stuffs,

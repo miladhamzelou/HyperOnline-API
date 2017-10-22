@@ -23,6 +23,7 @@ class Order extends Mailable
             ->with([
                 "body" => $this->email['body'],
                 "order" => $this->email['order']
-            ]);
+            ])
+            ->attach(public_path('/ftp/factors/' . $this->email['order']['code'] . '.pdf'));
     }
 }

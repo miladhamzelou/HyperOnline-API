@@ -18,6 +18,8 @@
                     <div class="box-body">
                         <br>
                         <br>
+                        <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">کد سفارش
+                                : </strong>{{ $order->code }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">فروشنده
                                 : </strong>{{ $order->seller_name }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">نام
