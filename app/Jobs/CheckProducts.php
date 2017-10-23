@@ -32,7 +32,7 @@ class CheckProducts implements ShouldQueue
         }
         if (strlen($final) > 0) {
             SendEmail::dispatch([
-                "to" => "hatamiarash7@gmail.com",
+                "to" => "hyper.online.h@gmail.com",
                 "body" => "موجودی محصولات مورد نظر رو به اتمام است. جهت تهییه مجدد اقدام فرمایید : " . "\r\n" . $final
             ], 0);
         }
