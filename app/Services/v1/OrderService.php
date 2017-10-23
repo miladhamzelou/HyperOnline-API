@@ -5,6 +5,7 @@
 
 namespace App\Services\v1;
 
+use App\Jobs\CheckProducts;
 use App\Jobs\SendEmail;
 use App\Jobs\SendSMS;
 use App\Order;
@@ -12,6 +13,7 @@ use App\Product;
 use App\Seller;
 use App\Support;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
@@ -81,7 +83,7 @@ class OrderService
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
             $product->sell = $product->sell + 1;
-            $product->count = $product->count - 1;
+//            $product->count = $product->count - 1;
             $price_original += $product->price_original * $counts[$index];
             $tPrice += $product->price * $counts[$index];
             if ($product->description)
@@ -137,8 +139,12 @@ class OrderService
         SendSMS::dispatch([
             "msg" => ["سفارش جدید ثبت شد"],
             "phone" => ["09188167800"]
-        ]);
+        ])
+            ->onQueue('sms');
 
+        CheckProducts::dispatch()
+            ->onQueue('email')
+            ->delay(Carbon::now()->addMinutes(1));
         return true;
     }
 
