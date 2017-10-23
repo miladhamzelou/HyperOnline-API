@@ -290,8 +290,8 @@ class AdminController
 
     public function messages()
     {
-        $sms = Sms::orderBy("created_at","desc")->get();
-        $push = Push::orderBy("created_at","desc")->get();
+        $sms = Sms::orderBy("created_at", "desc")->get();
+        $push = Push::orderBy("created_at", "desc")->get();
         return view('admin.messages')
             ->withTitle("گزارشات پیام ها")
             ->withSms($sms)
@@ -798,5 +798,17 @@ class AdminController
             return true;
         } else
             return false;
+    }
+
+    public function resetMostSell()
+    {
+        $products = Product::get();
+        foreach ($products as $product) {
+            $product->sell = 0;
+            $product->save();
+        }
+        $message = "فروش محصولات به حالت صفر برگشت";
+        return redirect('/admin/setting')
+            ->withMessage($message);
     }
 }

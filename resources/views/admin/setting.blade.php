@@ -16,7 +16,10 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <a href="{{ url('admin/setting/delete_log/') }}" tabindex="4" class="btn btn-danger  btn-lg">حذف لاگ</a>
+                        <a href="{{ url('admin/setting/delete_log') }}" tabindex="1" class="btn btn-danger  btn-lg">حذف
+                            لاگ</a>
+                        <a href="{{ url('admin/setting/resetMostSell') }}" tabindex="2" class="btn btn-danger  btn-lg">صفر
+                            کردن فروش</a>
                     </div>
                 </div>
             </div>
