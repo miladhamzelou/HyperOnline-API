@@ -78,19 +78,26 @@ class OrderService
         }
         $price_original = 0;
         $tPrice = 0;
+        $tOff = 0;
+        $tFinal = 0;
         $counts = explode(',', $order->stuffs_count);
         $desc = '';
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
+
             $product->sell = $product->sell + 1;
             if ($order->code != '-1')
                 $product->count = $product->count - 1;
-            $price_original += $product->price_original * $counts[$index];
-            $tPrice += $product->price * $counts[$index];
             if ($product->description)
                 $desc .= $product->description . ',';
             else
                 $desc .= '-,';
+
+            $price_original += $product->price_original * $counts[$index];
+            $tPrice += $product->price * $counts[$index];
+            $tOff += $product->price * $product->off / 100 * $counts[$index];
+            $tFinal += ($product->price - ($product->price * $product->off / 100)) * $counts[$index];
+
             $product->save();
         }
         if ($tPrice < 35000) $tPrice += 5000;
@@ -99,6 +106,7 @@ class OrderService
         $order->stuffs_desc = ltrim(rtrim($desc, ','), ',');
         $order->save();
 
+        $send_price = Seller::firstOrFail()->send_price;
         $data = [
             "products" => $products,
             "counts" => $counts,
@@ -107,11 +115,14 @@ class OrderService
             "user_phone" => $order->user_phone,
             "user_code" => $user->code,
             "user_address" => $user->state . '-' . $user->city . ' : ' . $user->address,
-            "total" => $order->price,
+            "total" => $tPrice,
+            "off" => $tOff,
+            "final" => $tFinal,
             "hour" => $order->hour,
             "description" => $order->description,
             "date" => $order->create_date,
-            "code" => $order->code
+            "code" => $order->code,
+            "send_price" => $send_price
         ];
         $pdf = PDF::loadView('pdf.factor', $data);
         $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));

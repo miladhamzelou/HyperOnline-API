@@ -47,14 +47,16 @@
     <tr>
         <th>نام</th>
         <th>تعداد</th>
-        <th>قیمت روی جلد</th>
-        <th>قیمت نهایی</th>
+        <th>قیمت روی کالا</th>
+        <th>قیمت هایپرآنلاین</th>
+        <th>قابل پرداخت</th>
     </tr>
     @foreach($products as $index => $product)
         <tr>
             <td>{{ $product['name'] . ' ( ' . $desc[$index] . ' )' }}</td>
             <td>{{ $counts[$index] }}</td>
-            <td>{{ $product['price'] * $counts[$index] . ' تومان' }}</td>
+            <td>{{ $product['price'] }}</td>
+            <td>{{ ($product['price']) - ($product['price'] * $product['off'] / 100) }}</td>
             <td>{{ (($product['price']) - ($product['price'] * $product['off'] / 100)) * $counts[$index] . ' تومان' }}</td>
         </tr>
     @endforeach
@@ -63,19 +65,19 @@
 <table class="table2">
     <tr>
         <td>جمع کل</td>
-        <td>1000 تومان</td>
+        <td>{{ $total . ' تومان' }}</td>
     </tr>
     <tr>
         <td>سود شما از این خرید</td>
-        <td>1000 تومان</td>
+        <td>{{ $off . ' تومان' }}</td>
     </tr>
     <tr>
         <td>هزینه ارسال و بسته بندی</td>
-        <td>1000 تومان</td>
+        <td>{{ $send_price . ' تومان' }}</td>
     </tr>
     <tr>
         <td>مبلغ قابل پرداخت</td>
-        <td>{{ $total.' تومان' }}</td>
+        <td>{{ $final . ' تومان' }}</td>
     </tr>
 </table>
 <p class="mine"><strong>ساعت ارسال کالای شما : </strong>کالای شما از ساعت 18 الی 19 درب منزل شما تحویل می گردد.</p>

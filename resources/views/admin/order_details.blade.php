@@ -55,8 +55,6 @@
                                         style="color:#3c8dbc; font-size: 19px;">وضعیت فعلی : </strong>درحال انتظار</p>
                             <br>
                         @endif
-                        <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">کد
-                                : </strong>{{ $order->code }}</p><br>
                         @if($order->description)
                             <p style="text-align: justify; direction: rtl;"><strong
                                         style="color:#3c8dbc; font-size: 19px;">توضیحات
