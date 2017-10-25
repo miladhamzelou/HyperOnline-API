@@ -5,6 +5,7 @@
 
 namespace App\Services\v1;
 
+use App\Jobs\SendEmail;
 use App\Password;
 use App\User;
 use Illuminate\Support\Facades\Log;
@@ -93,7 +94,11 @@ class UserService
         $user->save();
         $password->save();
 
-        \App\Facades\CustomLog::info("User Registered : " . $user->name . " : " . $user->create_date, "users");
+//        \App\Facades\CustomLog::info("User Registered : " . $user->name . " : " . $user->create_date, "users");
+        SendEmail::dispatch([
+            "to" => "hyper.online.h@gmail.com",
+            "body" => "کاربر " . '* ' . $user->name . ' *' . " ثبت نام کرد. حساب کاربری نیاز به تایید دارد"
+        ], 0);
 
         return true;
     }
