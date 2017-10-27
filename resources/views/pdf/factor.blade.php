@@ -69,11 +69,19 @@
     </tr>
     <tr>
         <td>سود شما از این خرید</td>
-        <td>{{ $off . ' تومان' }}</td>
+        @if($off=='0')
+            <td>{{ '-' }}</td>
+        @else
+            <td>{{ $off . ' تومان' }}</td>
+        @endif
     </tr>
     <tr>
         <td>هزینه ارسال و بسته بندی</td>
-        <td>{{ $send_price . ' تومان' }}</td>
+        @if($send_price=='0')
+            <td>{{ 'رایگان' }}</td>
+        @else
+            <td>{{ $send_price . ' تومان' }}</td>
+        @endif
     </tr>
     <tr>
         <td>مبلغ قابل پرداخت</td>

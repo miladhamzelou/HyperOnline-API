@@ -1,1 +1,1 @@
-<p style="direction: rtl;">{{ $body }}</p>
+<p style="direction: rtl;">{!! nl2br(e($body)) !!}</p>

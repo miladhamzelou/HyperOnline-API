@@ -100,13 +100,14 @@ class OrderService
 
             $product->save();
         }
+        $send_price = Seller::firstOrFail()->send_price;
         if ($tPrice < 35000) $tPrice += 5000;
+        else $send_price = 0;
         $order->price = $tPrice;
         $order->price_original = $price_original;
         $order->stuffs_desc = ltrim(rtrim($desc, ','), ',');
         $order->save();
 
-        $send_price = Seller::firstOrFail()->send_price;
         $data = [
             "products" => $products,
             "counts" => $counts,
@@ -146,7 +147,8 @@ class OrderService
                 "price" => $order->price,
                 "desc" => $order->description,
             ]
-        ], 1);
+        ], 1)
+            ->onQueue('email');
 
         SendSMS::dispatch([
             "msg" => ["سفارش جدید ثبت شد"],

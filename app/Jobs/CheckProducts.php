@@ -25,9 +25,9 @@ class CheckProducts implements ShouldQueue
             if ($product->count <= 1) {
                 $final .= $product->name;
                 if ($product->description)
-                    $final .= '(' . $product->description . ')-';
+                    $final .= '(' . $product->description . ')' . "\n";
                 else
-                    $final .= '-';
+                    $final .= "\n";
             }
         }
         if (strlen($final) > 0) {
