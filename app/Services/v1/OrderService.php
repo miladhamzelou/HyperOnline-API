@@ -52,7 +52,7 @@ class OrderService
     {
         $order = new Order();
         $user = User::where('unique_id', $request->get('user'))->firstOrFail();
-        $seller = Seller::where('unique_id', $request->get('seller'))->firstOrFail();
+        $seller = Seller::where('unique_id', 'vbkYwlL98I3F3')->firstOrFail();
 
         $order->unique_id = uniqid('', false);
         $order->seller_id = $seller->unique_id;
@@ -66,7 +66,7 @@ class OrderService
         $order->stuffs_count = ltrim(rtrim($request->get('stuffs_count'), ','), ',');
         $order->price_send = 5000;
         $order->hour = $request->get('hour');
-        $order->pay_method = $request->get('method');
+        $order->pay_method = 'online';
         $order->description = $request->get('description');
         $order->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
