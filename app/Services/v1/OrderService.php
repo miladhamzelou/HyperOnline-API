@@ -5,7 +5,6 @@
 
 namespace App\Services\v1;
 
-use App\Jobs\CheckProducts;
 use App\Jobs\SendEmail;
 use App\Jobs\SendSMS;
 use App\Order;
@@ -13,7 +12,6 @@ use App\Product;
 use App\Seller;
 use App\Support;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
@@ -52,7 +50,7 @@ class OrderService
     {
         $order = new Order();
         $user = User::where('unique_id', $request->get('user'))->firstOrFail();
-        $seller = Seller::where('unique_id', 'vbkYwlL98I3F3')->firstOrFail();
+        $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
 
         $order->unique_id = uniqid('', false);
         $order->seller_id = $seller->unique_id;
@@ -156,9 +154,9 @@ class OrderService
         ])
             ->onQueue('sms');
 
-        CheckProducts::dispatch()
-            ->onQueue('email')
-            ->delay(Carbon::now()->addMinutes(1));
+//        CheckProducts::dispatch()
+//            ->onQueue('email')
+//            ->delay(Carbon::now()->addMinutes(1));
         return true;
     }
 
