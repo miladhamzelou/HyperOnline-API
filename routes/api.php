@@ -78,3 +78,4 @@ Route::post('/v1/user_update', 'v1\UserController@updateUser');
 Route::post('/v1/checkConfirm', 'v1\UserController@checkConfirm');
 Route::post('/v1/resetPassword', 'v1\UserController@resetPassword');
 Route::post('/v1/updatePassword', 'v1\UserController@updatePassword');
+Route::post('/v1/sync_id', 'v1\UserController@syncID');

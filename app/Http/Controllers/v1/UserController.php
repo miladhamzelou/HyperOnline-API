@@ -325,4 +325,25 @@ class UserController extends Controller
         $hash = array("salt" => $salt, "encrypted" => $encrypted);
         return $hash;
     }
+
+    public function syncID(Request $request)
+    {
+        try {
+            $id = $request->get("u");
+            $pushe = $request->get("p");
+            $fireBase = $request->get("f");
+            $user = User::where("unique_id", $id)->first();
+            $user->pushe = $pushe;
+            $user->fire = $fireBase;
+            $user->save();
+            return response()->json([
+                'error' => false
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'error_msg' => $e
+            ], 201);
+        }
+    }
 }
