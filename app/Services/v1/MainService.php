@@ -105,7 +105,8 @@ class MainService
             'm' => $option->most_sell,
             'p' => $option->popular,
             'c' => $option->collection,
-            'b' => $option->banner
+            'b' => $option->banner,
+            'v' => $option->version
         ];
         return $data;
     }
