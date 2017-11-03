@@ -811,4 +811,43 @@ class AdminController
         return redirect('/admin/setting')
             ->withMessage($message);
     }
+
+    public function popUser($uid)
+    {
+        $user = User::where("unique_id", $uid)->first();
+        $id = $user->pushe;
+        $client = new Client([
+            'headers' => [
+                'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
+                'Content-Type' => 'application/json',
+                'Accept: application/json'
+            ]
+        ]);
+        $response = $client->post(
+            'https://panel.pushe.co/api/v1/notifications/',
+            [
+                'body' => json_encode([
+                    "applications" => ["ir.hatamiarash.hyperonline"],
+                    "filter" => [
+                        "imei" => [$id]
+                    ],
+                    "notification" => [
+                        "wake_screen" => true,
+                    ],
+                    "custom_content" => [
+                        "type" => "2",
+                        "logout" => [
+                            "out" => true,
+                        ]
+                    ]
+                ])
+            ]
+        );
+        if ($response->getStatusCode() == "201") {
+            return redirect('/admin/users/' . $uid)
+                ->withMessage("کاربر خارج شد");
+        } else
+            return redirect('/admin/users/' . $uid)
+                ->withErrors("خطایی رخ داده است");
+    }
 }

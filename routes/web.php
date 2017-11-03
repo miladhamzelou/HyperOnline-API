@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/admin/confirm/message', 'v1_web\AdminController@messages_send_confirm')->name('messages');
     Route::get('/admin/confirm/{id}/{code}', 'v1_web\AdminController@confirmInfo')->name('confirm');
+    Route::get('/admin/pop/{id}', 'v1_web\AdminController@popUser')->name('pop');
 
     Route::get('/admin/accounting', 'v1_web\AdminController@accounting')->name('accounting');
 
