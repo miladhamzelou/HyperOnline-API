@@ -34,23 +34,23 @@
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">{{ $user->address }}</td>
                                     </tr>
-                                    <tr>
-                                        <td style="text-align: right; direction: rtl;">{{ $user->wallet.' تومان' }}</td>
-                                    </tr>
+                                    {{--<tr>--}}
+                                        {{--<td style="text-align: right; direction: rtl;">{{ $user->wallet.' تومان' }}</td>--}}
+                                    {{--</tr>--}}
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">{{ $user->state }}</td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">{{ $user->city }}</td>
                                     </tr>
-                                    <tr>
-                                        <td style="text-align: right; direction: rtl;">
-                                            @if($user->district)
-                                                {{ $user->district }}
-                                            @else
-                                                -
-                                            @endif</td>
-                                    </tr>
+                                    {{--<tr>--}}
+                                        {{--<td style="text-align: right; direction: rtl;">--}}
+                                            {{--@if($user->district)--}}
+                                                {{--{{ $user->district }}--}}
+                                            {{--@else--}}
+                                                {{-----}}
+                                            {{--@endif</td>--}}
+                                    {{--</tr>--}}
                                     <tr>
                                         <td style="@if($user->confirmed_phone)color:limegreen;@else color:red;@endif text-align: right; direction: rtl;">
                                             @if($user->confirmed_phone)
@@ -125,18 +125,18 @@
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">آدرس</td>
                                     </tr>
-                                    <tr>
-                                        <td style="text-align: right; direction: rtl;">کیف پول</td>
-                                    </tr>
+                                    {{--<tr>--}}
+                                        {{--<td style="text-align: right; direction: rtl;">کیف پول</td>--}}
+                                    {{--</tr>--}}
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">استان</td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">شهر</td>
                                     </tr>
-                                    <tr>
-                                        <td style="text-align: right; direction: rtl;">منطقه</td>
-                                    </tr>
+                                    {{--<tr>--}}
+                                        {{--<td style="text-align: right; direction: rtl;">منطقه</td>--}}
+                                    {{--</tr>--}}
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">تایید تلفن همراه</td>
                                     </tr>
@@ -178,7 +178,7 @@
         <div class="col-lg-9 col-centered center-block" style="float: none;">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h2 class="box-title">تایید اطلاعات</h2>
+                    <h2 class="box-title">تنظیمات</h2>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
@@ -187,10 +187,12 @@
                     <div class="box-body">
                         <br>
                         <br>
-                        <a class="btn btn-success pull-right btn-lg" tabindex="1"
-                           href="{{ url('admin/confirm/' . $user->unique_id . '/1') }}">تایید</a>
-                        <a class="btn btn-danger pull-right btn-lg" tabindex="2"
-                           href="{{ url('admin/confirm/' . $user->unique_id . '/0') }}">عدم تایید</a>
+                        <a class="btn btn-success pull-right btn-lg" tabindex="1" style="margin-left: 5px"
+                           href="{{ url('admin/confirm/' . $user->unique_id . '/1') }}">تایید اطلاعات</a>
+                        <a class="btn btn-danger pull-right btn-lg" tabindex="2" style="margin-left: 10px"
+                           href="{{ url('admin/confirm/' . $user->unique_id . '/0') }}">عدم تایید اطلاعات</a>
+                        <a class="btn btn-warning pull-right btn-lg" tabindex="3"
+                           href="{{ url('admin/pop/' . $user->unique_id) }}">خروج اجباری کاربر</a>
                         <br>
                         <br>
                         <br>
@@ -204,7 +206,7 @@
                                 <label for="body" style="direction: rtl">متن پیام :</label>
                                 <textarea id="body" type="text" style="text-align: center; direction: rtl"
                                           class="my_font form-control"
-                                          name="body" tabindex="3" required></textarea>
+                                          name="body" tabindex="4" required></textarea>
 
                                 @if ($errors->has('body'))
                                     <span class="help-block">
@@ -215,7 +217,7 @@
 
                             <br>
                             <div class="form-group">
-                                <input type="submit" tabindex="4" name="send"
+                                <input type="submit" tabindex="5" name="send"
                                        class="my_font btn center-block btn-lg btn-success" value="ارسال">
                             </div>
                         </form>
