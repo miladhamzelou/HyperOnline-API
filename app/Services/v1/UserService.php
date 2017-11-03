@@ -60,7 +60,6 @@ class UserService
      */
     public function createUser($request)
     {
-        Log::info("create user");
         $user = new User();
         $password = new Password();
 
