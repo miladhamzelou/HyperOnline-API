@@ -253,7 +253,7 @@ class UserController extends Controller
         $phone = $request->get("phone");
         $user = User::where("phone", $phone)->first();
         if ($user) {
-            $password = $this->randomString(8, 1);
+            $password = $this->randomString(8, 0);
             SendSMS::dispatch([
                 "msg" => ["هایپرآنلاین - رمز عبور جدید : " . $password],
                 "phone" => [$phone]
