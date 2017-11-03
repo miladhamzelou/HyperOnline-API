@@ -8,7 +8,6 @@ namespace App\Services\v1;
 use App\Jobs\SendEmail;
 use App\Password;
 use App\User;
-use Illuminate\Support\Facades\Log;
 
 include(app_path() . '/Common/jdf.php');
 
