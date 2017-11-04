@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/orders/{id}', 'v1_web\OrderController@details')->name('order_details');
     Route::post('/admin/orders/update', 'v1_web\OrderController@update')->name('order_update');
     Route::get('/admin/orders/delete/{id}', 'v1_web\OrderController@delete')->name('order_delete');
+    Route::get('/admin/order_sent/{id}', 'v1_web\OrderController@sent')->name('order_sent');
 
     Route::get('/admin/pays', 'v1_web\OrderController@pays')->name('pays');
 

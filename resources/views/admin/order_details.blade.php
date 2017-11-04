@@ -18,7 +18,8 @@
                     <div class="box-body">
                         <br>
                         <br>
-                        <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">کد سفارش
+                        <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">کد
+                                سفارش
                                 : </strong>{{ $order->code }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">فروشنده
                                 : </strong>{{ $order->seller_name }}</p><br>
@@ -33,10 +34,12 @@
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">قیمت
                                 : </strong>{{ $order->price . ' تومان' }}</p><br>
                         @if($order->hour==18)
-                            <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">ساعت
+                            <p style="text-align: justify; direction: rtl;"><strong
+                                        style="color:#3c8dbc; font-size: 19px;">ساعت
                                     تحویل : </strong>18:30 الی 19:30</p><br>
                         @else
-                            <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">ساعت
+                            <p style="text-align: justify; direction: rtl;"><strong
+                                        style="color:#3c8dbc; font-size: 19px;">ساعت
                                     تحویل : </strong>{{ $order->hour }}</p><br>
                         @endif
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">روش
@@ -67,8 +70,11 @@
                         <p style="text-align: right; direction: ltr"><strong style="color:#3c8dbc; font-size: 19px;">تاریخ
                                 / ساعت : </strong>{{ $order->create_date }}</p><br>
                         <br>
-                        <a class="btn btn-success pull-right btn-lg" tabindex="1"
+                        <a class="btn btn-warning pull-right btn-lg" tabindex="1" style="margin-left: 5px"
                            href="{{ url('admin/downloadFactor/' . $order->code) }}">دانلود فاکتور</a>
+
+                        <a class="btn btn-success pull-right btn-lg" tabindex="2"
+                           href="{{ url('admin/order_sent/' . $order->code) }}">ارسال شد</a>
                     </div>
                 </div>
             </div>
