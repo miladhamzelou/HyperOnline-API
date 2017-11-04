@@ -17,6 +17,7 @@ use App\Banner;
 use App\Category1;
 use App\Category2;
 use App\Category3;
+use App\Comment;
 use App\Jobs\SendEmail;
 use App\Option;
 use App\Order;
@@ -849,5 +850,13 @@ class AdminController
         } else
             return redirect('/admin/users/' . $uid)
                 ->withErrors("خطایی رخ داده است");
+    }
+
+    public function comments()
+    {
+        $comments = Comment::get();
+        return view('admin.comments')
+            ->withTitle("نظرات")
+            ->withComments($comments);
     }
 }

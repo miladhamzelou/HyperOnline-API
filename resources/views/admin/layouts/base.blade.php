@@ -263,11 +263,12 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        {{--                        <li><a href="{{ url('/admin/orders/create') }}">سفارش جدید</a></li>--}}
                         <li><a href="{{ url('/admin/banners/create') }}">بنر جدید</a></li>
                         <li><a href="{{ url('/admin/banners') }}">مشاهده بنر ها</a></li>
                     </ul>
                 </li>
+
+                <li class="my_font"><a href="{{ url('/admin/comments') }}">نظرات</a></li>
 
                 <hr>
                 <li class="header">امکانات</li>
