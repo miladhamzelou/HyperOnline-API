@@ -44,3 +44,4 @@ public/ftp/orders/*.txt
 public/ftp/factors/*.pdf
 /public/arash
 !*.gitkeep
+*.apk
