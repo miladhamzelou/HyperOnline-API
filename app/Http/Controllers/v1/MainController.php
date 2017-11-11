@@ -94,7 +94,7 @@ class MainController extends Controller
     {
         Log::info($request);
         $user = $request->get('from');
-        $message = "هایپرآنلاین" . "\n" . "http://hyper-online.ir";
+        $message = "دانلود هایپرآنلاین" . "\n" . "http://hyper-online.ir/HyperOnline.apk";
         Smsir::send([$message], [$user]);
     }
 }
