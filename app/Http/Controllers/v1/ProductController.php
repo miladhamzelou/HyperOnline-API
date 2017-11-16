@@ -78,9 +78,13 @@ class ProductController extends Controller
 
         $parameters = request()->input();
         if ($data = $this->Products->getProducts($parameters))
+//            return response()->json([
+//                'error' => false,
+//                'product' => $data
+//            ], 201);
             return response()->json([
-                'error' => false,
-                'product' => $data
+                'error' => true,
+                'error_msg' => "امروز سفارشی ثبت نمی شود"
             ], 201);
         else
             return response()->json([
@@ -194,9 +198,13 @@ class ProductController extends Controller
 
         try {
             if ($data = $this->Products->getGroupProducts($parameters))
+//                return response()->json([
+//                    'error' => false,
+//                    'product' => $data
+//                ], 201);
                 return response()->json([
-                    'error' => false,
-                    'product' => $data
+                    'error' => true,
+                    'error_msg' => "امروز سفارشی ثبت نمی شود"
                 ], 201);
             else
                 return response()->json([
@@ -214,9 +222,13 @@ class ProductController extends Controller
     {
         try {
             if ($data = $this->Products->getProductsWithDetail($request))
+//                return response()->json([
+//                    'error' => false,
+//                    'products' => $data
+//                ], 201);
                 return response()->json([
-                    'error' => false,
-                    'products' => $data
+                    'error' => true,
+                    'error_msg' => "امروز سفارشی ثبت نمی شود"
                 ], 201);
             else
                 return response()->json([
