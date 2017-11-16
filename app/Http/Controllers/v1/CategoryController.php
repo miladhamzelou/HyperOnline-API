@@ -28,9 +28,13 @@ class CategoryController extends Controller
         try {
             $categories = $this->Categories->getGroupCategories2($request);
             if ($categories)
+//                return response()->json([
+//                    'error' => false,
+//                    'cat' => $categories,
+//                ], 201);
                 return response()->json([
-                    'error' => false,
-                    'cat' => $categories,
+                    'error' => true,
+                    'error_msg' => "امروز سفارشی ثبت نمی شود"
                 ], 201);
             else
                 return response()->json([
@@ -52,10 +56,14 @@ class CategoryController extends Controller
             $products = $this->Categories->getProducts($request);
 
             if ($categories && $products)
+//                return response()->json([
+//                    'error' => false,
+//                    'category' => $categories,
+//                    'product' => $products
+//                ], 201);
                 return response()->json([
-                    'error' => false,
-                    'category' => $categories,
-                    'product' => $products
+                    'error' => true,
+                    'error_msg' => "امروز سفارشی ثبت نمی شود"
                 ], 201);
             else
                 return response()->json([
