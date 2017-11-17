@@ -43,48 +43,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        /*$parameters = request()->input();
-        //Log::info('parameters' . implode("|",$parameters));
-        Log::info('parameters' . $parameters);
-        $seller = Seller::where("unique_id", $parameters['unique_id'])->firstOrFail();
-        $final_seller = [
-            'unique_id' => $seller->unique_id,
-            'name' => $seller->name,
-            'type' => $seller->type,
-            'description' => $seller->description,
-            'address' => $seller->address,
-            'open_hour' => $seller->open_hour,
-            'close_hour' => $seller->close_hour,
-            'min_price' => $seller->min_price,
-            'send_price' => $seller->send_price
-        ];
-        Log::info("seller's detail\n" . $final_seller);
-        $comment = Comment::where([
-            'target_id' => $parameters['unique_id'],
-            'target_type' => 0
-        ])->get();
-        Log::info("\ncomments" . $comment);
-        if ($product = $this->Products->getProducts($parameters))
-            return response()->json([
-                'error' => false,
-                'seller' => $final_seller,
-                'comment' => $this->filterComments($comment),
-                'product' => $product
-            ], 201);
-        else
-            return response()->json([
-                'error' => true
-            ], 201);*/
-
         $parameters = request()->input();
         if ($data = $this->Products->getProducts($parameters))
-//            return response()->json([
-//                'error' => false,
-//                'product' => $data
-//            ], 201);
             return response()->json([
-                'error' => true,
-                'error_msg' => "امروز سفارشی ثبت نمی شود"
+                'error' => false,
+                'product' => $data
             ], 201);
         else
             return response()->json([
@@ -198,13 +161,9 @@ class ProductController extends Controller
 
         try {
             if ($data = $this->Products->getGroupProducts($parameters))
-//                return response()->json([
-//                    'error' => false,
-//                    'product' => $data
-//                ], 201);
                 return response()->json([
-                    'error' => true,
-                    'error_msg' => "امروز سفارشی ثبت نمی شود"
+                    'error' => false,
+                    'product' => $data
                 ], 201);
             else
                 return response()->json([
@@ -222,13 +181,9 @@ class ProductController extends Controller
     {
         try {
             if ($data = $this->Products->getProductsWithDetail($request))
-//                return response()->json([
-//                    'error' => false,
-//                    'products' => $data
-//                ], 201);
                 return response()->json([
-                    'error' => true,
-                    'error_msg' => "امروز سفارشی ثبت نمی شود"
+                    'error' => false,
+                    'products' => $data
                 ], 201);
             else
                 return response()->json([

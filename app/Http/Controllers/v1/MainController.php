@@ -38,21 +38,17 @@ class MainController extends Controller
             $send_price = $this->Main->getSendPrice();
             $banners = $this->Main->getBanners();
             if (1)
-//                return response()->json([
-//                    'error' => false,
-//                    'send_price' => $send_price,
-//                    'banner' => $banners,
-//                    'new' => $new,
-//                    'popular' => $popular,
-//                    'category' => $category,
-//                    'options' => $options,
-//                    'most' => $most,
-//                    'off' => $off,
-//                    'collection' => $collection
-//                ], 201);
                 return response()->json([
-                    'error' => true,
-                    'error_msg' => "امروز سفارشی ثبت نمی شود"
+                    'error' => false,
+                    'send_price' => $send_price,
+                    'banner' => $banners,
+                    'new' => $new,
+                    'popular' => $popular,
+                    'category' => $category,
+                    'options' => $options,
+                    'most' => $most,
+                    'off' => $off,
+                    'collection' => $collection
                 ], 201);
             else
                 return response()->json([

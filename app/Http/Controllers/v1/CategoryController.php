@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Services\v1\CategoryService;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -24,17 +23,14 @@ class CategoryController extends Controller
         $this->Categories = $service;
     }
 
-    public function getCategories(Request $request){
+    public function getCategories(Request $request)
+    {
         try {
             $categories = $this->Categories->getGroupCategories2($request);
             if ($categories)
-//                return response()->json([
-//                    'error' => false,
-//                    'cat' => $categories,
-//                ], 201);
                 return response()->json([
-                    'error' => true,
-                    'error_msg' => "امروز سفارشی ثبت نمی شود"
+                    'error' => false,
+                    'cat' => $categories,
                 ], 201);
             else
                 return response()->json([
@@ -56,14 +52,10 @@ class CategoryController extends Controller
             $products = $this->Categories->getProducts($request);
 
             if ($categories && $products)
-//                return response()->json([
-//                    'error' => false,
-//                    'category' => $categories,
-//                    'product' => $products
-//                ], 201);
                 return response()->json([
-                    'error' => true,
-                    'error_msg' => "امروز سفارشی ثبت نمی شود"
+                    'error' => false,
+                    'category' => $categories,
+                    'product' => $products
                 ], 201);
             else
                 return response()->json([
