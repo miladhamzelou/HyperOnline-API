@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/setting', 'v1_web\AdminController@setting_send')->name('setting');
     Route::get('/admin/setting/delete_log', 'v1_web\AdminController@delete_log')->name('setting');
     Route::get('/admin/setting/resetMostSell', 'v1_web\AdminController@resetMostSell')->name('setting');
+    Route::get('/admin/setting/confirmAllPhones', 'v1_web\AdminController@confirmAllPhones')->name('setting');
+    Route::post('/admin/setting/updateOffline', 'v1_web\AdminController@updateOffline')->name('setting');
 
     Route::get('/admin/products/create', 'v1_web\ProductController@show')->name('product_create');
     Route::post('/admin/products/create', 'v1_web\ProductController@store')->name('product_create');

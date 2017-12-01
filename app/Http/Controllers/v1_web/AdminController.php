@@ -246,8 +246,13 @@ class AdminController
     public function setting()
     {
         if (Auth::user()->isAdmin()) {
+            $option = Option::first();
             return view('admin.setting')
-                ->withTitle("تنظیمات");
+                ->withTitle("تنظیمات")
+                ->withOffline([
+                    'off' => $option->offline,
+                    'off_msg' => $option->offline_msg
+                ]);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
@@ -284,9 +289,29 @@ class AdminController
     public function delete_log()
     {
         unlink(storage_path('/logs/laravel.log'));
-        $message = "فایل لاگ پاک شد";
         return redirect('/admin/setting')
-            ->withMessage($message);
+            ->withMessage("فایل لاگ پاک شد");
+    }
+
+    public function confirmAllPhones()
+    {
+        $users = User::where("confirmed_phone", 0)->get();
+        foreach ($users as $user) {
+            $user->confirmed_phone = 1;
+            $user->save();
+        }
+        return redirect('/admin/setting')
+            ->withMessage("تمام شماره ها تایید شد");
+    }
+
+    public function updateOffline(Request $request)
+    {
+        $option = Option::first();
+        $option->offline = ($request->get('offline') == "on") ? 1 : 0;
+        $option->offline_msg = $request->get('message');
+        $option->save();
+        return redirect('/admin/setting')
+            ->withMessage("وضعیت فروشگاه تغییر کرد");
     }
 
     public function messages()

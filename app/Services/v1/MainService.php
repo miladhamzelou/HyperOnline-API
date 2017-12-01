@@ -111,6 +111,10 @@ class MainService
         return $data;
     }
 
+    /**
+     * return offline status
+     * @return array
+     */
     public function getOffline()
     {
         $option = Option::firstOrFail();
