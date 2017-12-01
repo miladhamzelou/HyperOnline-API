@@ -34,7 +34,7 @@ class CommentService
 
         SendEmail::dispatch([
             "to" => "hyper.online.h@gmail.com",
-            "body" => "نظر جدید ثبت شد"
+            "body" => "نظر جدید ثبت شد − " . $comment->body
         ], 0)
             ->onQueue('email');
 
