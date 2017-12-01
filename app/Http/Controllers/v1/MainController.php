@@ -37,6 +37,7 @@ class MainController extends Controller
             $collection = $this->Main->getCollections();
             $send_price = $this->Main->getSendPrice();
             $banners = $this->Main->getBanners();
+            $offline = $this->Main->getOffline();
             if (1)
                 return response()->json([
                     'error' => false,
@@ -48,7 +49,11 @@ class MainController extends Controller
                     'options' => $options,
                     'most' => $most,
                     'off' => $off,
-                    'collection' => $collection
+                    'collection' => $collection,
+                    'status' => [
+                        'offline_S' => $offline['off'],
+                        'offline' => $offline['off_msg']
+                    ]
                 ], 201);
             else
                 return response()->json([

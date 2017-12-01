@@ -111,6 +111,15 @@ class MainService
         return $data;
     }
 
+    public function getOffline()
+    {
+        $option = Option::firstOrFail();
+        return [
+            'off' => $option->offline,
+            'off_msg' => $option->offline_msg
+        ];
+    }
+
     /**
      * collection or event products
      * @return array|string
