@@ -210,7 +210,7 @@
         </div>
     </div>
     <div id="container">
-        @yield('feature-box')
+        {{--@yield('feature-box')--}}
         <div class="container">
             <div class="row">
                 @yield('right-panel')
