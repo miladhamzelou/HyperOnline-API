@@ -210,6 +210,7 @@
         </div>
     </div>
     <div id="container">
+        <input type="hidden" id="logged" value="@if(Auth::check()) 1 @else 0 @endif">
         {{--@yield('feature-box')--}}
         <div class="container">
             <div class="row">

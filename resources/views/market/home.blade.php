@@ -145,7 +145,7 @@
                         </div>
                         <div class="button-group">
                             <a href="javascript:void(0);"
-                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value)">
+                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value, document.getElementById('logged').value)">
                                 <button class="btn-primary" type="button">
                                     <span>افزودن به سبد</span>
                                 </button>
@@ -207,7 +207,8 @@
                                     <div>
                                         <div class="caption">
                                             <h4><a href="">{{ $product['name'] }}</a></h4>
-                                            <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
+                                            <h6 class="description"
+                                                style="color: grey">{{ $product['description'] }}</h6>
                                             @if($product['off'] > 0)
                                                 <p class="price">
                                                     <span class="price-new">{{ round($product['price'] - ($product['price'] * $product['off'] / 100)) . ' تومان' }}</span>
@@ -223,7 +224,7 @@
                                         </div>
                                         <div class="button-group">
                                             <a href="javascript:void(0);"
-                                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value)">
+                                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value, document.getElementById('logged').value)">
                                                 <button class="btn-primary" type="button">
                                                     <span>افزودن به سبد</span>
                                                 </button>
@@ -290,7 +291,7 @@
                         </div>
                         <div class="button-group">
                             <a href="javascript:void(0);"
-                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value)">
+                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value, document.getElementById('logged').value)">
                                 <button class="btn-primary" type="button">
                                     <span>افزودن به سبد</span>
                                 </button>
@@ -337,7 +338,7 @@
                         </div>
                         <div class="button-group">
                             <a href="javascript:void(0);"
-                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value)">
+                               onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value, document.getElementById('logged').value)">
                                 <button class="btn-primary" type="button">
                                     <span>افزودن به سبد</span>
                                 </button>

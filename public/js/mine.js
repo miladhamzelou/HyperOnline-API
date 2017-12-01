@@ -31,41 +31,49 @@ $(document).ready(function (e) {
     });
 });
 
-function addCart($id) {
-    var http = new XMLHttpRequest();
-    var url = "/api/v1/getProductByID/" + $id;
-    http.open("GET", url, true);
+function addCart($id, $logged) {
+    if ($logged == 0 || $logged == "0") {
+        swal(
+            'برای خرید باید وارد شوید',
+            '',
+            'error'
+        );
+    } else {
+        var http = new XMLHttpRequest();
+        var url = "/api/v1/getProductByID/" + $id;
+        http.open("GET", url, true);
 
-    http.onreadystatechange = function () {
-        if (http.readyState === 4 && http.status === 200) {
-            var product = JSON.parse(http.responseText);
+        http.onreadystatechange = function () {
+            if (http.readyState === 4 && http.status === 200) {
+                var product = JSON.parse(http.responseText);
 
-            swal({
-                title: product.name + '\n' + 'تعداد را تعیین کنید',
-                input: 'range',
-                confirmButtonText: 'ثبت',
-                inputAttributes: {
-                    min: 1,
-                    max: product.count,
-                    step: 1
-                },
-                inputValue: 1
-            }).then(function (c) {
-                var http2 = new XMLHttpRequest();
-                var p = "id=" + product.unique_id + "&count=" + c;
-                url = "/addToCart?" + p;
-                http2.open("GET", url, true);
-                http2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                http2.send(null);
-                http2.onreadystatechange = function () {
-                    if (http2.readyState === 4 && http2.status === 200) {
-                        window.location.href = "http://hyper-online.ir/home";
+                swal({
+                    title: product.name + '\n' + 'تعداد را تعیین کنید' + ' ' + $logged,
+                    input: 'range',
+                    confirmButtonText: 'ثبت',
+                    inputAttributes: {
+                        min: 1,
+                        max: product.count,
+                        step: 1
+                    },
+                    inputValue: 1
+                }).then(function (c) {
+                    var http2 = new XMLHttpRequest();
+                    var p = "id=" + product.unique_id + "&count=" + c;
+                    url = "/addToCart?" + p;
+                    http2.open("GET", url, true);
+                    http2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    http2.send(null);
+                    http2.onreadystatechange = function () {
+                        if (http2.readyState === 4 && http2.status === 200) {
+                            window.location.href = "http://hyper-online.ir/home";
+                        }
                     }
-                }
-            })
-        }
-    };
-    http.send(null);
+                })
+            }
+        };
+        http.send(null);
+    }
 }
 
 function removeCart($id) {
