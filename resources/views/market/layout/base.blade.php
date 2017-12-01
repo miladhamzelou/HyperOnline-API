@@ -33,7 +33,7 @@
                     <div class="pull-left flip left-top">
                         <div class="links">
                             <ul>
-                                <li class="mobile" style="font-size: 20px">081-32743297</li>
+                                <li class="mobile" style="font-size: 20px">081-34266311</li>
                                 <li class="email" style="font-size: 20px"><a href="mailto:hyperonlineir@gmail.com"><i
                                                 class="fa fa-envelope"></i>hyperonlineir@gmail.com</a></li>
                             </ul>
@@ -228,23 +228,24 @@
                         <h5>اطلاعات تماس</h5>
                         <ul>
                             <li class="address"><i class="fa fa-map-marker"></i>همدان / خیابان مهدیه</li>
-                            <li class="mobile"><i class="fa fa-phone"></i>081−38263324</li>
+                            <li class="mobile"><i class="fa fa-phone"></i>081−34266311</li>
                             <li class="email"><i class="fa fa-envelope"></i>برقراری ارتباط از طریق <a
-                                        href="{{ url('/contact-us') }}">تماس با ما</a>
+                                        href="{{ url('/contact_us') }}">تماس با ما</a>
                         </ul>
                     </div>
                     <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
                         <h5>اطلاعات</h5>
                         <ul>
                             <li><a href="{{ url('/about') }}">درباره ما</a></li>
-                            <li><a href="{{ url('/privacy') }}">حریم خصوصی</a></li>
+                            {{--<li><a href="{{ url('/privacy') }}">حریم خصوصی</a></li>--}}
                             <li><a href="{{ url('/terms') }}">شرایط و قوانین</a></li>
                         </ul>
                     </div>
                     <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
                         <h5>خدمات مشتریان</h5>
                         <ul>
-                            <li><a href="{{ url('/contact-us') }}">تماس با ما</a></li>
+                            <li><a href="{{ url('/contact_us') }}">تماس با ما</a></li>
+                            <li><a href="{{ url('/comment') }}">ثبت شکایات</a></li>
                         </ul>
                     </div>
                     <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
@@ -294,7 +295,7 @@
                 </div>
                 <div class="bottom-row">
                     <div class="custom-text text-center">
-                        {{--<p>طراحی شده توسط : آرش حاتمی</p>--}}
+                        <p style="font-size: small">Designed & Developed By : <a href="http://arash-hatami.ir" target="_blank">A.Hatami</a></p>
                     </div>
                 </div>
             </div>

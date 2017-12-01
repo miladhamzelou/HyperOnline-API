@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\v1\market;
 
+use App\Comment;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmail;
 use App\Order;
 use App\Pay;
 use App\Product;
@@ -14,6 +16,8 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
+
+require(app_path() . '/Common/jdf.php');
 
 class MainController extends Controller
 {
@@ -258,6 +262,129 @@ class MainController extends Controller
         if ($hour >= 19 && $hour <= 23) $send_time = 9;
         if ($hour >= 0 && $hour < 9) $send_time = 9;
         return $send_time;
+    }
+
+    public function contact_us()
+    {
+        $isAdmin = 0;
+        if (Auth::check())
+            if (Auth::user()->isAdmin() == 1)
+                $isAdmin = 1;
+        $cat = $this->mService->getCategories();
+        $cart = [
+            'items' => Cart::content(),
+            'count' => Cart::content()->count(),
+            'total' => Cart::total(),
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal()
+        ];
+        return view('market.contact_us')
+            ->withCategories($cat)
+            ->withAdmin($isAdmin)
+            ->withCart($cart);
+    }
+
+    public function about()
+    {
+        $isAdmin = 0;
+        if (Auth::check())
+            if (Auth::user()->isAdmin() == 1)
+                $isAdmin = 1;
+        $cat = $this->mService->getCategories();
+        $cart = [
+            'items' => Cart::content(),
+            'count' => Cart::content()->count(),
+            'total' => Cart::total(),
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal()
+        ];
+        return view('market.about')
+            ->withCategories($cat)
+            ->withAdmin($isAdmin)
+            ->withCart($cart);
+    }
+
+    public function privacy()
+    {
+        $isAdmin = 0;
+        if (Auth::check())
+            if (Auth::user()->isAdmin() == 1)
+                $isAdmin = 1;
+        $cat = $this->mService->getCategories();
+        $cart = [
+            'items' => Cart::content(),
+            'count' => Cart::content()->count(),
+            'total' => Cart::total(),
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal()
+        ];
+        return view('market.privacy')
+            ->withCategories($cat)
+            ->withAdmin($isAdmin)
+            ->withCart($cart);
+    }
+
+    public function terms()
+    {
+        $isAdmin = 0;
+        if (Auth::check())
+            if (Auth::user()->isAdmin() == 1)
+                $isAdmin = 1;
+        $cat = $this->mService->getCategories();
+        $cart = [
+            'items' => Cart::content(),
+            'count' => Cart::content()->count(),
+            'total' => Cart::total(),
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal()
+        ];
+        return view('market.terms')
+            ->withCategories($cat)
+            ->withAdmin($isAdmin)
+            ->withCart($cart);
+    }
+
+    public function comment()
+    {
+        $isAdmin = 0;
+        if (Auth::check())
+            if (Auth::user()->isAdmin() == 1)
+                $isAdmin = 1;
+        $cat = $this->mService->getCategories();
+        $cart = [
+            'items' => Cart::content(),
+            'count' => Cart::content()->count(),
+            'total' => Cart::total(),
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal()
+        ];
+        return view('market.comment')
+            ->withCategories($cat)
+            ->withAdmin($isAdmin)
+            ->withCart($cart);
+    }
+
+    public function sendComment(Request $request)
+    {
+        $comment = new Comment();
+        $comment->unique_id = uniqid('', false);
+        if (Auth::check())
+            $user = User::find(Auth::user()->getID());
+        else
+            $user = User::where("role", "admin")->first();
+        $comment->user_id = $user->unique_id;
+        $comment->user_name = $user->name;
+        if ($user->image)
+            $comment->user_image = $user->image;
+        $comment->body = $request->get('body');
+        $comment->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+        $comment->save();
+        SendEmail::dispatch([
+            "to" => "hyper.online.h@gmail.com",
+            "body" => "نظر جدید در سایت ثبت شد"
+        ], 0)
+            ->onQueue('email');
+        return redirect('/');
     }
 
     protected function getCurrentTime()

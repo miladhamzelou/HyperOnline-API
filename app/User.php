@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -35,5 +34,10 @@ class User extends Authenticatable
             return 1;
         else
             return 0;
+    }
+
+    public function getID()
+    {
+        return $this->unique_id;
     }
 }
