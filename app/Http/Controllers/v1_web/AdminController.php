@@ -879,7 +879,7 @@ class AdminController
 
     public function comments()
     {
-        $comments = Comment::get();
+        $comments = Comment::orderBy("created_at", "desc")->get();
         return view('admin.comments')
             ->withTitle("نظرات")
             ->withComments($comments);
