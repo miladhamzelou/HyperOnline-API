@@ -38,7 +38,7 @@
 
 @section('right-panel')
     <aside id="column-left" class="col-sm-3 hidden-xs">
-        <a href="#">
+        <a href="http://hyper-online.ir/HyperOnline.apk" target="_blank">
             <img src="{{ asset('market/image/banner/download.png') }}" title="download" class="img-responsive"/>
         </a>
         <br>
