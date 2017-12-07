@@ -8,8 +8,16 @@
     src: url('persian-fonts/sans.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'shabnam';
+    src: url('persian-fonts/Shabnam.eot'); /* IE9 Compat Modes */
+    src: url('persian-fonts/Shabnam.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('persian-fonts/Shabnam.woff') format('woff'), /* Pretty Modern Browsers */
+    url('persian-fonts/Shabnam.ttf') format('truetype') /* Safari, Android, iOS */
+}
+
 .font {
-    font-family: 'sanss', sans-serif;
+    font-family: 'shabnam', sans-serif;
 }
 
 @media only screen and (min-width: 767px) {
@@ -26,8 +34,8 @@ div#banner {
     background: #fde073;
     overflow: hidden;
     -webkit-box-shadow: 0 0 5px black;
-    -moz-box-shadow:    0 0 5px black;
-    box-shadow:         0 0 5px black;
+    -moz-box-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px black;
     margin-top: 25px;
     height: 50px;
 }

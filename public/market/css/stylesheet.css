@@ -68,6 +68,14 @@
     src: url('persian-fonts/sans.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'shabnam';
+    src: url('persian-fonts/Shabnam.eot'); /* IE9 Compat Modes */
+    src: url('persian-fonts/Shabnam.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('persian-fonts/Shabnam.woff') format('woff'), /* Pretty Modern Browsers */
+    url('persian-fonts/Shabnam.ttf') format('truetype') /* Safari, Android, iOS */
+}
+
 /*===================================================================================*/
 /*  1. General Styles
 /*===================================================================================*/
@@ -81,7 +89,7 @@ html {
 body {
     background: #dcdbdb;
     color: #222;
-    font-family: 'sanss', sans-serif;
+    font-family: 'WYekan', sans-serif;
     line-height: 22px;
 }
 
@@ -132,13 +140,12 @@ a:focus {
 /**===== Sub Title =====**/
 .subtitle {
     position: relative;
-    padding: 0;
     margin: 0 0 20px 0;
     line-height: normal;
     font-size: 20px;
     color: #000000;
     border-bottom: 2px solid #ddd;
-    padding-bottom: 3px;
+    padding: 0 0 3px;
 }
 
 .subtitle .viewall {
