@@ -43,14 +43,16 @@
                         <ul>
                             @if(Auth::check())
                                 @if($admin)
-                                    <li><a href="{{ url('admin') }}" target="_blank" style="font-size: 20px">پنل ادمین</a></li>
+                                    <li><a href="{{ url('admin') }}" target="_blank" style="font-size: 20px">پنل
+                                            ادمین</a></li>
                                 @endif
                                 <li><a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-size: 20px">خروج</a></li>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="post"
-                                          style="display: none">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    </form>
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                       style="font-size: 20px">خروج</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                      style="display: none">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                </form>
                             @else
                                 <li><a href="{{ url('login') }}" style="font-size: 20px">ورود</a></li>
                                 <li><a href="{{ url('register') }}" style="font-size: 20px">ثبت نام</a></li>
@@ -77,10 +79,17 @@
                         <div id="cart">
                             <button type="button" data-toggle="dropdown" data-loading-text="Loading..."
                                     class="heading dropdown-toggle">
-                                <a href="{{ url('checkout') }}" class="btn btn-primary" style="font-size: 18px; background-color: #00A000">تکمیل خرید&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="{{ url('checkout') }}" class="btn btn-primary"
+                                   style="font-size: 18px; background-color: #00A000">تکمیل خرید&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span id="cart-total">{{ $cart['count'].' کالا - '.$cart['total'].' تومان' }}</span>
                                 </a>
                             </button>
+                            <div id="banner" class="mobile_download">
+                                <div id="banner-content">
+                                    <p id="download_content"><a href="http://hyper-online.ir/HyperOnline.apk"
+                                                                target="_blank">دانلود نسخه موبایل</a></p>
+                                </div>
+                            </div>
                             <ul class="dropdown-menu">
                                 <li>
                                     <table class="table">
@@ -202,7 +211,8 @@
                             </div>
                         </li>
 
-                        <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank" style="font-size: 22px">تخفیف خورده ها !!</a>
+                        <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank"
+                                                         style="font-size: 22px">تخفیف خورده ها !!</a>
                         </li>
                     </ul>
                 </div>
@@ -295,7 +305,8 @@
                 </div>
                 <div class="bottom-row">
                     <div class="custom-text text-center">
-                        <p style="font-size: small">Designed & Developed By : <a href="http://arash-hatami.ir" target="_blank">A.Hatami</a></p>
+                        <p style="font-size: small">Designed & Developed By : <a href="http://arash-hatami.ir"
+                                                                                 target="_blank">A.Hatami</a></p>
                     </div>
                 </div>
             </div>
@@ -314,6 +325,10 @@
 <script type="text/javascript" src="{{ asset('market/js/custom.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/mine.js')}}"></script>
 <script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('market/js/jquery.fittext.js')}}"></script>
+<script>
+    jQuery("#download_content").fitText();
+</script>
 <!-- JS Part End-->
 </body>
 </html>
