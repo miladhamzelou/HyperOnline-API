@@ -14,11 +14,13 @@ class PriceLimitTempOrder extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            // price limit for shop_card
             $table->integer('minPrice')->default(0);
             $table->integer('maxPrice')->default(0);
         });
 
         Schema::table('orders', function (Blueprint $table) {
+            // for temp saving order before pay price
             $table->tinyInteger('temp')->default(0);
         });
     }
