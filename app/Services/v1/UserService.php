@@ -79,6 +79,8 @@ class UserService
         if (app('request')->exists('location_x')) $user->location_x = $request->input('location_x');
         if (app('request')->exists('location_y')) $user->location_y = $request->input('location_y');
         $user->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+        $user->confirmed_phone = 1;
+        $user->confirmed_info = 1;
 
         $password->unique_id = uniqid('', false);
         $password->user_id = $user->unique_id;

@@ -56,6 +56,28 @@ class OrderController extends Controller
         }
     }
 
+    public function storeTemp(Request $request)
+    {
+        try {
+            $result = $this->Orders->tempOrder($request);
+            if ($result)
+                return response()->json([
+                    'error' => false
+                ], 201);
+            else
+                return response()->json([
+                    'error' => true,
+                    'error_msg' => "something's wrong"
+                ], 201);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'error_msg' => $e->getMessage()
+            ], 201);
+        }
+    }
+
     public function userOrders(Request $request)
     {
         try {

@@ -6,7 +6,7 @@
 
 @section('add')
     <div class="row">
-        <div class="col-lg-6 col-centered center-block" style="float: none;">
+        <div class="col-lg-6 col-md-10 col-centered center-block" style="float: none;">
             <div class="box box-danger">
                 <div class="box-header with-border">
                     <h2 class="box-title">اطلاعات کالا</h2>
