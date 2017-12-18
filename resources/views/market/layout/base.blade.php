@@ -306,13 +306,13 @@
                 </div>
 
                 <div class="container">
-                    <div style="float:left;">
+                    <div style="float:none;">
                         <img class="img-responsive"
                              src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo" alt=""
                              onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=71394&amp;p=QHelLvhqUOh0EElo&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)"
                              style="cursor:pointer; margin: 0 auto;" id="QHelLvhqUOh0EElo">
                     </div>
-                    <div style="float:left;">
+                    <div style="float:none;">
                         <img class="img-responsive" id='sizpnbqesizpesgtfukz' style='cursor:pointer; margin:0 auto;'
                              onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=92906&p=pfvluiwkpfvlobpdgvka", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")'
                              alt='logo-samandehi'
