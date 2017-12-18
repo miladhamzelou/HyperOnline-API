@@ -302,6 +302,12 @@
                                 href="{{ url('feed') }}" target="_blank"> <img data-toggle="tooltip"
                                                                                src="{{ asset('market/image/socialicons/rss.png')}}"
                                                                                alt="RSS" title="RSS"> </a></div>
+                    <br>
+                </div>
+                <div class="pull-right">
+                    <img src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo" alt=""
+                         onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=71394&amp;p=QHelLvhqUOh0EElo&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)"
+                         style="cursor:pointer" id="QHelLvhqUOh0EElo">
                 </div>
                 <div class="bottom-row">
                     <div class="custom-text text-center">
