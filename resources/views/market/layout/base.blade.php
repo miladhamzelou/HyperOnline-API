@@ -305,7 +305,7 @@
                     <br>
                 </div>
 
-                <div class="container">
+                <div class="container" style="text-align: center;">
                     <div style="display: inline-block">
                         <div style="float:left;">
                             <img class="img-responsive"
