@@ -306,7 +306,7 @@
                 </div>
 
                 <div class="container">
-                    <div style="margin: 0 auto" class="img-responsive">
+                    <div style="display: inline-block">
                         <div style="float:left;">
                             <img class="img-responsive"
                                  src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo" alt=""
