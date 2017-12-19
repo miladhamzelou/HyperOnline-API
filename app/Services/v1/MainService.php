@@ -72,7 +72,7 @@ class MainService
     {
         $option = Option::firstOrFail();
 
-        $categories = Category1::orderBy('point', 'desc')->take($option->category_count)->get();
+        $categories = Category1::orderBy('created_at', 'desc')->take($option->category_count)->get();
 
         $data = [];
         foreach ($categories as $category) {
