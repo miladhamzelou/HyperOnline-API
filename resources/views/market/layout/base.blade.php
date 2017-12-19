@@ -309,7 +309,7 @@
                     <div style="display: inline-block">
                         <div style="float:left;">
                             <img class="img-responsive"
-                                 src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo" alt=""
+                                 src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo" alt="logo-enamad"
                                  onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=71394&amp;p=QHelLvhqUOh0EElo&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)"
                                  style="cursor:pointer; margin: 0 auto;" id="QHelLvhqUOh0EElo">
                         </div>
