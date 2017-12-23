@@ -115,9 +115,11 @@ Route::get('/pay', 'v1\market\MainController@pay')->name('pay');
 Route::post('/callback', 'v1\market\MainController@callback');
 Route::get('/admin/downloadFactor/{id}', 'v1_web\OrderController@downloadFactor');
 
-Route::get('/contact_us','v1\market\MainController@contact_us');
-Route::get('/about','v1\market\MainController@about');
-Route::get('/privacy','v1\market\MainController@privacy');
-Route::get('/terms','v1\market\MainController@terms');
-Route::get('/comment','v1\market\MainController@comment');
-Route::post('/comment/send','v1\market\MainController@sendComment');
+Route::get('/contact_us', 'v1\market\MainController@contact_us');
+Route::get('/about', 'v1\market\MainController@about');
+Route::get('/privacy', 'v1\market\MainController@privacy');
+Route::get('/terms', 'v1\market\MainController@terms');
+Route::get('/comment', 'v1\market\MainController@comment');
+Route::post('/comment/send', 'v1\market\MainController@sendComment');
+
+Route::get('/android/pay/{id}', 'v1\OrderController@pay');

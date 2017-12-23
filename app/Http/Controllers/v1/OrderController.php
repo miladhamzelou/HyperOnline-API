@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\Pay;
 use App\Services\v1\OrderService;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class OrderController extends Controller
 {
     protected $Orders;
+    protected $API;
 
     /**
      * ProductController constructor.
@@ -21,6 +25,7 @@ class OrderController extends Controller
         require(app_path() . '/Common/jdf.php');
         require(app_path() . '/Common/MYPDF.php');
         $this->Orders = $service;
+        $this->API = "4d0d3be84eae7fbe5c317bf318c77e83";
     }
 
     public function callback(Request $request)
@@ -62,7 +67,8 @@ class OrderController extends Controller
             $result = $this->Orders->tempOrder($request);
             if ($result)
                 return response()->json([
-                    'error' => false
+                    'error' => false,
+                    'code' => $result
                 ], 201);
             else
                 return response()->json([
@@ -98,6 +104,42 @@ class OrderController extends Controller
                 'error' => true,
                 'error_msg' => $e->getMessage()
             ], 201);
+        }
+    }
+
+    public function pay($id)
+    {
+        $order = Order::where("unique_id", $id)->first();
+        if ($order) {
+            $client = new Client([
+                'headers' => ['Content-Type' => 'application/json']
+            ]);
+            $url = "https://pay.ir/payment/send";
+            $params = [
+                'api' => $this->API,
+                'amount' => $order->price * 10,
+                'redirect' => "http://hyper-online.ir/api/callback",
+                'mobile' => $order->user_phone,
+                'factorNumber' => $id,
+            ];
+            $response = $client->post(
+                $url,
+                ['body' => json_encode($params)]
+            );
+
+            $response = (array)json_decode($response->getBody()->getContents());
+
+            if ($response['status'] == 1) {
+                $transId = $response['transId'];
+                return Redirect::to("http://pay.ir/payment/gateway/" . $transId);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'error_msg' => $response['errorCode']
+                ], 201);
+            }
+        } else {
+            return "session expired";
         }
     }
 }

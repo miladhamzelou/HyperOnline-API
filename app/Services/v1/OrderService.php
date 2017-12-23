@@ -192,7 +192,14 @@ class OrderService
         $order->stuffs_count = ltrim(rtrim($request->get('stuffs_count'), ','), ',');
         $order->price_send = $send_price;
         $order->hour = $request->get('hour');
-        $order->pay_method = 'online';
+        if (app('request')->exists('method')) {
+            $method = $request->get('method');
+            if ($method == 1)
+                $order->pay_method = 'online';
+            else
+                $order->pay_method = 'place';
+        } else
+            $order->pay_method = 'online';
         $order->description = $request->get('description');
         $order->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
@@ -212,7 +219,7 @@ class OrderService
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
 
             $product->sell = $product->sell + 1;
-            if ($order->code != '-1')
+            if ($order->user_phone != '09123456789')
                 $product->count = $product->count - 1;
             if ($product->description)
                 $desc .= $product->description . ',';
@@ -220,15 +227,15 @@ class OrderService
                 $desc .= '-,';
 
             $price_original += $product->price_original * $counts[$index];
-            $tPrice += $product->price * $counts[$index];
+            //$tPrice += $product->price * $counts[$index];
             $tOff += $product->price * $product->off / 100 * $counts[$index];
             $tFinal += ($product->price - ($product->price * $product->off / 100)) * $counts[$index];
 
             $product->save();
         }
 
-        if ($tPrice < 35000) $tPrice += $send_price;
-        $order->price = $tPrice;
+        if ($tFinal < 35000) $tFinal += $send_price;
+        $order->price = $tFinal;
         $order->price_original = $price_original;
         $order->stuffs_desc = ltrim(rtrim($desc, ','), ',');
         $order->temp = 1;
@@ -236,7 +243,7 @@ class OrderService
 
         $this->addInfo($order);
 
-        return true;
+        return $order->unique_id;
     }
 
     public function addInfo(&$item)
