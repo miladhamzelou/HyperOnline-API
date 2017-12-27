@@ -241,7 +241,7 @@
                 </div>
                 <div class="col-md-3">
                     <a href="http://parshub.com/push/APP/930533830" target="_blank">
-                        <img class="img-responsive" src="{{ asset('market/image/markets/parshub.jpg')}}" alt="پارس هاب">
+                        <img class="img-responsive" src="{{ asset('market/image/markets/parshub.png')}}" alt="پارس هاب">
                     </a>
                 </div>
             </div>
