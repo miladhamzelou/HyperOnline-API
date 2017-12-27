@@ -316,7 +316,7 @@
                         <div style="float:left;">
                             <img class="img-responsive" id='sizpnbqesizpesgtfukz' style='cursor:pointer; margin:0 auto;'
                                  onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=92906&p=pfvluiwkpfvlobpdgvka", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")'
-                                 alt='logo-samandehi'
+                                 alt="logo-samandehi"
                                  src='https://logo.samandehi.ir/logo.aspx?id=92906&p=bsiyodrfbsiylymawlbq'/>
                         </div>
                     </div>
