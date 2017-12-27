@@ -34,15 +34,20 @@
                                     </thead>
                                     <tbody>
                                     @foreach($orders as $order)
-                                        <tr>
-                                            @if($order->status=="abort")
-                                                <td style="text-align: right; direction: rtl; color: red;">لغو شده</td>
-                                            @elseif($order->status=="delivered")
-                                                <td style="text-align: right; direction: rtl; color: green">تحویل شده</td>
-                                            @elseif($order->status=="shipped")
-                                                <td style="text-align: right; direction: rtl; color: darkviolet">ارسال شده</td>
-                                            @elseif($order->status=="pending")
-                                                <td style="text-align: right; direction: rtl; color: orange">درحال انتظار</td>
+                                            @if($order->temp==0)
+                                                <tr>
+                                                @if($order->status=="abort")
+                                                    <td style="text-align: right; direction: rtl; color: red;">لغو شده</td>
+                                                @elseif($order->status=="delivered")
+                                                    <td style="text-align: right; direction: rtl; color: green">تحویل شده</td>
+                                                @elseif($order->status=="shipped")
+                                                    <td style="text-align: right; direction: rtl; color: darkviolet">ارسال شده</td>
+                                                @elseif($order->status=="pending")
+                                                    <td style="text-align: right; direction: rtl; color: orange">درحال انتظار</td>
+                                                @endif
+                                            @else
+                                                <tr style="background-color: lightgrey">
+                                                <td style="text-align: right; direction: rtl; color: red;">در انتظار پرداخت</td>
                                             @endif
                                             <td style="text-align: right; direction: rtl;">{{ (str_replace(',','',$order->price) - str_replace(',','',$order->price_original)) . ' تومان' }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ $order->price . ' تومان' }}</td>
