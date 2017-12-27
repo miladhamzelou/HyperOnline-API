@@ -224,6 +224,28 @@
         {{--@yield('feature-box')--}}
         <div class="container">
             <div class="row">
+                <div class="col-md-3">
+                    <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">
+                        <img class="img-responsive" src="{{ asset('market/image/markets/bazaar.png')}}" alt="کافه بازار">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://iranapps.ir/app/ir.hatamiarash.hyperonline" target="_blank">
+                        <img class="img-responsive" src="{{ asset('market/image/markets/iran_apps.png')}}" alt="ایران اپس">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://myket.ir/app/ir.hatamiarash.hyperonline" target="_blank">
+                        <img class="img-responsive" src="{{ asset('market/image/markets/myket.png')}}" alt="مایکت">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://parshub.com/push/APP/930533830" target="_blank">
+                        <img class="img-responsive" src="{{ asset('market/image/markets/parshub.jpg')}}" alt="پارس هاب">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
                 @yield('right-panel')
                 @yield('content')
             </div>

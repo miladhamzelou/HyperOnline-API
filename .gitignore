@@ -45,3 +45,4 @@ public/ftp/factors/*.pdf
 /public/arash
 !*.gitkeep
 *.apk
+!/public/market/image/markets/*.png
