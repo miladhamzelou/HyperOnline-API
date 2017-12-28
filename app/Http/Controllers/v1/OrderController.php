@@ -142,4 +142,61 @@ class OrderController extends Controller
             return "session expired";
         }
     }
+
+    public function pay_test($price)
+    {
+        $client = new Client([
+            'headers' => ['Content-Type' => 'application/json']
+        ]);
+        $url = "https://pay.ir/payment/send";
+        $params = [
+            'api' => $this->API,
+            'amount' => $price,
+            'redirect' => "http://hyper-online.ir/callback2",
+            'mobile' => '09182180519',
+            'factorNumber' => '1',
+        ];
+        $response = $client->post(
+            $url,
+            ['body' => json_encode($params)]
+        );
+
+        $response = (array)json_decode($response->getBody()->getContents());
+
+        if ($response['status'] == 1) {
+            $transId = $response['transId'];
+            return Redirect::to("http://pay.ir/payment/gateway/" . $transId);
+        } else {
+            return response()->json([
+                'error' => true,
+                'error_msg' => $response['errorCode']
+            ], 201);
+        }
+    }
+
+    public function call_back(Request $request)
+    {
+        $pay = new Pay();
+        if (app('request')->exists('status')) $pay->status = $request->input('status');
+        if (app('request')->exists('transId')) $pay->transId = $request->input('transId');
+        if (app('request')->exists('factorNumber')) $pay->factorNumber = $request->input('factorNumber');
+        if (app('request')->exists('cardNumber')) $pay->cardNumber = $request->input('cardNumber');
+        if (app('request')->exists('message')) $pay->message = $request->input('message');
+        $pay->save();
+
+        $client = new Client();
+        $res = $client->request(
+            'POST',
+            'https://pay.ir/payment/verify',
+            [
+                'json' => [
+                    'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
+                    'transId' => $pay->transId
+                ]
+            ]);
+        $status = json_decode($res->getBody(), true)['status'];
+
+        header("location: hyper://pay?status=" . $status);
+        exit();
+    }
 }

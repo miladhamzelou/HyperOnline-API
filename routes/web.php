@@ -123,3 +123,5 @@ Route::get('/comment', 'v1\market\MainController@comment');
 Route::post('/comment/send', 'v1\market\MainController@sendComment');
 
 Route::get('/android/pay/{id}', 'v1\OrderController@pay');
+Route::get('/pay/{price}', 'v1\OrderController@pay_test');
+Route::get('/callback2', 'v1\OrderController@call_back');
