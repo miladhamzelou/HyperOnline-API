@@ -9,6 +9,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         'api/*',
         'api/v1/*',
-        'callback'
+        'callback',
+        'callback2',
     ];
 }
