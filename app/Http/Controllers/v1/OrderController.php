@@ -184,19 +184,22 @@ class OrderController extends Controller
         if (app('request')->exists('message')) $pay->message = $request->input('message');
         $pay->save();
 
-        $client = new Client();
-        $res = $client->request(
-            'POST',
-            'https://pay.ir/payment/verify',
-            [
-                'json' => [
-                    'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
-                    'transId' => $pay->transId
-                ]
-            ]);
-        $status = json_decode($res->getBody(), true)['status'];
+        $client = new Client([
+            'headers' => ['Content-Type' => 'application/json']
+        ]);
+        $url = "https://pay.ir/payment/verify";
+        $params = [
+            'api' => $this->API,
+            'transId' => $pay->transId
+        ];
+        $response = $client->post(
+            $url,
+            ['body' => json_encode($params)]
+        );
 
-        header("location: hyper://pay?status=" . $status);
+        $response = (array)json_decode($response->getBody()->getContents());
+
+        header("location: hyper://pay?status=" . $response['status']);
         exit();
     }
 }
