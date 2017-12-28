@@ -188,9 +188,10 @@ class OrderController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
         $url = "https://pay.ir/payment/verify";
+        $t_id = (integer)$request->input('transId');
         $params = [
             'api' => $this->API,
-            'transId' => (int)$pay->transId
+            'transId' => $t_id
         ];
         $response = $client->post(
             $url,
