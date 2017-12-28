@@ -183,24 +183,37 @@ class OrderController extends Controller
         if (app('request')->exists('cardNumber')) $pay->cardNumber = $request->input('cardNumber');
         if (app('request')->exists('message')) $pay->message = $request->input('message');
         $pay->save();
+//        $client = new Client([
+//            'headers' => ['Content-Type' => 'application/json']
+//        ]);
+//        $url = "https://pay.ir/payment/verify";
+//        $t_id = (integer)$request->input('transId');
+//        $params = [
+//            'api' => $this->API,
+//            'transId' => $request->input('transId')
+//        ];
+//        $response = $client->post(
+//            $url,
+//            ['body' => json_encode($params)]
+//        );
+//
+//        $response = (array)json_decode($response->getBody()->getContents());
 
-        $client = new Client([
-            'headers' => ['Content-Type' => 'application/json']
-        ]);
-        $url = "https://pay.ir/payment/verify";
-        $t_id = (integer)$request->input('transId');
-        $params = [
-            'api' => $this->API,
-            'transId' => $request->input('transId')
-        ];
-        $response = $client->post(
-            $url,
-            ['body' => json_encode($params)]
-        );
-
-        $response = (array)json_decode($response->getBody()->getContents());
-
-        header("location: hyper://pay?status=" . $response['status']);
+        $res = $this->verify($this->API, $pay->transId);
+        $res = (array)json_decode($res);
+        header("location: hyper://pay?status=" . $res['status']);
         exit();
+    }
+
+    function verify($api, $transId)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://pay.ir/payment/verify');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "api=$api&transId=$transId");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $res = curl_exec($ch);
+        curl_close($ch);
+        return $res;
     }
 }
