@@ -190,7 +190,7 @@ class OrderController extends Controller
         $url = "https://pay.ir/payment/verify";
         $params = [
             'api' => $this->API,
-            'transId' => $pay->transId
+            'transId' => (int)$pay->transId
         ];
         $response = $client->post(
             $url,
