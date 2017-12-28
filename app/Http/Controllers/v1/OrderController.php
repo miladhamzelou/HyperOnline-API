@@ -191,7 +191,7 @@ class OrderController extends Controller
         $t_id = (integer)$request->input('transId');
         $params = [
             'api' => $this->API,
-            'transId' => $t_id
+            'transId' => $request->input('transId')
         ];
         $response = $client->post(
             $url,
