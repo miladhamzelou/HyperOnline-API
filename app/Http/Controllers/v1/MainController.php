@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use App\Services\v1\MainService;
 use Exception;
 use Illuminate\Http\Request;
@@ -101,5 +102,11 @@ class MainController extends Controller
         $user = $request->get('from');
         $message = "دانلود هایپرآنلاین" . "\n" . "http://hyper-online.ir/HyperOnline.apk";
         Smsir::send([$message], [$user]);
+    }
+
+    public function armin()
+    {
+        $products = Product::orderBy("sell", "desc")->get();
+        return view('armin')->withProducts($products);
     }
 }
