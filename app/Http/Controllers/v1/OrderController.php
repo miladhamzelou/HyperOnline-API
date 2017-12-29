@@ -118,7 +118,7 @@ class OrderController extends Controller
             $params = [
                 'api' => $this->API,
                 'amount' => $order->price * 10,
-                'redirect' => "http://hyper-online.ir/api/callback",
+                'redirect' => "http://hyper-online.ir/callback2",
                 'mobile' => $order->user_phone,
                 'factorNumber' => $id,
             ];
@@ -131,6 +131,8 @@ class OrderController extends Controller
 
             if ($response['status'] == 1) {
                 $transId = $response['transId'];
+                $order->transId = $transId;
+                $order->save();
                 return Redirect::to("http://pay.ir/payment/gateway/" . $transId);
             } else {
                 return response()->json([
@@ -183,24 +185,12 @@ class OrderController extends Controller
         if (app('request')->exists('cardNumber')) $pay->cardNumber = $request->input('cardNumber');
         if (app('request')->exists('message')) $pay->message = $request->input('message');
         $pay->save();
-//        $client = new Client([
-//            'headers' => ['Content-Type' => 'application/json']
-//        ]);
-//        $url = "https://pay.ir/payment/verify";
-//        $t_id = (integer)$request->input('transId');
-//        $params = [
-//            'api' => $this->API,
-//            'transId' => $request->input('transId')
-//        ];
-//        $response = $client->post(
-//            $url,
-//            ['body' => json_encode($params)]
-//        );
-//
-//        $response = (array)json_decode($response->getBody()->getContents());
 
         $res = $this->verify($this->API, $pay->transId);
         $res = (array)json_decode($res);
+
+        $error = 0;
+        $error_code = 0;
         header("location: hyper://pay?status=" . $res['status']);
         exit();
     }
