@@ -210,7 +210,7 @@ class OrderService
             array_push($products, $p);
         }
         $price_original = 0;
-        $tPrice = 0;
+        //$tPrice = 0;
         $tOff = 0;
         $tFinal = 0;
         $counts = explode(',', $order->stuffs_count);
@@ -227,7 +227,7 @@ class OrderService
                 $desc .= '-,';
 
             $price_original += $product->price_original * $counts[$index];
-            //$tPrice += $product->price * $counts[$index];
+//            $tPrice += $product->price * $counts[$index];
             $tOff += $product->price * $product->off / 100 * $counts[$index];
             $tFinal += ($product->price - ($product->price * $product->off / 100)) * $counts[$index];
 

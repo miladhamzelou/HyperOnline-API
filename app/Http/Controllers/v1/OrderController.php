@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmail;
+use App\Jobs\SendSMS;
 use App\Order;
 use App\Pay;
 use App\Services\v1\OrderService;
@@ -10,6 +12,7 @@ use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class OrderController extends Controller
 {
@@ -189,13 +192,16 @@ class OrderController extends Controller
         $res = $this->verify($this->API, $pay->transId);
         $res = (array)json_decode($res);
 
-        $error = 0;
-        $error_code = 0;
-        header("location: hyper://pay?status=" . $res['status']);
+        if ($res['status'] == 1) {
+            $this->completeOrder($pay->factorNumber);
+            header("location: hyper://pay?error=0&code=" . $pay->factorNumber);
+        } else {
+            header("location: hyper://pay?error=1&er_code=" . $res['errorCode']);
+        }
         exit();
     }
 
-    function verify($api, $transId)
+    private function verify($api, $transId)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://pay.ir/payment/verify');
@@ -205,5 +211,88 @@ class OrderController extends Controller
         $res = curl_exec($ch);
         curl_close($ch);
         return $res;
+    }
+
+    private function completeOrder($id)
+    {
+        $order = Order::where("unique_id", $id)->first();
+        $user = User::where('unique_id', $order->user_id)->firstOrFail();
+        $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
+        $send_price = $seller->send_price;
+
+        $ids = explode(',', $order->stuffs_id);
+        $products = array();
+        foreach ($ids as $id) {
+            $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
+            array_push($products, $p);
+        }
+        $price_original = 0;
+        $tPrice = 0;
+        $tOff = 0;
+        $tFinal = 0;
+        $counts = explode(',', $order->stuffs_count);
+        $desc = '';
+        foreach ($products as $index => $pr) {
+            $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
+            if ($product->description)
+                $desc .= $product->description . ',';
+            else
+                $desc .= '-,';
+            $price_original += $product->price_original * $counts[$index];
+            $tPrice += $product->price * $counts[$index];
+            $tOff += $product->price * $product->off / 100 * $counts[$index];
+            $tFinal += ($product->price - ($product->price * $product->off / 100)) * $counts[$index];
+        }
+
+        $data = [
+            "products" => $products,
+            "counts" => $counts,
+            "desc" => explode(',', $order->stuffs_desc),
+            "user_name" => $order->user_name,
+            "user_phone" => $order->user_phone,
+            "user_code" => $user->code,
+            "user_address" => $user->state . '-' . $user->city . ' : ' . $user->address,
+            "total" => $tPrice,
+            "off" => $tOff,
+            "final" => $tFinal,
+            "hour" => $order->hour,
+            "description" => $order->description,
+            "date" => $order->create_date,
+            "code" => $order->code,
+            "send_price" => $send_price
+        ];
+        $pdf = PDF::loadView('pdf.factor', $data);
+        $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
+
+        $support = new Support();
+        $support->unique_id = uniqid('', false);
+        $support->section = "سفارش جدید";
+        $support->body = "سفارش جدید ثبت شد";
+        $support->log = 0;
+
+        $type = "";
+        if ($order->pay_method == 'online') $type = "آنلاین";
+        else if ($order->pay_method == 'place') $type = "حضوری";
+
+        SendEmail::dispatch([
+            "to" => "hyper.online.h@gmail.com",
+            "body" => "سفارش ( " . $type . " ) جدید ثبت شد",
+            "order" => [
+                "code" => $order->code,
+                "user_name" => $order->user_name,
+                "user_phone" => $order->user_phone,
+                "stuffs" => $order->stuffs,
+                "hour" => $order->hour,
+                "price" => $order->price,
+                "desc" => $order->description,
+            ]
+        ], 1)
+            ->onQueue('email');
+
+        SendSMS::dispatch([
+            "msg" => ["سفارش ( " . $type . " ) جدید ثبت شد"],
+            "phone" => ["09188167800"]
+        ])
+            ->onQueue('sms');
     }
 }
