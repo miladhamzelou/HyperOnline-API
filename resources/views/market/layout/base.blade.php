@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/stylesheet-rtl.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive-rtl.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/webfont/stylesheet.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css')}}"/>
     <link rel="stylesheet" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.css') }}">
     <!-- CSS Part End-->
@@ -226,22 +227,26 @@
             <div class="row">
                 <div class="col-md-3">
                     <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive" style="margin: 4px" src="{{ asset('market/image/markets/bazaar.png')}}" alt="کافه بازار">
+                        <img class="img-responsive" style="margin: 4px"
+                             src="{{ asset('market/image/markets/bazaar.png')}}" alt="کافه بازار">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://iranapps.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive" style="margin: 4px" src="{{ asset('market/image/markets/iran_apps.png')}}" alt="ایران اپس">
+                        <img class="img-responsive" style="margin: 4px"
+                             src="{{ asset('market/image/markets/iran_apps.png')}}" alt="ایران اپس">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://myket.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive" style="margin: 4px" src="{{ asset('market/image/markets/myket.png')}}" alt="مایکت">
+                        <img class="img-responsive" style="margin: 4px"
+                             src="{{ asset('market/image/markets/myket.png')}}" alt="مایکت">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://parshub.com/push/APP/930533830" target="_blank">
-                        <img class="img-responsive" style="margin: 4px" src="{{ asset('market/image/markets/parshub.png')}}" alt="پارس هاب">
+                        <img class="img-responsive" style="margin: 4px"
+                             src="{{ asset('market/image/markets/parshub.png')}}" alt="پارس هاب">
                     </a>
                 </div>
             </div>
@@ -332,7 +337,8 @@
                     <div style="display: inline-block">
                         <div style="float:left;">
                             <img class="img-responsive"
-                                 src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo" alt="logo-enamad"
+                                 src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo"
+                                 alt="logo-enamad"
                                  onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=71394&amp;p=QHelLvhqUOh0EElo&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)"
                                  style="cursor:pointer; margin: 0 auto;" id="QHelLvhqUOh0EElo">
                         </div>
@@ -347,8 +353,9 @@
                 <br>
                 <div class="bottom-row">
                     <div class="custom-text text-center">
-                        <p style="font-size: small">Designed & Developed By : <a href="http://arash-hatami.ir"
-                                                                                 target="_blank">A.Hatami</a></p>
+                        <p style="font-size: xx-small; font-family: 'Courier New', Courier, mono;">Designed & Developed By</p>
+                        <br>
+                        <a class="web_font" style="font-size: xx-large" href="http://arash-hatami.ir" target="_blank">A.Hatami</a>
                     </div>
                 </div>
             </div>
