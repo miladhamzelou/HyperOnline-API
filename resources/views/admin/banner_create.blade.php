@@ -50,7 +50,7 @@
                                 <div class="form-check pull-right">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="radio" name="type"
-                                               id="type" value="0" checked>
+                                               id="banner_type" value="0" checked>
                                         اپلیکیشن
                                     </label>
                                 </div>
@@ -59,9 +59,27 @@
                                 <div class="form-check pull-right">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="radio" name="type"
-                                               id="type" value="1" disabled>
+                                               id="banner_type" value="1">
                                         وب سایت
                                     </label>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group{{ $errors->has('size') ? ' has-error' : '' }}">
+                                    <label for="size" class="pull-right" style="direction:rtl;">سایز :</label>
+                                    <select id="size" type="text" style="text-align: center"
+                                            class="my_font form-control" tabindex="5"
+                                            name="size" required>
+                                        <option value="0">920 x 380</option>
+                                        <option value="1">400 x 200</option>
+                                        <option value="2">400 x 150</option>
+                                    </select>
+
+                                    @if ($errors->has('size'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('size') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <br>
@@ -89,4 +107,7 @@
             </div>
         </div>
     </div>
+    <script>
+        
+    </script>
 @endsection
