@@ -16,8 +16,7 @@
     "laravel/tinker": "~1.0",
     "niklasravnsborg/laravel-pdf": "^1.5",
     "phplusir/smsir": "1.5",
-    "snowfire/beautymail": "dev-master",
-    "spatie/laravel-analytics": "^3.3"
+    "snowfire/beautymail": "dev-master"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

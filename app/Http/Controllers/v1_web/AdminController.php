@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use phplusir\smsir\Smsir;
+use Spatie\Analytics\AnalyticsFacade as Analytics;
 use Spatie\Analytics\Period;
 
 require(app_path() . '/Common/jdf.php');
@@ -884,12 +885,5 @@ class AdminController
         return view('admin.comments')
             ->withTitle("نظرات")
             ->withComments($comments);
-    }
-
-    public function analytics(){
-        $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
-        return view('admin.analytics')
-            ->withTitle("Analytics")
-            ->withData($analyticsData);
     }
 }
