@@ -288,7 +288,7 @@
                         <li><a href="{{ url('/admin/messages') }}">گزارشات</a></li>
                     </ul>
                 </li>
-
+                <li class="my_font"><a href="{{ url('/admin/analytics') }}">Analytics</a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>

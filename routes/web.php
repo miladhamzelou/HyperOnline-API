@@ -102,6 +102,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/banners/delete/{id}', 'v1_web\AdminController@banner_delete')->name('banner_delete');
 
     Route::get('/admin/comments', 'v1_web\AdminController@comments')->name('comments');
+
+    Route::get('/admin/analytics', 'v1_web\AdminController@analytics');
 });
 
 Route::get('/search', 'v1_web\AdminController@search');
