@@ -4,23 +4,22 @@
     <meta charset="UTF-8"/>
     <meta name="format-detection" content="telephone=09182180519"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="{{ asset('market/image/favicon.png')}}" rel="icon"/>
+    <link href="{{ asset('market/image/favicon.png') }}" rel="icon"/>
     <title>هایپرآنلاین</title>
     <meta name="description" content="سامانه فروش محصولات آنلاین">
-    <meta name="samandehi" content="487553811"/>
     <!-- CSS Part Start-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/js/bootstrap/css/bootstrap.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/js/bootstrap/css/bootstrap-rtl.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/font-awesome/css/font-awesome.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/stylesheet.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/owl.carousel.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/owl.transitions.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/stylesheet-rtl.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive-rtl.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/webfont/stylesheet.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css')}}"/>
-    <link rel="stylesheet" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/js/bootstrap/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/js/bootstrap/css/bootstrap-rtl.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/font-awesome/css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/stylesheet.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/owl.carousel.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/owl.transitions.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/stylesheet-rtl.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive-rtl.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/webfont/stylesheet.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.css') }}">
     <!-- CSS Part End-->
 </head>
 <body>
@@ -71,7 +70,7 @@
                     <!-- Logo Start -->
                     <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12 inner">
                         <div id="logo"><a href="{{ url('home') }}"><img class="img-responsive"
-                                                                        src="{{ asset('market/image/logo.png')}}"
+                                                                        src="{{ asset('market/image/logo.png') }}"
                                                                         title="MarketShop" alt="MarketShop"/></a></div>
                     </div>
                     <!-- Logo End -->
@@ -106,7 +105,7 @@
                                                                  width="50" height="50">
                                                         @else
                                                             <img class="img-thumbnail"
-                                                                 src="{{ asset('market/image/no_image.jpg')}}"
+                                                                 src="{{ asset('market/image/no_image.jpg') }}"
                                                                  width="50" height="50">
                                                         @endif
                                                     </a>
@@ -228,25 +227,25 @@
                 <div class="col-md-3">
                     <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">
                         <img class="img-responsive" style="margin: 4px"
-                             src="{{ asset('market/image/markets/bazaar.png')}}" alt="کافه بازار">
+                             src="{{ asset('market/image/markets/bazaar.png') }}" alt="کافه بازار">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://iranapps.ir/app/ir.hatamiarash.hyperonline" target="_blank">
                         <img class="img-responsive" style="margin: 4px"
-                             src="{{ asset('market/image/markets/iran_apps.png')}}" alt="ایران اپس">
+                             src="{{ asset('market/image/markets/iran_apps.png') }}" alt="ایران اپس">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://myket.ir/app/ir.hatamiarash.hyperonline" target="_blank">
                         <img class="img-responsive" style="margin: 4px"
-                             src="{{ asset('market/image/markets/myket.png')}}" alt="مایکت">
+                             src="{{ asset('market/image/markets/myket.png') }}" alt="مایکت">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://parshub.com/push/APP/930533830" target="_blank">
                         <img class="img-responsive" style="margin: 4px"
-                             src="{{ asset('market/image/markets/parshub.png')}}" alt="پارس هاب">
+                             src="{{ asset('market/image/markets/parshub.png') }}" alt="پارس هاب">
                     </a>
                 </div>
             </div>
@@ -261,7 +260,7 @@
     <footer id="footer">
         <div class="fpart-first">
             <div class="container">
-                <div class="row">
+                <div class="row font_sans">
                     <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <h5>اطلاعات تماس</h5>
                         <ul>
@@ -307,31 +306,32 @@
             <div class="container">
                 <div id="powered" class="clearfix">
                     <div class="powered_text pull-left flip">
-                        <p class="font_sans">کپی رایت © {{ date("Y") }} − کلیه ی حقوق مادی و معنوی این سایت مربوط به هایپرآنلاین می
+                        <p class="font_sans">کپی رایت © {{ date("Y") }} − کلیه ی حقوق مادی و معنوی این سایت مربوط به
+                            هایپرآنلاین می
                             باشد</p>
                     </div>
                     <div class="social pull-right flip">
                         <a href="{{ $social['facebook'] }}" target="_blank">
                             <img data-toggle="tooltip"
-                                 src="{{ asset('market/image/socialicons/facebook.png')}}"
+                                 src="{{ asset('market/image/socialicons/facebook.png') }}"
                                  alt="Facebook" title="Facebook">
                         </a>
                         <a href="{{ $social['twitter'] }}" target="_blank">
-                            <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/twitter.png')}}"
+                            <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/twitter.png') }}"
                                  alt="Twitter" title="Twitter">
                         </a>
                         <a href="{{ $social['google'] }}" target="_blank">
-                            <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/google_plus.png')}}"
+                            <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/google_plus.png') }}"
                                  alt="Google+" title="Google+">
                         </a>
                         <a href="{{ $social['pinterest'] }}" target="_blank">
                             <img data-toggle="tooltip"
-                                 src="{{ asset('market/image/socialicons/pinterest.png')}}"
+                                 src="{{ asset('market/image/socialicons/pinterest.png') }}"
                                  alt="Pinterest" title="Pinterest">
                         </a>
                         <a href="{{ url('feed') }}" target="_blank">
                             <img data-toggle="tooltip"
-                                 src="{{ asset('market/image/socialicons/rss.png')}}"
+                                 src="{{ asset('market/image/socialicons/rss.png') }}"
                                  alt="RSS" title="RSS">
                         </a>
                     </div>
@@ -365,22 +365,25 @@
                     </div>
                 </div>
             </div>
-            <div id="back-top"><a data-toggle="tooltip" title="بازگشت به بالا" href="javascript:void(0)"
-                                  class="backtotop"><i class="fa fa-chevron-up"></i></a></div>
+            <div id="back-top">
+                <a data-toggle="tooltip" title="بازگشت به بالا" href="javascript:void(0)" class="backtotop">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
         </div>
     </footer>
     <!--Footer End-->
 </div>
 <!-- JS Part Start-->
-<script type="text/javascript" src="{{ asset('market/js/jquery-2.1.1.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('market/js/bootstrap/js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('market/js/jquery.easing-1.3.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('market/js/jquery.dcjqaccordion.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('market/js/owl.carousel.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('market/js/custom.js')}}"></script>
-<script type="text/javascript" src="{{ asset('js/mine.js')}}"></script>
+<script type="text/javascript" src="{{ asset('market/js/jquery-2.1.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('market/js/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('market/js/jquery.easing-1.3.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('market/js/jquery.dcjqaccordion.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('market/js/owl.carousel.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('market/js/custom.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/mine.js') }}"></script>
 <script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('market/js/jquery.fittext.js')}}"></script>
+<script src="{{ asset('market/js/jquery.fittext.js') }}"></script>
 <script>
     jQuery("#download_content").fitText();
 </script>
