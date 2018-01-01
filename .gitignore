@@ -46,4 +46,3 @@ public/ftp/factors/*.pdf
 !*.gitkeep
 *.apk
 !/public/market/image/markets/*.png
-!/storage/app/analytics/HyperOnline-a7bb2190e5b0.json
