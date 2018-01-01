@@ -43,12 +43,16 @@
                         <ul>
                             @if(Auth::check())
                                 @if($admin)
-                                    <li><a href="{{ url('admin') }}" target="_blank" style="font-size: 20px">پنل
-                                            ادمین</a></li>
+                                    <li>
+                                        <a href="{{ url('admin') }}" target="_blank" style="font-size: 20px">پنل
+                                            ادمین</a>
+                                    </li>
                                 @endif
-                                <li><a href="{{ route('logout') }}"
+                                <li>
+                                    <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                       style="font-size: 20px">خروج</a></li>
+                                       style="font-size: 20px">خروج</a>
+                                </li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="post"
                                       style="display: none">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -69,9 +73,13 @@
                 <div class="table-container">
                     <!-- Logo Start -->
                     <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12 inner">
-                        <div id="logo"><a href="{{ url('home') }}"><img class="img-responsive"
-                                                                        src="{{ asset('market/image/logo.png') }}"
-                                                                        title="MarketShop" alt="MarketShop"/></a></div>
+                        <div id="logo">
+                            <a href="{{ url('home') }}">
+                                <img class="img-responsive"
+                                     src="{{ asset('market/image/logo.png') }}"
+                                     alt="MarketShop"/>
+                            </a>
+                        </div>
                     </div>
                     <!-- Logo End -->
                     <!-- Mini Cart Start-->
@@ -86,8 +94,9 @@
                             </button>
                             <div id="banner" class="mobile_download">
                                 <div id="banner-content">
-                                    <p id="download_content"><a href="http://hyper-online.ir/HyperOnline.apk"
-                                                                target="_blank">دانلود نسخه موبایل</a></p>
+                                    <p id="download_content">
+                                        <a href="http://hyper-online.ir/HyperOnline.apk" target="_blank">دانلود نسخه موبایل</a>
+                                    </p>
                                 </div>
                             </div>
                             <ul class="dropdown-menu">
