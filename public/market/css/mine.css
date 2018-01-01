@@ -20,6 +20,10 @@
     font-family: 'shabnam', sans-serif;
 }
 
+.font_sans {
+    font-family: 'shabnam', sans-serif;
+}
+
 @media only screen and (min-width: 767px) {
     .mobile_download {
         display: none;
