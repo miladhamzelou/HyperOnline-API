@@ -1,7 +1,7 @@
 @extends('market.layout.base')
 
 @section('content')
-    <div id="content" class="col-sm-12">
+    <div id="content" class="col-sm-12 font">
         <h1 style="text-align: center">تماس با ما</h1>
         <br>
 
