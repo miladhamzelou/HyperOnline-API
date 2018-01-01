@@ -307,7 +307,7 @@
             <div class="container">
                 <div id="powered" class="clearfix">
                     <div class="powered_text pull-left flip">
-                        <p>کپی رایت © {{ date("Y") }} − کلیه ی حقوق مادی و معنوی این سایت مربوط به هایپرآنلاین می
+                        <p class="font_sans">کپی رایت © {{ date("Y") }} − کلیه ی حقوق مادی و معنوی این سایت مربوط به هایپرآنلاین می
                             باشد</p>
                     </div>
                     <div class="social pull-right flip">
