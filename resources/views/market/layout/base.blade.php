@@ -310,26 +310,31 @@
                         <p>کپی رایت © {{ date("Y") }} − کلیه ی حقوق مادی و معنوی این سایت مربوط به هایپرآنلاین می
                             باشد</p>
                     </div>
-                    <div class="social pull-right flip"><a href="{{ $social['facebook'] }}" target="_blank"> <img
-                                    data-toggle="tooltip"
-                                    src="{{ asset('market/image/socialicons/facebook.png')}}"
-                                    alt="Facebook"
-                                    title="Facebook"></a> <a
-                                href="{{ $social['twitter'] }}" target="_blank"> <img data-toggle="tooltip"
-                                                                                      src="{{ asset('market/image/socialicons/twitter.png')}}"
-                                                                                      alt="Twitter" title="Twitter">
-                        </a> <a href="{{ $social['google'] }}"
-                                target="_blank">
+                    <div class="social pull-right flip">
+                        <a href="{{ $social['facebook'] }}" target="_blank">
+                            <img data-toggle="tooltip"
+                                 src="{{ asset('market/image/socialicons/facebook.png')}}"
+                                 alt="Facebook" title="Facebook">
+                        </a>
+                        <a href="{{ $social['twitter'] }}" target="_blank">
+                            <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/twitter.png')}}"
+                                 alt="Twitter" title="Twitter">
+                        </a>
+                        <a href="{{ $social['google'] }}" target="_blank">
                             <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/google_plus.png')}}"
-                                 alt="Google+"
-                                 title="Google+"> </a> <a href="{{ $social['pinterest'] }}" target="_blank"> <img
-                                    data-toggle="tooltip"
-                                    src="{{ asset('market/image/socialicons/pinterest.png')}}"
-                                    alt="Pinterest"
-                                    title="Pinterest"> </a> <a
-                                href="{{ url('feed') }}" target="_blank"> <img data-toggle="tooltip"
-                                                                               src="{{ asset('market/image/socialicons/rss.png')}}"
-                                                                               alt="RSS" title="RSS"> </a></div>
+                                 alt="Google+" title="Google+">
+                        </a>
+                        <a href="{{ $social['pinterest'] }}" target="_blank">
+                            <img data-toggle="tooltip"
+                                 src="{{ asset('market/image/socialicons/pinterest.png')}}"
+                                 alt="Pinterest" title="Pinterest">
+                        </a>
+                        <a href="{{ url('feed') }}" target="_blank">
+                            <img data-toggle="tooltip"
+                                 src="{{ asset('market/image/socialicons/rss.png')}}"
+                                 alt="RSS" title="RSS">
+                        </a>
+                    </div>
                     <br>
                 </div>
 
@@ -353,7 +358,8 @@
                 <br>
                 <div class="bottom-row">
                     <div class="custom-text text-center">
-                        <p style="font-size: xx-small; font-family: 'Courier New', Courier, mono;">Designed & Developed By</p>
+                        <p style="font-size: xx-small; font-family: 'Courier New', Courier, mono;">Designed & Developed
+                            By</p>
                         <br>
                         <a class="web_font" style="font-size: xx-large" href="http://arash-hatami.ir" target="_blank">A.Hatami</a>
                     </div>
