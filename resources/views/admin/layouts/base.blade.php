@@ -288,7 +288,6 @@
                         <li><a href="{{ url('/admin/messages') }}">گزارشات</a></li>
                     </ul>
                 </li>
-
             </ul>
             <!-- /.sidebar-menu -->
         </section>

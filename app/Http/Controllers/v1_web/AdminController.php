@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use phplusir\smsir\Smsir;
+use Spatie\Analytics\AnalyticsFacade as Analytics;
+use Spatie\Analytics\Period;
 
 require(app_path() . '/Common/jdf.php');
 
