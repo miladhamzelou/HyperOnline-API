@@ -14,7 +14,7 @@ class MainService
     {
         $result = Product::where("confirmed", 1)
             ->orderBy("created_at", "desc")
-            ->take(10)
+            ->take(8)
             ->get();
         return $this->filterProduct($result);
     }
@@ -108,7 +108,7 @@ class MainService
     {
         $most = Product::where("confirmed", 1)
             ->orderBy("sell", "desc")
-            ->take(10)
+            ->take(8)
             ->get();
 
         return $this->filterProduct($most);
