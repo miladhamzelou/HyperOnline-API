@@ -102,7 +102,7 @@
         <div class="clickyab-native-ad na_zepQ0A"></div>
         <script type="text/javascript">
             var clickyab_native = clickyab_native || [];
-            clickyab_native['count'] = 4;
+            clickyab_native['count'] = 2;
             clickyab_native['corners'] = "round";
             clickyab_native['title'] = "مطالب از سراسر وب";
             clickyab_native['horizontal'] = "";
