@@ -30,9 +30,6 @@ class MainController extends Controller
 
     public function index()
     {
-        $new = $this->mService->getNew();
-        $cat = $this->mService->getCategories();
-
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::content()->count(),
@@ -47,8 +44,9 @@ class MainController extends Controller
             if (Auth::user()->isAdmin() == 1)
                 $isAdmin = 1;
 
+        $new = $this->mService->getNew();
+        $cat = $this->mService->getCategories();
         $most = $this->mService->getMostSell();
-
         $cat1 = $this->mService->getRandomCategory();
         $cat2 = $this->mService->getRandomCategory();
         $cat3 = $this->mService->getRandomCategory2();
