@@ -98,6 +98,23 @@
                 </div>
             @endforeach
         </div>
+        <br>
+        <div class="clickyab-native-ad na_zepQ0A"></div>
+        <script type="text/javascript">
+            var clickyab_native = clickyab_native || [];
+            clickyab_native['count'] = 4;
+            clickyab_native['corners'] = "round";
+            clickyab_native['title'] = "مطالب از سراسر وب";
+            clickyab_native['horizontal'] = "";
+            clickyab_native['fontSize'] = 13;
+            clickyab_native['fontFamily'] = "sahel";
+            clickyab_native['position'] = "top";
+            clickyab_native['domain'] = "hyper-online.ir";
+            clickyab_native['id'] = 7191514766581;
+            clickyab_native['orientation'] = "vertical";
+            clickyab_native['selector'] = "na_zepQ0A";
+        </script>
+        <script src="http://static.clickyab.com/js/native_ad.js"></script>
     </aside>
 @endsection
 <!-- Left Part End-->
