@@ -299,5 +299,9 @@ class OrderController extends Controller
             "phone" => ["09188167800"]
         ])
             ->onQueue('sms');
+
+        return response()->json([
+            'error' => false
+        ], 201);
     }
 }
