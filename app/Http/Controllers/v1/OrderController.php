@@ -269,11 +269,11 @@ class OrderController extends Controller
         $pdf = PDF::loadView('pdf.factor', $data);
         $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
 
-        $support = new Support();
-        $support->unique_id = uniqid('', false);
-        $support->section = "سفارش جدید";
-        $support->body = "سفارش جدید ثبت شد";
-        $support->log = 0;
+//        $support = new Support();
+//        $support->unique_id = uniqid('', false);
+//        $support->section = "سفارش جدید";
+//        $support->body = "سفارش جدید ثبت شد";
+//        $support->log = 0;
 
         $type = "";
         if ($order->pay_method == 'online') $type = "آنلاین";
