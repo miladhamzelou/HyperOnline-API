@@ -120,7 +120,8 @@ class OrderController extends Controller
             $url = "https://pay.ir/payment/send";
             $params = [
                 'api' => $this->API,
-                'amount' => $order->price * 10,
+//                'amount' => $order->price * 10,
+                'amount' => 1000,
                 'redirect' => "http://hyper-online.ir/callback2",
                 'mobile' => $order->user_phone,
                 'factorNumber' => $id,
