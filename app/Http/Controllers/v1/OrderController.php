@@ -193,7 +193,7 @@ class OrderController extends Controller
         $res = (array)json_decode($res);
 
         if ($res['status'] == 1) {
-            $this->completeOrder($pay->factorNumber);
+//            $this->completeOrder($pay->factorNumber);
             header("location: hyper://pay?error=0&code=" . $pay->factorNumber);
         } else {
             header("location: hyper://pay?error=1&er_code=" . $res['errorCode']);
