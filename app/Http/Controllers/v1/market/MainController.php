@@ -97,7 +97,7 @@ class MainController extends Controller
                 'json' => [
                     'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
                     'amount' => '1000',
-                    'redirect' => "http://hyper-online.ir/callback",
+                    'redirect' => "http://hyper-online.ir/callback2",
                     'factorNumber' => '1'
                 ]
             ]);
