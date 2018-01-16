@@ -7,7 +7,10 @@ use App\Jobs\SendEmail;
 use App\Jobs\SendSMS;
 use App\Order;
 use App\Pay;
+use App\Product;
+use App\Seller;
 use App\Services\v1\OrderService;
+use App\User;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -214,8 +217,9 @@ class OrderController extends Controller
         return $res;
     }
 
-    private function completeOrder($id)
+    public function completeOrder(Request $request)
     {
+        $id = $request->get('id');
         $order = Order::where("unique_id", $id)->first();
         $user = User::where('unique_id', $order->user_id)->firstOrFail();
         $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
