@@ -221,6 +221,7 @@ class OrderController extends Controller
     {
         $id = $request->get('id');
         $order = Order::where("unique_id", $id)->first();
+        $order->temp = 0;
         $user = User::where('unique_id', $order->user_id)->firstOrFail();
         $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
         $send_price = $seller->send_price;
@@ -268,12 +269,6 @@ class OrderController extends Controller
         ];
         $pdf = PDF::loadView('pdf.factor', $data);
         $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
-
-//        $support = new Support();
-//        $support->unique_id = uniqid('', false);
-//        $support->section = "سفارش جدید";
-//        $support->body = "سفارش جدید ثبت شد";
-//        $support->log = 0;
 
         $type = "";
         if ($order->pay_method == 'online') $type = "آنلاین";
