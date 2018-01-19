@@ -46,3 +46,4 @@ public/ftp/factors/*.pdf
 !*.gitkeep
 *.apk
 !/public/market/image/markets/*.png
+*.db
