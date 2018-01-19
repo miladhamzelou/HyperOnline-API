@@ -123,8 +123,8 @@ class OrderController extends Controller
             $url = "https://pay.ir/payment/send";
             $params = [
                 'api' => $this->API,
-//                'amount' => $order->price * 10,
-                'amount' => 1000,
+                'amount' => $order->price * 10,
+//                'amount' => 1000,
                 'redirect' => "http://hyper-online.ir/callback2",
                 'mobile' => $order->user_phone,
                 'factorNumber' => $id,
@@ -289,11 +289,12 @@ class OrderController extends Controller
         ], 1)
             ->onQueue('email');
 
-        SendSMS::dispatch([
-            "msg" => ["سفارش ( " . $type . " ) جدید ثبت شد"],
-            "phone" => ["09188167800"]
-        ])
-            ->onQueue('sms');
+        if ($order->user_phone != '09182180519')
+            SendSMS::dispatch([
+                "msg" => ["سفارش ( " . $type . " ) جدید ثبت شد"],
+                "phone" => ["09188167800"]
+            ])
+                ->onQueue('sms');
 
         return response()->json([
             'error' => false

@@ -219,9 +219,10 @@ class OrderService
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
 
-            $product->sell = $product->sell + 1;
-            if ($order->user_phone != '09123456789')
+            if ($order->user_phone != '09123456789' && $order->user_phone != '09182180519' ) {
+                $product->sell = $product->sell + 1;
                 $product->count = $product->count - 1;
+            }
             if ($product->description)
                 $desc .= $product->description . ',';
             else
