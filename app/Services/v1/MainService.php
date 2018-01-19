@@ -165,6 +165,7 @@ class MainService
         $word = $request->get('word');
         $products = Product::where('name', 'LIKE', '%' . $word . '%')
             ->orWhere('description', 'LIKE', '%' . $word . '%')
+            ->where("confirmed", 1)
             ->get();
         if (count($products) > 0)
             return $this->filterProduct($products);
