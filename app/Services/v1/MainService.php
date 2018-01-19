@@ -163,9 +163,16 @@ class MainService
     public function Search(Request $request)
     {
         $word = $request->get('word');
-        $products = Product::where('name', 'LIKE', '%' . $word . '%')
-            ->orWhere('description', 'LIKE', '%' . $word . '%')
-            ->get();
+
+        $products = Product::where(function ($query) use ($word) {
+            $query->where('name', 'LIKE', '%' . $word . '%');
+            $query->orWhere('description', 'LIKE', '%' . $word . '%');
+        })->where("confirmed", 1)->get();
+
+//        $products = Product::where('name', 'LIKE', '%' . $word . '%')
+//            ->orWhere('description', 'LIKE', '%' . $word . '%')
+//            ->where("confirmed", 1)
+//            ->get();
         if (count($products) > 0)
             return $this->filterProduct($products);
         else

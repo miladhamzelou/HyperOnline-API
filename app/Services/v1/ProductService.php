@@ -182,6 +182,7 @@ class ProductService
         $products=[];
         if ($type == 1) {
             $products = Product::where("type", 1)
+                ->where("confirmed", 1)
                 ->orderBy("created_at", "desc")
                 ->skip(($index - 1) * 20)
                 ->take(20)
@@ -213,6 +214,7 @@ class ProductService
                 ->get();
         } else if ($type == 6) {
             $products = Product::where("type", 2)
+                ->where("confirmed", 1)
                 ->orderBy("created_at", "desc")
                 ->skip(($index - 1) * 20)
                 ->take(20)
