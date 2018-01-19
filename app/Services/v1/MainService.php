@@ -164,7 +164,7 @@ class MainService
     {
         $word = $request->get('word');
 
-        $products = Product::where(function ($query, $word) {
+        $products = Product::where(function ($query) use ($word) {
             $query->where('name', 'LIKE', '%' . $word . '%');
             $query->orWhere('description', 'LIKE', '%' . $word . '%');
         })->where("confirmed", 1)->get();
