@@ -30,7 +30,8 @@ class LoginController extends Controller
         $hash = $hash = $this->checkHashSSHA($user->salt, $credentials['password']);
         $res = $user->encrypted_password == $hash;
         if ($res) {
-            return true;
+            Auth::login($user);
+            return redirect()->intended('/home');
         } else
             return Auth::attempt(
                 [
