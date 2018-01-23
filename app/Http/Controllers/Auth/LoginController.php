@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -26,7 +27,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $salt = User::where('phone', $request->phone)->firstOrFail()->salt;
-
+        Log::info('salt' . $salt);
         if (
             Auth::attempt([
                 'phone' => $request->phone,
