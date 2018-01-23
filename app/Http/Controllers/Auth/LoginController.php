@@ -7,7 +7,6 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -24,38 +23,18 @@ class LoginController extends Controller
         return 'phone';
     }
 
-    public function authenticate(Request $request)
-    {
-        $salt = User::where('phone', $request->phone)->firstOrFail()->salt;
-        Log::info('salt' . $salt);
-        if (
-            Auth::attempt([
-                'phone' => $request->phone,
-                'encrypted_password' => base64_encode(sha1($request->password . $salt, true) . $salt)],
-                true)
-            ||
-            Auth::attempt(['phone' => $request->phone, 'password' => $request->password], true)
-        ) {
-            return redirect()->intended('/home');
-        }
-    }
-
     public function attemptLogin(Request $request)
     {
         $credentials = $request->only($this->username(), 'password');
-        $salt = User::where('phone', $credentials['phone'])->firstOrFail()->salt;
-
-        $mine = Auth::attempt([
-            'phone' => $request->phone,
-            'encrypted_password' => base64_encode(sha1($request->password . $salt, true) . $salt)],
-            true);
-
-        $original = $this->guard()->attempt(
-            $credentials, $request->has('remember')
-        );
-
-        $result = $mine || $original;
-
-        return $result;
+        $user = User::where('phone', $credentials['phone'])->firstOrFail();
+        $hash = base64_encode(sha1($request->password . $user->salt, true);
+        if ($user->encrypted_password == $hash) {
+            return Auth::attempt(
+                [
+                    $this->username() => $credentials['phone'],
+                    'password' => bcrypt($user->password)
+                ], $request->has('remember'));
+        } else
+            return false;
     }
 }
