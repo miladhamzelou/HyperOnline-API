@@ -349,6 +349,11 @@
 
                 <div class="container" style="text-align: center;">
                     <div style="display: inline-block">
+                        <div style="float: left;" class="logo">
+                            <img class="img-responsive" style='cursor:pointer; margin:0 auto;'
+                                 alt="aparat"
+                                 src="{{ asset('/market/image/asnaf.png') }}"/>
+                        </div>
                         <div style="float:left;" class="logo">
                             <img class="img-responsive"
                                  src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo"
@@ -362,7 +367,7 @@
                                  alt="logo-samandehi"
                                  src='https://logo.samandehi.ir/logo.aspx?id=92906&p=bsiyodrfbsiylymawlbq'/>
                         </div>
-                        <div style="float: left; vertical-align: baseline;" class="logo">
+                        <div style="float: left;" class="logo">
                             <img class="img-responsive" style='cursor:pointer; margin:0 auto;'
                                  alt="aparat"
                                  src="https://www.aparat.com/public/public/images/logo/v2/aparat_logo_fa_color_black_275x100.png"/>
