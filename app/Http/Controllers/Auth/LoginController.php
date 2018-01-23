@@ -27,7 +27,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only($this->username(), 'password');
         $user = User::where('phone', $credentials['phone'])->firstOrFail();
-        $hash = base64_encode(sha1($request->password . $user->salt, true);
+        $hash = base64_encode(sha1($request->password . $user->salt, true));
         if ($user->encrypted_password == $hash) {
             return Auth::attempt(
                 [
