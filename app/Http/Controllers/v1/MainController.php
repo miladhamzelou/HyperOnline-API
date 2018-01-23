@@ -109,4 +109,8 @@ class MainController extends Controller
         $products = Product::orderBy("sell", "desc")->get();
         return view('armin')->withProducts($products);
     }
+
+    public function test(){
+
+    }
 }
