@@ -31,6 +31,8 @@ class LoginController extends Controller
         $hash = base64_encode(sha1($request->password . $user->salt, true));
         $res = $user->encrypted_password == $hash;
         Log::info($res);
+        Log::info($user->encrypted_password );
+        Log::info($hash);
         if ($res) {
             return Auth::attempt(
                 [
