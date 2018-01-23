@@ -7,7 +7,6 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -28,18 +27,21 @@ class LoginController extends Controller
     {
         $credentials = $request->only($this->username(), 'password');
         $user = User::where('phone', $credentials['phone'])->firstOrFail();
-        $hash = base64_encode(sha1($request->password . $user->salt, true));
+        $hash = $hash = $this->checkHashSSHA($user->salt, $credentials['password']);
         $res = $user->encrypted_password == $hash;
-        Log::info($res);
-        Log::info($user->encrypted_password );
-        Log::info($hash);
         if ($res) {
+            return true;
+        } else
             return Auth::attempt(
                 [
                     $this->username() => $credentials['phone'],
                     'password' => bcrypt($user->password)
                 ], $request->has('remember'));
-        } else
-            return false;
+    }
+
+    public function checkHashSSHA($salt, $password)
+    {
+        $hash = base64_encode(sha1($password . $salt, true) . $salt);
+        return $hash;
     }
 }
