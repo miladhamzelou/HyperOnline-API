@@ -362,6 +362,11 @@
                                  alt="logo-samandehi"
                                  src='https://logo.samandehi.ir/logo.aspx?id=92906&p=bsiyodrfbsiylymawlbq'/>
                         </div>
+                        <div style="float: left">
+                            <img class="img-responsive" style='cursor:pointer; margin:0 auto;'
+                                 alt="aparat"
+                                 src="https://www.aparat.com/public/public/images/logo/v2/aparat_logo_fa_color_black_275x100.png"/>
+                        </div>
                     </div>
                 </div>
                 <br>
