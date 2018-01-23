@@ -95,7 +95,7 @@
                             <div id="banner" class="mobile_download">
                                 <div id="banner-content">
                                     <p id="download_content">
-                                        <a href="http://hyper-online.ir/HyperOnline.apk" target="_blank">دانلود نسخه موبایل</a>
+                                        <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">دانلود نسخه موبایل</a>
                                     </p>
                                 </div>
                             </div>
