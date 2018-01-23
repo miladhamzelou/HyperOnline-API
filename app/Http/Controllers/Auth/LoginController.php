@@ -42,10 +42,20 @@ class LoginController extends Controller
 
     public function attemptLogin(Request $request)
     {
-        Log::info('LoginController');
-        
-        return $this->guard()->attempt(
-            $this->credentials($request), $request->has('remember')
+        $credentials = $request->only($this->username(), 'password');
+        $salt = User::where('phone', $credentials['phone'])->firstOrFail()->salt;
+
+        $mine = Auth::attempt([
+            'phone' => $request->phone,
+            'encrypted_password' => base64_encode(sha1($request->password . $salt, true) . $salt)],
+            true);
+
+        $original = $this->guard()->attempt(
+            $credentials, $request->has('remember')
         );
+
+        $result = $mine || $original;
+
+        return $result;
     }
 }
