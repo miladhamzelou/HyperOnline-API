@@ -39,4 +39,13 @@ class LoginController extends Controller
             return redirect()->intended('/home');
         }
     }
+
+    public function attemptLogin(Request $request)
+    {
+        Log::info('LoginController');
+        
+        return $this->guard()->attempt(
+            $this->credentials($request), $request->has('remember')
+        );
+    }
 }
