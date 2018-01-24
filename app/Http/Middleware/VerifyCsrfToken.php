@@ -11,5 +11,6 @@ class VerifyCsrfToken extends BaseVerifier
         'api/v1/*',
         'callback',
         'callback2',
+        'callback3',
     ];
 }
