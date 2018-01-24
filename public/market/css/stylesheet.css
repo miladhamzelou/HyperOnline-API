@@ -71,9 +71,7 @@
 @font-face {
     font-family: 'shabnam';
     src: url('persian-fonts/Shabnam.eot'); /* IE9 Compat Modes */
-    src: url('persian-fonts/Shabnam.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('persian-fonts/Shabnam.woff') format('woff'), /* Pretty Modern Browsers */
-    url('persian-fonts/Shabnam.ttf') format('truetype') /* Safari, Android, iOS */
+    src: url('persian-fonts/Shabnam.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('persian-fonts/Shabnam.woff') format('woff'), /* Pretty Modern Browsers */ url('persian-fonts/Shabnam.ttf') format('truetype') /* Safari, Android, iOS */
 }
 
 /*===================================================================================*/
@@ -89,22 +87,22 @@ html {
 body {
     background: #dcdbdb;
     color: #222;
-    font-family: 'WYekan', sans-serif;
+    font-family: IRANSans, 'WYekan', sans-serif;
     line-height: 22px;
 }
 
 body {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 legend {
-    font-size: 18px;
+    font-size: 16px;
     padding: 7px 0
 }
 
 label {
     font-weight: normal;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 form {
@@ -142,7 +140,7 @@ a:focus {
     position: relative;
     margin: 0 0 20px 0;
     line-height: normal;
-    font-size: 20px;
+    font-size: 18px;
     color: #000000;
     border-bottom: 2px solid #ddd;
     padding: 0 0 3px;
@@ -415,14 +413,12 @@ a:focus {
     text-transform: capitalize;
     display: inline-block;
     padding: 0 10px;
+    font-size: medium;
+    font-weight: bold;
 }
 
 #header #top .links > ul > li, #header #top-links > ul > li, #language .btn-link span, #currency .btn-link span {
     line-height: 35px;
-}
-
-#header #top-links > ul > li > a:hover, #header .links > ul > li > a:hover {
-    text-decoration: underline;
 }
 
 .wrapper-box #header #top-links {
@@ -1145,8 +1141,12 @@ a:focus {
     padding-bottom: 0;
 }
 
+.product-thumb h6 {
+    font-weight: normal;
+}
+
 .product-thumb h4 a {
-    font-size: 16px;
+    font-size: 12px;
     line-height: 18px;
     text-decoration: none;
     display: inline-block;
@@ -1155,8 +1155,14 @@ a:focus {
     color: #333;
 }
 
-.product-thumb h4 a:hover {
-    text-decoration: underline;
+.product-thumb h5 a{
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    color: #333;
 }
 
 .product-thumb .button-group button {
@@ -1166,10 +1172,10 @@ a:focus {
 .product-thumb .button-group .btn-primary {
     padding: 4px 8px;
     margin-bottom: 7px;
-    font-size: 11px;
+    font-size: 14px;
     height: auto;
     text-transform: uppercase;
-    font-family: BKoodakBold, Helvetica, sans-serif;
+    font-weight: normal;
     line-height: normal;
 }
 
@@ -1201,7 +1207,7 @@ a:focus {
 
 .product-thumb .price {
     margin: 10px 0;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
 }
 
@@ -1209,7 +1215,7 @@ a:focus {
     color: #999;
     text-decoration: line-through;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .price-new {

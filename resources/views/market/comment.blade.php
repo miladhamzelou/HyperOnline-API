@@ -1,7 +1,7 @@
 @extends('market.layout.base')
 
 @section('content')
-    <div id="content" class="col-sm-12 font">
+    <div id="content" class="col-sm-12">
         <h1 style="text-align: center">ثبت نظرات / شکایات</h1>
         <br>
         <div class="row">

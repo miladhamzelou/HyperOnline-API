@@ -2,7 +2,8 @@
 
 @section('content')
     <div id="content" class="col-sm-12">
-        <h1 class="title">سبد خرید</h1>
+        <h2 class="title">سبد خرید</h2>
+        @if(count($cart['items'])>0)
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -58,8 +59,15 @@
             </div>
         </div>
         <div class="buttons">
-            <div class="pull-center"><a href="{{ url('pay') }}" class="btn btn-primary" style="font-size: 18px">پرداخت</a></div>
-            <div class="pull-center"><a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px">ادامه خرید</a></div>
+            <div class="pull-right"><a href="{{ url('pay') }}" class="btn btn-primary" style="font-size: 18px">پرداخت</a></div>
+            <br>
+            <div class="pull-left"><a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px">ادامه خرید</a></div>
         </div>
+            @else
+            <h4 style="text-align: center">سبد خرید شما خالی است</h4>
+            <div class="buttons">
+                <div class="pull-left"><a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px">ادامه خرید</a></div>
+            </div>
+        @endif
     </div>
 @endsection

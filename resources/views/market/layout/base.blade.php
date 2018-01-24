@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive-rtl.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/webfont/stylesheet.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('market/css/iransans.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.css') }}">
     <!-- CSS Part End-->
 </head>
@@ -33,8 +34,8 @@
                     <div class="pull-left flip left-top">
                         <div class="links">
                             <ul>
-                                <li class="mobile" style="font-size: 20px">081-34266311</li>
-                                <li class="email" style="font-size: 20px"><a href="mailto:hyperonlineir@gmail.com"><i
+                                <li class="mobile" style="font-size: medium">081-34266311</li>
+                                <li class="email" style="font-size: medium"><a href="mailto:hyperonlineir@gmail.com"><i
                                                 class="fa fa-envelope"></i>hyperonlineir@gmail.com</a></li>
                             </ul>
                         </div>
@@ -58,8 +59,8 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </form>
                             @else
-                                <li><a href="{{ url('login') }}" style="font-size: 20px">ورود</a></li>
-                                <li><a href="{{ url('register') }}" style="font-size: 20px">ثبت نام</a></li>
+                                <li><a href="{{ url('login') }}">ورود</a></li>
+                                <li><a href="{{ url('register') }}">ثبت نام</a></li>
                             @endif
                         </ul>
                     </div>
@@ -88,7 +89,7 @@
                             <button type="button" data-toggle="dropdown" data-loading-text="Loading..."
                                     class="heading dropdown-toggle">
                                 <a href="{{ url('checkout') }}" class="btn btn-primary"
-                                   style="font-size: 18px; background-color: #00A000">تکمیل خرید&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   style="font-size: 16px; background-color: #00A000">تکمیل خرید&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span id="cart-total">{{ $cart['count'].' کالا - '.$cart['total'].' تومان' }}</span>
                                 </a>
                             </button>
@@ -181,9 +182,9 @@
                 <div class="navbar-header"><span class="visible-xs visible-sm"> منو <b></b></span></div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a title="خانه" style="font-size: 22px" href="{{ url('home') }}"><span>خانه</span></a></li>
-                        <li><a style="font-size: 22px" disabled><span>/</span></a></li>
-                        <li class="mega-menu dropdown"><a style="font-size: 22px">دسته بندی ها</a>
+                        <li><a title="خانه" href="{{ url('home') }}"><span>خانه</span></a></li>
+                        <li><a disabled><span>/</span></a></li>
+                        <li class="mega-menu dropdown"><a>دسته بندی ها</a>
                             <div class="dropdown-menu">
                                 @foreach($categories as $c1)
                                     @if($c1['level']==1)
@@ -220,8 +221,7 @@
                             </div>
                         </li>
 
-                        <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank"
-                                                         style="font-size: 22px">تخفیف خورده ها !!</a>
+                        <li class="custom-link-right"><a href="{{ url('off') }}" target="_blank">تخفیف خورده ها !!</a>
                         </li>
                     </ul>
                 </div>

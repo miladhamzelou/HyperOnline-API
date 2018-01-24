@@ -56,7 +56,7 @@
                         </a>
                     </div>
                     <div class="caption">
-                        <h4><a href="">{{ $m['name']  }}</a></h4>
+                        <h5><a href="">{{ $m['name']  }}</a></h5>
                         <h6 class="description" style="color: grey">{{ $m['description'] }}</h6>
                         @if($m['off']  > 0)
                             <p class="price">
@@ -86,7 +86,7 @@
                         </a>
                     </div>
                     <div class="caption">
-                        <h4><a href="">{{ $product['name'] }}</a></h4>
+                        <h5><a href="">{{ $product['name'] }}</a></h5>
                         <h6 class="description" style="color: grey">{{ $product['description'] }}</h6>
                         @if($product['off'] > 0)
                             <p class="price">
@@ -168,7 +168,7 @@
                             <a href="javascript:void(0);"
                                onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value, document.getElementById('logged').value)">
                                 <button class="btn-primary" type="button">
-                                    <span>افزودن به سبد</span>
+                                    <span>خرید</span>
                                 </button>
                             </a>
                         </div>
@@ -247,7 +247,7 @@
                                             <a href="javascript:void(0);"
                                                onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value, document.getElementById('logged').value)">
                                                 <button class="btn-primary" type="button">
-                                                    <span>افزودن به سبد</span>
+                                                    <span>خرید</span>
                                                 </button>
                                             </a>
                                         </div>
@@ -314,7 +314,7 @@
                             <a href="javascript:void(0);"
                                onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value, document.getElementById('logged').value)">
                                 <button class="btn-primary" type="button">
-                                    <span>افزودن به سبد</span>
+                                    <span>خرید</span>
                                 </button>
                             </a>
                         </div>
@@ -361,7 +361,7 @@
                             <a href="javascript:void(0);"
                                onClick="addCart(document.getElementById('{{ $product['unique_id'] }}').value, document.getElementById('logged').value)">
                                 <button class="btn-primary" type="button">
-                                    <span>افزودن به سبد</span>
+                                    <span>خرید</span>
                                 </button>
                             </a>
                         </div>
