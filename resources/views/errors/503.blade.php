@@ -129,7 +129,7 @@
     </div>
     <div id="main-content">
         <h1 style="text-align: center">متاسفم</h1>
-        <p style="direction: rtl;text-align: center">وب سایت به علت " {{ $exception->getMessage() }} " موقتا در دسترس نمی باشد. به زودی با شما خواهیم بود.</p>
+        <p style="direction: rtl;text-align: center">وب سایت موقتا در دسترس نمی باشد. به زودی با شما خواهیم بود.</p>
         <div id="navigation" style="text-align: center">
             <a class="navigation" href="{{ url('/') }}">خانه</a>
         </div>
