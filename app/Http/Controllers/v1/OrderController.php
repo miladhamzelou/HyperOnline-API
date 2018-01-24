@@ -431,7 +431,7 @@ class OrderController extends Controller
 
         if ($res['status'] == 1) {
             $order = Order::where("unique_id", $pay->factorNumber)->firstOrFail();
-            if ($this->completeOrder($pay->factorNumber))
+            if ($this->completeOrder2($pay->factorNumber))
                 return view('market.result')->withOrder($order);
             else
                 return view('market.result')->withError("مشکلی به وجود آمده است");
