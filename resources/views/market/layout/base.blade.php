@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/iransans.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.css') }}">
+    @yield('style')
     <!-- CSS Part End-->
 </head>
 <body>
@@ -122,7 +123,7 @@
                                                 </td>
                                                 <td class="text-left"><a href="product.html">{{ $item->name }}</a></td>
                                                 <td class="text-right">{{ $item->qty . ' عدد' }}</td>
-                                                <td class="text-right">{{ $item->subtotal . ' تومان' }}</td>
+                                                <td class="text-right">{{ number_format($item->subtotal) . ' تومان' }}</td>
                                                 <td class="text-center">
                                                     <a href="javascript:void(0);"
                                                        onClick="removeCart(document.getElementById('{{ $item->rowId }}').value)">
@@ -146,7 +147,13 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>مالیات / هزینه ارسال</strong></td>
-                                                <td class="text-right">{{ $cart['tax'] . ' تومان' }}</td>
+                                                <td class="text-right">
+                                                    @if($cart['tax']!=0)
+                                                        {{ $cart['tax'] . ' تومان' }}
+                                                    @else
+                                                        رایگان
+                                                    @endif
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>قابل پرداخت</strong></td>
@@ -154,6 +161,14 @@
                                             </tr>
                                             </tbody>
                                         </table>
+                                        <p>
+                                            <span><a class="fa fa-warning"></a> </span>
+                                            @if($cart['free-ship'])
+                                                سفارش شما رایگان ارسال خواهد شد.
+                                            @else
+                                                سبد های کمتر از ۳۰ هزار تومان با هزینه ارسال خواهند شد.
+                                            @endif
+                                        </p>
                                         <p class="checkout">
                                             <a href="{{ url('checkout') }}" class="btn btn-primary">تسویه حساب</a>
                                         </p>
@@ -393,6 +408,7 @@
 <script>
     jQuery("#download_content").fitText();
 </script>
+@yield('script')
 <!-- JS Part End-->
 </body>
 </html>

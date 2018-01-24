@@ -30,12 +30,25 @@ class MainController extends Controller
 
     public function index()
     {
+        $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
+        if (Cart::content()->count() > 0)
+            $send_price = $seller->send_price;
+        else
+            $send_price = 0;
+
+        if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+            $send_price = 0;
+            $free_ship = true;
+        } else
+            $free_ship = false;
+
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::content()->count(),
-            'total' => Cart::total(),
-            'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal()
+            'total' => number_format((int)str_replace(',', '', Cart::subtotal()) + $send_price),
+            'tax' => number_format($send_price),
+            'subtotal' => Cart::subtotal(),
+            'free-ship' => $free_ship
         ];
 
         $isAdmin = 0;
@@ -66,7 +79,18 @@ class MainController extends Controller
 
     public function checkout()
     {
+        $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
+        if (Cart::content()->count() > 0)
+            $send_price = $seller->send_price;
+        else
+            $send_price = 0;
         $isAdmin = 0;
+
+        if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+            $send_price = 0;
+            $free_ship = true;
+        } else
+            $free_ship = false;
 
         if (Auth::check())
             if (Auth::user()->isAdmin() == 1)
@@ -77,10 +101,12 @@ class MainController extends Controller
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::content()->count(),
-            'total' => Cart::total(),
-            'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal()
+            'total' => number_format((int)str_replace(',', '', Cart::subtotal()) + $send_price),
+            'tax' => number_format($send_price),
+            'subtotal' => Cart::subtotal(),
+            'free-ship' => $free_ship
         ];
+
         return view('market.checkout')
             ->withCategories($cat)
             ->withAdmin($isAdmin)
