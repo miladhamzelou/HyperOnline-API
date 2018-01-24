@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>آرش حاتمی</title>
+    <title>{{ config('app.name') }}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('errors/css/style.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('errors/css/iransans.css') }}"/>
     <script type="text/javascript" src="{{ asset('errors/js/jquery.js') }}"></script>

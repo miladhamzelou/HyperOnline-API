@@ -41,15 +41,23 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Exception $exception
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
         if ($exception instanceof NotFoundHttpException) {
-            return response()->view('responses.missing', [], 404);
+            return response()->view('errors.404', [], 404);
         }
 
-        return parent::render($request, $exception);
+        if ($this->isHttpException($exception)) {
+            return $this->renderHttpException($exception);
+        } else {
+            // Custom error 500 view on production
+            if (app()->environment() == 'production') {
+                return response()->view('errors.503', [], 500);
+            }
+            return parent::render($request, $exception);
+        }
     }
 
     /**
