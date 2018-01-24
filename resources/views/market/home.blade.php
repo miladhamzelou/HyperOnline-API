@@ -48,7 +48,11 @@
                 <div class="product-thumb clearfix">
                     <div class="image">
                         <a href="">
-                            <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
+                            @if($product['image'])
+                                <img src="{{ asset('images').'/' . $product['image'] }}" class="img-responsive"/>
+                            @else
+                                <img src="{{ asset('market/image/no_image.jpg') }}" class="img-responsive"/>
+                            @endif
                         </a>
                     </div>
                     <div class="caption">
