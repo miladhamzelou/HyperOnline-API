@@ -16,12 +16,12 @@ class SocialViewComposer
         $twitter = "https://facebook.com/hatamiarash7";
         $pinterest = "https://facebook.com/hatamiarash7";
         $google = "https://facebook.com/hatamiarash7";
+        $instagram = "https://www.instagram.com/online.hyper";
+        $telegram = "https://t.me/online_hyper";
 
         $view->with('social', [
-            'facebook' => $facebook,
-            'twitter' => $twitter,
-            'pinterest' => $pinterest,
-            'google' => $google,
+            'instagram' => $instagram,
+            'telegram' => $telegram
         ]);
     }
 }

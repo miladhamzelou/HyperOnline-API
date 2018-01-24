@@ -235,25 +235,25 @@
             <div class="row">
                 <div class="col-md-3">
                     <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive" style="margin: 4px"
+                        <img class="img-responsive markets" style="margin: 4px"
                              src="{{ asset('market/image/markets/bazaar.png') }}" alt="کافه بازار">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://iranapps.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive" style="margin: 4px"
+                        <img class="img-responsive markets" style="margin: 4px"
                              src="{{ asset('market/image/markets/iran_apps.png') }}" alt="ایران اپس">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://myket.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive" style="margin: 4px"
+                        <img class="img-responsive markets" style="margin: 4px"
                              src="{{ asset('market/image/markets/myket.png') }}" alt="مایکت">
                     </a>
                 </div>
                 <div class="col-md-3">
                     <a href="http://parshub.com/push/APP/930533830" target="_blank">
-                        <img class="img-responsive" style="margin: 4px"
+                        <img class="img-responsive markets" style="margin: 4px"
                              src="{{ asset('market/image/markets/parshub.png') }}" alt="پارس هاب">
                     </a>
                 </div>
@@ -320,28 +320,15 @@
                             باشد</p>
                     </div>
                     <div class="social pull-right flip">
-                        <a href="{{ $social['facebook'] }}" target="_blank">
-                            <img data-toggle="tooltip"
-                                 src="{{ asset('market/image/socialicons/facebook.png') }}"
-                                 alt="Facebook" title="Facebook">
+                        <a href="{{ $social['instagram'] }}" target="_blank">
+                            <img data-toggle="tooltip" style="width: 32px; height: 32px;"
+                                 src="{{ asset('market/image/socialicons/instagram.png') }}"
+                                 alt="Instagram" title="Instagram">
                         </a>
-                        <a href="{{ $social['twitter'] }}" target="_blank">
-                            <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/twitter.png') }}"
-                                 alt="Twitter" title="Twitter">
-                        </a>
-                        <a href="{{ $social['google'] }}" target="_blank">
-                            <img data-toggle="tooltip" src="{{ asset('market/image/socialicons/google_plus.png') }}"
-                                 alt="Google+" title="Google+">
-                        </a>
-                        <a href="{{ $social['pinterest'] }}" target="_blank">
-                            <img data-toggle="tooltip"
-                                 src="{{ asset('market/image/socialicons/pinterest.png') }}"
-                                 alt="Pinterest" title="Pinterest">
-                        </a>
-                        <a href="{{ url('feed') }}" target="_blank">
-                            <img data-toggle="tooltip"
-                                 src="{{ asset('market/image/socialicons/rss.png') }}"
-                                 alt="RSS" title="RSS">
+                        <a href="{{ $social['telegram'] }}" target="_blank">
+                            <img data-toggle="tooltip" style="width: 32px; height: 32px;"
+                                 src="{{ asset('market/image/socialicons/telegram.png') }}"
+                                 alt="Telegram" title="Telegram">
                         </a>
                     </div>
                     <br>
