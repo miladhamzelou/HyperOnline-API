@@ -1206,14 +1206,14 @@ a:focus {
 }
 
 .price-old {
-    color: #F00;
+    color: #999;
     text-decoration: line-through;
     font-weight: normal;
     font-size: 12px;
 }
 
 .price-new {
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .price, .price-new {
