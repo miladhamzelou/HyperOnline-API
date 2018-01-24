@@ -110,7 +110,8 @@ class MainController extends Controller
         return view('armin')->withProducts($products);
     }
 
-    public function test(){
-
+    public function test()
+    {
+        return view('test');
     }
 }
