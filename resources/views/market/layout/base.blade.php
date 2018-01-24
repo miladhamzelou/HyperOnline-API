@@ -45,14 +45,14 @@
                             @if(Auth::check())
                                 @if($admin)
                                     <li>
-                                        <a href="{{ url('admin') }}" target="_blank" style="font-size: 20px">پنل
+                                        <a href="{{ url('admin') }}" target="_blank">پنل
                                             ادمین</a>
                                     </li>
                                 @endif
                                 <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                       style="font-size: 20px">خروج</a>
+                                       >خروج</a>
                                 </li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="post"
                                       style="display: none">
