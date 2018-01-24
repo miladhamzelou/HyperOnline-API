@@ -113,6 +113,54 @@ class MainController extends Controller
             ->withCart($cart);
     }
 
+    public function pay_confirm()
+    {
+        $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
+        if (Cart::content()->count() > 0)
+            $send_price = $seller->send_price;
+        else
+            $send_price = 0;
+
+        if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+            $send_price = 0;
+            $free_ship = true;
+        } else
+            $free_ship = false;
+
+        $isAdmin = 0;
+
+        if (Auth::user()->isAdmin() == 1)
+            $isAdmin = 1;
+
+        $final_pay = (int)str_replace(',', '', Cart::subtotal()) + $send_price;
+
+        $user = Auth::user();
+        $confirmed = $user->confirmed_phone && $user->confirmed_info;
+
+        $data = [
+            'confirmed' => $confirmed,
+            'user' => $user,
+            'pay' => $final_pay
+        ];
+
+        $cat = $this->mService->getCategories();
+
+        $cart = [
+            'items' => Cart::content(),
+            'count' => Cart::content()->count(),
+            'total' => number_format((int)str_replace(',', '', Cart::subtotal()) + $send_price),
+            'tax' => number_format($send_price),
+            'subtotal' => Cart::subtotal(),
+            'free-ship' => $free_ship
+        ];
+
+        return view('market.confirm')
+            ->withData($data)
+            ->withCart($cart)
+            ->withCategories($cat)
+            ->withAdmin($isAdmin);
+    }
+
     public function pay()
     {
         $client = new Client();

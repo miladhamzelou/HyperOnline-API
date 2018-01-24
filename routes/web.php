@@ -102,6 +102,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/banners/delete/{id}', 'v1_web\AdminController@banner_delete')->name('banner_delete');
 
     Route::get('/admin/comments', 'v1_web\AdminController@comments')->name('comments');
+
+    Route::get('/checkout', 'v1\market\MainController@checkout')->name('checkout');
+    Route::get('/pay_confirm', 'v1\market\MainController@pay_confirm')->name('pay_confirm');
 });
 
 Route::get('/search', 'v1_web\AdminController@search');
@@ -110,7 +113,6 @@ Route::get('/admin/search', 'v1_web\AdminController@search');
 Route::get('category/{level}/{id}', 'v1\market\CategoryController@index');
 Route::get('/addToCart', 'v1\ProductController@addToCart');
 Route::get('/removeFromCart', 'v1\ProductController@removeFromCart');
-Route::get('/checkout', 'v1\market\MainController@checkout')->name('checkout');
 Route::get('/pay', 'v1\market\MainController@pay')->name('pay');
 Route::post('/callback', 'v1\market\MainController@callback');
 Route::get('/admin/downloadFactor/{id}', 'v1_web\OrderController@downloadFactor');
@@ -123,8 +125,10 @@ Route::get('/comment', 'v1\market\MainController@comment');
 Route::post('/comment/send', 'v1\market\MainController@sendComment');
 
 Route::get('/android/pay/{id}', 'v1\OrderController@pay');
+Route::get('/website/pay', 'v1\OrderController@web_pay');
 Route::get('/pay/{price}', 'v1\OrderController@pay_test');
 Route::post('/callback2', 'v1\OrderController@call_back');
+Route::post('/callback3', 'v1\OrderController@call_back2');
 
 Route::get('/armin', 'v1\MainController@armin');
 Route::get('/test', 'v1\MainController@test');
