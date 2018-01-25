@@ -146,7 +146,7 @@
                                                 <td class="text-right">{{ $cart['subtotal'] . ' تومان' }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-right"><strong>مالیات / هزینه ارسال</strong></td>
+                                                <td class="text-right"><strong>ارسال / بسته بندی</strong></td>
                                                 <td class="text-right">
                                                     @if($cart['tax']!=0)
                                                         {{ $cart['tax'] . ' تومان' }}
