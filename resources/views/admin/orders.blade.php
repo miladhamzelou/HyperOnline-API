@@ -7,7 +7,8 @@
 @section('list')
     <div class="row">
         <div class="col-lg-12 col-centered center-block" style="float: none;">
-            <h2 style="color: red; text-align: center;">سفارشات خاکستری رنگ هنوز پرداخت نشده اند</h2>
+            <h3 style="color: red; text-align: center;">سفارشات خاکستری رنگ هنوز پرداخت نشده اند</h3>
+            <br>
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h2 class="box-title">لیست سفارشات</h2>

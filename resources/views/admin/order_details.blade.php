@@ -8,7 +8,8 @@
     <div class="row">
         <div class="col-lg-7 col-centered center-block" style="float: none;">
             @if($order->temp==1 and $order->pay_method=="آنلاین")
-                <h2 style="color: red; text-align: center;">این سفارش هنوز پرداخت نشده است</h2>
+                <h3 style="color: red; text-align: center;">این سفارش هنوز پرداخت نشده است</h3>
+                <br>
             @endif
             <div class="box box-primary">
                 <div class="box-header with-border">
