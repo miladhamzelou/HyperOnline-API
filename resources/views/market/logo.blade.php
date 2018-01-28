@@ -2,11 +2,11 @@
 <head>
     <style>
         div {
-            max-width: 500px;
+            max-width: 500px !important;
         }
 
         img {
-            width: 100%;
+            width: 100% !important;
         }
 
         .centered {
