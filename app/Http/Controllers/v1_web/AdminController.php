@@ -34,7 +34,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use phplusir\smsir\Smsir;
-use Spatie\Analytics\AnalyticsFacade as Analytics;
 use Spatie\Analytics\Period;
 
 require(app_path() . '/Common/jdf.php');
@@ -135,7 +134,15 @@ class AdminController
             ->options([]);
 
         $users = User::orderBy("created_at", "desc")->take(5)->get();
-        $orders = $this->fix(Order::where("status", "!=", "abort")->where("temp", 0)->orderBy("created_at", "desc")->take(5)->get());
+        $orders = $this->fix(
+            Order::where(function ($query) {
+                $query->where("temp", 0)
+                    ->orWhere("pay_method", "place");
+            })->where("status", "!=", "abort")
+                ->orderBy("created_at", "desc")
+                ->take(5)
+                ->get()
+        );
         $products = $this->fixPrice(Product::orderBy("created_at", "desc")->take(5)->get());
 
         //TODO: filter outputs

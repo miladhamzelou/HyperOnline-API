@@ -7,6 +7,8 @@
 @section('list')
     <div class="row">
         <div class="col-lg-7 col-centered center-block" style="float: none;">
+            @if($order->temp==1 && $order->pay_method=="online")
+                <h2 style="color: red; text-align: center;">این سفارش هنوز پرداخت نشده است</h2>
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h2 class="box-title">اطلاعات سفارش</h2>
