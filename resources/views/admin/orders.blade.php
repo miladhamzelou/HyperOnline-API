@@ -46,8 +46,10 @@
                                                     <td style="text-align: right; direction: rtl; color: orange">درحال انتظار</td>
                                                 @endif
                                             @else
+                                                @if($order->pay_method=="online")
                                                 <tr style="background-color: lightgrey">
                                                 <td style="text-align: right; direction: rtl; color: red;">در انتظار پرداخت</td>
+                                                @endif
                                             @endif
                                             <td style="text-align: right; direction: rtl;">{{ (str_replace(',','',$order->price) - str_replace(',','',$order->price_original)) . ' تومان' }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ $order->price . ' تومان' }}</td>
