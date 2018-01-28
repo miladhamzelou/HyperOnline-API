@@ -289,6 +289,7 @@ class OrderController extends Controller
                     "hour" => $order->hour,
                     "price" => $order->price,
                     "desc" => $order->description,
+                    "address" => $data["user_address"]
                 ]
             ], 1)
                 ->onQueue('email');
