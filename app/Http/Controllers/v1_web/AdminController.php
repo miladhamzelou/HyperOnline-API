@@ -140,7 +140,7 @@ class AdminController
                     ->orWhere("pay_method", "place");
             })->where("status", "!=", "abort")
                 ->orderBy("created_at", "desc")
-                ->take(5)
+                ->take(7)
                 ->get()
         );
         $products = $this->fixPrice(Product::orderBy("created_at", "desc")->take(5)->get());
