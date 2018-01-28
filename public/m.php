@@ -7,7 +7,7 @@ $message = wordwrap($message, 70, "\r\n");
 echo "sending";
 // Send
 //mail('apps@cafebazaar.ir', 'Cafe Bazaar', $message);
-mail('hatamiarash7@gmail.com', 'Cafe Bazzar' $message);
+mail('hatamiarash7@gmail.com', 'Cafe Bazzar', $message);
 echo "After";
 ?>
 
