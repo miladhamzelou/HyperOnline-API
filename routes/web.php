@@ -126,6 +126,9 @@ Route::post('/comment/send', 'v1\market\MainController@sendComment');
 Route::get('/logo', function (){
     return view('market.logo');
 });
+Route::get('/asnaf', function (){
+    return view('market.asnaf');
+});
 
 Route::get('/android/pay/{id}', 'v1\OrderController@pay');
 Route::get('/website/pay', 'v1\OrderController@web_pay');
