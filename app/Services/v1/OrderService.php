@@ -10,7 +10,6 @@ use App\Jobs\SendSMS;
 use App\Order;
 use App\Product;
 use App\Seller;
-use App\Support;
 use App\User;
 use Illuminate\Http\Request;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
@@ -219,7 +218,7 @@ class OrderService
         foreach ($products as $index => $pr) {
             $product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
 
-            if ($order->user_phone != '09123456789' && $order->user_phone != '09182180519' ) {
+            if ($order->user_phone != '09123456789' && $order->user_phone != '09182180519') {
                 $product->sell = $product->sell + 1;
                 $product->count = $product->count - 1;
             }
@@ -245,7 +244,7 @@ class OrderService
 
         $this->addInfo($order);
 
-        if($method!=1){
+        if ($method != 1) {
             $type = "حضوری";
 
             SendEmail::dispatch([
@@ -259,6 +258,7 @@ class OrderService
                     "hour" => $order->hour,
                     "price" => $order->price,
                     "desc" => $order->description,
+                    "address" => $user->address
                 ]
             ], 1)
                 ->onQueue('email');
