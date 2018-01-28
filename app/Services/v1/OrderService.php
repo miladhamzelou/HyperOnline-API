@@ -254,7 +254,7 @@ class OrderService
                 "user_phone" => $order->user_phone,
                 "user_code" => $user->code,
                 "user_address" => $user->state . '-' . $user->city . ' : ' . $user->address,
-                "total" => $tFinal + $tOff,
+                "total" => $tFinal + $tOff - $send_price,
                 "off" => $tOff,
                 "final" => $tFinal,
                 "hour" => $order->hour,
