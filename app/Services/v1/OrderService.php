@@ -245,6 +245,32 @@ class OrderService
 
         $this->addInfo($order);
 
+        if($method!=1){
+            $type = "حضوری";
+
+            SendEmail::dispatch([
+                "to" => "hyper.online.h@gmail.com",
+                "body" => "سفارش ( " . $type . " ) جدید ثبت شد",
+                "order" => [
+                    "code" => $order->code,
+                    "user_name" => $order->user_name,
+                    "user_phone" => $order->user_phone,
+                    "stuffs" => $order->stuffs,
+                    "hour" => $order->hour,
+                    "price" => $order->price,
+                    "desc" => $order->description,
+                ]
+            ], 1)
+                ->onQueue('email');
+
+            if ($order->user_phone != '09182180519')
+                SendSMS::dispatch([
+                    "msg" => ["سفارش ( " . $type . " ) جدید ثبت شد"],
+                    "phone" => ["09188167800"]
+                ])
+                    ->onQueue('sms');
+        }
+
         return $order->unique_id;
     }
 
