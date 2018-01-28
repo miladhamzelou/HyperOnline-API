@@ -180,10 +180,11 @@ class OrderService
         $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
         $send_price = $seller->send_price;
 
-        $order->unique_id = uniqid('', false);
+        $uid = uniqid('', false);
+        $order->unique_id = $uid;
         $order->seller_id = $seller->unique_id;
         $order->user_id = $user->unique_id;
-        $order->code = $request->get('code');
+        $order->code = $uid;
         $order->seller_name = $seller->name;
         $order->user_name = $user->name;
         $order->user_phone = $user->phone;

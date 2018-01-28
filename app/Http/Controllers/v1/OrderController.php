@@ -226,6 +226,7 @@ class OrderController extends Controller
         $order = Order::where("unique_id", $id)->first();
         if ($order->temp == 1) {
             $order->temp = 0;
+            $order->save();
             $user = User::where('unique_id', $order->user_id)->firstOrFail();
             $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
             $send_price = $seller->send_price;
