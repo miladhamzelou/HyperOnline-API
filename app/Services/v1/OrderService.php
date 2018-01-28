@@ -246,6 +246,26 @@ class OrderService
         $this->addInfo($order);
 
         if ($method != 1) {
+            $data = [
+                "products" => $products,
+                "counts" => $counts,
+                "desc" => explode(',', $order->stuffs_desc),
+                "user_name" => $order->user_name,
+                "user_phone" => $order->user_phone,
+                "user_code" => $user->code,
+                "user_address" => $user->state . '-' . $user->city . ' : ' . $user->address,
+                "total" => $tFinal + $tOff,
+                "off" => $tOff,
+                "final" => $tFinal,
+                "hour" => $order->hour,
+                "description" => $order->description,
+                "date" => $order->create_date,
+                "code" => $order->code,
+                "send_price" => $send_price
+            ];
+            $pdf = PDF::loadView('pdf.factor', $data);
+            $pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
+
             $type = "حضوری";
 
             SendEmail::dispatch([
