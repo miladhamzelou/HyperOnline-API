@@ -114,4 +114,12 @@ class MainController extends Controller
     {
         return view('test');
     }
+
+    public function test2(Request $request)
+    {
+        Log::info("test\n" . $request);
+        return response()->json([
+            'error' => false,
+        ], 201);
+    }
 }
