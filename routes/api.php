@@ -82,3 +82,9 @@ Route::post('/v1/sync_id', 'v1\UserController@syncID');
 Route::post('/v1/temp_order', 'v1\OrderController@storeTemp');
 Route::post('/v1/complete_order', 'v1\OrderController@completeOrder');
 Route::post('/v1/test', 'v1\MainController@test2');
+
+Route::get('/200', function(){
+	return response()->json([
+                    'error' => false,
+                ], 200);
+});
