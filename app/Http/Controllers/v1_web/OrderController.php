@@ -17,6 +17,7 @@ use App\Order;
 use App\Pay;
 use App\User;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 require(app_path() . '/Common/jdf.php');
 
@@ -24,6 +25,8 @@ class OrderController
 {
     public function index()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $orders = Order::orderBy("created_at", "desc")->get();
 
         return view('admin.orders')
@@ -33,6 +36,8 @@ class OrderController
 
     public function pays()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $pays = Pay::get();
         return view('admin.pays')
             ->withTitle("تراکنش ها")
@@ -41,6 +46,8 @@ class OrderController
 
     public function details($id)
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $order = Order::find($id);
         $this->addInfo($order);
         $order->price = $this->formatMoney($order->price);

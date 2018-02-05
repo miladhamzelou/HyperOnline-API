@@ -27,6 +27,8 @@ class SellerController
 
     public function index()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $sellers = Seller::orderBy("created_at", "desc")->get();
         return view('admin.sellers')
             ->withTitle("Sellers")

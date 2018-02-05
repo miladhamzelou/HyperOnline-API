@@ -40,6 +40,8 @@ class CategoryController extends Controller
 
     public function index()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $categories1 = Category1::orderBy('created_at', 'desc')->get();
         $categories2 = Category2::orderBy('created_at', 'desc')->get();
         $categories3 = Category3::orderBy('created_at', 'desc')->get();

@@ -32,6 +32,9 @@ class ProductController extends Controller
 
     public function index()
     {
+        if (Auth::check())
+            if (!Auth::user()->isAdmin())
+                return view('errors.404');
         $products = Product::where("confirmed", 1)->orderBy('created_at', 'desc')->get();
         $inactive = count(Product::where("confirmed", 0)->get());
         $title = "محصولات";
@@ -196,6 +199,8 @@ class ProductController extends Controller
 
     public function inactive()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $products = Product::where("confirmed", 0)->orderBy('created_at', 'desc')->get();
         $title = "محصولات غیرفعال";
         return view('admin.products_inactive')

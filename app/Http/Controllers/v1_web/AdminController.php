@@ -167,6 +167,8 @@ class AdminController
 
     public function database_get()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $option = Option::firstOrFail();
         return view('admin.database')
             ->withTitle("Change Settings")
@@ -215,12 +217,10 @@ class AdminController
 
     public function support()
     {
-        if (Auth::user()->isAdmin()) {
-            return view('admin.support')
-                ->withTitle("Support");
-        } else
-            return redirect('/')
-                ->withErrors('دسترسی غیرمجاز');
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
+        return view('admin.support')
+            ->withTitle("Support");
     }
 
     public function support_send(Request $request)
@@ -254,17 +254,15 @@ class AdminController
 
     public function setting()
     {
-        if (Auth::user()->isAdmin()) {
-            $option = Option::first();
-            return view('admin.setting')
-                ->withTitle("تنظیمات")
-                ->withOffline([
-                    'off' => $option->offline,
-                    'off_msg' => $option->offline_msg
-                ]);
-        } else
-            return redirect('/')
-                ->withErrors('دسترسی غیرمجاز');
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
+        $option = Option::first();
+        return view('admin.setting')
+            ->withTitle("تنظیمات")
+            ->withOffline([
+                'off' => $option->offline,
+                'off_msg' => $option->offline_msg
+            ]);
     }
 
     public function setting_send(Request $request)
@@ -325,6 +323,8 @@ class AdminController
 
     public function messages()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $sms = Sms::orderBy("created_at", "desc")->get();
         $push = Push::orderBy("created_at", "desc")->get();
         return view('admin.messages')
@@ -529,6 +529,8 @@ class AdminController
 
     public function accounting()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $orders = Order::get();
         $total_price = $total_price_original = $total_send = $total_count = 0;
         $total_order = $total_abort = $total_pending = $total_delivered = $total_shipped = 0;
@@ -888,6 +890,8 @@ class AdminController
 
     public function comments()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $comments = Comment::orderBy("created_at", "desc")->get();
         return view('admin.comments')
             ->withTitle("نظرات")

@@ -27,6 +27,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $users = User::orderBy("created_at", "desc")->get();
         return view('admin.users')
             ->withTitle("کاربران")
@@ -35,6 +37,8 @@ class UserController extends Controller
 
     public function info($id)
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $user = User::where("unique_id", $id)->firstOrFail();
         if ($user->role == "admin") $user->role = "مدیر";
         if ($user->role == "user") $user->role = "کاربر";

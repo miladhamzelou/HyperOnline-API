@@ -27,6 +27,8 @@ class AuthorController
 
     public function index()
     {
+        if (!Auth::user()->isAdmin())
+            return redirect()->route('profile');
         $authors = Author::orderBy("created_at", "desc")->get();
         return view('admin.authors')
             ->withTitle("Authors")
@@ -83,7 +85,7 @@ class AuthorController
     public function update(Request $request)
     {
         if (Auth::user()->isAdmin()) {
-            $author = Author::where("unique_id",$request->get('unique_id'))->firstOrFail();
+            $author = Author::where("unique_id", $request->get('unique_id'))->firstOrFail();
 
             $author->name = $request->get('name');
             $author->phone = $request->get('phone');
