@@ -279,6 +279,8 @@ class OrderController extends Controller
             if ($order->pay_method == 'online') $type = "آنلاین";
             else if ($order->pay_method == 'place') $type = "حضوری";
 
+            $this->addInfo($order);
+
             SendEmail::dispatch([
                 "to" => "hyper.online.h@gmail.com",
                 "body" => "سفارش ( " . $type . " ) جدید ثبت شد",
