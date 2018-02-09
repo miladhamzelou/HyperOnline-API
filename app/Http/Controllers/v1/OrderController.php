@@ -255,6 +255,8 @@ class OrderController extends Controller
                 $tFinal += ($product->price - ($product->price * $product->off / 100)) * $counts[$index];
             }
 
+            if ($tFinal >= 35000) $send_price = 0;
+
             $data = [
                 "products" => $products,
                 "counts" => $counts,
