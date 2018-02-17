@@ -245,6 +245,8 @@ class OrderService
 
         $this->addInfo($order);
 
+        if ($tFinal >= 30000) $send_price = 0;
+
         if ($method != 1) {
             $data = [
                 "products" => $products,
