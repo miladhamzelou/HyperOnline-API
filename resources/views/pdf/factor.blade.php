@@ -99,9 +99,9 @@
     <tr>
         <td>توضیحات</td>
         @if($description)
-            <td>با عرض سلام و خسته نباشید. متشکرم.</td>
+            <td>{{ $description }}</td>
         @else
-            <td>-</td>
+            <td>ندارد</td>
         @endif
     </tr>
 </table>
