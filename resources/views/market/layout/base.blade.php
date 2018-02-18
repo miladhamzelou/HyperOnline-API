@@ -410,5 +410,20 @@
 </script>
 @yield('script')
 <!-- JS Part End-->
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=11633503;
+var sc_invisible=1;
+var sc_security="d2f379e4";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="http://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/11633503/0/d2f379e4/1/" alt="Web
+Analytics Made Easy - StatCounter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
