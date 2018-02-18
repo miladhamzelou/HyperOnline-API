@@ -12,7 +12,12 @@ class TelegramController extends Controller
 	{
 		$response = Telegram::getMe();
 		return $response;
+	}
 
+	public function info_webhook()
+	{
+		$response = Telegram::getWebhookInfo();
+		return $response;
 	}
 
 	public function set()
