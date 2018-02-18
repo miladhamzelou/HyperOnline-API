@@ -13,7 +13,7 @@ return [
     | https://core.telegram.org/bots#botfather
     |
     */
-    'bot_token' => env('TELEGRAM_BOT_TOKEN', '531370522'),
+    'bot_token' => env('TELEGRAM_BOT_TOKEN'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     | Possible Values: (Boolean) "true" OR "false"
     |
     */
-    'async_requests' => env('TELEGRAM_ASYNC_REQUESTS', false),
+    'async_requests' => false,
 
     /*
     |--------------------------------------------------------------------------
