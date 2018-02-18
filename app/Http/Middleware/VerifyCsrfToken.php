@@ -12,5 +12,6 @@ class VerifyCsrfToken extends BaseVerifier
         'callback',
         'callback2',
         'callback3',
+        '531370522:AAHYvRhHW7Y2HRIOQszk5MfsZTbJNsy29Dw/webhook'
     ];
 }

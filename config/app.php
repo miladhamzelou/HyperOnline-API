@@ -192,6 +192,7 @@ return [
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class
     ],
 
     /*
@@ -242,5 +243,6 @@ return [
         'Smsir' => phplusir\smsir\SmsirFacade::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
     ],
 ];
