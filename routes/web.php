@@ -141,8 +141,5 @@ Route::post('/callback3', 'v1\OrderController@call_back2');
 Route::get('/armin', 'v1\MainController@armin');
 Route::get('/test', 'v1\MainController@test');
 Route::get('/telegram', 'TelegramController@info');
-Route::post('/531370522:AAHYvRhHW7Y2HRIOQszk5MfsZTbJNsy29Dw/webhook', function () {
-    $updates = Telegram::getWebhookUpdates();
-
-    return 'ok';
-});
+Route::get('/set', 'TelegramController@set');
+Route::post('/531370522:AAHYvRhHW7Y2HRIOQszk5MfsZTbJNsy29Dw/webhook', 'TelegramController@webhook');

@@ -2,24 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use app\Commands\StartCommand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Telegram\Bot\Api;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramController extends Controller
 {
-    public function info(){
-        $telegram = new Api(config('telegram.bot_token'));
-        $response = $telegram->getMe();
+	public function info()
+	{
+		$response = Telegram::getMe();
+		return $response;
 
-        $response = $telegram->getUpdates();
+	}
 
-        return $response;
+	public function set()
+	{
+		$result = Telegram::setWebhook([
+			'url' => 'https://hyper-online.ir/' . config('telegram.bot_token') . '/webhook'
+		]);
+		return $result;
+	}
 
-    }
-
-    public function webhook(Request $request){
-        return 'OK';
-    }
+	public function webhook(Request $request)
+	{
+		$update = Telegram::commandsHandler(true);
+		Log::info($update);
+		Log::info($request);
+		return 'ok';
+	}
 }
