@@ -23,7 +23,8 @@ class TelegramController extends Controller
 	public function set()
 	{
 		$result = Telegram::setWebhook([
-			'url' => 'https://hyper-online.ir/' . config('telegram.bot_token') . '/webhook'
+			'url' => 'https://hyper-online.ir/' . config('telegram.bot_token') . '/webhook',
+			'certificate' => 'https://hyper-online.ir/CSR.txt'
 		]);
 		return $result;
 	}
