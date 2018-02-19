@@ -23,7 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.css') }}">
     @yield('style')
     <!-- CSS Part End-->
-	<!-- Hotjar -->
+	<!-- Hotjar Tracking Code for https://hyper-online.ir -->
 	<script>
 		(function(h,o,t,j,a,r){
 			h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -34,7 +34,6 @@
 			a.appendChild(r);
 		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 	</script>
-<!-- Hotjar -->
 </head>
 <body>
 <div class="wrapper-wide">
