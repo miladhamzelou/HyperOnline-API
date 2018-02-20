@@ -437,5 +437,19 @@ target="_blank"><img class="statcounter"
 src="//c.statcounter.com/11633503/0/d2f379e4/1/" alt="Web
 Analytics Made Easy - StatCounter"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
+
+<a title="Web Analytics" href="http://clicky.com/101102199"><img alt="Web Analytics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script type="text/javascript">
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(101102199);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101102199ns.gif" /></p></noscript>
 </body>
 </html>
