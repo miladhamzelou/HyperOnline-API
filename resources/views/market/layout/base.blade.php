@@ -438,7 +438,7 @@ src="//c.statcounter.com/11633503/0/d2f379e4/1/" alt="Web
 Analytics Made Easy - StatCounter"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 
-<a title="Web Analytics" href="http://clicky.com/101102199"><img alt="Web Analytics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+
 <script type="text/javascript">
 var clicky_site_ids = clicky_site_ids || [];
 clicky_site_ids.push(101102199);
