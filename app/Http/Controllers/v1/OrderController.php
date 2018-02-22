@@ -17,6 +17,7 @@ use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
@@ -437,8 +438,10 @@ class OrderController extends Controller
 
         if ($res['status'] == 1) {
             $order = Order::where("unique_id", $pay->factorNumber)->firstOrFail();
-            if ($this->completeOrder2($pay->factorNumber))
+            if ($this->completeOrder2($pay->factorNumber)){
+                Cart::destroy();
                 return view('market.result')->withOrder($order);
+            }
             else
                 return view('market.result')->withError("مشکلی به وجود آمده است");
         } else {
@@ -529,6 +532,15 @@ class OrderController extends Controller
         } else {
             return false;
         }
+    }
+
+    public function getFactor($code)
+    {
+        $file = public_path() . '/ftp/factors/' . $code . '.pdf';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return response()->download($file, $code . '.pdf', $headers);
     }
 
     public function addInfo(&$item)

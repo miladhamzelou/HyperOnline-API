@@ -123,6 +123,7 @@ Route::get('/website/pay', 'v1\OrderController@web_pay');
 Route::get('/pay/{price}', 'v1\OrderController@pay_test');
 Route::post('/callback2', 'v1\OrderController@call_back');
 Route::post('/callback3', 'v1\OrderController@call_back2');
+Route::get('/factor/{code}','v1\OrderController@getFactor');
 
 Route::get('/armin', 'v1\MainController@armin');
 Route::get('/test', 'v1\MainController@test');
