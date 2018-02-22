@@ -21,7 +21,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
-require_once(app_path() . '/Common/jdf.php');
 
 class OrderController extends Controller
 {
@@ -34,6 +33,8 @@ class OrderController extends Controller
      */
     public function __construct(OrderService $service)
     {
+        if (!function_exists("jdate"))
+            require_once(app_path() . '/Common/jdf.php');
         require(app_path() . '/Common/MYPDF.php');
         $this->Orders = $service;
         $this->API = "4d0d3be84eae7fbe5c317bf318c77e83";
