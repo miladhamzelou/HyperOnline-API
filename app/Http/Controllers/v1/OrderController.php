@@ -18,10 +18,10 @@ use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
+require(app_path() . '/Common/jdf.php');
 
 class OrderController extends Controller
 {
@@ -34,7 +34,6 @@ class OrderController extends Controller
      */
     public function __construct(OrderService $service)
     {
-        require(app_path() . '/Common/jdf.php');
         require(app_path() . '/Common/MYPDF.php');
         $this->Orders = $service;
         $this->API = "4d0d3be84eae7fbe5c317bf318c77e83";
@@ -439,7 +438,9 @@ class OrderController extends Controller
 
         if ($res['status'] == 1) {
             $order = Order::where("unique_id", $pay->factorNumber)->firstOrFail();
-            if ($this->completeOrder2($pay->factorNumber)){
+            $order->temp = 0;
+            $order->save();
+            if ($this->completeOrder2($pay->factorNumber)) {
                 Cart::destroy();
                 $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
                 if (Cart::content()->count() > 0)
@@ -471,8 +472,6 @@ class OrderController extends Controller
                     'free-ship' => $free_ship
                 ];
 
-                $order = Order::first();
-
                 $ids = explode(',', $order->stuffs_id);
                 $products = array();
                 foreach ($ids as $id) {
@@ -498,8 +497,7 @@ class OrderController extends Controller
                     ->withCategories($cat)
                     ->withAdmin($isAdmin)
                     ->withCart($cart);
-            }
-            else
+            } else
                 return view('market.result')->withError("مشکلی به وجود آمده است");
         } else {
             return view('market.result')->withError($res['errorCode']);
