@@ -436,8 +436,6 @@ class OrderController extends Controller
         $res = $this->verify($this->API, $pay->transId);
         $res = (array)json_decode($res);
 
-        return $res['status'];
-
         if ($res['status'] == 1) {
             $order = Order::where("unique_id", $pay->factorNumber)->firstOrFail();
             $order->temp = 0;
