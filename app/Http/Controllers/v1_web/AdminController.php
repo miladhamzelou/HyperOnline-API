@@ -32,9 +32,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Log;
 use phplusir\smsir\Smsir;
-use Spatie\Analytics\Period;
 
 require(app_path() . '/Common/jdf.php');
 
@@ -455,7 +453,6 @@ class AdminController
             $inactive = count(Product::where("confirmed", 0)
                 ->get());
 
-            Log::info("products\n" . $products);
             return view('admin.products')
                 ->withTitle("جستجو - محصولات")
                 ->withInactive($inactive)

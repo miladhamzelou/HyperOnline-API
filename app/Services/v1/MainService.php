@@ -224,7 +224,6 @@ class MainService
 
                 $data[] = $entry;
             }
-            Log::info($data);
             return $data;
         } else
             return 0;

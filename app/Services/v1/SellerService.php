@@ -30,7 +30,6 @@ class SellerService
      */
     public function getSellers($parameters)
     {
-        Log::info($parameters);
         if (empty($parameters)) return $this->filterSellers(Seller::all());
 
         $withKeys = $this->getWithKeys($parameters);
@@ -59,7 +58,6 @@ class SellerService
             'location_x' => $seller->location_x,
             'location_y' => $seller->location_y
         ];
-        //Log::info("\n\nSeller : \n" . json_encode($final_seller));
         return $final_seller;
     }
 
@@ -70,7 +68,6 @@ class SellerService
             'target_id' => $id,
             'target_type' => 0
         ])->get();
-        //Log::info("\n\nComment \n :" . json_encode($this->filterComments($comment)));
         return $comment;
     }
 
@@ -78,7 +75,6 @@ class SellerService
     {
         $id = $parameters['unique_id'];
         $product = Product::where("seller_id", $id)->get();
-        //Log::info("\n\nProducts \n : " . json_encode($product));
         return $product;
     }
 

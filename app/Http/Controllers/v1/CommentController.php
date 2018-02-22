@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Services\v1\CommentService;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class CommentController extends Controller
 {
