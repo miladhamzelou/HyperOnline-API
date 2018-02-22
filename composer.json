@@ -9,6 +9,8 @@
   "type": "project",
   "require": {
     "php": ">=5.6.4",
+    "barryvdh/laravel-ide-helper": "^2.4",
+    "doctrine/dbal": "^2.6",
     "fx3costa/laravelchartjs": "^2.3",
     "gloudemans/shoppingcart": "^2.4",
     "guzzlehttp/guzzle": "^6.3",
@@ -51,6 +53,7 @@
     ],
     "post-update-cmd": [
       "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+      "php artisan ide-helper:generate",
       "php artisan optimize"
     ]
   },

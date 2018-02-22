@@ -9,6 +9,7 @@
  * @Author : Reza Gholampanahi & WebSite : http://jdf.scr.ir
  * @License: GNU/LGPL _ Open Source & Free : [all functions]
  * @Version: 2.70 =>[ 1395/11/22 = 1438/05/12 = 2017/02/10 ]
+ * @return mixed|string
  */
 
 /*	F	*/

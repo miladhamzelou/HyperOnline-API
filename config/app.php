@@ -192,7 +192,8 @@ return [
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        Telegram\Bot\Laravel\TelegramServiceProvider::class
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*

@@ -343,12 +343,19 @@ class MainController extends Controller
             if (Auth::user()->isAdmin() == 1)
                 $isAdmin = 1;
         $cat = $this->mService->getCategories();
+
+        if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+            $free_ship = true;
+        } else
+            $free_ship = false;
+
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::content()->count(),
             'total' => Cart::total(),
             'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal()
+            'subtotal' => Cart::subtotal(),
+            'free-ship' => $free_ship
         ];
         return view('market.contact_us')
             ->withCategories($cat)
@@ -363,12 +370,19 @@ class MainController extends Controller
             if (Auth::user()->isAdmin() == 1)
                 $isAdmin = 1;
         $cat = $this->mService->getCategories();
+
+        if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+            $free_ship = true;
+        } else
+            $free_ship = false;
+
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::content()->count(),
             'total' => Cart::total(),
             'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal()
+            'subtotal' => Cart::subtotal(),
+            'free-ship' => $free_ship
         ];
         return view('market.about')
             ->withCategories($cat)
@@ -383,12 +397,19 @@ class MainController extends Controller
             if (Auth::user()->isAdmin() == 1)
                 $isAdmin = 1;
         $cat = $this->mService->getCategories();
+
+        if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+            $free_ship = true;
+        } else
+            $free_ship = false;
+
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::content()->count(),
             'total' => Cart::total(),
             'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal()
+            'subtotal' => Cart::subtotal(),
+            'free-ship' => $free_ship
         ];
         return view('market.privacy')
             ->withCategories($cat)
@@ -403,12 +424,19 @@ class MainController extends Controller
             if (Auth::user()->isAdmin() == 1)
                 $isAdmin = 1;
         $cat = $this->mService->getCategories();
+
+        if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+            $free_ship = true;
+        } else
+            $free_ship = false;
+
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::content()->count(),
             'total' => Cart::total(),
             'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal()
+            'subtotal' => Cart::subtotal(),
+            'free-ship' => $free_ship
         ];
         return view('market.terms')
             ->withCategories($cat)
@@ -423,12 +451,19 @@ class MainController extends Controller
             if (Auth::user()->isAdmin() == 1)
                 $isAdmin = 1;
         $cat = $this->mService->getCategories();
+
+        if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+            $free_ship = true;
+        } else
+            $free_ship = false;
+
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::content()->count(),
             'total' => Cart::total(),
             'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal()
+            'subtotal' => Cart::subtotal(),
+            'free-ship' => $free_ship
         ];
         return view('market.comment')
             ->withCategories($cat)
