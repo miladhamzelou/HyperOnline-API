@@ -438,8 +438,6 @@ class OrderController extends Controller
 
         if ($res['status'] == 1) {
             $order = Order::where("unique_id", $pay->factorNumber)->firstOrFail();
-            $order->temp = 0;
-            $order->save();
             if ($this->completeOrder2($pay->factorNumber)) {
                 Cart::destroy();
                 $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
