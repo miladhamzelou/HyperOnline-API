@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class MainService
 {
-    public function __construct(OrderService $service)
+    public function __construct()
     {
         if (!function_exists("jalali_to_gregorian"))
             include(app_path() . '/Common/jdf.php');
