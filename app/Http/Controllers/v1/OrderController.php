@@ -398,8 +398,7 @@ class OrderController extends Controller
         $url = "https://pay.ir/payment/send";
         $params = [
             'api' => $this->API,
-            'amount' => 1000,
-//            'amount' => $order->price * 10,
+            'amount' => $order->price * 10,
             'redirect' => "http://hyper-online.ir/callback3",
             'mobile' => $order->user_phone,
             'factorNumber' => $order->unique_id,
@@ -535,6 +534,8 @@ class OrderController extends Controller
                 $tOff += $product->price * $product->off / 100 * $counts[$index];
                 $tFinal += ($product->price - ($product->price * $product->off / 100)) * $counts[$index];
             }
+
+            if ($tFinal >= 30000) $send_price = 0;
 
             $data = [
                 "products" => $products,
