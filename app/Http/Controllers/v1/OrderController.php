@@ -33,7 +33,7 @@ class OrderController extends Controller
      */
     public function __construct(OrderService $service)
     {
-        if (!function_exists("jdate"))
+        if (!function_exists("jalali_to_gregorian"))
             require_once(app_path() . '/Common/jdf.php');
         require(app_path() . '/Common/MYPDF.php');
         $this->Orders = $service;
