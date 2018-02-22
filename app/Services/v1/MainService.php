@@ -11,12 +11,15 @@ use App\Option;
 use App\Product;
 use App\Seller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-
-include(app_path() . '/Common/jdf.php');
 
 class MainService
 {
+    public function __construct(OrderService $service)
+    {
+        if (!function_exists("jalali_to_gregorian"))
+            include(app_path() . '/Common/jdf.php');
+    }
+
     /**
      * new products
      * @return array|string
