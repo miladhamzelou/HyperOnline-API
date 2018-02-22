@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
-require(app_path() . '/Common/jdf.php');
+require_once(app_path() . '/Common/jdf.php');
 
 class OrderController extends Controller
 {
