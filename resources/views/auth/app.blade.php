@@ -22,14 +22,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand font" href="http://hyper-online.ir">هایپرآنلاین</a>
+            <a class="navbar-brand font" href="{{ url('/') }}">خانه</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav font">
-                <li>
-                    <a href="{{ url('/') }}">خانه</a>
-                </li>
-            </ul>
             <ul class="nav navbar-nav navbar-right font">
                 @if (Auth::guest())
                     <li>

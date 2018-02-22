@@ -29,7 +29,7 @@
                             <input id="city" type="text" style="text-align: center" placeholder="شهر"
                                    class="font form-control"
                                    name="city"
-                                   value="همدان" disabled required>
+                                   value="همدان" required>
 
                             @if ($errors->has('city'))
                                 <span class="help-block">
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <input id="phone" type="text" style="text-align: center" placeholder="شماره تلفن"
+                            <input id="phone" type="number" style="text-align: center" placeholder="شماره تلفن"
                                    class="font form-control" name="phone" tabindex="2"
                                    value="{{ old('phone') }}" required>
 
