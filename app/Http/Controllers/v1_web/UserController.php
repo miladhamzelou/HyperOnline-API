@@ -8,6 +8,7 @@ namespace App\Http\Controllers\v1_web;
 use App\Http\Controllers\Controller;
 use App\Services\v1\UserService;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
