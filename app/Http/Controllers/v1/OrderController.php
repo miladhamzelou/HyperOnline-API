@@ -440,7 +440,63 @@ class OrderController extends Controller
             $order = Order::where("unique_id", $pay->factorNumber)->firstOrFail();
             if ($this->completeOrder2($pay->factorNumber)){
                 Cart::destroy();
-                return view('market.result')->withOrder($order);
+                $seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
+                if (Cart::content()->count() > 0)
+                    $send_price = $seller->send_price;
+                else
+                    $send_price = 0;
+                $isAdmin = 0;
+
+                if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+                    $send_price = 0;
+                    $free_ship = true;
+                } else
+                    $free_ship = false;
+
+                if (Auth::check())
+                    if (Auth::user()->isAdmin() == 1)
+                        $isAdmin = 1;
+
+                $mService = new MainService();
+
+                $cat = $mService->getCategories();
+
+                $cart = [
+                    'items' => Cart::content(),
+                    'count' => Cart::content()->count(),
+                    'total' => number_format((int)str_replace(',', '', Cart::subtotal()) + $send_price),
+                    'tax' => number_format($send_price),
+                    'subtotal' => Cart::subtotal(),
+                    'free-ship' => $free_ship
+                ];
+
+                $order = Order::first();
+
+                $ids = explode(',', $order->stuffs_id);
+                $products = array();
+                foreach ($ids as $id) {
+                    $p = Product::where("unique_id", $id)->firstOrFail()->toArray();
+                    array_push($products, $p);
+                }
+
+                $counts = explode(',', $order->stuffs_count);
+
+                $data = [
+                    "products" => $products,
+                    "counts" => $counts,
+                    "user_name" => $order->user_name,
+                    "user_phone" => $order->user_phone,
+                    "user_address" => User::where("unique_id", $order->user_id)->firstOrFail()->address,
+                    "total" => $order->price,
+                    "hour" => $order->hour,
+                    "description" => $order->description
+                ];
+                return view('market.result')
+                    ->withData($data)
+                    ->withOrder($order)
+                    ->withCategories($cat)
+                    ->withAdmin($isAdmin)
+                    ->withCart($cart);
             }
             else
                 return view('market.result')->withError("مشکلی به وجود آمده است");
