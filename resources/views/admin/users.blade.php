@@ -6,7 +6,7 @@
 
 @section('list')
     <div class="row">
-        <div class="col-lg-6 col-centered center-block" style="float: none;">
+        <div class="col-lg-8 col-centered center-block" style="float: none;">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h2 class="box-title">لیست کاربران</h2>
