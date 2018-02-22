@@ -267,19 +267,19 @@
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="http://iranapps.ir/app/ir.hatamiarash.hyperonline" target="_blank">
+                    <a href="https://iranapps.ir/app/ir.hatamiarash.hyperonline" target="_blank">
                         <img class="img-responsive markets" style="margin: 4px"
                              src="{{ asset('market/image/markets/iran_apps.png') }}" alt="ایران اپس">
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="http://myket.ir/app/ir.hatamiarash.hyperonline" target="_blank">
+                    <a href="https://myket.ir/app/ir.hatamiarash.hyperonline" target="_blank">
                         <img class="img-responsive markets" style="margin: 4px"
                              src="{{ asset('market/image/markets/myket.png') }}" alt="مایکت">
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="http://parshub.com/push/APP/930533830" target="_blank">
+                    <a href="https://parshub.com/push/APP/930533830" target="_blank">
                         <img class="img-responsive markets" style="margin: 4px"
                              src="{{ asset('market/image/markets/parshub.png') }}" alt="پارس هاب">
                     </a>
@@ -432,7 +432,7 @@ var sc_security="d2f379e4";
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics
-Made Easy - StatCounter" href="http://statcounter.com/"
+Made Easy - StatCounter" href="https://statcounter.com/"
 target="_blank"><img class="statcounter"
 src="//c.statcounter.com/11633503/0/d2f379e4/1/" alt="Web
 Analytics Made Easy - StatCounter"></a></div></noscript>

@@ -118,7 +118,7 @@
             clickyab_native['orientation'] = "vertical";
             clickyab_native['selector'] = "na_zepQ0A";
         </script>
-        <script src="http://static.clickyab.com/js/native_ad.js"></script>
+        <script src="https://static.clickyab.com/js/native_ad.js"></script>
     </aside>
 @endsection
 <!-- Left Part End-->
