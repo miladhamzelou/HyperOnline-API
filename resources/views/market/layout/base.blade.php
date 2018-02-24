@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/owl.transitions.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/stylesheet-rtl.css') }}"/>
+	<script type="text/javascript" src="{{ asset('market/js/jquery.am.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive-rtl.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/webfont/stylesheet.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css') }}"/>
@@ -418,7 +419,6 @@
 <script type="text/javascript" src="{{ asset('market/js/bootstrap/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('market/js/jquery.easing-1.3.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('market/js/jquery.dcjqaccordion.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('market/js/jquery.am.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('market/js/owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('market/js/custom.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/mine.js') }}"></script>
