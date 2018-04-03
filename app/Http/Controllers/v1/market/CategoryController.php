@@ -21,12 +21,18 @@ class CategoryController extends Controller
         $new = $this->mService->getNew();
         $cat = $this->mService->getCategories();
 
+	    if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+		    $free_ship = true;
+	    } else
+		    $free_ship = false;
+
         $cart = [
             'items' => Cart::content(),
             'count' => Cart::count(),
             'total' => Cart::total(),
             'tax' => Cart::tax(),
-            'subtotal' => Cart::subtotal()
+            'subtotal' => Cart::subtotal(),
+	        'free-ship' => $free_ship
         ];
 
         if (Auth::check())
