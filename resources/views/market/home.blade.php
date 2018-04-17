@@ -103,7 +103,7 @@
             @endforeach
         </div>
         <br>
-        <div class="clickyab-native-ad na_zepQ0A"></div>
+        {{-- <div class="clickyab-native-ad na_zepQ0A"></div>
         <script type="text/javascript">
             var clickyab_native = clickyab_native || [];
             clickyab_native['count'] = 2;
@@ -118,7 +118,7 @@
             clickyab_native['orientation'] = "vertical";
             clickyab_native['selector'] = "na_zepQ0A";
         </script>
-        <script src="https://static.clickyab.com/js/native_ad.js"></script>
+        <script src="https://static.clickyab.com/js/native_ad.js"></script> --}}
     </aside>
 @endsection
 <!-- Left Part End-->
