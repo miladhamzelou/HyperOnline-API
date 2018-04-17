@@ -175,7 +175,7 @@
     @endif
     <!-- Featured محصولات End-->
         <!-- Banner Start-->
-        <div class="marketshop-banner">
+        {{-- <div class="marketshop-banner">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img
                                 src="{{ asset('market/image/banner/sample-banner-3-400x200.jpg')}}"
@@ -190,7 +190,7 @@
                                 alt="بنر نمونه 2"
                                 title="بنر نمونه 2"/></a></div>
             </div>
-        </div>
+        </div> --}}
         <!-- Banner End-->
         <!-- دسته ها محصولات Slider Start-->
         <div class="category-module" id="latest_category">
@@ -259,7 +259,7 @@
         </div>
         <!-- دسته ها محصولات Slider End-->
         <!-- Banner Start -->
-        <div class="marketshop-banner">
+        {{-- <div class="marketshop-banner">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a href="#"><img
                                 src="{{ asset('market/image/banner/sample-banner-4-400x150.jpg')}}"
@@ -270,7 +270,7 @@
                                 alt="2 Block Banner 1"
                                 title="2 Block Banner 1"/></a></div>
             </div>
-        </div>
+        </div> --}}
         <!-- Banner End -->
         <!-- دسته ها محصولات Slider Start -->
         <h3 class="subtitle">{{ $rand1['name'] }} - <a class="viewall" href="{{ url('category/3/'. $rand1['id']) }}">نمایش
