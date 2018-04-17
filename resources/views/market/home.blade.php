@@ -133,9 +133,6 @@
             <div class="item"><a href="#"><img class="img-responsive"
                                                src="{{ asset('market/image/slider/banner-2.jpg')}}"
                                                alt="banner 2"/></a></div>
-            <div class="item"><a href="#"><img class="img-responsive"
-                                               src="{{ asset('market/image/slider/banner-3.jpg')}}"
-                                               alt="banner 3"/></a></div>
         </div>
         <!-- Slideshow End-->
         <!-- Featured محصولات Start-->
