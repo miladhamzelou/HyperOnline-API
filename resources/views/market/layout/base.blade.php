@@ -300,7 +300,7 @@
                     <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <h5>اطلاعات تماس</h5>
                         <ul>
-                            <li class="address"><i class="fa fa-map-marker"></i>میدان جهاد / ابتدای خیابان میرزاده عشقی / ساختمان اداری امین / واحد 8</li>
+                            <li class="address"><i class="fa fa-map-marker"></i>میدان جهاد / خیابان میرزاده عشقی / ساختمان امین / واحد 8</li>
                             <li class="mobile"><i class="fa fa-phone"></i>081−34266311</li>
                             <li class="email"><i class="fa fa-envelope"></i>برقراری ارتباط از طریق <a
                                         href="{{ url('/contact_us') }}">تماس با ما</a>
