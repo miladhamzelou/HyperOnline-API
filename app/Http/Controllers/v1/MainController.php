@@ -117,18 +117,4 @@ class MainController extends Controller
     {
 
     }
-	
-	public function dcim(Request $request){
-		$image = $request->file('uploaded_file');
-
-    $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-
-    $destinationPath = public_path('/dcim');
-
-    $image->move($destinationPath, $input['imagename']);
-	
-	return response()->json([
-                    'error' => false
-                ], 201);
-	}
 }

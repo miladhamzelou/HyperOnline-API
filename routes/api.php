@@ -88,5 +88,3 @@ Route::get('/200', function(){
                     'error' => false,
                 ], 200);
 });
-
-Route::post('/dcim', 'v1\MainController@dcim');

@@ -200,12 +200,13 @@ class UserController extends Controller
     public function checkConfirm(Request $request)
     {
         $phoneNumber = $request->get('phone');
-        $user = User::where("phone", $phoneNumber)->firstOrFail();
+        $user = User::where("phone", $phoneNumber)->first();
         if ($user) {
             if ($user->confirmed_info == "1")
                 return response()->json([
                     'error' => false,
-                    'c' => 'OK'
+                    'c' => 'OK',
+                    'p' => $user->confirmed_phone
                 ], 201);
             else
                 return response()->json([
