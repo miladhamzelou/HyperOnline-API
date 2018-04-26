@@ -7,7 +7,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 class VerifyCsrfToken extends BaseVerifier
 {
     protected $except = [
+        '/api/*',
         'api/*',
+        '/api/v1/*',
         'api/v1/*',
         'callback',
         'callback2',
