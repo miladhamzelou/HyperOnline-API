@@ -103,7 +103,7 @@
             @endforeach
         </div>
         <br>
-        {{-- <div class="clickyab-native-ad na_zepQ0A"></div>
+        <div class="clickyab-native-ad na_zepQ0A"></div>
         <script type="text/javascript">
             var clickyab_native = clickyab_native || [];
             clickyab_native['count'] = 2;
@@ -118,7 +118,7 @@
             clickyab_native['orientation'] = "vertical";
             clickyab_native['selector'] = "na_zepQ0A";
         </script>
-        <script src="https://static.clickyab.com/js/native_ad.js"></script> --}}
+        <script src="https://static.clickyab.com/js/native_ad.js"></script>
     </aside>
 @endsection
 <!-- Left Part End-->
@@ -175,23 +175,23 @@
     @endif
     <!-- Featured محصولات End-->
         <!-- Banner Start-->
-        {{-- <div class="marketshop-banner">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img
-                                src="{{ asset('market/image/banner/sample-banner-3-400x200.jpg')}}"
-                                alt="بنر نمونه 3"
-                                title="بنر نمونه 3"/></a></div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img
-                                src="{{ asset('market/image/banner/sample-banner-1-400x200.jpg')}}"
-                                alt="بنر نمونه"
-                                title="بنر نمونه"/></a></div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img
-                                src="{{ asset('market/image/banner/sample-banner-2-400x200.jpg')}}"
-                                alt="بنر نمونه 2"
-                                title="بنر نمونه 2"/></a></div>
-            </div>
-        </div> --}}
-        <!-- Banner End-->
+    {{-- <div class="marketshop-banner">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img
+                            src="{{ asset('market/image/banner/sample-banner-3-400x200.jpg')}}"
+                            alt="بنر نمونه 3"
+                            title="بنر نمونه 3"/></a></div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img
+                            src="{{ asset('market/image/banner/sample-banner-1-400x200.jpg')}}"
+                            alt="بنر نمونه"
+                            title="بنر نمونه"/></a></div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img
+                            src="{{ asset('market/image/banner/sample-banner-2-400x200.jpg')}}"
+                            alt="بنر نمونه 2"
+                            title="بنر نمونه 2"/></a></div>
+        </div>
+    </div> --}}
+    <!-- Banner End-->
         <!-- دسته ها محصولات Slider Start-->
         <div class="category-module" id="latest_category">
             <h3 class="subtitle">{{ $rand3['name'] }} - <a class="viewall"
@@ -259,19 +259,19 @@
         </div>
         <!-- دسته ها محصولات Slider End-->
         <!-- Banner Start -->
-        {{-- <div class="marketshop-banner">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a href="#"><img
-                                src="{{ asset('market/image/banner/sample-banner-4-400x150.jpg')}}"
-                                alt="2 Block Banner"
-                                title="2 Block Banner"/></a></div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a href="#"><img
-                                src="{{ asset('market/image/banner/sample-banner-5-400x150.jpg')}}"
-                                alt="2 Block Banner 1"
-                                title="2 Block Banner 1"/></a></div>
-            </div>
-        </div> --}}
-        <!-- Banner End -->
+    {{-- <div class="marketshop-banner">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a href="#"><img
+                            src="{{ asset('market/image/banner/sample-banner-4-400x150.jpg')}}"
+                            alt="2 Block Banner"
+                            title="2 Block Banner"/></a></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a href="#"><img
+                            src="{{ asset('market/image/banner/sample-banner-5-400x150.jpg')}}"
+                            alt="2 Block Banner 1"
+                            title="2 Block Banner 1"/></a></div>
+        </div>
+    </div> --}}
+    <!-- Banner End -->
         <!-- دسته ها محصولات Slider Start -->
         <h3 class="subtitle">{{ $rand1['name'] }} - <a class="viewall" href="{{ url('category/3/'. $rand1['id']) }}">نمایش
                 همه</a></h3>
