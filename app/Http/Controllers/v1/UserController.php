@@ -171,7 +171,7 @@ class UserController extends Controller
 			$code = mt_rand(1527, 5388);
 			$message = "هایپرآنلاین - کد فعال سازی شما :‌ " . $code;
 //            Smsir::send([$message], [$phoneNumber]);
-			Smsir::sendVerification($code, $phoneNumber);
+			//Smsir::sendVerification($code, $phoneNumber);
 			return response()->json([
 				'error' => false,
 				'code' => $code + 4611
