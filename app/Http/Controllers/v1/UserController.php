@@ -8,6 +8,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmail;
 use App\Jobs\SendSMS;
+use App\Order;
 use App\Services\v1\UserService;
 use App\User;
 use Exception;
@@ -102,9 +103,24 @@ class UserController extends Controller
 	public function show($id)
 	{
 		$data = $this->Users->getUser($id);
+		$orders = Order::where("user_phone", $data['phone'])->where('pay_method', 'online')->get();
+		if ($orders) {
+			$count = count($orders);
+			$price = 0;
+			foreach ($orders as $order) {
+				$price += $order->price;
+			}
+		} else {
+			$count = 0;
+			$price = 0;
+		}
 		return response()->json([
 			'error' => false,
-			'user' => $data
+			'user' => $data,
+			'orders' => [
+				'count' => $count,
+				'price' => $price
+			]
 		], 201);
 	}
 
