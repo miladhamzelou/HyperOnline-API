@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.36 on 2018-02-22 14:59:31.
+ * Generated for Laravel 5.4.36 on 2018-04-26 15:25:34.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -6807,7 +6807,7 @@ namespace Illuminate\Support\Facades {
          * @param array $cookies The COOKIE parameters
          * @param array $files The FILES parameters
          * @param array $server The SERVER parameters
-         * @param string|resource $content The raw body data
+         * @param string|resource|null $content The raw body data
          * @static 
          */ 
         public static function initialize($query = array(), $request = array(), $attributes = array(), $cookies = array(), $files = array(), $server = array(), $content = null)
@@ -6840,7 +6840,7 @@ namespace Illuminate\Support\Facades {
          * @param array $cookies The request cookies ($_COOKIE)
          * @param array $files The request files ($_FILES)
          * @param array $server The server parameters ($_SERVER)
-         * @param string|resource $content The raw body data
+         * @param string|resource|null $content The raw body data
          * @return static 
          * @static 
          */ 
@@ -11613,7 +11613,21 @@ namespace phplusir\smsir {
     class SmsirFacade {
         
         /**
-         * this method use in every request to get the token at first.
+         * This method used for log the messages to the database if db-log set to true (@ smsir.php in config folder).
+         *
+         * @param $result
+         * @param $messages
+         * @param $numbers
+         * @internal param bool $addToCustomerClub | set to true if you want to log another message instead main message
+         * @static 
+         */ 
+        public static function DBlog($result, $messages, $numbers)
+        {
+            return \phplusir\smsir\Smsir::DBlog($result, $messages, $numbers);
+        }
+        
+        /**
+         * this method used in every request to get the token at first.
          *
          * @return mixed - the Token for use api
          * @static 
@@ -11624,7 +11638,7 @@ namespace phplusir\smsir {
         }
         
         /**
-         * this method return your credit in sms.ir
+         * this method return your credit in sms.ir (sms credit, not money)
          *
          * @return mixed - credit
          * @static 
@@ -11635,12 +11649,23 @@ namespace phplusir\smsir {
         }
         
         /**
+         * by this method you can fetch all of your sms lines.
+         *
+         * @return mixed , return all of your sms lines
+         * @static 
+         */ 
+        public static function getLines()
+        {
+            return \phplusir\smsir\Smsir::getLines();
+        }
+        
+        /**
          * Simple send message with sms.ir account and line number
          *
-         * @param array $messages = Messages - Count must be equal with $numbers
-         * @param array $numbers = Numbers - must be equal with $messages
+         * @param $messages = Messages - Count must be equal with $numbers
+         * @param $numbers = Numbers - must be equal with $messages
          * @param null $sendDateTime = dont fill it if you want to send message now
-         * @return mixed 
+         * @return \phplusir\smsir\mixed, return status
          * @static 
          */ 
         public static function send($messages, $numbers, $sendDateTime = null)
@@ -11666,10 +11691,10 @@ namespace phplusir\smsir {
         }
         
         /**
-         * 
+         * this method send message to your customer club contacts (known as white sms module)
          *
-         * @param array $messages
-         * @param array $numbers
+         * @param $messages
+         * @param $numbers
          * @param null $sendDateTime
          * @param bool $canContinueInCaseOfError
          * @return \Psr\Http\Message\ResponseInterface 
@@ -11681,7 +11706,7 @@ namespace phplusir\smsir {
         }
         
         /**
-         * 
+         * this method add contact to the your customer club and then send a message to him/her
          *
          * @param $prefix
          * @param $firstName
@@ -11699,16 +11724,61 @@ namespace phplusir\smsir {
         }
         
         /**
-         * 
+         * this method send a verification code to your customer. need active the module at panel first.
          *
          * @param $code
          * @param $number
+         * @param bool $log
          * @return mixed 
          * @static 
          */ 
-        public static function sendVerification($code, $number)
+        public static function sendVerification($code, $number, $log = false)
         {
-            return \phplusir\smsir\Smsir::sendVerification($code, $number);
+            return \phplusir\smsir\Smsir::sendVerification($code, $number, $log);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $parameters = all parameters and parameters value as an array
+         * @param $template_id = you must create a template in sms.ir and put your template id here
+         * @param $number = phone number
+         * @return mixed = the result
+         * @static 
+         */ 
+        public static function ultraFastSend($parameters, $template_id, $number)
+        {
+            return \phplusir\smsir\Smsir::ultraFastSend($parameters, $template_id, $number);
+        }
+        
+        /**
+         * this method used for fetch received messages
+         *
+         * @param $perPage
+         * @param $pageNumber
+         * @param $formDate
+         * @param $toDate
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getReceivedMessages($perPage, $pageNumber, $formDate, $toDate)
+        {
+            return \phplusir\smsir\Smsir::getReceivedMessages($perPage, $pageNumber, $formDate, $toDate);
+        }
+        
+        /**
+         * this method used for fetch your sent messages
+         *
+         * @param $perPage = how many sms you want to fetch in every page
+         * @param $pageNumber = the page number
+         * @param $formDate = from date
+         * @param $toDate = to date
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getSentMessages($perPage, $pageNumber, $formDate, $toDate)
+        {
+            return \phplusir\smsir\Smsir::getSentMessages($perPage, $pageNumber, $formDate, $toDate);
         }
          
     }

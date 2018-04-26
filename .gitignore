@@ -48,3 +48,4 @@ public/ftp/factors/*.pdf
 !/public/market/image/markets/*.png
 *.db
 private.key
+/_ide_helper.php
