@@ -167,9 +167,7 @@ class UserController extends Controller
 		$user = User::where("phone", $phoneNumber)->first();
 		if ($user) {
 			$code = mt_rand(1527, 5388);
-			$message = "هایپرآنلاین - کد فعال سازی شما :‌ " . $code;
-//            Smsir::send([$message], [$phoneNumber]);
-			Smsir::sendVerification($code, $phoneNumber);
+			Smsir::ultraFastSend(['verificationCode' => $code], 2006, $phoneNumber);
 			return response()->json([
 				'error' => false,
 				'code' => $code + 4611
@@ -184,7 +182,7 @@ class UserController extends Controller
 	public function phoneVerificationOK(Request $request)
 	{
 		$phoneNumber = $request->get('phone');
-		$user = User::where("phone", $phoneNumber)->firstOrFail();
+		$user = User::where("phone", $phoneNumber)->first();
 		if ($user) {
 			$user->confirmed_phone = 1;
 			$user->save();
