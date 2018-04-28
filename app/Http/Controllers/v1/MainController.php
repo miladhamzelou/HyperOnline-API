@@ -3,15 +3,10 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Order;
 use App\Product;
-use App\Seller;
 use App\Services\v1\MainService;
-use App\User;
 use Exception;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use phplusir\smsir\Smsir;
 
 class MainController extends Controller
@@ -113,7 +108,7 @@ class MainController extends Controller
         return view('armin')->withProducts($products);
     }
 
-    public function test()
+    public function test2(Request $request)
     {
 
     }

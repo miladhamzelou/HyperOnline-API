@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Libraries\EncryptionHelper;
 use App\Services\v1\UserService;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -35,32 +35,24 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), $this->rules, $this->messages);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'error' => true,
-                'error_msg' => $validator->messages()
-            ], 201);
-        } else {
-            try {
-                if ($data = $this->Users->checkUser($request))
-                    return response()->json([
-                        'error' => false,
-                        'user' => $data
-                    ], 201);
-                else
-                    return response()->json([
-                        'error' => true,
-                        'error_msg' => 'اطلاعات وارد شده صحیح نمی باشد'
-                    ], 201);
-            } catch (Exception $e) {
+        try {
+            $encryption = new EncryptionHelper();
+            $json = $encryption->getJSON($request->getContent());
+            if ($data = $this->Users->checkUser($json))
+                return response()->json([
+                    'error' => false,
+                    'user' => $data
+                ], 201);
+            else
                 return response()->json([
                     'error' => true,
                     'error_msg' => 'اطلاعات وارد شده صحیح نمی باشد'
-//                    'error_msg' => $e->getMessage()
                 ], 201);
-            }
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'error_msg' => 'مشکلی پیش آمده است'
+            ], 201);
         }
     }
 }
