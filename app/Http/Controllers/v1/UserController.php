@@ -8,8 +8,6 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmail;
 use App\Jobs\SendSMS;
-use App\Libraries\EncryptionHelper;
-use App\Order;
 use App\Services\v1\UserService;
 use App\User;
 use Exception;
@@ -60,24 +58,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $encryption = new EncryptionHelper();
-        $json = $encryption->getJSON($request->getContent());
-        if (!$this->Users->checkExists($json)) {
-            try {
-                if ($this->Users->createUser($json)) {
-                    return response()->json([
-                        'error' => false
-                    ], 201);
-                } else
-                    return response()->json([
-                        'error' => true,
-                        'error_msg' => "Register Error"
-                    ], 201);
-            } catch (Exception $e) {
+        $validator = Validator::make($request->all(), $this->rules, $this->messages);
+
+        if (!$this->Users->checkExists($request)) {
+            if ($validator->fails()) {
+                $failedRules = $validator->failed();
                 return response()->json([
+                    'tag' => 'validation',
                     'error' => true,
-                    'error_msg' => 'مشکلی پیش آمده است'
+                    'error_msg' => $validator->messages(),
+                    'rules' => $failedRules
                 ], 201);
+            } else {
+                try {
+                    if ($this->Users->createUser($request)) {
+                        return response()->json([
+                            'error' => false
+                        ], 201);
+                    } else
+                        return response()->json([
+                            'error' => true,
+                            'error_msg' => "Register Error"
+                        ], 201);
+                } catch (Exception $e) {
+                    return response()->json([
+                        'tag' => $request->input('tag'),
+                        'error' => true,
+                        'error_msg' => $e->getMessage()
+                    ], 201);
+                }
             }
         } else
             return response()->json([
@@ -93,24 +102,9 @@ class UserController extends Controller
     public function show($id)
     {
         $data = $this->Users->getUser($id);
-        $orders = Order::where("user_phone", $data['phone'])->where('pay_method', 'online')->get();
-        if ($orders) {
-            $count = count($orders);
-            $price = 0;
-            foreach ($orders as $order) {
-                $price += $order->price;
-            }
-        } else {
-            $count = 0;
-            $price = 0;
-        }
         return response()->json([
             'error' => false,
-            'user' => $data,
-            'orders' => [
-                'count' => $count,
-                'price' => $price
-            ]
+            'user' => $data
         ], 201);
     }
 
@@ -170,10 +164,11 @@ class UserController extends Controller
     public function phoneVerification(Request $request)
     {
         $phoneNumber = $request->get('phone');
-        $user = User::where("phone", $phoneNumber)->first();
+        $user = User::where("phone", $phoneNumber)->firstOrFail();
         if ($user) {
             $code = mt_rand(1527, 5388);
-            Smsir::ultraFastSend(['VerificationCode' => $code], 2006, $phoneNumber);
+            $message = "هایپرآنلاین - کد فعال سازی شما :‌ " . $code;
+            Smsir::send([$message], [$phoneNumber]);
             return response()->json([
                 'error' => false,
                 'code' => $code + 4611
@@ -188,7 +183,7 @@ class UserController extends Controller
     public function phoneVerificationOK(Request $request)
     {
         $phoneNumber = $request->get('phone');
-        $user = User::where("phone", $phoneNumber)->first();
+        $user = User::where("phone", $phoneNumber)->firstOrFail();
         if ($user) {
             $user->confirmed_phone = 1;
             $user->save();
@@ -205,13 +200,12 @@ class UserController extends Controller
     public function checkConfirm(Request $request)
     {
         $phoneNumber = $request->get('phone');
-        $user = User::where("phone", $phoneNumber)->first();
+        $user = User::where("phone", $phoneNumber)->firstOrFail();
         if ($user) {
             if ($user->confirmed_info == "1")
                 return response()->json([
                     'error' => false,
-                    'c' => 'OK',
-                    'p' => $user->confirmed_phone
+                    'c' => 'OK'
                 ], 201);
             else
                 return response()->json([

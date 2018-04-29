@@ -63,20 +63,23 @@ class UserService
         $password = new Password();
         $date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
+
         $user->unique_id = uniqid('', false);
-        $hash = $this->hashSSHA($request['password']);
+        $hash = $this->hashSSHA($request->input('password'));
         $user->encrypted_password = $hash["encrypted"];
-        $user->password = $request['password'];
+        $user->password = $request->input('password');
         $user->salt = $hash["salt"];
-        $user->name = $request['name'];
+        $user->name = $request->input('name');
 
         $count = count(User::get()) + 1;
         $user->code = "HO-" . $count;
 
-        $user->phone = $request['phone'];
-        $user->address = $request['address'];
-        $user->state = $request['state'];
-        $user->city = $request['city'];
+        $user->phone = $request->input('phone');
+        $user->address = $request->input('address');
+        $user->state = $request->input('state');
+        $user->city = $request->input('city');
+        if (app('request')->exists('location_x')) $user->location_x = $request->input('location_x');
+        if (app('request')->exists('location_y')) $user->location_y = $request->input('location_y');
         $user->create_date = $date;
         $user->confirmed_phone = 1;
         $user->confirmed_info = 1;
@@ -85,7 +88,8 @@ class UserService
         $password->user_id = $user->unique_id;
         $password->name = $user->name;
         $password->phone = $user->phone;
-        $password->password = $request['password'];
+        if (app('request')->exists('email')) $password->email = $user->email;
+        $password->password = $request->input('password');
         $password->create_date = $date;
 
         $user->save();
@@ -105,8 +109,8 @@ class UserService
      */
     public function checkUser($request)
     {
-        $user = User::where('phone', $request['phone'])->firstOrFail();
-        $hash = $this->checkHashSSHA($user->salt, $request['password']);
+        $user = User::where('phone', $request->input('phone'))->firstOrFail();
+        $hash = $this->checkHashSSHA($user->salt, $request->input('password'));
         if ($hash == $user->encrypted_password) {
             $final = [
                 'unique_id' => $user->unique_id,
@@ -154,7 +158,7 @@ class UserService
 
     public function checkExists($request)
     {
-        $user = User::where("phone", $request['phone'])->first();
+        $user = User::where("phone", $request->get('phone'))->first();
         if ($user)
             return true;
         else
