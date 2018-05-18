@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html dir="rtl">
 <head>
-	<!-- Hotjar Tracking Code for http://hyper-online.ir -->
-	<script>
-		(function(h,o,t,j,a,r){
-			h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-			h._hjSettings={hjid:786410,hjsv:6};
-			a=o.getElementsByTagName('head')[0];
-			r=o.createElement('script');r.async=1;
-			r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-			a.appendChild(r);
-		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-	</script>
+    <!-- Hotjar Tracking Code for http://hyper-online.ir -->
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () {
+                (h.hj.q = h.hj.q || []).push(arguments)
+            };
+            h._hjSettings = {hjid: 786410, hjsv: 6};
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script');
+            r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
     <meta charset="UTF-8"/>
     <meta name="format-detection" content="telephone=09182180519"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -32,8 +35,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/mine.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/css/iransans.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.css') }}">
-    @yield('style')
-    <!-- CSS Part End-->
+@yield('style')
+<!-- CSS Part End-->
 
 </head>
 <body>
@@ -56,21 +59,24 @@
                     <div id="top-links" class="nav pull-right flip">
                         <ul>
                             @if(Auth::check())
-                                @if($admin)
-                                    <li>
-                                        <a href="{{ url('admin') }}" target="_blank">پنل
-                                            ادمین</a>
-                                    </li>
-                                @endif
                                 <li>
                                     <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                       >خروج</a>
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">خروج</a>
                                 </li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="post"
                                       style="display: none">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </form>
+                                @if($admin)
+                                    <li>
+                                        <a href="{{ url('admin') }}" target="_blank">پنل
+                                            ادمین</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{ url('admin') }}" target="_blank">پروفایل</a>
+                                    </li>
+                                @endif
                             @else
                                 <li><a href="{{ url('login') }}">ورود</a></li>
                                 <li><a href="{{ url('register') }}">ثبت نام</a></li>
@@ -109,7 +115,8 @@
                             <div id="banner" class="mobile_download">
                                 <div id="banner-content">
                                     <p id="download_content">
-                                        <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">دانلود نسخه موبایل</a>
+                                        <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">دانلود
+                                            نسخه موبایل</a>
                                     </p>
                                 </div>
                             </div>
@@ -259,33 +266,7 @@
         <input type="hidden" id="logged" value="@if(Auth::check()) 1 @else 0 @endif">
         {{--@yield('feature-box')--}}
         <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive markets" style="margin: 4px"
-                             src="{{ asset('market/image/markets/bazaar.png') }}" alt="کافه بازار">
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://iranapps.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive markets" style="margin: 4px"
-                             src="{{ asset('market/image/markets/iran_apps.png') }}" alt="ایران اپس">
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://myket.ir/app/ir.hatamiarash.hyperonline" target="_blank">
-                        <img class="img-responsive markets" style="margin: 4px"
-                             src="{{ asset('market/image/markets/myket.png') }}" alt="مایکت">
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://parshub.com/push/APP/930533830" target="_blank">
-                        <img class="img-responsive markets" style="margin: 4px"
-                             src="{{ asset('market/image/markets/parshub.png') }}" alt="پارس هاب">
-                    </a>
-                </div>
-            </div>
-            <br>
+            @yield('download')
             <div class="row">
                 @yield('right-panel')
                 @yield('content')
@@ -300,7 +281,9 @@
                     <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <h5>اطلاعات تماس</h5>
                         <ul>
-                            <li class="address"><i class="fa fa-map-marker"></i>میدان جهاد / خیابان میرزاده عشقی / ساختمان امین / واحد 8</li>
+                            <li class="address"><i class="fa fa-map-marker"></i>میدان جهاد / خیابان میرزاده عشقی /
+                                ساختمان امین / واحد 8
+                            </li>
                             <li class="mobile"><i class="fa fa-phone"></i>081−34266311</li>
                             <li class="email"><i class="fa fa-envelope"></i>برقراری ارتباط از طریق <a
                                         href="{{ url('/contact_us') }}">تماس با ما</a>
@@ -424,32 +407,34 @@
 <!-- JS Part End-->
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
-var sc_project=11633503;
-var sc_invisible=1;
-var sc_security="d2f379e4";
+    var sc_project = 11633503;
+    var sc_invisible = 1;
+    var sc_security = "d2f379e4";
 </script>
 <script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js"
-async></script>
-<noscript><div class="statcounter"><a title="Web Analytics
+        src="https://www.statcounter.com/counter/counter.js"
+        async></script>
+<noscript>
+    <div class="statcounter"><a title="Web Analytics
 Made Easy - StatCounter" href="https://statcounter.com/"
-target="_blank"><img class="statcounter"
-src="//c.statcounter.com/11633503/0/d2f379e4/1/" alt="Web
-Analytics Made Easy - StatCounter"></a></div></noscript>
+                                target="_blank"><img class="statcounter"
+                                                     src="//c.statcounter.com/11633503/0/d2f379e4/1/" alt="Web
+Analytics Made Easy - StatCounter"></a></div>
+</noscript>
 <!-- End of StatCounter Code for Default Guide -->
 
 
 <script type="text/javascript">
-var clicky_site_ids = clicky_site_ids || [];
-clicky_site_ids.push(101102199);
-(function() {
-  var s = document.createElement('script');
-  s.type = 'text/javascript';
-  s.async = true;
-  s.src = '//static.getclicky.com/js';
-  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
-})();
+    var clicky_site_ids = clicky_site_ids || [];
+    clicky_site_ids.push(101102199);
+    (function () {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//static.getclicky.com/js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+    })();
 </script>
-<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101102199ns.gif" /></p></noscript>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101102199ns.gif"/></p></noscript>
 </body>
 </html>

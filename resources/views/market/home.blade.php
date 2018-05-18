@@ -1,6 +1,34 @@
 @extends('market.layout.base')
 
-
+@section('download')
+    <div class="row">
+        <div class="col-md-3">
+            <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">
+                <img class="img-responsive markets" style="margin: 4px"
+                     src="{{ asset('market/image/markets/bazaar.png') }}" alt="کافه بازار">
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="https://iranapps.ir/app/ir.hatamiarash.hyperonline" target="_blank">
+                <img class="img-responsive markets" style="margin: 4px"
+                     src="{{ asset('market/image/markets/iran_apps.png') }}" alt="ایران اپس">
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="https://myket.ir/app/ir.hatamiarash.hyperonline" target="_blank">
+                <img class="img-responsive markets" style="margin: 4px"
+                     src="{{ asset('market/image/markets/myket.png') }}" alt="مایکت">
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="https://parshub.com/push/APP/930533830" target="_blank">
+                <img class="img-responsive markets" style="margin: 4px"
+                     src="{{ asset('market/image/markets/parshub.png') }}" alt="پارس هاب">
+            </a>
+        </div>
+    </div>
+    <br>
+@endsection
 
 @section('feature-box')
     <div class="container">
