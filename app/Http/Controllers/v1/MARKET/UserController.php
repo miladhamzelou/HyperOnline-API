@@ -61,4 +61,37 @@ class UserController extends Controller
 			->withCategories($cat)
 			->withAdmin($user->isAdmin());
 	}
+
+	public function orders(){
+		$seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
+		if (Cart::content()->count() > 0)
+			$send_price = $seller->send_price;
+		else
+			$send_price = 0;
+
+		if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+			$send_price = 0;
+			$free_ship = true;
+		} else
+			$free_ship = false;
+
+		$cart = [
+			'items' => Cart::content(),
+			'count' => Cart::content()->count(),
+			'total' => number_format((int)str_replace(',', '', Cart::subtotal()) + $send_price),
+			'tax' => number_format($send_price),
+			'subtotal' => Cart::subtotal(),
+			'free-ship' => $free_ship
+		];
+
+		$user = Auth::user();
+
+		$cat = $this->mService->getCategories();
+		$orders = $this->userService->getUserOrders($user->unique_id);
+
+		return view('market.orders', compact('user', 'orders'))
+			->withCart($cart)
+			->withCategories($cat)
+			->withAdmin($user->isAdmin());
+	}
 }

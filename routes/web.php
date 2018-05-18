@@ -99,6 +99,7 @@ Route::get('/search', 'v1_web\AdminController@search');
 Route::get('/admin/search', 'v1_web\AdminController@search');
 
 Route::get('/profile', 'v1\MARKET\UserController@profile');
+Route::get('/orders', 'v1\MARKET\UserController@orders');
 
 Route::get('category/{level}/{id}', 'v1\market\CategoryController@index');
 Route::get('/addToCart', 'v1\ProductController@addToCart');

@@ -71,8 +71,10 @@ class UserService
 		foreach ($orders as $order) {
 			$totalPrice += $order->price;
 			$totalCount++;
-			if ($order->pay_method == 'online') $totalOnline++;
-			else $totalPlace++;
+			if ($order->pay_method == 'online')
+				$totalOnline++;
+			else
+				$totalPlace++;
 		}
 
 		return [
@@ -81,6 +83,17 @@ class UserService
 			'totalPlace' => $totalPlace,
 			'totalOnline' => $totalOnline
 		];
+	}
+
+	/**
+	 * return details of all user's orders
+	 * @param $id
+	 * @return array
+	 */
+	public function getUserOrders($id)
+	{
+		$orders = Order::whereUserId($id)->where('status', '!=', 'abort')->where('temp', 0)->orderBy('created_at', 'desc')->get();
+		return $orders;
 	}
 
 	/**
