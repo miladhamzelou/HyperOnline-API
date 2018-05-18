@@ -18,3 +18,9 @@
 .web_font {
     font-family: 'agataregular', serif;
 }
+
+.web_font:hover {
+    color: black !important;
+    font-size: 35px !important;
+    text-decoration: none !important;
+}

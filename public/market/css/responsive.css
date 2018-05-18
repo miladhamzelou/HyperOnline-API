@@ -25,6 +25,10 @@
 }
 
 @media (max-width: 991px) {
+    #banners {
+        transform: translateX(-15%);
+    }
+
     body {
         -webkit-text-size-adjust: auto;
     }

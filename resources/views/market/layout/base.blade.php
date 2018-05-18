@@ -107,17 +107,17 @@
                         <div id="cart">
                             <button type="button" data-toggle="dropdown" data-loading-text="Loading..."
                                     class="heading dropdown-toggle">
-                                <a href="{{ url('checkout') }}" class="btn btn-primary"
+                                <a href="{{ url('checkout') }}" class="btn btn-primary btn-pay"
                                    style="font-size: 16px; background-color: #00A000">تکمیل خرید&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span id="cart-total">{{ $cart['count'].' کالا - '.$cart['total'].' تومان' }}</span>
                                 </a>
                             </button>
-                            <div id="banner" class="mobile_download">
-                                <div id="banner-content">
-                                    <p id="download_content">
-                                        <a href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">دانلود
-                                            نسخه موبایل</a>
-                                    </p>
+                            <div class="mobile_download">
+                                <div class="banner-content">
+                                    <a class="download_content"
+                                       href="https://cafebazaar.ir/app/ir.hatamiarash.hyperonline" target="_blank">دانلود
+                                        نسخه موبایل
+                                    </a>
                                 </div>
                             </div>
                             <ul class="dropdown-menu">
@@ -401,7 +401,7 @@
 <script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('market/js/jquery.fittext.js') }}"></script>
 <script>
-    jQuery("#download_content").fitText();
+    // jQuery("#download_content").fitText();
 </script>
 @yield('script')
 <!-- JS Part End-->
