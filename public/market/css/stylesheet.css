@@ -841,6 +841,7 @@ a:focus {
     padding: 0;
     position: absolute;
     z-index: 1008;
+    width: auto;
 }
 
 #menu .nav > li.mega-menu.dropdown, #menu .nav > li.menu_brands.dropdown {
@@ -864,7 +865,7 @@ a:focus {
 
 #menu .nav > li.mega-menu > div > .column > a {
     border-bottom: 1px solid #ddd;
-    font-family: BKoodakBold;
+    font-family: IRANSans, BKoodakBold, sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
