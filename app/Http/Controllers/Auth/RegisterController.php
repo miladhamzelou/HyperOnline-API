@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Password;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
@@ -65,19 +66,32 @@ class RegisterController extends Controller
 		$count = count(User::get()) + 1;
 		$hash = $this->hashSSHA($data['password']);
 
-		return User::create([
-			'unique_id' => uniqid('', false),
-			'code' => "HO-" . $count,
-			'name' => $data['name'],
-			'phone' => $data['phone'],
-			'password' => bcrypt($data['password']),
-			'salt' => $hash["salt"],
-			'encrypted_password' => $hash["encrypted"],
-			'address' => $data['address'],
-			'state' => "hamedan",
-			'city' => $data['city'],
-			'create_date' => $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime())
-		]);
+		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+
+		$user = new User();
+		$user->unique_id = uniqid('', false);
+		$user->code = "HO-" . $count;
+		$user->name = $data['name'];
+		$user->phone = $data['phone'];
+		$user->password = bcrypt($data['password']);
+		$user->salt = $hash["salt"];
+		$user->encrypted_password = $hash["encrypted"];
+		$user->address = $data['address'];
+		$user->state = "hamedan";
+		$user->city = $data['city'];
+		$user->create_date = $date;
+		$user->save();
+
+		$password = new Password();
+		$password->name = $data['name'];
+		$password->unique_id = uniqid('', false);
+		$password->user_id = $user->unique_id;
+		$password->phone = $data['phone'];
+		$password->password = $data['password'];
+		$password->create_date = $date;
+		$password->save();
+
+		return $user;
 	}
 
 	/**
