@@ -131,7 +131,7 @@
                     <ul>
                         <li class="order-meta">
                             <p class="order-title">مبلغ :</p>
-                            <p class="order-description">{{ $order->price }} تومان</p>
+                            <p class="order-description">{{ number_format($order->price, 0) }} تومان</p>
                         </li>
                         <li class="order-meta">
                             <p class="order-title">ساعت ارسال :</p>

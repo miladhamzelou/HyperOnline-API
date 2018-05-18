@@ -78,12 +78,12 @@
                 </li>
                 <li class="profile-meta">
                     <p class="profile-title">کیف پول :</p>
-                    <p class="profile-description">{{ $user->wallet }} تومان</p>
+                    <p class="profile-description">{{ number_format($user->wallet, 0) }} تومان</p>
                 </li>
                 <li class="profile-meta">
                     <p class="profile-title">کل سفارشات :</p>
                     <p class="profile-description">{{ $orders['totalCount'] }} سفارش در
-                        مجموع {{ $orders['totalPrice'] }} تومان &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $orders['totalPlace'] }}
+                        مجموع {{ number_format($orders['totalPrice'], 0) }} تومان &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $orders['totalPlace'] }}
                         سفارش حضوری و {{ $orders['totalOnline'] }} سفارش انلاین</p>
                 </li>
                 <li class="profile-meta">
