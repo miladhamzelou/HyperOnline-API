@@ -82,13 +82,12 @@
         @yield('content')
     </div>
 </div>
-<script src="{{ asset('/js/app2.css') }}"></script>
-<script src="{{ asset('/js/bootstrap.min.css') }}"></script>
-<script src="{{ asset('/js/npm.css') }}"></script>
-<script src="{{ asset('/js/jquery.min.css') }}"></script>
-<!--[if lt IE 9]>
-<script src="{{ asset('/js/respond.min.css') }}"></script>
-<script src="{{ asset('/js/html5shiv.min.css') }}"></script>
-<![endif]-->
+{{--<script src="{{ asset('/js/app2.js') }}"></script>--}}
+{{--<script src="{{ asset('/js/bootstrap.min.js') }}"></script>--}}
+{{--<script src="{{ asset('/js/jquery.min.js') }}"></script>--}}
+{{--<!--[if lt IE 9]>--}}
+{{--<script src="{{ asset('/js/respond.min.js') }}"></script>--}}
+{{--<script src="{{ asset('/js/html5shiv.min.js') }}"></script>--}}
+{{--<![endif]-->--}}
 </body>
 </html>
