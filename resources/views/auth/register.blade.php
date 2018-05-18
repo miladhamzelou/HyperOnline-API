@@ -5,58 +5,13 @@
         <div class="wrapper">
             <form class="form-signin" role="form" method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
-                <h3 class="form-signin-heading font">سلام ... خوش آمدید !!<br>جهت ثبت نام اطلاعات خود را وارد کنید
+                <h3 class="form-signin-heading font">جهت ثبت نام اطلاعات خود را وارد کنید
                 </h3>
                 <hr class="colorgraph">
                 <br>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
-                            <input id="state" type="text" style="text-align: center" placeholder="استان"
-                                   class="font form-control"
-                                   name="state"
-                                   value="همدان" disabled required>
-
-                            @if ($errors->has('state'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('state') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-
-                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                            <label for="city" class="city-label" style="">شهر :</label>
-                            <select id="city" type="text" style="text-align: center"
-                                   class="font form-control"
-                                   name="city"
-                                    required>
-                                <option>همدان</option>
-                                <option>مریانج</option>
-                                <option>بهار</option>
-                            </select>
-
-                            @if ($errors->has('city'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('city') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-
-                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <input id="address" type="text" style="text-align: center" placeholder="آدرس کامل"
-                                   class="font form-control"
-                                   name="address" tabindex="5"
-                                   value="{{ old('address') }}" required>
-
-                            @if ($errors->has('address'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-10 col-md-offset-1">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <input id="name" type="text" style="text-align: center" placeholder="نام و نام خانوادگی"
                                    class="font form-control"
@@ -100,11 +55,56 @@
                                    name="password_confirmation" style="text-align: center" required tabindex="4"
                                    placeholder="تکرار رمز عبور">
                         </div>
+
+                        <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}" hidden>
+                            <input id="state" type="text" style="text-align: center" placeholder="استان"
+                                   class="font form-control"
+                                   name="state"
+                                   value="همدان" disabled required>
+
+                            @if ($errors->has('state'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('state') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label for="city" class="city-label" style="">شهر :</label>
+                            <select id="city" type="text" style="text-align: center"
+                                    class="font form-control"
+                                    name="city"
+                                    required>
+                                <option>همدان</option>
+                                <option>مریانج</option>
+                                <option>بهار</option>
+                            </select>
+
+                            @if ($errors->has('city'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <input id="address" type="text" style="text-align: center" placeholder="آدرس کامل"
+                                   class="font form-control"
+                                   name="address" tabindex="5"
+                                   value="{{ old('address') }}" required>
+
+                            @if ($errors->has('address'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button type="submit" tabindex="6" class="font btn btn-block btn3d btn-lg btn-info">ثبت نام
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" tabindex="6" class="font btn btn-block btn3d btn-lg btn-info">ثبت نام
-                    </button>
                 </div>
             </form>
             <br>
