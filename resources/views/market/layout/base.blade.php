@@ -18,6 +18,9 @@
     <meta charset="UTF-8"/>
     <meta name="format-detection" content="telephone=09182180519"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#e40571">
+    <meta name="msapplication-navbutton-color" content="#e40571">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#e40571">
     <link href="{{ asset('market/image/favicon.png') }}" rel="icon"/>
     <title>هایپرآنلاین</title>
     <meta name="description" content="سامانه فروش محصولات آنلاین">
