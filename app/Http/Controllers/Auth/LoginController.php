@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ class LoginController extends Controller
         $res = $user->encrypted_password == $hash;
         if ($res) {
             Auth::login($user);
-            return redirect()->intended('/home');
+            return redirect()->intended('/');
         } else
             return Auth::attempt(
                 [
