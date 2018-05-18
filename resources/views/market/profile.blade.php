@@ -84,7 +84,7 @@
                     <p class="profile-title">کل سفارشات :</p>
                     <p class="profile-description">{{ $orders['totalCount'] }} سفارش در
                         مجموع {{ $orders['totalPrice'] }} تومان &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $orders['totalPlace'] }}
-                        سفارش حضوری و {{ $orders['totalPlace'] }} سفارش انلاین</p>
+                        سفارش حضوری و {{ $orders['totalOnline'] }} سفارش انلاین</p>
                 </li>
                 <li class="profile-meta">
                     <p class="profile-title">وضعیت حساب :</p>

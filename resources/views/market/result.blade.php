@@ -62,7 +62,7 @@
             </tr>
             @foreach($data['products'] as $index => $product)
                 <tr>
-                    <td>{{ $index+1 }}</td>
+                    <td>{{ $index + 1 }}</td>
                     <td>{{ $product['name'] }}</td>
                     <td>{{ $data['counts'][$index] }}</td>
                 </tr>
