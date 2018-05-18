@@ -20,6 +20,10 @@
     font-family: 'shabnam', sans-serif;
 }
 
+.rtl {
+    direction: rtl;
+}
+
 .font_sans {
     font-family: 'sanss', sans-serif;
 }
