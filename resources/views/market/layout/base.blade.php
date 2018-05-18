@@ -74,7 +74,7 @@
                                     </li>
                                 @else
                                     <li>
-                                        <a href="{{ url('admin') }}" target="_blank">پروفایل</a>
+                                        <a href="{{ url('profile') }}" target="_blank">پروفایل</a>
                                     </li>
                                 @endif
                             @else
