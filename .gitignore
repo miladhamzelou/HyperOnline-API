@@ -49,3 +49,4 @@ public/ftp/factors/*.pdf
 *.db
 private.key
 /_ide_helper.php
+/.phpstorm.meta.php
