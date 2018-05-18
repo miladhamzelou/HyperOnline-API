@@ -12,6 +12,20 @@
     font-family: 'sanss', sans-serif;
 }
 
+.rtl {
+    direction: rtl;
+}
+
+.city-label {
+    text-align: right;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: medium;
+    font-family: 'sanss', sans-serif;
+    direction: rtl;
+    font-weight: normal;
+}
+
 .wrapper {
     margin-top: 80px;
     margin-bottom: 20px;
@@ -518,4 +532,6 @@ ul.dropdown-menu > li {
 a:hover {
     text-decoration: none !important;
     color: red !important;
-}z
+}
+
+z

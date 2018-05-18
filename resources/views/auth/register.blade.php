@@ -26,10 +26,15 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                            <input id="city" type="text" style="text-align: center" placeholder="شهر"
+                            <label for="city" class="city-label" style="">شهر :</label>
+                            <select id="city" type="text" style="text-align: center"
                                    class="font form-control"
                                    name="city"
-                                   value="همدان" required>
+                                    required>
+                                <option>همدان</option>
+                                <option>مریانج</option>
+                                <option>بهار</option>
+                            </select>
 
                             @if ($errors->has('city'))
                                 <span class="help-block">
