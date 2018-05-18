@@ -77,7 +77,7 @@ class RegisterController extends Controller
 		$user->salt = $hash["salt"];
 		$user->encrypted_password = $hash["encrypted"];
 		$user->address = $data['address'];
-		$user->state = "hamedan";
+		$user->state = "همدان";
 		$user->city = $data['city'];
 		$user->create_date = $date;
 		$user->save();
