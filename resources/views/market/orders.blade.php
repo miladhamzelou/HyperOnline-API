@@ -86,6 +86,9 @@
         <br>
         <br>
         @foreach($orders as $order)
+            @if ($order->pay_method=='online' && $order->temp==1)
+                @continue
+            @endif
             @php
                 $date = explode(' ', $order->create_date)[0];
                 $time = explode(' ', $order->create_date)[1];

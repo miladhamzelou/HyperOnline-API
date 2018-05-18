@@ -61,7 +61,7 @@ class UserService
 	 */
 	public function getUserOrdersDetail($id)
 	{
-		$orders = Order::whereUserId($id)->where('status', '!=', 'abort')->where('temp', 0)->get();
+		$orders = Order::whereUserId($id)->whereIn('status', ['delivered', 'shipped', 'pending'])->get();
 
 		$totalPrice = 0;
 		$totalCount = 0;
@@ -69,12 +69,17 @@ class UserService
 		$totalOnline = 0;
 
 		foreach ($orders as $order) {
-			$totalPrice += $order->price;
-			$totalCount++;
-			if ($order->pay_method == 'online')
-				$totalOnline++;
-			else
+			if ($order->pay_method == "place") {
+				$totalPrice += $order->price;
+				$totalCount++;
 				$totalPlace++;
+			} else {
+				if (!$order->temp) {
+					$totalPrice += $order->price;
+					$totalCount++;
+					$totalOnline++;
+				}
+			}
 		}
 
 		return [
@@ -92,7 +97,7 @@ class UserService
 	 */
 	public function getUserOrders($id)
 	{
-		$orders = Order::whereUserId($id)->where('status', '!=', 'abort')->where('temp', 0)->orderBy('created_at', 'desc')->get();
+		$orders = Order::whereUserId($id)->whereIn('status', ['delivered', 'shipped', 'pending'])->orderBy('created_at', 'desc')->get();
 		return $orders;
 	}
 
