@@ -207,12 +207,14 @@ class UserController extends Controller
 			if ($user->confirmed_info == "1")
 				return response()->json([
 					'error' => false,
-					'c' => 'OK'
+					'c' => 'OK',
+					'p' => $user->confirmed_phone
 				], 201);
 			else
 				return response()->json([
 					'error' => false,
-					'c' => 'NOK'
+					'c' => 'NOK',
+					'p' => $user->confirmed_phone
 				], 201);
 		} else
 			return response()->json([
