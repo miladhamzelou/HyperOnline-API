@@ -58,6 +58,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUserName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUserPhone($value)
  * @mixin \Eloquent
+ * @property string $pay_way
+ * @property string|null $wallet_price
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order wherePayWay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereWalletPrice($value)
  */
 class Order extends Model
 {
