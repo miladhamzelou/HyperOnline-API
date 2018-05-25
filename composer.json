@@ -19,6 +19,7 @@
     "laravel/tinker": "~1.0",
     "niklasravnsborg/laravel-pdf": "^1.5",
     "phplusir/smsir": "^2.3",
+    "simplesoftwareio/simple-qrcode": "^2.0",
     "snowfire/beautymail": "dev-master"
   },
   "require-dev": {

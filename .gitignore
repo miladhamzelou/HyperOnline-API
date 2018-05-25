@@ -50,3 +50,4 @@ public/ftp/factors/*.pdf
 private.key
 /_ide_helper.php
 /.phpstorm.meta.php
+/public/images/qr/

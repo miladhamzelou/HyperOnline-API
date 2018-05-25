@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.36 on 2018-05-24 14:40:57.
+ * Generated for Laravel 5.4.36 on 2018-05-25 18:23:22.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -7487,7 +7487,7 @@ namespace Illuminate\Support\Facades {
          * Gets the mime type associated with the format.
          *
          * @param string $format The format
-         * @return string The associated mime type (null if not found)
+         * @return string|null The associated mime type (null if not found)
          * @static 
          */ 
         public static function getMimeType($format)
