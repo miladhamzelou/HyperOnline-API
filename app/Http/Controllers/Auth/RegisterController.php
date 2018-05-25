@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Password;
 use App\User;
+use App\Wallet;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 
@@ -63,14 +64,13 @@ class RegisterController extends Controller
 	 */
 	protected function create(array $data)
 	{
-		$count = count(User::get()) + 1;
 		$hash = $this->hashSSHA($data['password']);
 
 		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
 		$user = new User();
 		$user->unique_id = uniqid('', false);
-		$user->code = "HO-" . $count;
+		$user->code = "HO-" . strval(User::count() + 1);
 		$user->name = $data['name'];
 		$user->phone = $data['phone'];
 		$user->password = bcrypt($data['password']);
@@ -90,6 +90,15 @@ class RegisterController extends Controller
 		$password->password = $data['password'];
 		$password->create_date = $date;
 		$password->save();
+
+		$wallet = new Wallet();
+		$wallet->unique_id = uniqid('', false);
+		$wallet->user_id = $user->unique_id;
+		$wallet->title = "اصلی";
+		$wallet->code = "HO-" . strval(Wallet::count() + 151);
+		$wallet->create_date = $date;
+		$wallet->update_date = $date;
+		$wallet->save();
 
 		return $user;
 	}
