@@ -8,6 +8,7 @@ use App\User;
 use App\Wallet;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
+use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
 class RegisterController extends Controller
 {
@@ -94,11 +95,16 @@ class RegisterController extends Controller
 		$wallet = new Wallet();
 		$wallet->unique_id = uniqid('', false);
 		$wallet->user_id = $user->unique_id;
-		$wallet->title = "اصلی";
 		$wallet->code = "HO-" . strval(Wallet::count() + 151);
 		$wallet->create_date = $date;
-		$wallet->update_date = $date;
 		$wallet->save();
+
+		$QRCode = new BaconQrCodeGenerator;
+		$QRCode->encoding('UTF-8')
+			->format('png')
+			->merge('/public/market/image/h_logo.png', .15)
+			->size(1000)
+			->generate($wallet->unique_id, public_path('/images/qr/' . $wallet->code . '.png'));
 
 		return $user;
 	}
