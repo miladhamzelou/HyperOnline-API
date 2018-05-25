@@ -83,6 +83,7 @@ Route::post('/v1/temp_order', 'v1\API\OrderController@storeTemp');
 Route::post('/v1/complete_order', 'v1\API\OrderController@completeOrder');
 Route::post('/v1/test', 'v1\API\MainController@test2');
 
+Route::get('/v1/generateWallets', 'v1\API\WalletController@generateWallets');
 Route::get('/v1/getWallet_byId/{id}', 'v1\API\WalletController@getWalletByID');
 Route::get('/v1/getWallet_byUser/{id}', 'v1\API\WalletController@getWalletByUser');
 

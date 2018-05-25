@@ -12,6 +12,10 @@ namespace App\Http\Controllers\v1\API;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Wallet;
+use Illuminate\Support\Facades\File;
+use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
+
+include(app_path() . '/Common/jdf.php');
 
 class WalletController extends Controller
 {
@@ -43,5 +47,64 @@ class WalletController extends Controller
 				'error' => true,
 				'error_msg' => "مشکلی پیش آمده است"
 			], 201);
+	}
+
+	public function generateWallets()
+	{
+		$users = User::get();
+		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+		$count = count($users);
+		$finalCount = 0;
+		foreach ($users as $user) {
+			$wallet = new Wallet();
+			$wallet->unique_id = uniqid('', false);
+			$wallet->user_id = $user->unique_id;
+			$wallet->code = "HO-" . strval(Wallet::count() + 151);
+			$wallet->create_date = $date;
+			$wallet->save();
+
+			$QRCode = new BaconQrCodeGenerator;
+			$file = public_path('/images/qr/' . $wallet->code . '.png');
+			$QRCode->encoding('UTF-8')
+				->format('png')
+				->merge('/public/market/image/h_logo.png', .15)
+				->size(1000)
+				->generate($wallet->unique_id, $file);
+			if (File::exists($file))
+				$finalCount++;
+		}
+		return response()->json([
+			'count' => $count,
+			'finalCount' => $finalCount
+		], 201);
+	}
+
+	protected function getCurrentTime()
+	{
+		$now = date("Y-m-d", time());
+		$time = date("H:i:s", time());
+		return $now . ' ' . $time;
+	}
+
+	protected function getDate($date)
+	{
+		$now = explode(' ', $date)[0];
+		$time = explode(' ', $date)[1];
+		list($year, $month, $day) = explode('-', $now);
+		list($hour, $minute, $second) = explode(':', $time);
+		$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+		$date = jDate("Y/m/d", $timestamp);
+		return $date;
+	}
+
+	protected function getTime($date)
+	{
+		$now = explode(' ', $date)[0];
+		$time = explode(' ', $date)[1];
+		list($year, $month, $day) = explode('-', $now);
+		list($hour, $minute, $second) = explode(':', $time);
+		$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+		$date = jDate("H:i", $timestamp);
+		return $date;
 	}
 }
