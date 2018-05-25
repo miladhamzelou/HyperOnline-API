@@ -195,6 +195,7 @@ return [
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+	    SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
     ],
 
     /*
@@ -245,6 +246,7 @@ return [
         'Smsir' => phplusir\smsir\SmsirFacade::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
-        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
+	    'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
     ],
 ];
