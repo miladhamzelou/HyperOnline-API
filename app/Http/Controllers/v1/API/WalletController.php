@@ -55,12 +55,14 @@ class WalletController extends Controller
 		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 		$count = count($users);
 		$finalCount = 0;
+		$code = 150;
 		foreach ($users as $user) {
 			$wallet = new Wallet();
 			$wallet->unique_id = uniqid('', false);
 			$wallet->user_id = $user->unique_id;
-			$wallet->code = "HO-" . strval(Wallet::count() + 151);
+			$wallet->code = "HO-" . strval($code++);
 			$wallet->create_date = $date;
+			$wallet->status = 'active';
 			$wallet->save();
 
 			$QRCode = new BaconQrCodeGenerator;
