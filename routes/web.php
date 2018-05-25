@@ -134,3 +134,7 @@ Route::get('/info', 'TelegramController@info');
 Route::get('/winfo', 'TelegramController@info_webhook');
 Route::get('/set', 'TelegramController@set');
 Route::post('/531370522:AAHYvRhHW7Y2HRIOQszk5MfsZTbJNsy29Dw/webhook', 'TelegramController@webhook');
+
+Route::get('/phpinfo', function () {
+	return phpinfo();
+});
