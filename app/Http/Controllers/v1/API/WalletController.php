@@ -60,7 +60,7 @@ class WalletController extends Controller
 			$wallet = new Wallet();
 			$wallet->unique_id = uniqid('', false);
 			$wallet->user_id = $user->unique_id;
-			$wallet->code = "HO-" . strval($code++);
+			$wallet->code = "HO-" . strval($code);
 			$wallet->create_date = $date;
 			$wallet->status = 'active';
 			$wallet->save();
@@ -74,6 +74,7 @@ class WalletController extends Controller
 				->generate($wallet->unique_id, $file);
 			if (File::exists($file))
 				$finalCount++;
+			$code++;
 		}
 		return response()->json([
 			'count' => $count,
