@@ -21,7 +21,7 @@ class CreateCompaniesTable extends Migration
 			$table->text('description')->nullable();
 
 			$table->string('create_date');
-			$table->string('update_date');
+			$table->string('update_date')->nullable();
 			$table->timestamps();
 		});
 		Schema::enableForeignKeyConstraints();

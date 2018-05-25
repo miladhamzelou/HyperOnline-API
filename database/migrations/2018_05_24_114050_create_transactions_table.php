@@ -31,7 +31,7 @@ class CreateTransactionsTable extends Migration
 			$table->foreign('wallet_id')->references('unique_id')->on('wallets');
 
 			$table->string('create_date');
-			$table->string('update_date');
+			$table->string('update_date')->nullable();
 			$table->timestamps();
 		});
 		Schema::enableForeignKeyConstraints();

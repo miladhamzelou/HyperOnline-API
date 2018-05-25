@@ -21,7 +21,7 @@ class CreateChangelogsTable extends Migration
 			$table->longText('changes');
 
 			$table->string('create_date');
-			$table->string('update_date');
+			$table->string('update_date')->nullable();
 			$table->timestamps();
 		});
 		Schema::enableForeignKeyConstraints();

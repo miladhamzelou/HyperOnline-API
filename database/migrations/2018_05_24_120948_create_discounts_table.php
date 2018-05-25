@@ -27,7 +27,7 @@ class CreateDiscountsTable extends Migration
 			$table->integer('usage')->default(0);
 
 			$table->string('create_date');
-			$table->string('update_date');
+			$table->string('update_date')->nullable();
 			$table->timestamps();
 		});
 		Schema::enableForeignKeyConstraints();

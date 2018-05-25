@@ -21,7 +21,7 @@ class CreateInstallsTable extends Migration
 			$table->string('device_id');
 
 			$table->string('create_date');
-			$table->string('update_date');
+			$table->string('update_date')->nullable();
 			$table->timestamps();
 		});
 		Schema::enableForeignKeyConstraints();

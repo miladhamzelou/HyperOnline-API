@@ -32,7 +32,7 @@ class CreateTransfersTable extends Migration
 			$table->foreign('destination_user_id')->references('unique_id')->on('users');
 
 			$table->string('create_date');
-			$table->string('update_date');
+			$table->string('update_date')->nullable();
 			$table->timestamps();
 		});
 		Schema::enableForeignKeyConstraints();
