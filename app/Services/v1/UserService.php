@@ -45,7 +45,7 @@ class UserService
 			'image' => $user->image,
 			'phone' => $user->phone,
 			'address' => $user->address,
-			'wallet' => $user->wallet,
+			'wallet' => $user->wallet->price,
 			'state' => $user->state,
 			'city' => $user->city,
 			'confirmed_phone' => $user->confirmed_phone
