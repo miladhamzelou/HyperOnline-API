@@ -10,8 +10,7 @@
  * Time: 6:18 PM
  */
 
-namespace app\Http\Controllers\v1_web;
-
+namespace app\Http\Controllers\v1\ADMIN;
 
 use App\Author;
 use Illuminate\Http\Request;

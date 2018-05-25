@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\v1\market;
+namespace App\Http\Controllers\v1\MARKET;
 
 use App\Http\Controllers\Controller;
 use App\Services\v1\market\MainService;

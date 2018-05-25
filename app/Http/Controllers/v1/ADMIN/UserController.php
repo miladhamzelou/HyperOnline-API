@@ -3,7 +3,7 @@
  * Copyright (c) 2017 - All Rights Reserved - Arash Hatami
  */
 
-namespace App\Http\Controllers\v1_web;
+namespace App\Http\Controllers\v1\ADMIN;
 
 use App\Http\Controllers\Controller;
 use App\Services\v1\UserService;

@@ -3,7 +3,7 @@
  * Copyright (c) 2017 - All Rights Reserved - Arash Hatami
  */
 
-namespace app\Http\Controllers\v1_web;
+namespace app\Http\Controllers\v1\ADMIN;
 
 
 use App\Category3;
