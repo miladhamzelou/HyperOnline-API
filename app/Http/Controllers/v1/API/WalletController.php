@@ -21,7 +21,7 @@ class WalletController extends Controller
 		if ($user)
 			return response()->json([
 				'error' => false,
-				'wallet' => $user->wallets
+				'wallet' => $user->wallet
 			], 201);
 		else
 			return response()->json([

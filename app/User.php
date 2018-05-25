@@ -23,9 +23,9 @@ class User extends Authenticatable
 		return $this->hasMany(Order::class, 'user_id');
 	}
 
-	public function wallets()
+	public function wallet()
 	{
-		return $this->hasMany(Wallet::class, 'user_id');
+		return $this->hasOne(Wallet::class, 'user_id');
 	}
 
 	public function company()
