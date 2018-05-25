@@ -102,8 +102,8 @@ class OrderController extends Controller
             $result = $this->Orders->userOrders($request);
             if ($result)
                 return response()->json([
-                    'orders' => $result,
-                    'error' => false
+                    'error' => false,
+					'orders' => $result
                 ], 201);
             else
                 return response()->json([
