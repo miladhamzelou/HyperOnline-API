@@ -21,7 +21,6 @@ class CreateWalletsTable extends Migration
 			$table->string('title')->default('اصلی');
 			$table->string('price')->default(0);
 			$table->string('code');
-			$table->string('barcode')->nullable();
 			$table->string('min')->default('0');
 			$table->string('max')->default('0');
 			$table->enum('status', ['active', 'inactive'])->default('inactive');
