@@ -19,7 +19,7 @@ class CreateWalletsTable extends Migration
 			$table->string('user_id', 13);
 
 			$table->string('title')->default('اصلی');
-			$table->string('price');
+			$table->string('price')->default(0);
 			$table->string('code');
 			$table->string('barcode')->nullable();
 			$table->string('min')->default('0');
@@ -30,7 +30,7 @@ class CreateWalletsTable extends Migration
 			$table->foreign('user_id')->references('unique_id')->on('users');
 
 			$table->string('create_date');
-			$table->string('update_date');
+			$table->string('update_date')->nullable();
 			$table->timestamps();
 		});
 		Schema::enableForeignKeyConstraints();
