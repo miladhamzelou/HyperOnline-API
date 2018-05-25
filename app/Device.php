@@ -61,6 +61,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Device extends Model
 {
-    protected $primaryKey = 'unique_id';
-    public $incrementing = false;
+	protected $primaryKey = 'unique_id';
+	public $incrementing = false;
 }

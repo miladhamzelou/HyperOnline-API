@@ -54,11 +54,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    protected $primaryKey = 'unique_id';
-    public $incrementing = false;
+	protected $primaryKey = 'unique_id';
+	public $incrementing = false;
 
-    public function seller()
-    {
-        return $this->belongsTo(Seller::class);
-    }
+	public function seller()
+	{
+		return $this->belongsTo(Seller::class);
+	}
 }

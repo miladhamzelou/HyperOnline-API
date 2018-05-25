@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sms extends Model
 {
-    protected $table = 'smsir_logs';
+	protected $table = 'smsir_logs';
 }

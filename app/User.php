@@ -15,17 +15,17 @@ class User extends Authenticatable
 
 	public function comments()
 	{
-		return $this->hasMany(comment::class);
+		return $this->hasMany(comment::class, 'user_id');
 	}
 
 	public function orders()
 	{
-		return $this->hasMany(Order::class);
+		return $this->hasMany(Order::class, 'user_id');
 	}
 
 	public function wallets()
 	{
-		return $this->hasMany(Wallet::class);
+		return $this->hasMany(Wallet::class, 'user_id');
 	}
 
 	public function company()
@@ -35,7 +35,7 @@ class User extends Authenticatable
 
 	public function transactions()
 	{
-		return $this->hasMany(Transaction::class);
+		return $this->hasMany(Transaction::class, 'user_id');
 	}
 
 	public function Role()

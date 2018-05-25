@@ -49,6 +49,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Option extends Model
 {
-    protected $primaryKey = 'unique_id';
-    public $incrementing = false;
+	protected $primaryKey = 'unique_id';
+	public $incrementing = false;
 }
