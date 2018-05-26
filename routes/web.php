@@ -121,15 +121,15 @@ Route::get('/asnaf', function () {
 	return view('market.asnaf');
 });
 
-Route::get('/android/pay/{id}', 'v1\OrderController@pay');
-Route::get('/website/pay', 'v1\OrderController@web_pay');
-Route::get('/pay/{price}', 'v1\OrderController@pay_test');
-Route::post('/callback2', 'v1\OrderController@call_back');
-Route::post('/callback3', 'v1\OrderController@call_back2');
-Route::get('/factor/{code}', 'v1\OrderController@getFactor');
+Route::get('/android/pay/{id}', 'v1\API\OrderController@pay');
+Route::get('/website/pay', 'v1\API\OrderController@web_pay');
+Route::get('/pay/{price}', 'v1\API\OrderController@pay_test');
+Route::post('/callback2', 'v1\API\OrderController@call_back');
+Route::post('/callback3', 'v1\API\OrderController@call_back2');
+Route::get('/factor/{code}', 'v1\API\OrderController@getFactor');
 
-Route::get('/armin', 'v1\MainController@armin');
-Route::get('/test', 'v1\MainController@test');
+Route::get('/armin', 'v1\API\MainController@armin');
+Route::get('/test', 'v1\API\MainController@test');
 Route::get('/info', 'TelegramController@info');
 Route::get('/winfo', 'TelegramController@info_webhook');
 Route::get('/set', 'TelegramController@set');
