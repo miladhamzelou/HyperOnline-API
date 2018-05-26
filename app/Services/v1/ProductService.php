@@ -59,7 +59,6 @@ class ProductService
         foreach ($products as $product) {
             $entry = [
                 'unique_id' => $product->unique_id,
-                'seller_id' => $product->seller_id,
                 'name' => $product->name,
                 'image' => $product->image,
                 'point' => $product->point,
@@ -152,7 +151,6 @@ class ProductService
         foreach ($products as $product) {
             $entry = [
                 'unique_id' => $product->unique_id,
-                'seller_id' => $product->seller_id,
                 'name' => $product->name,
                 'image' => $product->image,
                 'point' => $product->point,
@@ -161,8 +159,7 @@ class ProductService
                 'off' => $product->off,
                 'count' => $product->count,
                 'confirmed' => $product->confirmed,
-                'price' => $product->price,
-                'created_at' => $product->create_date
+                'price' => $product->price
             ];
 
             if (in_array('seller', $keys))
