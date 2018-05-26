@@ -68,6 +68,8 @@ class Order extends Model
 	protected $primaryKey = 'unique_id';
 	public $incrementing = false;
 
+	protected $hidden = ['updated_at', 'update_date'];
+
 	public function seller()
 	{
 		return $this->belongsTo(Seller::class);

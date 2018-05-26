@@ -13,6 +13,8 @@ class User extends Authenticatable
 		'encrypted_password', 'salt'
 	];
 
+	protected $hidden = ['salt', 'district', 'country' . 'location_x', 'location_y', 'remember_token', 'minPrice', 'maxPrice', 'update_date', 'updated_at'];
+
 	public function comments()
 	{
 		return $this->hasMany(comment::class, 'user_id');

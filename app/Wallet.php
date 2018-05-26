@@ -9,7 +9,7 @@ class Wallet extends Model
 	protected $primaryKey = 'unique_id';
 	public $incrementing = false;
 
-	protected $hidden = ['user'];
+	protected $hidden = ['user', 'updated_at'];
 
 	public function user()
 	{
