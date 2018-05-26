@@ -57,7 +57,7 @@ class Product extends Model
 	protected $primaryKey = 'unique_id';
 	public $incrementing = false;
 
-	protected $hidden = ['update_date', 'updated_at', 'point', 'point_count', 'sell'];
+	protected $hidden = ['update_date', 'updated_at', 'sell'];
 
 	public function seller()
 	{
