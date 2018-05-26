@@ -10,6 +10,7 @@ namespace App\Http\Controllers\v1\API;
 
 
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\User;
 use App\Wallet;
 use Illuminate\Support\Facades\File;
@@ -25,7 +26,8 @@ class WalletController extends Controller
 		if ($user)
 			return response()->json([
 				'error' => false,
-				'wallet' => $user->wallet
+				'wallet' => $user->wallet,
+				'orders' => $this->getWalletOrders($id)
 			], 201);
 		else
 			return response()->json([
@@ -40,13 +42,36 @@ class WalletController extends Controller
 		if ($wallet)
 			return response()->json([
 				'error' => false,
-				'wallet' => $wallet
+				'wallet' => $wallet,
+				'orders' => $this->getWalletOrders($wallet->user->unique_id)
 			], 201);
 		else
 			return response()->json([
 				'error' => true,
 				'error_msg' => "مشکلی پیش آمده است"
 			], 201);
+	}
+
+	private function getWalletOrders($user_id)
+	{
+		$orders = Order::whereUserId($user_id)->get();
+		$count = 0;
+		$price = 0;
+		foreach ($orders as $order) {
+			if ($order->temp == 1) {
+				if ($order->pay_method == 'place') {
+					$count++;
+					$price += $order->wallet_price;
+				}
+			} else {
+				$count++;
+				$price += $order->wallet_price;
+			}
+		}
+		return [
+			'count' => $count,
+			'price' => $price
+		];
 	}
 
 	public function generateWallets()
