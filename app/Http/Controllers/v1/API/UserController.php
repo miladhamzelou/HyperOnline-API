@@ -339,6 +339,10 @@ class UserController extends Controller
 			$user = User::where("unique_id", $id)->first();
 			$user->pushe = $pushe;
 			$user->fire = $fireBase;
+			if (app('request')->exists('v')) {
+				$version = $request->get("v");
+				$user->android = $version;
+			}
 			$user->save();
 			return response()->json([
 				'error' => false
