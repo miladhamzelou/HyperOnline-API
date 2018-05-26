@@ -66,8 +66,8 @@ class ProductController extends Controller
         if ($validator->fails()) {
             $failedRules = $validator->failed();
             return response()->json([
-                'tag' => 'validation',
-                'error' => true,
+	            'error' => true,
+	            'tag' => 'validation',
                 'error_msg' => $validator->messages(),
                 'rules' => $failedRules
             ], 500);
@@ -75,13 +75,13 @@ class ProductController extends Controller
             try {
                 $this->Products->createProduct($request);
                 return response()->json([
-                    'tag' => $request->input('tag'),
-                    'error' => false
+	                'error' => false,
+                    'tag' => $request->input('tag')
                 ], 201);
             } catch (Exception $e) {
                 return response()->json([
-                    'tag' => $request->input('tag'),
-                    'error' => true,
+	                'error' => true,
+	                'tag' => $request->input('tag'),
                     'error_msg' => $e->getMessage()
                 ], 500);
             }
@@ -112,8 +112,8 @@ class ProductController extends Controller
         if ($validator->fails()) {
             $failedRules = $validator->failed();
             return response()->json([
-                'tag' => 'validation',
-                'error' => true,
+	            'error' => true,
+	            'tag' => 'validation',
                 'error_msg' => $validator->messages(),
                 'rules' => $failedRules
             ], 500);
@@ -121,15 +121,15 @@ class ProductController extends Controller
             try {
                 $this->Products->updateProduct($request, $id);
                 return response()->json([
-                    'tag' => $request->input('tag'),
-                    'error' => false
+                    'error' => false,
+                    'tag' => $request->input('tag')
                 ], 201);
             } catch (ModelNotFoundException $e) {
                 throw $e;
             } catch (Exception $e) {
                 return response()->json([
-                    'tag' => $request->input('tag'),
-                    'error' => true,
+	                'error' => true,
+	                'tag' => $request->input('tag'),
                     'error_msg' => $e->getMessage()
                 ], 500);
             }
