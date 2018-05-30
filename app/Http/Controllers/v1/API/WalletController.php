@@ -129,7 +129,7 @@ class WalletController extends Controller
 	public function getTransferConfirmationByCode(Request $request)
 	{
 		$user = User::where('unique_id', $request->get('user_id'))->first();
-		$src_wallet = Wallet::where('unique_id', 'HO-' . $request->get('src_id'))->first();
+		$src_wallet = Wallet::where('code', 'HO-' . $request->get('src_id'))->first();
 		$des_wallet = Wallet::where('code', 'HO-' . $request->get('dest_code'))->first();
 
 		if ($user && $src_wallet && $des_wallet) {
