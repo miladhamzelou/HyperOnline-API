@@ -86,6 +86,10 @@ Route::post('/v1/test', 'v1\API\MainController@test2');
 Route::get('/v1/generateWallets', 'v1\API\WalletController@generateWallets');
 Route::get('/v1/getWallet_byId/{id}', 'v1\API\WalletController@getWalletByID');
 Route::get('/v1/getWallet_byUser/{id}', 'v1\API\WalletController@getWalletByUser');
+Route::post('/v1/getWalletCode', 'v1\API\WalletController@getWalletCode');
+Route::post('/v1/getTransferConfirmationByID', 'v1\API\WalletController@getTransferConfirmationByID');
+Route::post('/v1/getTransferConfirmationByCode', 'v1\API\WalletController@getTransferConfirmationByCode');
+Route::post('/v1/transferMoney', 'v1\API\WalletController@transferMoney');
 
 Route::get('/200', function () {
 	return response()->json([
