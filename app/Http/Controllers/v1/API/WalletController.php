@@ -16,6 +16,7 @@ use App\User;
 use App\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
 include(app_path() . '/Common/jdf.php');
@@ -127,6 +128,7 @@ class WalletController extends Controller
 
 	public function getTransferConfirmationByCode(Request $request)
 	{
+		Log::info($request);
 		$user = User::where('unique_id', $request->get('user_id'))->first();
 		$src_wallet = Wallet::where('unique_id', $request->get('src_id'))->first();
 		$des_wallet = Wallet::where('code', 'HO-' . $request->get('dest_code'))->first();
