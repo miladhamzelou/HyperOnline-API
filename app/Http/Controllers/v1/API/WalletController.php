@@ -193,7 +193,7 @@ class WalletController extends Controller
 					$transaction1->price = $price;
 					$transaction1->code = $unique;
 					$transaction1->status = 'successful';
-					$transaction1->description = "انتقال وجه";
+					$transaction1->description = "انتقال وجه به" . $des_wallet->user->name;
 					$transaction1->create_date = $date;
 					$transaction1->save();
 
@@ -205,7 +205,7 @@ class WalletController extends Controller
 					$transaction2->price = $price;
 					$transaction2->code = $unique;
 					$transaction2->status = 'successful';
-					$transaction2->description = "انتقال وجه";
+					$transaction2->description = "دریافت وجه از" . $user->name;
 					$transaction2->create_date = $date;
 					$transaction2->save();
 
