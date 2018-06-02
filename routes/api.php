@@ -90,6 +90,7 @@ Route::post('/v1/getWalletCode', 'v1\API\WalletController@getWalletCode');
 Route::post('/v1/getTransferConfirmationByID', 'v1\API\WalletController@getTransferConfirmationByID');
 Route::post('/v1/getTransferConfirmationByCode', 'v1\API\WalletController@getTransferConfirmationByCode');
 Route::post('/v1/transferMoney', 'v1\API\WalletController@transferMoney');
+Route::post('/v1/transactions', 'v1\API\WalletController@getTransactions');
 
 Route::get('/200', function () {
 	return response()->json([

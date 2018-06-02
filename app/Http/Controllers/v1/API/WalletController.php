@@ -264,6 +264,18 @@ class WalletController extends Controller
 		], 201);
 	}
 
+	public function getTransactions(Request $request)
+	{
+		$id = $request->get('uid');
+
+		$transactions = Transaction::where("user_id", $id)->orderBy('created_at', 'desc')->get();
+
+		return response()->json([
+			'error' => false,
+			'list' => $transactions
+		], 201);
+	}
+
 	protected function getCurrentTime()
 	{
 		$now = date("Y-m-d", time());
