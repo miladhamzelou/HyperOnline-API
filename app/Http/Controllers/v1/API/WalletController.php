@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\v1\API;
 
 
+use App\Facades\CustomLog;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\Transaction;
@@ -208,6 +209,9 @@ class WalletController extends Controller
 					$transaction2->description = "دریافت وجه از" . $user->name;
 					$transaction2->create_date = $date;
 					$transaction2->save();
+
+					$log = "P:" . $price . " F:" . $transaction1->user_id . " T:" . $transaction2->user_id . " D:" . $date;
+					CustomLog::info($log, "transaction");
 
 					return response()->json([
 						'error' => false,
