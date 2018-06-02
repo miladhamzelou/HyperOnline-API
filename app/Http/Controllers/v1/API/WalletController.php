@@ -16,7 +16,6 @@ use App\User;
 use App\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
 include(app_path() . '/Common/jdf.php');
@@ -186,21 +185,25 @@ class WalletController extends Controller
 
 					$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
+					$unique = uniqid('', false);
 					$transaction1 = new Transaction();
+					$transaction1->unique_id = $unique;
 					$transaction1->user_id = $user->unique_id;
 					$transaction1->wallet_id = $src_wallet->unique_id;
 					$transaction1->price = $price;
-					$transaction1->code = uniqid('', false);
+					$transaction1->code = $unique;
 					$transaction1->status = 'successful';
 					$transaction1->description = "انتقال وجه";
 					$transaction1->create_date = $date;
 					$transaction1->save();
 
+					$unique = uniqid('', false);
 					$transaction2 = new Transaction();
+					$transaction2->unique_id = $unique;
 					$transaction2->user_id = $des_wallet->user->unique_id;
 					$transaction2->wallet_id = $des_wallet->unique_id;
 					$transaction2->price = $price;
-					$transaction2->code = uniqid('', false);
+					$transaction2->code = $unique;
 					$transaction2->status = 'successful';
 					$transaction2->description = "انتقال وجه";
 					$transaction2->create_date = $date;
