@@ -64,8 +64,8 @@ class UserController extends Controller
 			if ($validator->fails()) {
 				$failedRules = $validator->failed();
 				return response()->json([
-					'tag' => 'validation',
 					'error' => true,
+					'tag' => 'validation',
 					'error_msg' => $validator->messages(),
 					'rules' => $failedRules
 				], 201);
@@ -82,8 +82,8 @@ class UserController extends Controller
 						], 201);
 				} catch (Exception $e) {
 					return response()->json([
-						'tag' => $request->input('tag'),
 						'error' => true,
+						'tag' => $request->input('tag'),
 						'error_msg' => $e->getMessage()
 					], 201);
 				}
@@ -138,8 +138,8 @@ class UserController extends Controller
 		if ($validator->fails()) {
 			$failedRules = $validator->failed();
 			return response()->json([
-				'tag' => 'validation',
 				'error' => true,
+				'tag' => 'validation',
 				'error_msg' => $validator->messages(),
 				'rules' => $failedRules
 			], 201);
