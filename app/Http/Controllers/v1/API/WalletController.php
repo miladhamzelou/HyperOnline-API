@@ -247,8 +247,37 @@ class WalletController extends Controller
 
 	public function chargeWallet(Request $request)
 	{
-		$id = $request->get('id');
+		$user_id = $request->get('uid');
 		$price = $request->get('price');
+
+		$user = User::where("unique_id", $user_id)->first();
+		$wallet = Wallet::where("unique_id", $user->wallet->unique_id)->first();
+		$wallet->price = (int)$wallet->price + (int)$price;
+		$wallet->save();
+
+		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+
+		$transaction = new Transaction();
+		$transaction->unique_id = uniqid('', false);
+		$transaction->user_id = $user_id;
+		$transaction->wallet_id = $wallet->unique_id;
+		$transaction->price = $price;
+		$transaction->code = uniqid('', false);
+		$transaction->description = 'شارژ کیف پول';
+		$transaction->status = 'successful';
+		$transaction->create_date = $date;
+		$transaction->save();
+
+		if ($transaction)
+			return response()->json([
+				'error' => false,
+				'price' => $price
+			], 201);
+		else
+			return response()->json([
+				'error' => true,
+				'error_msg' => 'مشکلی به وجود آمده است'
+			], 201);
 	}
 
 	public function generateWallets()
