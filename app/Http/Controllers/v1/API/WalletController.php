@@ -13,6 +13,7 @@ use App\Facades\CustomLog;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\Transaction;
+use App\Transfer;
 use App\User;
 use App\Wallet;
 use Illuminate\Http\Request;
@@ -210,7 +211,20 @@ class WalletController extends Controller
 					$transaction2->create_date = $date;
 					$transaction2->save();
 
-					$log = "P:" . $price . " F:" . $transaction1->user_id . " T:" . $transaction2->user_id . " D:" . $date;
+					$transfer = new Transfer();
+					$transfer->unique_id = uniqid('', false);
+					$transfer->origin_id = $transaction1->wallet_id;
+					$transfer->destination_id = $transaction2->wallet_id;
+					$transfer->origin_user_id = $transaction1->user_id;
+					$transfer->destination_user_id = $transaction2->user_id;
+					$transfer->price = $price;
+					$transfer->code = uniqid('', false);
+					if ($transaction1 && $transaction2)
+						$transfer->status = 'successful';
+					$transfer->create_date = $date;
+					$transfer->save();
+
+					$log = "P:" . $transfer->price . " F:" . $transfer->origin_user_id . " T:" . $transfer->destination_user_id . " D:" . $transfer->create_date;
 					CustomLog::info($log, "transaction");
 
 					return response()->json([
@@ -229,6 +243,12 @@ class WalletController extends Controller
 				'error_msg' => 'مشکلی به وجود آمده است'
 			], 201);
 		}
+	}
+
+	public function chargeWallet(Request $request)
+	{
+		$id = $request->get('id');
+		$price = $request->get('price');
 	}
 
 	public function generateWallets()
