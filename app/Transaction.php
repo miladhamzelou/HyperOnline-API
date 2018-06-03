@@ -13,16 +13,16 @@ class Transaction extends Model
 
 	public function user()
 	{
-		return $this->belongsTo(User::class);
+		return $this->belongsTo(User::class, 'user_id');
 	}
 
 	public function wallet()
 	{
-		return $this->belongsTo(Wallet::class);
+		return $this->belongsTo(Wallet::class . 'wallet_id');
 	}
 
 	public function company()
 	{
-		return $this->belongsTo(Company::class);
+		return $this->belongsTo(Company::class, 'company_id');
 	}
 }
