@@ -12,18 +12,28 @@ namespace App\Http\Controllers\v1\API;
 use App\Facades\CustomLog;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Pay;
 use App\Transaction;
 use App\Transfer;
 use App\User;
 use App\Wallet;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Redirect;
 use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
 include(app_path() . '/Common/jdf.php');
 
 class WalletController extends Controller
 {
+	protected $API;
+
+	public function __construct()
+	{
+		$this->API = "4d0d3be84eae7fbe5c317bf318c77e83";
+	}
+
 	public function getWalletByUser($id)
 	{
 		$user = User::where('unique_id', $id)->first();
@@ -245,15 +255,13 @@ class WalletController extends Controller
 		}
 	}
 
-	public function chargeWallet(Request $request)
+	public function chargeWalletTemp(Request $request)
 	{
 		$user_id = $request->get('uid');
 		$price = $request->get('price');
 
 		$user = User::where("unique_id", $user_id)->first();
 		$wallet = Wallet::where("unique_id", $user->wallet->unique_id)->first();
-		$wallet->price = (int)$wallet->price + (int)$price;
-		$wallet->save();
 
 		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
@@ -264,14 +272,111 @@ class WalletController extends Controller
 		$transaction->price = $price;
 		$transaction->code = uniqid('', false);
 		$transaction->description = 'شارژ کیف پول';
-		$transaction->status = 'successful';
 		$transaction->create_date = $date;
 		$transaction->save();
 
 		if ($transaction)
 			return response()->json([
 				'error' => false,
-				'price' => $price
+				'code' => $transaction->unique_id
+			], 201);
+		else
+			return response()->json([
+				'error' => true,
+				'error_msg' => 'مشکلی به وجود آمده است'
+			], 201);
+	}
+
+	public function pay($id)
+	{
+		$transaction = Transaction::where("unique_id", $id)->first();
+		if ($transaction) {
+			$client = new Client([
+				'headers' => ['Content-Type' => 'application/json']
+			]);
+			$url = "https://pay.ir/payment/send";
+			$params = [
+				'api' => $this->API,
+				'amount' => $transaction->price * 10,
+				'redirect' => "http://hyper-online.ir/wallet_callback",
+				'mobile' => $transaction->user->phone,
+				'factorNumber' => $id,
+			];
+			$response = $client->post(
+				$url,
+				['body' => json_encode($params)]
+			);
+
+			$response = (array)json_decode($response->getBody()->getContents());
+
+			if ($response['status'] == 1) {
+				$transId = $response['transId'];
+				return Redirect::to("http://pay.ir/payment/gateway/" . $transId);
+			} else {
+				return response()->json([
+					'error' => true,
+					'error_msg' => $response['errorCode']
+				], 201);
+			}
+		} else
+			return response()->json([
+				'error' => true,
+				'error_msg' => 'مشکلی به وجود آمده است'
+			], 201);
+	}
+
+	public function callBack(Request $request)
+	{
+		$pay = new Pay();
+		if (app('request')->exists('status')) $pay->status = $request->input('status');
+		if (app('request')->exists('transId')) $pay->transId = $request->input('transId');
+		if (app('request')->exists('factorNumber')) $pay->factorNumber = $request->input('factorNumber');
+		if (app('request')->exists('cardNumber')) $pay->cardNumber = $request->input('cardNumber');
+		if (app('request')->exists('message')) $pay->message = $request->input('message');
+		$pay->save();
+
+		$res = $this->verify($this->API, $pay->transId);
+		$res = (array)json_decode($res);
+
+		if ($res['status'] == 1) {
+			header("location: hyper://charge?error=0&code=" . $pay->factorNumber);
+		} else {
+			header("location: hyper://charge?error=1&er_code=" . $res['errorCode']);
+		}
+		exit();
+	}
+
+	private function verify($api, $transId)
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, 'https://pay.ir/payment/verify');
+		curl_setopt($ch, CURLOPT_POSTFIELDS, "api=$api&transId=$transId");
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		$res = curl_exec($ch);
+		curl_close($ch);
+		return $res;
+	}
+
+	public function chargeWallet(Request $request)
+	{
+		$id = $request->get('uid');
+
+		$transaction = Transaction::where("unique_id", $id)->first();
+
+		$wallet = Wallet::where("unique_id", $transaction->wallet_id)->first();
+		$wallet->price = (int)$wallet->price + (int)$transaction->price;
+		$wallet->save();
+
+		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+
+		$transaction->update_date = $date;
+		$transaction->status = 'successful';
+		$transaction->save();
+
+		if ($transaction)
+			return response()->json([
+				'error' => false
 			], 201);
 		else
 			return response()->json([

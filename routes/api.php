@@ -91,6 +91,7 @@ Route::post('/v1/getTransferConfirmationByID', 'v1\API\WalletController@getTrans
 Route::post('/v1/getTransferConfirmationByCode', 'v1\API\WalletController@getTransferConfirmationByCode');
 Route::post('/v1/transferMoney', 'v1\API\WalletController@transferMoney');
 Route::post('/v1/transactions', 'v1\API\WalletController@getTransactions');
+Route::post('/v1/chargeWalletTemp', 'v1\API\WalletController@chargeWalletTemp');
 Route::post('/v1/chargeWallet', 'v1\API\WalletController@chargeWallet');
 
 Route::get('/200', function () {

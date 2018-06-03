@@ -135,6 +135,9 @@ Route::get('/winfo', 'TelegramController@info_webhook');
 Route::get('/set', 'TelegramController@set');
 Route::post('/531370522:AAHYvRhHW7Y2HRIOQszk5MfsZTbJNsy29Dw/webhook', 'TelegramController@webhook');
 
+Route::get('/wallet/pay/{id}', 'v1\API\WalletController@pay');
+Route::post('/wallet_callback', 'v1\API\WalletController@callBack');
+
 Route::get('/phpinfo', function () {
 	return phpinfo();
 });
