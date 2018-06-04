@@ -192,7 +192,7 @@ class WalletController extends Controller
 			else {
 				$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-				$check = Transaction::where("user_id", $user->unique_id)->where('wallet_id', $src_wallet->unique_id)->where('create_date', $date)->where('price' . $price)->first();
+				$check = Transaction::where("user_id", $user->unique_id)->where('wallet_id', $src_wallet->unique_id)->where('create_date', $date)->where('price', $price)->first();
 				if (!$check)
 					if ((int)$src_wallet->price >= (int)$price) {
 						$src_wallet->price = (int)$src_wallet->price - (int)$price;
