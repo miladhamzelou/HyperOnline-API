@@ -394,11 +394,14 @@ class WalletController extends Controller
 			$transaction->status = 'successful';
 			$transaction->save();
 
-			if ($transaction)
+			if ($transaction) {
+				$log = "P:" . $transaction->price . " F:" . $transaction->user_id . " D:" . $transaction->create_date;
+				CustomLog::info($log, "charge");
+
 				return response()->json([
 					'error' => false
 				], 201);
-			else
+			} else
 				return response()->json([
 					'error' => true,
 					'error_msg' => 'مشکلی به وجود آمده است'
