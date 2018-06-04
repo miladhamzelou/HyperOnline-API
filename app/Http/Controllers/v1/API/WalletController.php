@@ -240,7 +240,7 @@ class WalletController extends Controller
 						$log = "P:" . $transfer->price . " F:" . $transfer->origin_user_id . " T:" . $transfer->destination_user_id . " D:" . $transfer->create_date;
 						CustomLog::info($log, "transaction");
 
-						if ($this->sendPush($des_wallet->user->pushe, 'کیف پول', 'مبلغ ' . $price . ' تومان به کیف پول شما واریز شد'))
+						if ($this->sendPush($des_wallet->user->pushe, 'کیف پول', 'مبلغ ' . $price . ' تومان به کیف پول شما واریز شد', $price . ' تومان دریافت شد'))
 							return response()->json([
 								'error' => false,
 								'code' => $transaction1->code
@@ -465,7 +465,7 @@ class WalletController extends Controller
 		], 201);
 	}
 
-	protected function sendPush($id, $title, $body)
+	protected function sendPush($id, $title, $body, $content)
 	{
 		$client = new Client([
 			'headers' => [
@@ -484,7 +484,7 @@ class WalletController extends Controller
 					],
 					"notification" => [
 						"title" => $title,
-						"content" => "۱ پیام جدید دریافت شد",
+						"content" => $content,
 						"wake_screen" => true,
 						"action" => [
 							"action_data" => "Activity_Inbox",
