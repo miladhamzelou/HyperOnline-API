@@ -335,6 +335,10 @@ class WalletController extends Controller
 		if (app('request')->exists('message')) $pay->message = $request->input('message');
 		$pay->save();
 
+		$transaction = Transaction::where("unique_id", $pay->factorNumber)->first();
+		$transaction->card = $pay->cardNumber;
+		$transaction->save();
+
 		$res = $this->verify($this->API, $pay->transId);
 		$res = (array)json_decode($res);
 
