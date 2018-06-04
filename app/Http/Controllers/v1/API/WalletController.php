@@ -190,69 +190,77 @@ class WalletController extends Controller
 					'error_msg' => 'کیف پول مقصد فعال نیست'
 				], 201);
 			else {
-				if ((int)$src_wallet->price >= (int)$price) {
-					$src_wallet->price = (int)$src_wallet->price - (int)$price;
-					$src_wallet->save();
-					$des_wallet->price = (int)$des_wallet->price + (int)$price;
-					$des_wallet->save();
+				$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-					$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+				$check = Transaction::where("user_id", $user->unique_id)->where('wallet_id', $src_wallet->unique_id)->where('create_date', $date)->where('price' . $price)->first();
+				if (!$check)
+					if ((int)$src_wallet->price >= (int)$price) {
+						$src_wallet->price = (int)$src_wallet->price - (int)$price;
+						$src_wallet->save();
+						$des_wallet->price = (int)$des_wallet->price + (int)$price;
+						$des_wallet->save();
 
-					$unique = uniqid('', false);
-					$transaction1 = new Transaction();
-					$transaction1->unique_id = $unique;
-					$transaction1->user_id = $user->unique_id;
-					$transaction1->wallet_id = $src_wallet->unique_id;
-					$transaction1->price = $price;
-					$transaction1->code = $unique;
-					$transaction1->status = 'successful';
-					$transaction1->description = "انتقال وجه به " . $des_wallet->user->name;
-					$transaction1->create_date = $date;
-					$transaction1->save();
+						$unique = uniqid('', false);
+						$transaction1 = new Transaction();
+						$transaction1->unique_id = $unique;
+						$transaction1->user_id = $user->unique_id;
+						$transaction1->wallet_id = $src_wallet->unique_id;
+						$transaction1->price = $price;
+						$transaction1->code = $unique;
+						$transaction1->status = 'successful';
+						$transaction1->description = "انتقال وجه به " . $des_wallet->user->name;
+						$transaction1->create_date = $date;
+						$transaction1->save();
 
-					$unique = uniqid('', false);
-					$transaction2 = new Transaction();
-					$transaction2->unique_id = $unique;
-					$transaction2->user_id = $des_wallet->user->unique_id;
-					$transaction2->wallet_id = $des_wallet->unique_id;
-					$transaction2->price = $price;
-					$transaction2->code = $unique;
-					$transaction2->status = 'successful';
-					$transaction2->description = "دریافت وجه از " . $user->name;
-					$transaction2->create_date = $date;
-					$transaction2->save();
+						$unique = uniqid('', false);
+						$transaction2 = new Transaction();
+						$transaction2->unique_id = $unique;
+						$transaction2->user_id = $des_wallet->user->unique_id;
+						$transaction2->wallet_id = $des_wallet->unique_id;
+						$transaction2->price = $price;
+						$transaction2->code = $unique;
+						$transaction2->status = 'successful';
+						$transaction2->description = "دریافت وجه از " . $user->name;
+						$transaction2->create_date = $date;
+						$transaction2->save();
 
-					$transfer = new Transfer();
-					$transfer->unique_id = uniqid('', false);
-					$transfer->origin_id = $transaction1->wallet_id;
-					$transfer->destination_id = $transaction2->wallet_id;
-					$transfer->origin_user_id = $transaction1->user_id;
-					$transfer->destination_user_id = $transaction2->user_id;
-					$transfer->price = $price;
-					$transfer->code = uniqid('', false);
-					if ($transaction1 && $transaction2)
-						$transfer->status = 'successful';
-					$transfer->create_date = $date;
-					$transfer->save();
+						$transfer = new Transfer();
+						$transfer->unique_id = uniqid('', false);
+						$transfer->origin_id = $transaction1->wallet_id;
+						$transfer->destination_id = $transaction2->wallet_id;
+						$transfer->origin_user_id = $transaction1->user_id;
+						$transfer->destination_user_id = $transaction2->user_id;
+						$transfer->price = $price;
+						$transfer->code = uniqid('', false);
+						if ($transaction1 && $transaction2)
+							$transfer->status = 'successful';
+						$transfer->create_date = $date;
+						$transfer->save();
 
-					$log = "P:" . $transfer->price . " F:" . $transfer->origin_user_id . " T:" . $transfer->destination_user_id . " D:" . $transfer->create_date;
-					CustomLog::info($log, "transaction");
+						$log = "P:" . $transfer->price . " F:" . $transfer->origin_user_id . " T:" . $transfer->destination_user_id . " D:" . $transfer->create_date;
+						CustomLog::info($log, "transaction");
 
-					if ($this->sendPush($des_wallet->user->pushe, 'کیف پول', 'مبلغ ' . $price . ' تومان به کیف پول شما واریز شد'))
-						return response()->json([
-							'error' => false,
-							'code' => $transaction1->code
-						], 201);
-					else
+						if ($this->sendPush($des_wallet->user->pushe, 'کیف پول', 'مبلغ ' . $price . ' تومان به کیف پول شما واریز شد'))
+							return response()->json([
+								'error' => false,
+								'code' => $transaction1->code
+							], 201);
+						else
+							return response()->json([
+								'error' => true,
+								'error_msg' => 'مشکلی به وجود آمده است'
+							], 201);
+					} else
 						return response()->json([
 							'error' => true,
-							'error_msg' => 'مشکلی به وجود آمده است'
+							'error_msg' => 'موجودی کافی نیست'
 						], 201);
-				} else
+				else {
 					return response()->json([
-						'error' => true,
-						'error_msg' => 'موجودی کافی نیست'
+						'error' => false,
+						'code' => $check->code
 					], 201);
+				}
 			}
 		} else {
 			return response()->json([
