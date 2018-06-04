@@ -13,6 +13,7 @@ use App\Facades\CustomLog;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\Pay;
+use App\Push;
 use App\Transaction;
 use App\Transfer;
 use App\User;
@@ -237,10 +238,16 @@ class WalletController extends Controller
 					$log = "P:" . $transfer->price . " F:" . $transfer->origin_user_id . " T:" . $transfer->destination_user_id . " D:" . $transfer->create_date;
 					CustomLog::info($log, "transaction");
 
-					return response()->json([
-						'error' => false,
-						'code' => $transaction1->code
-					], 201);
+					if ($this->sendPush($des_wallet->user->pushe, 'کیف پول', 'مبلغ ' . $price . ' تومان به کیف پول شما واریز شد'))
+						return response()->json([
+							'error' => false,
+							'code' => $transaction1->code
+						], 201);
+					else
+						return response()->json([
+							'error' => true,
+							'error_msg' => 'مشکلی به وجود آمده است'
+						], 201);
 				} else
 					return response()->json([
 						'error' => true,
@@ -442,6 +449,54 @@ class WalletController extends Controller
 			'error' => false,
 			'list' => $transactions
 		], 201);
+	}
+
+	protected function sendPush($id, $title, $body)
+	{
+		$client = new Client([
+			'headers' => [
+				'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
+				'Content-Type' => 'application/json',
+				'Accept: application/json'
+			]
+		]);
+		$response = $client->post(
+			'https://panel.pushe.co/api/v1/notifications/',
+			[
+				'body' => json_encode([
+					"applications" => ["ir.hatamiarash.hyperonline"],
+					"filter" => [
+						"imei" => [$id]
+					],
+					"notification" => [
+						"title" => $title,
+						"content" => "۱ پیام جدید دریافت شد",
+						"wake_screen" => true,
+						"action" => [
+							"action_data" => "Activity_Inbox",
+							"action_type" => "T"
+						],
+					],
+					"custom_content" => [
+						"type" => "1",
+						"msg" => [
+							"title" => $title,
+							"body" => $body,
+							"date" => $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime())
+						]
+					]
+				])
+			]
+		);
+		if ($response->getStatusCode() == "201") {
+			$push = new Push();
+			$push->title = $title;
+			$push->body = $body;
+			$push->save();
+
+			return true;
+		} else
+			return false;
 	}
 
 	protected function getCurrentTime()
