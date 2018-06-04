@@ -375,24 +375,30 @@ class WalletController extends Controller
 
 		$transaction = Transaction::where("unique_id", $id)->first();
 
-		$wallet = Wallet::where("unique_id", $transaction->wallet_id)->first();
-		$wallet->price = (int)$wallet->price + (int)$transaction->price;
-		$wallet->save();
+		if ($transaction->status != 'successful') {
+			$wallet = Wallet::where("unique_id", $transaction->wallet_id)->first();
+			$wallet->price = (int)$wallet->price + (int)$transaction->price;
+			$wallet->save();
 
-		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
+			$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-		$transaction->update_date = $date;
-		$transaction->status = 'successful';
-		$transaction->save();
+			$transaction->update_date = $date;
+			$transaction->status = 'successful';
+			$transaction->save();
 
-		if ($transaction)
-			return response()->json([
-				'error' => false
-			], 201);
-		else
+			if ($transaction)
+				return response()->json([
+					'error' => false
+				], 201);
+			else
+				return response()->json([
+					'error' => true,
+					'error_msg' => 'مشکلی به وجود آمده است'
+				], 201);
+		} else
 			return response()->json([
 				'error' => true,
-				'error_msg' => 'مشکلی به وجود آمده است'
+				'error_msg' => 'عملیات غیر مجاز'
 			], 201);
 	}
 
