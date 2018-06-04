@@ -389,6 +389,16 @@ class WalletController extends Controller
 			], 201);
 	}
 
+	public function regenerateWallets()
+	{
+		$qr_dir = public_path('/images/qr/');
+		(new Wallet)->newQueryWithoutScopes()->forceDelete();
+		File::deleteDirectory($qr_dir);
+		mkdir($qr_dir, 0777, true);
+		chmod($qr_dir, 0777);
+		$this->generateWallets();
+	}
+
 	public function generateWallets()
 	{
 		$users = User::get();
@@ -400,7 +410,7 @@ class WalletController extends Controller
 			$wallet = new Wallet();
 			$wallet->unique_id = uniqid('', false);
 			$wallet->user_id = $user->unique_id;
-			$wallet->code = "HO-" . strval($code);
+			$wallet->code = "HO-" . strval(mt_rand(100, 999)) . strval($code);
 			$wallet->create_date = $date;
 			$wallet->status = 'active';
 			$wallet->save();
