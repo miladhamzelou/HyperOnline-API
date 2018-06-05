@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use phplusir\smsir\Smsir;
 
+include(app_path() . '/Common/jdf.php');
+
 class UserController extends Controller
 {
 	protected $Users;
@@ -234,6 +236,7 @@ class UserController extends Controller
 			$user->name = $name;
 			$user->address = $address;
 			$user->confirmed_info = 0;
+			$user->update_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 			$user->save();
 
 			SendEmail::dispatch([
@@ -266,6 +269,7 @@ class UserController extends Controller
 			$user->encrypted_password = $hash["encrypted"];
 			$user->password = $password;
 			$user->salt = $hash["salt"];
+			$user->update_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 			$user->save();
 			return response()->json([
 				'error' => false
@@ -287,6 +291,7 @@ class UserController extends Controller
 			$user->encrypted_password = $hash["encrypted"];
 			$user->password = $password;
 			$user->salt = $hash["salt"];
+			$user->update_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 			$user->save();
 			return response()->json([
 				'error' => false
@@ -339,6 +344,7 @@ class UserController extends Controller
 			$user = User::where("unique_id", $id)->first();
 			$user->pushe = $pushe;
 			$user->fire = $fireBase;
+			$user->update_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 			if (app('request')->exists('v')) {
 				$version = $request->get("v");
 				$user->android = $version;
@@ -353,5 +359,34 @@ class UserController extends Controller
 				'error_msg' => $e
 			], 201);
 		}
+	}
+
+	protected function getCurrentTime()
+	{
+		$now = date("Y-m-d", time());
+		$time = date("H:i:s", time());
+		return $now . ' ' . $time;
+	}
+
+	protected function getDate($date)
+	{
+		$now = explode(' ', $date)[0];
+		$time = explode(' ', $date)[1];
+		list($year, $month, $day) = explode('-', $now);
+		list($hour, $minute, $second) = explode(':', $time);
+		$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+		$date = jDate("Y/m/d", $timestamp);
+		return $date;
+	}
+
+	protected function getTime($date)
+	{
+		$now = explode(' ', $date)[0];
+		$time = explode(' ', $date)[1];
+		list($year, $month, $day) = explode('-', $now);
+		list($hour, $minute, $second) = explode(':', $time);
+		$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+		$date = jDate("H:i", $timestamp);
+		return $date;
 	}
 }
