@@ -106,6 +106,10 @@
                                             @endif</td>
                                     </tr>
                                     <tr>
+                                        <td style="text-align: right; direction: ltr;">{{ $user->password }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; direction: ltr;">{{ $user->android }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -162,7 +166,10 @@
                                         <td style="text-align: right; direction: rtl;">آخرین به روز رسانی</td>
                                     </tr>
                                     <tr>
-
+                                        <td style="text-align: right; direction: rtl;">رمز عبور</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; direction: rtl;">نسخه اندروید</td>
                                     </tr>
                                     </tbody>
                                 </table>
