@@ -452,7 +452,7 @@ class WalletController extends Controller
 	{
 		$id = $request->get('uid');
 
-		$transactions = Transaction::where("user_id", $id)->orderBy('created_at', 'desc')->get();
+		$transactions = Transaction::where("user_id", $id)->where('status', 'successful')->orderBy('created_at', 'desc')->get();
 
 		return response()->json([
 			'error' => false,
