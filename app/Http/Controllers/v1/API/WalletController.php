@@ -28,13 +28,6 @@ include(app_path() . '/Common/jdf.php');
 
 class WalletController extends Controller
 {
-	protected $API;
-
-	public function __construct()
-	{
-		$this->API = "4d0d3be84eae7fbe5c317bf318c77e83";
-	}
-
 	public function getWalletByUser($id)
 	{
 		$user = User::where('unique_id', $id)->first();
@@ -309,16 +302,15 @@ class WalletController extends Controller
 			$client = new Client([
 				'headers' => ['Content-Type' => 'application/json']
 			]);
-			$url = "https://pay.ir/payment/send";
 			$params = [
-				'api' => $this->API,
+				'api' => config('pay.api-key'),
 				'amount' => $transaction->price * 10,
 				'redirect' => "http://hyper-online.ir/wallet_callback",
 				'mobile' => $transaction->user->phone,
 				'factorNumber' => $id,
 			];
 			$response = $client->post(
-				$url,
+				config('pay.api-send'),
 				['body' => json_encode($params)]
 			);
 
@@ -326,7 +318,7 @@ class WalletController extends Controller
 
 			if ($response['status'] == 1) {
 				$transId = $response['transId'];
-				return Redirect::to("http://pay.ir/payment/gateway/" . $transId);
+				return Redirect::to(config('pay.api-gateway') . $transId);
 			} else {
 				return response()->json([
 					'error' => true,
@@ -354,7 +346,7 @@ class WalletController extends Controller
 		$transaction->card = $pay->cardNumber;
 		$transaction->save();
 
-		$res = $this->verify($this->API, $pay->transId);
+		$res = $this->verify(config('pay.api-key'), $pay->transId);
 		$res = (array)json_decode($res);
 
 		if ($res['status'] == 1) {
@@ -368,7 +360,7 @@ class WalletController extends Controller
 	private function verify($api, $transId)
 	{
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'https://pay.ir/payment/verify');
+		curl_setopt($ch, CURLOPT_URL, config('pay.api-verify'));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, "api=$api&transId=$transId");
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -472,13 +464,13 @@ class WalletController extends Controller
 	{
 		$client = new Client([
 			'headers' => [
-				'Authorization' => 'Token 49a07ca7cb6a25c2d61044365c4560500a38ec3f',
+				'Authorization' => 'Token ' . config('pushe.api-key'),
 				'Content-Type' => 'application/json',
 				'Accept: application/json'
 			]
 		]);
 		$response = $client->post(
-			'https://panel.pushe.co/api/v1/notifications/',
+			config('pushe.api'),
 			[
 				'body' => json_encode([
 					"applications" => ["ir.hatamiarash.hyperonline"],
