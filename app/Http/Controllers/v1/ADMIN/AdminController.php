@@ -903,7 +903,7 @@ class AdminController
 			$contents = '';
 		}
 
-		$contents = str_replace("local.INFO:", "-", $contents);
+		$contents = str_replace("local.INFO:", "   ", $contents);
 
 		return view('admin.logs', compact('contents'));
 	}
