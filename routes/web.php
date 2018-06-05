@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::get('/checkout', 'v1\market\MainController@checkout')->name('checkout');
 	Route::get('/pay_confirm', 'v1\market\MainController@pay_confirm')->name('pay_confirm');
+
+	Route::get('/admin/logs/{type}', 'v1\ADMIN\AdminController@logs')->name('logs');
 });
 
 Route::get('/search', 'v1\ADMIN\AdminController@search');

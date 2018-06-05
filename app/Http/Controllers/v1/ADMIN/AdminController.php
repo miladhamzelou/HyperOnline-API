@@ -894,4 +894,17 @@ class AdminController
 			->withTitle("نظرات")
 			->withComments($comments);
 	}
+
+	public function logs($type)
+	{
+		try {
+			$contents = File::get(storage_path('logs/' . $type . '.log'));
+		} catch (\Illuminate\Contracts\Filesystem\FileNotFoundException $e) {
+			$contents = '';
+		}
+
+		$contents = str_replace("local.INFO:", "-", $contents);
+
+		return view('admin.logs', compact('contents'));
+	}
 }

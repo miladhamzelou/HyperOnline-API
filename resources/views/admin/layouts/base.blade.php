@@ -279,13 +279,24 @@
                 <li class="treeview">
                     <a href="#">پیام ها
                         <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('/admin/messages/sms') }}">ارسال اس ام اس</a></li>
                         <li><a href="{{ url('/admin/messages/push') }}">ارسال پوش</a></li>
                         <li><a href="{{ url('/admin/messages') }}">گزارشات</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">لاگ ها
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('logs', 'transaction') }}">تراکنش</a></li>
+                        <li><a href="{{ route('logs', 'charge') }}">شارژ</a></li>
                     </ul>
                 </li>
             </ul>
