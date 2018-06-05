@@ -16,8 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use phplusir\smsir\Smsir;
 
-include(app_path() . '/Common/jdf.php');
-
 class UserController extends Controller
 {
 	protected $Users;
@@ -41,6 +39,8 @@ class UserController extends Controller
 	 */
 	public function __construct(UserService $service)
 	{
+		if (!function_exists("jalali_to_gregorian"))
+			require_once(app_path() . '/Common/jdf.php');
 		$this->Users = $service;
 	}
 
