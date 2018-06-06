@@ -14,6 +14,7 @@ use App\Visit;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use phplusir\smsir\Smsir;
 
@@ -172,8 +173,8 @@ class UserController extends Controller
 		$user = User::where("phone", $phoneNumber)->firstOrFail();
 		if ($user) {
 			$code = mt_rand(1527, 5388);
-			$message = "هایپرآنلاین - کد فعال سازی شما :‌ " . $code;
-			Smsir::send([$message], [$phoneNumber]);
+			$r = Smsir::sendVerification(['VerificationCode' => $code], 2006, $phoneNumber);
+			Log::info($r);
 			return response()->json([
 				'error' => false,
 				'code' => $code + 4611
