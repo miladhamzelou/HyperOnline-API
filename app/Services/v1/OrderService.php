@@ -259,6 +259,7 @@ class OrderService
 
 		if ($tFinal >= 30000) $send_price = 0;
 
+		$rPrice = -1;
 		if ($method != 1) {
 			$data = [
 				"products" => $products,
@@ -280,7 +281,6 @@ class OrderService
 			$pdf = PDF::loadView('pdf.factor', $data);
 			$pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
 
-			$rPrice = -1;
 			if ($order->pay_way == 'wallet') {
 				$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
 				// check wallet's stock
