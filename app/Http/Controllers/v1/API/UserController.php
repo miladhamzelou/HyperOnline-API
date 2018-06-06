@@ -173,7 +173,7 @@ class UserController extends Controller
 		$user = User::where("phone", $phoneNumber)->firstOrFail();
 		if ($user) {
 			$code = mt_rand(1527, 5388);
-			$result = Smsir::ultraFastSend(['VerificationCode' => $code], 2006, [$phoneNumber]);
+			$result = Smsir::ultraFastSend(['VerificationCode' => $code], 2006, $phoneNumber);
 			Log::info($result);
 			return response()->json([
 				'error' => false,
