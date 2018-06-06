@@ -78,7 +78,7 @@ class WalletController extends Controller
 
 	private function getWalletOrders($user_id)
 	{
-		$orders = Order::whereUserId($user_id)->get();
+		$orders = Order::whereUserId($user_id)->where('pay_way', 'wallet')->get();
 		$count = 0;
 		$price = 0;
 		foreach ($orders as $order) {
