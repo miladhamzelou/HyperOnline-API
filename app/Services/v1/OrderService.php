@@ -306,6 +306,7 @@ class OrderService
 					->onQueue('sms');
 		}
 
+		$rPrice = 0;
 		if ($order->pay_way == 'wallet') {
 			$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
 			// check wallet's stock
@@ -317,7 +318,8 @@ class OrderService
 					$wallet->price = intval($wallet->price) - intval($order->price);
 					$wallet->save();
 				}
-			} else {
+				$rPrice = 0;
+			} elseif (intval($order->price) > intval($wallet->price)) {
 				$order->wallet_price = $wallet->price;
 				$order->save();
 				// decrease wallet'price if it's a place order
@@ -325,10 +327,14 @@ class OrderService
 					$wallet->price = 0;
 					$wallet->save();
 				}
+				$rPrice = intval($order->price) - intval($wallet->price);
 			}
 		}
 
-		return $order->unique_id;
+		return [
+			'code' => $order->unique_id,
+			'price' => $rPrice
+		];
 	}
 
 	public function addInfo(&$item)

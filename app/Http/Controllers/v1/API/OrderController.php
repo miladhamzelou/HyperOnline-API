@@ -78,7 +78,8 @@ class OrderController extends Controller
 			if ($result)
 				return response()->json([
 					'error' => false,
-					'code' => $result
+					'code' => $result['code'],
+					'price' => $result['price']
 				], 201);
 			else
 				return response()->json([
