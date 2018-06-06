@@ -8,6 +8,7 @@ namespace App\Services\v1;
 use App\Jobs\SendEmail;
 use App\Order;
 use App\Password;
+use App\Presenter;
 use App\User;
 
 include(app_path() . '/Common/jdf.php');
@@ -142,6 +143,20 @@ class UserService
 
 		$user->save();
 		$password->save();
+
+		if (app('request')->exists('presenter')) {
+			$phone = $request->input('presenter');
+			$oldUser = User::where('phone', $phone)->first();
+			$oldPresent = Presenter::where('user_id', $user->unique_id)->where('presenter_id', $oldUser->unique_id)->first();
+			if (!$oldPresent) {
+				$presenter = new Presenter();
+				$presenter->unique_id = uniqid('', false);
+				$presenter->user_id = $user->unique_id;
+				$presenter->presenter_id = $oldUser->unique_id;
+				$presenter->create_date = $date;
+				$presenter->save();
+			}
+		}
 
 		SendEmail::dispatch([
 			"to" => "hyper.online.h@gmail.com",
