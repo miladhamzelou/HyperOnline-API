@@ -287,6 +287,13 @@ class OrderController extends Controller
 			if ($order->pay_method == 'online') $type = "آنلاین";
 			else if ($order->pay_method == 'place') $type = "حضوری";
 
+			if ($order->pay_way == 'wallet') {
+				$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
+				$wallet->price = 0;
+				$wallet->save();
+				$type = "آنلاین - کیف پول";
+			}
+
 			$this->addInfo($order);
 
 			SendEmail::dispatch([
@@ -311,12 +318,6 @@ class OrderController extends Controller
 					"phone" => ["09188167800"]
 				])
 					->onQueue('sms');
-
-			if ($order->pay_way == 'wallet') {
-				$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
-				$wallet->price = 0;
-				$wallet->save();
-			}
 
 			return response()->json([
 				'error' => false
