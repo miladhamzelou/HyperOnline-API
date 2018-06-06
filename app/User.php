@@ -45,6 +45,16 @@ class User extends Authenticatable
 		return $this->role;
 	}
 
+	public function presents()
+	{
+		return $this->hasMany(Presenter::class, 'presenter_id');
+	}
+
+	public function visits()
+	{
+		return $this->hasMany(Visit::class, 'user_id');
+	}
+
 	public function isAdmin()
 	{
 		if ($this->role == "admin")
