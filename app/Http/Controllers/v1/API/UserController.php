@@ -10,6 +10,7 @@ use App\Jobs\SendEmail;
 use App\Jobs\SendSMS;
 use App\Services\v1\UserService;
 use App\User;
+use App\Visit;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -350,6 +351,19 @@ class UserController extends Controller
 				$user->android = $version;
 			}
 			$user->save();
+
+			$oldVisit = Visit::where("user_id", $user->unique_id)->first();
+			if ($oldVisit) {
+				$oldVisit->count = $oldVisit->count + 1;
+				$oldVisit->save();
+			} else {
+				$visit = new Visit();
+				$visit->unique_id = uniqid('', false);
+				$visit->user_id = $user->unique_id;
+				$visit->count = 1;
+				$visit->save();
+			}
+
 			return response()->json([
 				'error' => false
 			], 201);
