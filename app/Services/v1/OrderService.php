@@ -310,11 +310,19 @@ class OrderService
 			$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
 			// check wallet's stock
 			if (intval($order->price) <= intval($wallet->price)) {
+				$order->wallet_price = $order->price;
+				$order->save();
+				// decrease wallet'price if it's a place order
+				if ($order->pay_method == 'place') {
+					$wallet->price = intval($wallet->price) - intval($order->price);
+					$wallet->save();
+				}
+			} else {
 				$order->wallet_price = $wallet->price;
 				$order->save();
 				// decrease wallet'price if it's a place order
-				if ($method == 1) {
-					$wallet->price = intval($wallet->price) - intval($order->price);
+				if ($order->pay_method == 'place') {
+					$wallet->price = 0;
 					$wallet->save();
 				}
 			}
