@@ -280,7 +280,32 @@ class OrderService
 			$pdf = PDF::loadView('pdf.factor', $data);
 			$pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
 
+			$rPrice = -1;
+			if ($order->pay_way == 'wallet') {
+				$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
+				// check wallet's stock
+				if (intval($order->price) <= intval($wallet->price)) {
+					$order->wallet_price = $order->price;
+					$order->save();
+					$wallet->price = intval($wallet->price) - intval($order->price);
+					$wallet->save();
+					$rPrice = 0;
+				} elseif (intval($order->price) > intval($wallet->price)) {
+					$order->wallet_price = $wallet->price;
+					$order->save();
+					// decrease wallet'price if it's a place order
+					if ($order->pay_method == 'place') {
+						$wallet->price = 0;
+						$wallet->save();
+					}
+					$rPrice = intval($order->price) - intval($wallet->price);
+				}
+			}
+
 			$type = "حضوری";
+
+			if ($rPrice == 0)
+				$type = "کیف پول";
 
 			SendEmail::dispatch([
 				"to" => "hyper.online.h@gmail.com",
@@ -304,31 +329,6 @@ class OrderService
 					"phone" => ["09188167800"]
 				])
 					->onQueue('sms');
-		}
-
-		$rPrice = 0;
-		if ($order->pay_way == 'wallet') {
-			$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
-			// check wallet's stock
-			if (intval($order->price) <= intval($wallet->price)) {
-				$order->wallet_price = $order->price;
-				$order->save();
-				// decrease wallet'price if it's a place order
-				if ($order->pay_method == 'place') {
-					$wallet->price = intval($wallet->price) - intval($order->price);
-					$wallet->save();
-				}
-				$rPrice = 0;
-			} elseif (intval($order->price) > intval($wallet->price)) {
-				$order->wallet_price = $wallet->price;
-				$order->save();
-				// decrease wallet'price if it's a place order
-				if ($order->pay_method == 'place') {
-					$wallet->price = 0;
-					$wallet->save();
-				}
-				$rPrice = intval($order->price) - intval($wallet->price);
-			}
 		}
 
 		return [

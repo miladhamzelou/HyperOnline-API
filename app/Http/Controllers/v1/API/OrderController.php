@@ -12,6 +12,7 @@ use App\Seller;
 use App\Services\v1\MainService;
 use App\Services\v1\OrderService;
 use App\User;
+use App\Wallet;
 use DateTime;
 use DateTimeZone;
 use Exception;
@@ -122,13 +123,19 @@ class OrderController extends Controller
 	{
 		$order = Order::where("unique_id", $id)->first();
 		if ($order) {
+			$payPrice = $order->price;
+
+			if ($order->pay_way == 'wallet') {
+				$wallet = Wallet::where("user_id", $order->user_id)->firstOrFail();
+				$payPrice = intval($order->price) - intval($wallet->price);
+			}
+
 			$client = new Client([
 				'headers' => ['Content-Type' => 'application/json']
 			]);
 			$params = [
 				'api' => config('pay.api-key'),
-				'amount' => $order->price * 10,
-//                'amount' => 1000,
+				'amount' => $payPrice * 10,
 				'redirect' => "http://hyper-online.ir/callback2",
 				'mobile' => $order->user_phone,
 				'factorNumber' => $id,
@@ -304,6 +311,12 @@ class OrderController extends Controller
 					"phone" => ["09188167800"]
 				])
 					->onQueue('sms');
+
+			if ($order->pay_way == 'wallet') {
+				$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
+				$wallet->price = 0;
+				$wallet->save();
+			}
 
 			return response()->json([
 				'error' => false
