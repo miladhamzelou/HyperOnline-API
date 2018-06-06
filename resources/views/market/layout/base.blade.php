@@ -52,15 +52,19 @@
             "complete" === e.readyState ? t() : a.attachEvent ? a.attachEvent("onload", t) : a.addEventListener("load", t, !1)
         }();
     </script>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-65859337-5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65859337-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-65859337-5');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-65859337-5');
+    </script>
 
 </head>
 <body>
@@ -460,5 +464,15 @@ Analytics Made Easy - StatCounter"></a></div>
     })();
 </script>
 <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101102199ns.gif"/></p></noscript>
+<script type="text/javascript">
+    window._mfq = window._mfq || [];
+    (function () {
+        var mf = document.createElement("script");
+        mf.type = "text/javascript";
+        mf.async = true;
+        mf.src = "//cdn.mouseflow.com/projects/fa01325b-0d19-4482-832d-9498733f3b8d.js";
+        document.getElementsByTagName("head")[0].appendChild(mf);
+    })();
+</script>
 </body>
 </html>
