@@ -194,6 +194,7 @@ class OrderService
 		$order->stuffs_count = ltrim(rtrim($request->get('stuffs_count'), ','), ',');
 		$order->price_send = $send_price;
 		$order->hour = $request->get('hour');
+
 		if (app('request')->exists('method')) {
 			$method = $request->get('method');
 			if ($method == 1)
@@ -203,7 +204,6 @@ class OrderService
 		} else
 			$order->pay_method = 'online';
 
-		$way = 1;
 		if (app('request')->exists('way')) {
 			$way = $request->get('way');
 			if ($way == 1)
@@ -306,8 +306,8 @@ class OrderService
 					->onQueue('sms');
 		}
 
-		if ($way == 1) {
-			$wallet = Wallet::where("user_id", $user->unique_id)->first();
+		if ($order->pay_way == 'wallet') {
+			$wallet = Wallet::where("user_id", $user->unique_id)->firstOrFail();
 			// check wallet's stock
 			if (intval($order->price) <= intval($wallet->price)) {
 				$order->wallet_price = $wallet->price;
