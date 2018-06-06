@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-05-24 14:41:04.
+    * Generated on 2018-06-07 01:20:50.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -143,6 +143,7 @@ namespace PHPSTORM_META {
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
         'Telegram\Bot\Api' => \Telegram\Bot\Api::class,
+        'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
@@ -279,6 +280,7 @@ namespace PHPSTORM_META {
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
         'Telegram\Bot\Api' => \Telegram\Bot\Api::class,
+        'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
@@ -415,6 +417,7 @@ namespace PHPSTORM_META {
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
         'Telegram\Bot\Api' => \Telegram\Bot\Api::class,
+        'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
     ]));
     override(\App::make(0), map([
         '' => '@',
@@ -551,6 +554,7 @@ namespace PHPSTORM_META {
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
         'Telegram\Bot\Api' => \Telegram\Bot\Api::class,
+        'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
@@ -687,6 +691,7 @@ namespace PHPSTORM_META {
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
         'Telegram\Bot\Api' => \Telegram\Bot\Api::class,
+        'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
     ]));
     override(\app(0), map([
         '' => '@',
@@ -823,6 +828,7 @@ namespace PHPSTORM_META {
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
         'Telegram\Bot\Api' => \Telegram\Bot\Api::class,
+        'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
     ]));
     override(\resolve(0), map([
         '' => '@',
@@ -959,6 +965,7 @@ namespace PHPSTORM_META {
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
         'Telegram\Bot\Api' => \Telegram\Bot\Api::class,
+        'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
     ]));
 
     override(\Illuminate\Support\Arr::add(0), type(0));
