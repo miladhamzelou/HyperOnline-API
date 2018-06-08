@@ -161,18 +161,20 @@ class UserService
 		}
 
 		$wallet = new Wallet();
-		$wallet->unique_id = uniqid('', false);
+		$wallet->unique_id = uniqid('', true);
 		$wallet->user_id = $user->unique_id;
-		$wallet->code = "HO-" . strval(Wallet::count() + 151);
+		$wallet->code = "HO-" . strval(mt_rand(100, 999)) . strval(Wallet::count() + 151);
 		$wallet->create_date = $date;
+		$wallet->status = 'active';
 		$wallet->save();
 
 		$QRCode = new BaconQrCodeGenerator;
+		$file = public_path('/images/qr/' . $wallet->code . '.png');
 		$QRCode->encoding('UTF-8')
 			->format('png')
 			->merge('/public/market/image/h_logo.png', .15)
 			->size(1000)
-			->generate($wallet->unique_id, public_path('/images/qr/' . $wallet->code . '.png'));
+			->generate($wallet->unique_id, $file);
 
 		SendEmail::dispatch([
 			"to" => "hyper.online.h@gmail.com",
