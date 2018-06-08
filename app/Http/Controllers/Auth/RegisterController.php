@@ -81,6 +81,8 @@ class RegisterController extends Controller
 		$user->state = "همدان";
 		$user->city = $data['city'];
 		$user->create_date = $date;
+		$user->confirmed_phone = 0;
+		$user->confirmed_info = 1;
 		$user->save();
 
 		$password = new Password();
