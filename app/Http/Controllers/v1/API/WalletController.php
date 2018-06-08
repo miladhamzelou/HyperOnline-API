@@ -268,8 +268,7 @@ class WalletController extends Controller
 		$user_id = $request->get('uid');
 		$price = $request->get('price');
 
-		$user = User::where("unique_id", $user_id)->first();
-		$wallet = Wallet::where("unique_id", $user->wallet->unique_id)->first();
+		$wallet = Wallet::where("user_id", $user_id)->first();
 
 		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
