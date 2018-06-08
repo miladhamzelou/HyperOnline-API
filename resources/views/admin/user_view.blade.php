@@ -35,7 +35,7 @@
                                         <td style="text-align: right; direction: rtl;">{{ $user->address }}</td>
                                     </tr>
                                     {{--<tr>--}}
-                                        {{--<td style="text-align: right; direction: rtl;">{{ $user->wallet.' تومان' }}</td>--}}
+                                    {{--<td style="text-align: right; direction: rtl;">{{ $user->wallet.' تومان' }}</td>--}}
                                     {{--</tr>--}}
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">{{ $user->state }}</td>
@@ -44,12 +44,12 @@
                                         <td style="text-align: right; direction: rtl;">{{ $user->city }}</td>
                                     </tr>
                                     {{--<tr>--}}
-                                        {{--<td style="text-align: right; direction: rtl;">--}}
-                                            {{--@if($user->district)--}}
-                                                {{--{{ $user->district }}--}}
-                                            {{--@else--}}
-                                                {{-----}}
-                                            {{--@endif</td>--}}
+                                    {{--<td style="text-align: right; direction: rtl;">--}}
+                                    {{--@if($user->district)--}}
+                                    {{--{{ $user->district }}--}}
+                                    {{--@else--}}
+                                    {{-----}}
+                                    {{--@endif</td>--}}
                                     {{--</tr>--}}
                                     <tr>
                                         <td style="@if($user->confirmed_phone)color:limegreen;@else color:red;@endif text-align: right; direction: rtl;">
@@ -92,6 +92,9 @@
                                             @endif</td>
                                     </tr>
                                     <tr>
+                                        <td style="text-align: right; direction: rtl;">{{ $user->wallet->price . ' تومان' }}</td>
+                                    </tr>
+                                    <tr>
                                         <td style="text-align: right; direction: rtl;">{{ $user->role }}</td>
                                     </tr>
                                     <tr>
@@ -130,7 +133,7 @@
                                         <td style="text-align: right; direction: rtl;">آدرس</td>
                                     </tr>
                                     {{--<tr>--}}
-                                        {{--<td style="text-align: right; direction: rtl;">کیف پول</td>--}}
+                                    {{--<td style="text-align: right; direction: rtl;">کیف پول</td>--}}
                                     {{--</tr>--}}
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">استان</td>
@@ -139,7 +142,7 @@
                                         <td style="text-align: right; direction: rtl;">شهر</td>
                                     </tr>
                                     {{--<tr>--}}
-                                        {{--<td style="text-align: right; direction: rtl;">منطقه</td>--}}
+                                    {{--<td style="text-align: right; direction: rtl;">منطقه</td>--}}
                                     {{--</tr>--}}
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">تایید تلفن همراه</td>
@@ -155,6 +158,9 @@
                                     </tr>
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">وضعیت</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; direction: rtl;">کیف پول</td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">سطح کاربری</td>
