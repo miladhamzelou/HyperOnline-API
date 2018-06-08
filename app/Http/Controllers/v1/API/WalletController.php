@@ -424,6 +424,7 @@ class WalletController extends Controller
 		$count = count($users);
 		$finalCount = 0;
 		$code = 150;
+		return count($users);
 		foreach ($users as $user) {
 			$wallet = new Wallet();
 			$wallet->unique_id = uniqid('', false);
