@@ -50,6 +50,10 @@ class OrderController
 			return redirect()->route('profile');
 		$order = Order::find($id);
 		$this->addInfo($order);
+		if ($order->pay_way == "wallet") {
+			$order->pay_way = "کیف پول";
+			$order->wallet_price =  $this->formatMoney($order->price - $order->wallet_price);
+		}
 		$order->price = $this->formatMoney($order->price);
 		$order->pay_method = ($order->pay_method == "online") ? "آنلاین" : "در محل";
 		$user = User::where("unique_id", $order->user_id)->firstOrFail();

@@ -37,7 +37,14 @@
                                 ها : </strong>{{ $order->stuffs }}</p><br>
                         <p style="text-align: justify; direction: rtl;"><strong style="color:#3c8dbc; font-size: 19px;">قیمت
                                 : </strong>{{ $order->price . ' تومان' }}</p><br>
-                        @if($order->hour==19)
+                        @if($order->pay_way == "کیف پول")
+                            <p style="text-align: justify; direction: rtl;"><strong style="color:red; font-size: 19px;">قابل
+                                    پرداخت ( پس از کسر کیف پول ) : </strong>
+                                <span style="color: red;">{{ $order->wallet_price . ' تومان' }}</span>
+                            </p>
+                            <br>
+                        @endif
+                        @if($order->hour == 19)
                             <p style="text-align: justify; direction: rtl;"><strong
                                         style="color:#3c8dbc; font-size: 19px;">ساعت
                                     تحویل : </strong>19:30 الی 20:30</p><br>
