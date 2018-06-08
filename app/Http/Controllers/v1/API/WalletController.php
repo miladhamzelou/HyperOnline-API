@@ -419,7 +419,7 @@ class WalletController extends Controller
 
 	public function generateWallets()
 	{
-		$users = User::all();
+		$users = User::get();
 		$date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 		$count = count($users);
 		$finalCount = 0;
