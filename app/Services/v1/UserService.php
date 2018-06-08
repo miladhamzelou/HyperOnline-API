@@ -10,6 +10,8 @@ use App\Order;
 use App\Password;
 use App\Presenter;
 use App\User;
+use App\Wallet;
+use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
 include(app_path() . '/Common/jdf.php');
 
@@ -157,6 +159,20 @@ class UserService
 				$presenter->save();
 			}
 		}
+
+		$wallet = new Wallet();
+		$wallet->unique_id = uniqid('', false);
+		$wallet->user_id = $user->unique_id;
+		$wallet->code = "HO-" . strval(Wallet::count() + 151);
+		$wallet->create_date = $date;
+		$wallet->save();
+
+		$QRCode = new BaconQrCodeGenerator;
+		$QRCode->encoding('UTF-8')
+			->format('png')
+			->merge('/public/market/image/h_logo.png', .15)
+			->size(1000)
+			->generate($wallet->unique_id, public_path('/images/qr/' . $wallet->code . '.png'));
 
 		SendEmail::dispatch([
 			"to" => "hyper.online.h@gmail.com",
