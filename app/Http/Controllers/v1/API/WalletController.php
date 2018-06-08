@@ -408,6 +408,8 @@ class WalletController extends Controller
 	public function regenerateWallets()
 	{
 		$qr_dir = public_path('/images/qr/');
+		(new Transfer)->newQueryWithoutScopes()->forceDelete();
+		(new Transaction)->newQueryWithoutScopes()->forceDelete();
 		(new Wallet)->newQueryWithoutScopes()->forceDelete();
 		File::deleteDirectory($qr_dir);
 		mkdir($qr_dir, 0777, true);
