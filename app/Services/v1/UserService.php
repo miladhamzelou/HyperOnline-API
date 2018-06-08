@@ -149,14 +149,16 @@ class UserService
 		if (app('request')->exists('presenter')) {
 			$phone = $request->input('presenter');
 			$oldUser = User::where('phone', $phone)->first();
-			$oldPresent = Presenter::where('user_id', $user->unique_id)->where('presenter_id', $oldUser->unique_id)->first();
-			if (!$oldPresent) {
-				$presenter = new Presenter();
-				$presenter->unique_id = uniqid('', false);
-				$presenter->user_id = $user->unique_id;
-				$presenter->presenter_id = $oldUser->unique_id;
-				$presenter->create_date = $date;
-				$presenter->save();
+			if ($oldUser) {
+				$oldPresent = Presenter::where('user_id', $user->unique_id)->where('presenter_id', $oldUser->unique_id)->first();
+				if (!$oldPresent) {
+					$presenter = new Presenter();
+					$presenter->unique_id = uniqid('', false);
+					$presenter->user_id = $user->unique_id;
+					$presenter->presenter_id = $oldUser->unique_id;
+					$presenter->create_date = $date;
+					$presenter->save();
+				}
 			}
 		}
 
