@@ -424,6 +424,7 @@ class WalletController extends Controller
 		$count = count($users);
 		$finalCount = 0;
 		$code = 150;
+		$userCount = count($users);
 		foreach ($users as $user) {
 			$wallet = new Wallet();
 			$wallet->unique_id = uniqid('', true);
@@ -443,6 +444,8 @@ class WalletController extends Controller
 			if (File::exists($file))
 				$finalCount++;
 			$code++;
+			if ($finalCount == $userCount)
+				break;
 		}
 		return response()->json([
 			'count' => $count,
