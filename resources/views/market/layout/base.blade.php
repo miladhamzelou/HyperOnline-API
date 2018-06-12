@@ -21,9 +21,10 @@
     <meta name="theme-color" content="#e40571">
     <meta name="msapplication-navbutton-color" content="#e40571">
     <meta name="apple-mobile-web-app-status-bar-style" content="#e40571">
+    <meta name="description" content="سامانه فروش محصولات آنلاین">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link href="{{ asset('market/image/favicon.png') }}" rel="icon"/>
     <title>هایپرآنلاین</title>
-    <meta name="description" content="سامانه فروش محصولات آنلاین">
     <!-- CSS Part Start-->
     <link rel="stylesheet" type="text/css" href="{{ asset('market/js/bootstrap/css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('market/js/bootstrap/css/bootstrap-rtl.min.css') }}"/>
