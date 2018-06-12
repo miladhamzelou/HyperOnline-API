@@ -2,8 +2,8 @@
 
 Route::auth();
 
-Route::get('/', 'v1\market\MainController@index')->name('root');
-Route::get('/home', 'v1\market\MainController@index')->name('home');
+Route::get('/', 'v1\MARKET\MainController@index')->name('root');
+Route::get('/home', 'v1\MARKET\MainController@index')->name('home');
 
 Route::get('/profile', 'v1\ADMIN\UserController@profile')->name('profile');
 
@@ -91,8 +91,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::get('/admin/comments', 'v1\ADMIN\AdminController@comments')->name('comments');
 
-	Route::get('/checkout', 'v1\market\MainController@checkout')->name('checkout');
-	Route::get('/pay_confirm', 'v1\market\MainController@pay_confirm')->name('pay_confirm');
+	Route::get('/checkout', 'v1\MARKET\MainController@checkout')->name('checkout');
+	Route::get('/pay_confirm', 'v1\MARKET\MainController@pay_confirm')->name('pay_confirm');
 
 	Route::get('/admin/logs/{type}', 'v1\ADMIN\AdminController@logs')->name('logs');
 });
@@ -103,19 +103,19 @@ Route::get('/admin/search', 'v1\ADMIN\AdminController@search');
 Route::get('/profile', 'v1\MARKET\UserController@profile');
 Route::get('/orders', 'v1\MARKET\UserController@orders');
 
-Route::get('category/{level}/{id}', 'v1\market\CategoryController@index');
-Route::get('/addToCart', 'v1\ProductController@addToCart');
-Route::get('/removeFromCart', 'v1\ProductController@removeFromCart');
-Route::get('/pay', 'v1\market\MainController@pay')->name('pay');
-Route::post('/callback', 'v1\market\MainController@callback');
+Route::get('category/{level}/{id}', 'v1\MARKET\CategoryController@index');
+Route::get('/addToCart', 'v1\MARKET\ProductController@addToCart');
+Route::get('/removeFromCart', 'v1\MARKET\ProductController@removeFromCart');
+Route::get('/pay', 'v1\MARKET\MainController@pay')->name('pay');
+Route::post('/callback', 'v1\MARKET\MainController@callback');
 Route::get('/admin/downloadFactor/{id}', 'v1\ADMIN\OrderController@downloadFactor');
 
-Route::get('/contact_us', 'v1\market\MainController@contact_us');
-Route::get('/about', 'v1\market\MainController@about');
-Route::get('/privacy', 'v1\market\MainController@privacy');
-Route::get('/terms', 'v1\market\MainController@terms');
-Route::get('/comment', 'v1\market\MainController@comment');
-Route::post('/comment/send', 'v1\market\MainController@sendComment');
+Route::get('/contact_us', 'v1\MARKET\MainController@contact_us');
+Route::get('/about', 'v1\MARKET\MainController@about');
+Route::get('/privacy', 'v1\MARKET\MainController@privacy');
+Route::get('/terms', 'v1\MARKET\MainController@terms');
+Route::get('/comment', 'v1\MARKET\MainController@comment');
+Route::post('/comment/send', 'v1\MARKET\MainController@sendComment');
 Route::get('/logo', function () {
 	return view('market.logo');
 });
