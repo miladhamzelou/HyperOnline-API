@@ -78,7 +78,7 @@
                 </li>
                 <li class="profile-meta">
                     <p class="profile-title">کیف پول :</p>
-                    <p class="profile-description">{{ number_format($user->wallet, 0) }} تومان</p>
+                    <p class="profile-description">{{ number_format($user->wallet->price, 0) }} تومان</p>
                 </li>
                 <li class="profile-meta">
                     <p class="profile-title">کل سفارشات :</p>
