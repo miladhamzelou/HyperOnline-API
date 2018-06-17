@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.36 on 2018-06-17 13:14:18.
+ * Generated for Laravel 5.4.36 on 2018-06-17 13:33:18.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -11664,7 +11664,7 @@ namespace phplusir\smsir {
          *
          * @param $messages = Messages - Count must be equal with $numbers
          * @param $numbers = Numbers - must be equal with $messages
-         * @param null $sendDateTime = dont fill it if you want to send message now
+         * @param null $sendDateTime = don't fill it if you want to send message now
          * @return \phplusir\smsir\mixed, return status
          * @static 
          */ 
@@ -12929,6 +12929,79 @@ namespace SimpleSoftwareIO\QrCode\Facades {
         public static function encoding($encoding)
         {
             return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::encoding($encoding);
+        }
+         
+    }
+ 
+}
+
+namespace Anhskohbo\NoCaptcha\Facades { 
+
+    class NoCaptcha {
+        
+        /**
+         * Render HTML captcha.
+         *
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */ 
+        public static function display($attributes = array())
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::display($attributes);
+        }
+        
+        /**
+         * Render js source
+         *
+         * @param null $lang
+         * @param bool $callback
+         * @param string $onLoadClass
+         * @return string 
+         * @static 
+         */ 
+        public static function renderJs($lang = null, $callback = false, $onLoadClass = 'onloadCallBack')
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::renderJs($lang, $callback, $onLoadClass);
+        }
+        
+        /**
+         * Verify no-captcha response.
+         *
+         * @param string $response
+         * @param string $clientIp
+         * @return bool 
+         * @static 
+         */ 
+        public static function verifyResponse($response, $clientIp = null)
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::verifyResponse($response, $clientIp);
+        }
+        
+        /**
+         * Verify no-captcha response by Symfony Request.
+         *
+         * @param \Request $request
+         * @return bool 
+         * @static 
+         */ 
+        public static function verifyRequest($request)
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::verifyRequest($request);
+        }
+        
+        /**
+         * Get recaptcha js link.
+         *
+         * @param string $lang
+         * @param boolean $callback
+         * @param string $onLoadClass
+         * @return string 
+         * @static 
+         */ 
+        public static function getJsLink($lang = null, $callback = false, $onLoadClass = 'onloadCallBack')
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::getJsLink($lang, $callback, $onLoadClass);
         }
          
     }
@@ -15033,6 +15106,8 @@ namespace  {
     class Telegram extends \Telegram\Bot\Laravel\Facades\Telegram {}
 
     class QrCode extends \SimpleSoftwareIO\QrCode\Facades\QrCode {}
+
+    class NoCaptcha extends \Anhskohbo\NoCaptcha\Facades\NoCaptcha {}
  
 }
 
