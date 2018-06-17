@@ -196,6 +196,7 @@ return [
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 	    SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+	    Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 
     /*
@@ -247,6 +248,7 @@ return [
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
-	    'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
+	    'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+	    'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
     ],
 ];

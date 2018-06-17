@@ -23,8 +23,13 @@
                                     </span>
                         @endif
                     </div>
-
-                    <br>
+                    @if ($errors->has('g-recaptcha-response'))
+                        <span class="help-block" style="color: red">
+                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                        </span>
+                    @endif
+                    {!! NoCaptcha::renderJs('fa') !!}
+                    {!! NoCaptcha::display() !!}
                     <div class="form-group">
                         <input type="submit" tabindex="2" name="send"
                                class="my_font btn center-block btn-lg btn-success" value="ارسال">
