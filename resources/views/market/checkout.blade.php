@@ -39,10 +39,10 @@
 @endsection
 
 @section('content')
-    <?php
-    $i = 1;
-    $pay = $cart['total'];
-    ?>
+	<?php
+	$i = 1;
+	$pay = $cart['total'];
+	?>
     <div id="content" class="col-sm-12">
         <h2 class="title">سبد خرید</h2>
         @if(count($cart['items'])>0)
@@ -105,11 +105,13 @@
                 </div>
             </div>
             <div class="buttons">
-                <div class="pull-right"><a href="{{ url('pay_confirm') }}" class="btn btn-primary" style="font-size: 18px">تکمیل خرید</a>
+                <div style="text-align: center">
+                    <a href="{{ url('pay_confirm') }}" class="btn btn-primary"
+                       style="font-size: 18px; border-radius: 20px">تکمیل خرید</a>
                 </div>
-                <br>
-                <div class="pull-left"><a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px">ادامه
-                        خرید</a></div>
+                {{--<br>--}}
+                {{--<div ><a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px; border-radius: 20px">ادامه--}}
+                {{--خرید</a></div>--}}
             </div>
         @else
             <h4 style="text-align: center">سبد خرید شما خالی است</h4>
