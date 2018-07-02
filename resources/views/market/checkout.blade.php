@@ -74,7 +74,7 @@
                 <div class="col-sm-8">
                     <p>
                         <span><a class="fa fa-warning"></a> </span>
-                        @if($cart['free-ship'])
+                        @if($cart['free-ship'] || $cart['tax']==0)
                             سفارش شما رایگان ارسال خواهد شد.
                         @else
                             سبد های کمتر از ۳۰ هزار تومان با هزینه ارسال خواهند شد.
