@@ -156,7 +156,7 @@
                                             <input type="hidden" id="{{ $item->rowId }}" value="{{ $item->rowId }}">
                                             <tr>
                                                 <td class="text-center">
-                                                    <a href="product.html">
+                                                    <a href="#">
                                                         @if($item->options['image'])
                                                             <img class="img-thumbnail"
                                                                  src="{{ asset('images').'/' . $item->options['image'] }}"
