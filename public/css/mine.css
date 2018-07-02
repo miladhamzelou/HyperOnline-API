@@ -1,15 +1,5 @@
-@font-face {
-    font-family: 'yekan';
-    src: url('../fonts/yekan.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'sanss';
-    src: url('../fonts/sans.ttf') format('truetype');
-}
-
 .font {
-    font-family: 'sanss', sans-serif;
+    font-family: IRANSans, sans-serif;
 }
 
 .rtl {
@@ -21,7 +11,7 @@
     width: 100%;
     margin-bottom: 15px;
     font-size: medium;
-    font-family: 'sanss', sans-serif;
+    font-family: IRANSans, sans-serif;
     direction: rtl;
     font-weight: normal;
 }
@@ -296,7 +286,7 @@ btn 3d
     position: relative;
     border-radius: 0;
     border: 1px solid rgb(216, 216, 216);
-    font-family: "sanss", 'Roboto', sans-serif;
+    font-family: IRANSans, 'Roboto', sans-serif;
 }
 
 .panel-google-plus > .dropdown {
