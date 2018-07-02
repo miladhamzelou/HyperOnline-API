@@ -1,79 +1,3 @@
-/*-----------------------------------------------------------------------------------
-
-    Template Name: Marketshop eCommerce HTML Template
-    Author: MrCode.ir
-    Author URI: https:/mrcode.ir
-
-===================================================================================
- Table of Contents
-===================================================================================
- 
-1. General Styles
-2.  Layout
-3.  Header
-     3.1. Language & Currency
-     3.2. Top Links
-     3.3. Mini Cart
-     3.4. Search Bar
-4.  Menu
-5.  Feature box
-6.  Breadcrumb
-7.  Category Page
-     7.1. Refine Search Category
-     7.2. Grid-List Icon
-     7.3. Produc Thumb
-     7.4. Grid Product
-     7.5. List Product
-     7.6. Rating Star
-     7.7. Pagination 
-8.  Product Page
-9.  Product Item for Left and Right Panel
-10. Category Accordion
-11. buttons
-12. Tabs
-13. Static Banner
-14. Faq Page
-15. Sitemap Page
-16. Footer
-     16.1. Footer Links
-     16.2. Contact Block
-     16.3. Payments Types
-     16.4. Social Icon
-     16.5. Powered by Text
-     16.6. Back To Top
-17. Side Blocks
-     17.1. Facebook
-     17.2. Twitter
-     17.3. Custom Side block
-     17.4. Video Box
-18. Five Grid Columns
-19. Shortcodes
-20. Extra
--------------------------------------------------------------------------------------*/
-@font-face {
-    font-family: 'WYekan';
-    src: url('persian-fonts/WYekan.eot?#') format('eot'),
-    url('persian-fonts/WYekan.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'BKoodakBold';
-    src: url('persian-fonts/BKoodakBold.eot?#') format('eot'),
-    url('persian-fonts/BKoodakBold.woff') format('woff'),
-    url('persian-fonts/BKoodakBold.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'sanss';
-    src: url('persian-fonts/sans.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'shabnam';
-    src: url('persian-fonts/Shabnam.eot'); /* IE9 Compat Modes */
-    src: url('persian-fonts/Shabnam.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('persian-fonts/Shabnam.woff') format('woff'), /* Pretty Modern Browsers */ url('persian-fonts/Shabnam.ttf') format('truetype') /* Safari, Android, iOS */
-}
-
 /*===================================================================================*/
 /*  1. General Styles
 /*===================================================================================*/
@@ -87,7 +11,7 @@ html {
 body {
     background: #dcdbdb;
     color: #222;
-    font-family: IRANSans, 'WYekan', sans-serif;
+    font-family: IRANSans, sans-serif;
     line-height: 22px;
 }
 
@@ -152,7 +76,7 @@ a:focus {
 
 /**===== Title for 404 Page =====**/
 .title-404 {
-    font-family: BKoodakBold, Helvetica, sans-serif;
+    font-family: IRANSans, Helvetica, sans-serif;
     font-size: 300px;
     font-weight: bold;
     line-height: 1em;
@@ -986,7 +910,7 @@ a:focus {
 
 .custom-feature-box .feature-box .title {
     color: #555;
-    font-family: BKoodakBold;
+    font-family: IRANSans;
     font-size: 19px;
     line-height: normal;
     margin: 0;
@@ -2209,7 +2133,7 @@ a:focus {
 
 #footer h5 {
     color: #000;
-    font-family: BKoodakBold;
+    font-family: IRANSans;
     font-size: 18px;
     font-weight: normal;
     margin: 0 0 15px 0;
