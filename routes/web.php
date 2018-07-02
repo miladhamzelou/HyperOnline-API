@@ -104,7 +104,7 @@ Route::get('/profile', 'v1\MARKET\UserController@profile');
 Route::get('/orders', 'v1\MARKET\UserController@orders');
 
 Route::get('category/{level}/{id}', 'v1\MARKET\CategoryController@index');
-Route::get('/addToCart', 'v1\MARKET\ProductController@addToCart');
+Route::get('/addToCart', 'v1\API\ProductController@addToCart');
 Route::get('/removeFromCart', 'v1\MARKET\ProductController@removeFromCart');
 Route::get('/pay', 'v1\MARKET\MainController@pay')->name('pay');
 Route::post('/callback', 'v1\MARKET\MainController@callback');
