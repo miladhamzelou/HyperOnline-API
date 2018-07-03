@@ -12,7 +12,7 @@
 html,
 body {
     height: 100%;
-    font-family: "sanss";
+    font-family: IRANSans,sans-serif;
 }
 
 .layout-boxed html,
@@ -21,7 +21,7 @@ body {
 }
 
 body {
-    font-family: "sanss", 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: IRANSans, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
     overflow-x: hidden;
     overflow-y: auto;
@@ -182,13 +182,13 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-family: "sanss", 'Source Sans Pro', sans-serif;
+    font-family: IRANSans, 'Source Sans Pro', sans-serif;
 }
 
 /* General Links */
 a {
     color: #3c8dbc;
-    font-family: "sanss", sans-serif;
+    font-family: IRANSans, sans-serif;
 }
 
 a:hover,
@@ -293,7 +293,7 @@ a:focus {
     background-color: transparent;
     background-image: none;
     padding: 15px 15px;
-    font-family: "sanss", fontAwesome;
+    font-family: IRANSans, fontAwesome;
 }
 
 .main-header .sidebar-toggle:before {
@@ -341,7 +341,7 @@ a:focus {
     line-height: 50px;
     text-align: center;
     width: 230px;
-    font-family: "sanss", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: IRANSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 0 15px;
     font-weight: 300;
     overflow: hidden;
@@ -5997,20 +5997,15 @@ table.text-center th {
     }
 }
 
-@font-face {
-    font-family: "sanss";
-    src: url("../../fonts/sans.ttf") format('truetype');
-}
-
 .my_font {
-    font-family: "sanss", "sanss", sans-serif;
+    font-family: IRANSans, IRANSans, sans-serif;
     font-weight: normal;
 }
 
 .p {
-    font-family: "sanss", sans-serif;
+    font-family: IRANSans, sans-serif;
 }
 
 .i {
-    font-family: "sanss", sans-serif;
+    font-family: IRANSans, sans-serif;
 }
