@@ -1,21 +1,5 @@
-@font-face {
-    font-family: 'yekan';
-    src: url('persian-fonts/yekan.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'sanss';
-    src: url('persian-fonts/sans.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'shabnam';
-    src: url('persian-fonts/Shabnam.eot'); /* IE9 Compat Modes */
-    src: url('persian-fonts/Shabnam.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('persian-fonts/Shabnam.woff') format('woff'), /* Pretty Modern Browsers */ url('persian-fonts/Shabnam.ttf') format('truetype') /* Safari, Android, iOS */
-}
-
 .font {
-    font-family: 'shabnam', sans-serif;
+    font-family: IRANSans, sans-serif;
 }
 
 .rtl {
@@ -23,12 +7,11 @@
 }
 
 .font_sans {
-    font-family: 'sanss', sans-serif;
+    font-family: IRANSans, sans-serif;
 }
 
 .logo {
     filter: url(filters.svg#grayscale);
-    filter: gray;
     -webkit-filter: grayscale(1);
 }
 
@@ -42,6 +25,11 @@
     height: 40px;
     margin-bottom: 17px;
     padding: 4px 15px 5px 15px;
+}
+
+.swal2-title {
+    font-family: IRANSans, sans-serif !important;
+    font-weight: 400 !important;
 }
 
 @media only screen and (min-width: 767px) {
