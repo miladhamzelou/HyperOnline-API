@@ -262,7 +262,7 @@ class MainController extends Controller
 
 			SendEmail::dispatch([
 				"to" => "hyper.online.h@gmail.com",
-				"body" => "سفارش ( " . $type . " ) جدید ثبت شد",
+				"body" => "سفارش ( " . $type . " )( سایت ) جدید ثبت شد",
 				"order" => [
 					"code" => $order->code,
 					"user_name" => $order->user_name,
