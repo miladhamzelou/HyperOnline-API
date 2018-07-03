@@ -104,20 +104,29 @@
                     </table>
                 </div>
             </div>
-            <div class="buttons">
-                <div style="text-align: center">
-                    <a href="{{ url('pay_confirm') }}" class="btn btn-primary"
-                       style="font-size: 18px; border-radius: 20px">تکمیل خرید</a>
+            <form action="{{ url('pay_confirm') }}" method="post">
+                {{ csrf_field() }}
+                <div class="buttons">
+                    <div style="text-align: center">
+                        <label class="radio-inline">
+                            <input type="radio" name="pay_way" value="1" checked>پرداخت آنلاین
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="pay_way" value="0">پرداخت حضوری
+                        </label>
+                        <br>
+                        <br>
+                        <input class="btn btn-primary" type="submit"
+                               style="font-size: 18px; border-radius: 20px" value="تکمیل خرید"/>
+                    </div>
                 </div>
-                {{--<br>--}}
-                {{--<div ><a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px; border-radius: 20px">ادامه--}}
-                {{--خرید</a></div>--}}
-            </div>
+            </form>
         @else
             <h4 style="text-align: center">سبد خرید شما خالی است</h4>
             <div class="buttons">
-                <div class="pull-left"><a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px">ادامه
-                        خرید</a></div>
+                <div class="pull-left">
+                    <a href="{{ url('home') }}" class="btn btn-default" style="font-size: 18px">ادامه خرید</a>
+                </div>
             </div>
         @endif
     </div>

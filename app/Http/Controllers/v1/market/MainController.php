@@ -5,14 +5,18 @@ namespace App\Http\Controllers\v1\MARKET;
 use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmail;
+use App\Jobs\SendSMS;
 use App\Order;
 use App\Pay;
 use App\Product;
 use App\Seller;
 use App\Services\v1\market\MainService;
 use App\User;
+use DateTime;
+use DateTimeZone;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -114,69 +118,236 @@ class MainController extends Controller
 			->withCart($cart);
 	}
 
-	public function pay_confirm()
+	public function pay_confirm(Request $request)
 	{
-		$seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
-		if (Cart::content()->count() > 0)
+		$way = $request->get('pay_way');
+		if ($way == 1) {
+			$seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
+			if (Cart::content()->count() > 0)
+				$send_price = $seller->send_price;
+			else
+				$send_price = 0;
+
+			if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+				$send_price = 0;
+				$free_ship = true;
+			} else
+				$free_ship = false;
+
+			$isAdmin = 0;
+
+			if (Auth::user()->isAdmin() == 1)
+				$isAdmin = 1;
+
+			$final_pay = (int)str_replace(',', '', Cart::subtotal()) + $send_price;
+
+			$user = Auth::user();
+			$confirmed = $user->confirmed_phone && $user->confirmed_info;
+
+			$data = [
+				'confirmed' => $confirmed,
+				'user' => $user,
+				'pay' => $final_pay
+			];
+
+			$cat = $this->mService->getCategories();
+
+			$cart = [
+				'items' => Cart::content(),
+				'count' => Cart::content()->count(),
+				'total' => number_format((int)str_replace(',', '', Cart::subtotal()) + $send_price),
+				'tax' => number_format($send_price),
+				'subtotal' => Cart::subtotal(),
+				'free-ship' => $free_ship
+			];
+
+			return view('market.confirm')
+				->withData($data)
+				->withCart($cart)
+				->withCategories($cat)
+				->withAdmin($isAdmin);
+		} else {
+			$items = Cart::content();
+
+			$stuffs = "";
+			$stuffs_id = "";
+			$stuffs_count = "";
+
+			foreach ($items as $item) {
+				$stuffs .= $item->name;
+				$stuffs_id .= $item->id;
+				$stuffs_count .= $item->qty;
+			}
+
+			$order = new Order();
+			$user = Auth::user();
+			$seller = Seller::where('unique_id', "vbkYwlL98I3F3")->firstOrFail();
 			$send_price = $seller->send_price;
-		else
-			$send_price = 0;
 
-		if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
-			$send_price = 0;
-			$free_ship = true;
-		} else
-			$free_ship = false;
+			$order->unique_id = uniqid('', false);
+			$order->seller_id = $seller->unique_id;
+			$order->user_id = $user->unique_id;
+			$order->code = $order->unique_id;
+			$order->seller_name = $seller->name;
+			$order->user_name = $user->name;
+			$order->user_phone = $user->phone;
+			$order->stuffs = ltrim(rtrim($stuffs, ','), ',');
+			$order->stuffs_id = ltrim(rtrim($stuffs_id, ','), ',');
+			$order->stuffs_count = ltrim(rtrim($stuffs_count, ','), ',');
+			$order->price_send = $send_price;
+			$order->hour = $this->getOrderHour();
+			$order->pay_method = 'place';
+			$order->create_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 
-		$isAdmin = 0;
+			$ids = explode(',', $order->stuffs_id);
+			$products = array();
+			foreach ($ids as $id) {
+				$p = Product::where("unique_id", $id)->firstOrFail()->toArray();
+				array_push($products, $p);
+			}
+			$price_original = 0;
+			$tOff = 0;
+			$tFinal = 0;
+			$counts = explode(',', $order->stuffs_count);
+			$desc = '';
+			foreach ($products as $index => $pr) {
+				$product = Product::where("unique_id", $pr['unique_id'])->firstOrFail();
 
-		if (Auth::user()->isAdmin() == 1)
-			$isAdmin = 1;
+				if ($order->user_phone != '09123456789' && $order->user_phone != '09182180519' && $order->user_phone != '09182180520') {
+					$product->sell = $product->sell + 1;
+					$product->count = $product->count - 1;
+				}
+				if ($product->description)
+					$desc .= $product->description . ',';
+				else
+					$desc .= '-,';
 
-		$final_pay = (int)str_replace(',', '', Cart::subtotal()) + $send_price;
+				$price_original += $product->price_original * $counts[$index];
+				$tOff += $product->price * $product->off / 100 * $counts[$index];
+				$tFinal += ($product->price - ($product->price * $product->off / 100)) * $counts[$index];
 
-		$user = Auth::user();
-		$confirmed = $user->confirmed_phone && $user->confirmed_info;
+				$product->save();
+			}
 
-		$data = [
-			'confirmed' => $confirmed,
-			'user' => $user,
-			'pay' => $final_pay
-		];
+			if ($tFinal < 30000) $tFinal += $send_price;
+			$order->price = $tFinal;
+			$order->price_original = $price_original;
+			$order->stuffs_desc = ltrim(rtrim($desc, ','), ',');
+			$order->temp = 1;
+			$order->save();
 
-		$cat = $this->mService->getCategories();
+			$this->addInfo($order);
 
-		$cart = [
-			'items' => Cart::content(),
-			'count' => Cart::content()->count(),
-			'total' => number_format((int)str_replace(',', '', Cart::subtotal()) + $send_price),
-			'tax' => number_format($send_price),
-			'subtotal' => Cart::subtotal(),
-			'free-ship' => $free_ship
-		];
+			$data = [
+				"products" => $products,
+				"counts" => $counts,
+				"desc" => explode(',', $order->stuffs_desc),
+				"user_name" => $order->user_name,
+				"user_phone" => $order->user_phone,
+				"user_code" => $user->code,
+				"user_address" => $user->state . '-' . $user->city . ' : ' . $user->address,
+				"total" => $tFinal + $tOff - $send_price,
+				"off" => $tOff,
+				"final" => $tFinal,
+				"hour" => $order->hour,
+				"description" => $order->description,
+				"date" => $order->create_date,
+				"code" => $order->code,
+				"send_price" => $send_price
+			];
+			$pdf = PDF::loadView('pdf.factor', $data);
+			$pdf->save(public_path('/ftp/factors/' . $order->code . '.pdf'));
 
-		return view('market.confirm')
-			->withData($data)
-			->withCart($cart)
-			->withCategories($cat)
-			->withAdmin($isAdmin);
+			$type = "حضوری";
+
+			SendEmail::dispatch([
+				"to" => "hyper.online.h@gmail.com",
+				"body" => "سفارش ( " . $type . " ) جدید ثبت شد",
+				"order" => [
+					"code" => $order->code,
+					"user_name" => $order->user_name,
+					"user_phone" => $order->user_phone,
+					"stuffs" => $order->stuffs,
+					"hour" => $order->hour,
+					"price" => $order->price,
+					"desc" => $order->description,
+					"address" => $user->address
+				]
+			], 1)
+				->onQueue('email');
+
+			if ($order->user_phone != '09182180519')
+				SendSMS::dispatch([
+					"msg" => ["سفارش ( " . $type . " ) جدید ثبت شد"],
+					"phone" => ["09188167800"]
+				])
+					->onQueue('sms');
+
+			$data = [
+				"products" => $products,
+				"counts" => $counts,
+				"user_name" => $order->user_name,
+				"user_phone" => $order->user_phone,
+				"user_address" => $user->address,
+				"total" => $order->price,
+				"hour" => $order->hour,
+				"description" => $order->description
+			];
+
+			$mService = new MainService();
+			$cat = $mService->getCategories();
+
+			if (Cart::content()->count() > 0)
+				$send_price = $seller->send_price;
+			else
+				$send_price = 0;
+			if ((int)str_replace(',', '', Cart::subtotal()) > 30000) {
+				$send_price = 0;
+				$free_ship = true;
+			} else
+				$free_ship = false;
+
+			$isAdmin = 0;
+			if (Auth::check())
+				if (Auth::user()->isAdmin() == 1)
+					$isAdmin = 1;
+
+			$cart = [
+				'items' => Cart::content(),
+				'count' => Cart::content()->count(),
+				'total' => number_format((int)str_replace(',', '', Cart::subtotal()) + $send_price),
+				'tax' => number_format($send_price),
+				'subtotal' => Cart::subtotal(),
+				'free-ship' => $free_ship
+			];
+
+			return view('market.result')
+				->withData($data)
+				->withOrder($order)
+				->withCategories($cat)
+				->withAdmin($isAdmin)
+				->withCart($cart);
+		}
 	}
 
 	public function pay()
 	{
 		$client = new Client();
-		$res = $client->request(
-			'POST',
-			'https://pay.ir/payment/send',
-			[
-				'json' => [
-					'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
-					'amount' => '1000',
-					'redirect' => "http://hyper-online.ir/callback2",
-					'factorNumber' => '1'
-				]
-			]);
-		$transId = json_decode($res->getBody(), true)['transId'];
+		try {
+			$res = $client->request(
+				'POST',
+				'https://pay.ir/payment/send',
+				[
+					'json' => [
+						'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
+						'amount' => '1000',
+						'redirect' => "http://hyper-online.ir/callback2",
+						'factorNumber' => '1'
+					]
+				]);
+			$transId = json_decode($res->getBody(), true)['transId'];
+		} catch (GuzzleException $ignore) {
+		}
 		return redirect('https://pay.ir/payment/gateway/' . $transId);
 	}
 
@@ -193,15 +364,18 @@ class MainController extends Controller
 		$cat = $this->mService->getCategories();
 
 		$client = new Client();
-		$res = $client->request(
-			'POST',
-			'https://pay.ir/payment/verify',
-			[
-				'json' => [
-					'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
-					'transId' => $pay->transId
-				]
-			]);
+		try {
+			$res = $client->request(
+				'POST',
+				'https://pay.ir/payment/verify',
+				[
+					'json' => [
+						'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
+						'transId' => $pay->transId
+					]
+				]);
+		} catch (GuzzleException $ignore) {
+		}
 		$status = json_decode($res->getBody(), true)['status'];
 
 		if ($status == 1) {
@@ -282,7 +456,7 @@ class MainController extends Controller
 			$tPrice += $product->price * $counts[$index];
 			$product->save();
 		}
-		if ($tPrice < 35000) $tPrice += 5000;
+		if ($tPrice < 30000) $tPrice += 5000;
 		$order->price = $tPrice;
 		$order->price_original = $price_original;
 		$order->save();
@@ -508,6 +682,64 @@ class MainController extends Controller
 		} else {
 			return back()->withErrors(['g-recaptcha-response' => ['لطفا هویت خود را تایید کنید']]);
 		}
+	}
+
+	private function getOrderHour()
+	{
+		$date = new DateTime();
+		$date->setTimeZone(new DateTimeZone("Asia/Tehran"));
+		$hour = $date->format('H');
+		$minute = $date->format('i');
+		$send_time = 9;
+
+		if ($hour >= 9 && $hour < 10) $send_time = 11;
+		if ($hour >= 10 && $hour < 11)
+			if ($minute <= 40)
+				$send_time = 11;
+			else
+				$send_time = 16;
+
+		if ($hour >= 11 && $hour < 15) $send_time = 16;
+		if ($hour >= 15 && $hour < 16)
+			if ($minute <= 40)
+				$send_time = 16;
+			else
+				$send_time = 18;
+
+		if ($hour >= 16 && $hour < 17) $send_time = 18;
+		if ($hour >= 17 && $hour < 18)
+			if ($minute <= 40)
+				$send_time = 18;
+			else
+				$send_time = 19;
+
+		if ($hour >= 18 && $hour < 19)
+			if ($minute <= 50)
+				$send_time = 19;
+			else
+				$send_time = 9;
+
+		if ($hour >= 19 && $hour <= 23) $send_time = 9;
+		if ($hour >= 0 && $hour < 8) $send_time = 9;
+		if ($hour >= 8 && $hour < 9)
+			if ($minute <= 40)
+				$send_time = 9;
+			else
+				$send_time = 11;
+
+		return $send_time;
+	}
+
+	public function addInfo(&$item)
+	{
+		$stuff = explode(',', $item->stuffs);
+		$stuff_count = explode(',', $item->stuffs_count);
+		$stuff_desc = explode(',', $item->stuffs_desc);
+		$final = "";
+		foreach (array_values($stuff) as $i => $value) {
+			$final .= $value . ' ( ' . $stuff_desc[$i] . ' )( ' . $stuff_count[$i] . ' عدد ) :--: ';
+		}
+		$item->stuffs = substr($final, 0, -6);
 	}
 
 	protected function getCurrentTime()
