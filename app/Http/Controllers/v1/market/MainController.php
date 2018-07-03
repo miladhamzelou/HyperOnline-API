@@ -321,6 +321,8 @@ class MainController extends Controller
 				'free-ship' => $free_ship
 			];
 
+			Cart::destroy();
+
 			return view('market.result')
 				->withData($data)
 				->withOrder($order)
