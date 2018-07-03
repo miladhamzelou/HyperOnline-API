@@ -48,7 +48,7 @@ function addCart($id, $logged) {
                 var product = JSON.parse(http.responseText);
 
                 swal({
-                    title: product.name + '\n' + 'تعداد را تعیین کنید' + ' ' + $logged,
+                    title: product.name + '\n' + 'تعداد را تعیین کنید',
                     input: 'range',
                     confirmButtonText: 'ثبت',
                     inputAttributes: {
