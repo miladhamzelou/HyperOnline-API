@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/admin/comments', 'v1\ADMIN\AdminController@comments')->name('comments');
 
 	Route::get('/checkout', 'v1\MARKET\MainController@checkout')->name('checkout');
-	Route::get('/pay_confirm', 'v1\MARKET\MainController@pay_confirm')->name('pay_confirm');
+	Route::post('/pay_confirm', 'v1\MARKET\MainController@pay_confirm')->name('pay_confirm');
 
 	Route::get('/admin/logs/{type}', 'v1\ADMIN\AdminController@logs')->name('logs');
 });
