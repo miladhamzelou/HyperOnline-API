@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/admin/users/{id}', 'v1\ADMIN\UserController@info')->name('user_edit');
 	Route::post('/admin/users/update', 'v1\ADMIN\UserController@update')->name('user_update');
 	Route::get('/admin/users/delete/{id}', 'v1\ADMIN\UserController@delete')->name('user_delete');
+	Route::get('/admin/users/charge', 'v1\ADMIN\UserController@chargeWallet')->name('user_charge');
 
 	Route::get('/admin/orders/create', 'v1\ADMIN\OrderController@show')->name('order_create');
 	Route::post('/admin/orders/create', 'v1\ADMIN\OrderController@store')->name('order_create');

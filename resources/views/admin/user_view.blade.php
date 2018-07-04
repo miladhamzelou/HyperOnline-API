@@ -92,9 +92,6 @@
                                             @endif</td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: right; direction: rtl;">{{ $user->wallet->price . ' تومان' }}</td>
-                                    </tr>
-                                    <tr>
                                         <td style="text-align: right; direction: rtl;">{{ $user->role }}</td>
                                     </tr>
                                     <tr>
@@ -171,9 +168,6 @@
                                         <td style="text-align: right; direction: rtl;">وضعیت</td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: right; direction: rtl;">کیف پول</td>
-                                    </tr>
-                                    <tr>
                                         <td style="text-align: right; direction: rtl;">سطح کاربری</td>
                                     </tr>
                                     <tr>
@@ -238,6 +232,54 @@
                                 @if ($errors->has('body'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('body') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <br>
+                            <div class="form-group">
+                                <input type="submit" tabindex="5" name="send"
+                                       class="my_font btn center-block btn-lg btn-success" value="ارسال">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-9 col-centered center-block" style="float: none;">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h2 class="box-title">کیف پول</h2>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="box-body">
+                        <br>
+                        <br>
+                        <p style="direction: rtl; text-align: right;"><strong>موجودی : </strong>{{ $user->wallet->price . ' تومان' }}</p>
+                        <br>
+                        <br>
+                        <br>
+                        <h4 style="text-align: center">شارژ</h4>
+                        <br>
+                        <form role="form" action="{{ url('user_charge') }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="id" value="{{ $user->unique_id }}">
+
+                            <div class="text-right form-group{{ $errors->has('body') ? ' has-error' : '' }}">
+                                <label for="price" style="direction: rtl">مبلغ ( به تومان ) :</label>
+                                <input id="price" type="number" style="text-align: center; direction: rtl"
+                                          class="my_font form-control"
+                                          name="price" tabindex="4" required/>
+
+                                @if ($errors->has('price'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('price') }}</strong>
                                     </span>
                                 @endif
                             </div>
