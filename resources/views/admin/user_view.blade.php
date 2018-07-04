@@ -261,21 +261,22 @@
                     <div class="box-body">
                         <br>
                         <br>
-                        <p style="direction: rtl; text-align: right;"><strong>موجودی : </strong>{{ $user->wallet->price . ' تومان' }}</p>
+                        <p style="direction: rtl; text-align: right;"><strong>موجودی
+                                : </strong>{{ $user->wallet->price . ' تومان' }}</p>
                         <br>
                         <br>
                         <br>
                         <h4 style="text-align: center">شارژ</h4>
                         <br>
-                        <form role="form" action="{{ url('user_charge') }}" method="post">
+                        <form role="form" action="{{ route('user_charge') }}" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="id" value="{{ $user->unique_id }}">
 
                             <div class="text-right form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                                 <label for="price" style="direction: rtl">مبلغ ( به تومان ) :</label>
                                 <input id="price" type="number" style="text-align: center; direction: rtl"
-                                          class="my_font form-control"
-                                          name="price" tabindex="4" required/>
+                                       class="my_font form-control"
+                                       name="price" tabindex="4" required/>
 
                                 @if ($errors->has('price'))
                                     <span class="help-block">
