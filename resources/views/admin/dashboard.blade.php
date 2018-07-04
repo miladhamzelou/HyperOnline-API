@@ -102,9 +102,9 @@
                             <table class="table no-margin">
                                 <thead>
                                 <tr>
-                                    <th style="font-size:17px; text-align: right; direction: rtl;">آدرس</th>
-                                    <th style="font-size:17px; text-align: right; direction: rtl;">شماره تماس</th>
-                                    <th style="font-size:17px; text-align: right; direction: rtl;">نام</th>
+                                    <th style="text-align: right; direction: rtl;">آدرس</th>
+                                    <th style="text-align: right; direction: rtl;">شماره تماس</th>
+                                    <th style="text-align: right; direction: rtl;">نام</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -141,10 +141,10 @@
                             <table class="table no-margin">
                                 <thead>
                                 <tr>
-                                    <th style="font-size:17px; text-align: right; direction: rtl;">قیمت</th>
-                                    <th style="font-size:17px; text-align: right; direction: rtl;">محصولات</th>
-                                    <th style="font-size:17px; text-align: right; direction: rtl;">نام مشتری</th>
-                                    <th style="font-size:17px; text-align: right; direction: rtl;">کد سفارش</th>
+                                    <th style="text-align: right; direction: rtl;">قیمت</th>
+                                    <th style="text-align: right; direction: rtl;">محصولات</th>
+                                    <th style="text-align: right; direction: rtl;">نام مشتری</th>
+                                    <th style="text-align: right; direction: rtl;">کد سفارش</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -205,11 +205,12 @@
                                                class="product-title">
                                                 {{ $product->name }}
                                                 <span class="label label-info pull-right"
-                                                      style="font-weight:normal; font-size:15px; direction: rtl">
+                                                      style="font-weight:normal; font-size:12px; direction: rtl;">
                                                     {{ $product->price }} تومان</span>
                                                 <br>
+                                                <br>
                                                 <span class="label label-danger pull-right"
-                                                      style="font-weight:normal; font-size:15px; direction: rtl">
+                                                      style="font-weight:normal; font-size:12px; direction: rtl">
                                                     تعداد : {{ $product->count }}</span>
                                             </a>
                                             @if($product->description!="null")

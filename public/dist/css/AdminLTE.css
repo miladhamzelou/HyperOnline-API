@@ -805,7 +805,7 @@ a:focus {
 
 .sidebar-menu li > a {
     position: relative;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .sidebar-menu li > a > .fa {
@@ -3170,7 +3170,7 @@ a:focus {
 
 .products-list .product-title {
     /*font-weight: 600;*/
-    font-size: large;
+    /*font-size: large;*/
     margin-top: 5px;
 }
 
