@@ -6,47 +6,58 @@
 namespace App\Http\Controllers\v1\ADMIN;
 
 use App\Http\Controllers\Controller;
+use App\Presenter;
 use App\Services\v1\UserService;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    protected $Users;
+	protected $Users;
 
-    /**
-     * UserController constructor.
-     * @param UserService $service
-     */
-    public function __construct(UserService $service)
-    {
-        $this->Users = $service;
-    }
+	/**
+	 * UserController constructor.
+	 * @param UserService $service
+	 */
+	public function __construct(UserService $service)
+	{
+		$this->Users = $service;
+	}
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index()
-    {
-        if (!Auth::user()->isAdmin())
-            return redirect()->route('profile');
-        $users = User::orderBy("created_at", "desc")->get();
-        return view('admin.users')
-            ->withTitle("کاربران")
-            ->withUsers($users);
-    }
+	/**
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function index()
+	{
+		if (!Auth::user()->isAdmin())
+			return redirect()->route('profile');
+		$users = User::orderBy("created_at", "desc")->get();
+		return view('admin.users')
+			->withTitle("کاربران")
+			->withUsers($users);
+	}
 
-    public function info($id)
-    {
-        if (!Auth::user()->isAdmin())
-            return redirect()->route('profile');
-        $user = User::where("unique_id", $id)->firstOrFail();
-        if ($user->role == "admin") $user->role = "مدیر";
-        if ($user->role == "user") $user->role = "کاربر";
-        if ($user->role == "developer") $user->role = "توسعه دهنده";
-        $user->create_date = str_replace(":", " : ", $user->create_date);
-        return view('admin.user_view')
-            ->withTitle($user->name)
-            ->withUser($user);
-    }
+	public function info($id)
+	{
+		if (!Auth::user()->isAdmin())
+			return redirect()->route('profile');
+		$user = User::where("unique_id", $id)->firstOrFail();
+		if ($user->role == "admin") $user->role = "مدیر";
+		if ($user->role == "user") $user->role = "کاربر";
+		if ($user->role == "developer") $user->role = "توسعه دهنده";
+		$user->create_date = str_replace(":", " : ", $user->create_date);
+
+
+		$presenter = Presenter::where("user_id", $id)->first();
+		$presenterUser = "null";
+		if ($presenter) {
+			$presenterUser = User::where("unique_id", $presenter->presenter_id)->first();
+		}
+
+
+		return view('admin.user_view')
+			->withTitle($user->name)
+			->withUser($user)
+			->withPresenter($presenterUser);
+	}
 }

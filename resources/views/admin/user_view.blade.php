@@ -114,6 +114,17 @@
                                     <tr>
                                         <td style="text-align: right; direction: ltr;">{{ $user->android }}</td>
                                     </tr>
+                                    @if($presenter!="null")
+                                        <tr>
+                                            <td style="text-align: right; direction: rtl;">
+                                                <a href="{{ url('/admin/users/' . $presenter->unique_id) }}"
+                                                   target="_blank">{{ $presenter->name }}</a></td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td style="text-align: right; direction: ltr;">ندارد</td>
+                                        </tr>
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -176,6 +187,9 @@
                                     </tr>
                                     <tr>
                                         <td style="text-align: right; direction: rtl;">نسخه اندروید</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; direction: rtl;">معرف</td>
                                     </tr>
                                     </tbody>
                                 </table>
