@@ -149,7 +149,7 @@ class UserService
 		if (app('request')->exists('presenter')) {
 			$phone = $request->input('presenter');
 			$oldUser = User::where('phone', $phone)->first();
-			if ($oldUser) {
+			if ($oldUser && ($user->phone != $phone)) {
 				$oldPresent = Presenter::where('user_id', $user->unique_id)->where('presenter_id', $oldUser->unique_id)->first();
 				if (!$oldPresent) {
 					$presenter = new Presenter();
