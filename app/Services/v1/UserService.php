@@ -230,13 +230,13 @@ class UserService
 		return true;
 	}
 
-	/**
-	 * @param $id
-	 */
 	public function deleteUser($id)
 	{
-		$user = User::where('unique_id', $id)->firstOrFail();
-		$user->delete();
+		try {
+			$user = User::where('unique_id', $id)->firstOrFail();
+			$user->delete();
+		} catch (\Exception $ignore) {
+		}
 	}
 
 	public function checkExists($request)
