@@ -1,0 +1,89 @@
+button.btn:active, button.btn:hover {
+    color: #fff;
+    opacity: .6;
+}
+
+input[type=text], input[type=number], input[type=password], textarea, textarea.form-control, select, select.form-control {
+    background: #f8f8f8;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    box-shadow: none;
+    color: #000;
+    font-family: IRANSans, Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    height: 50px;
+    line-height: 50px;
+    margin: 0;
+    padding: 0 20px;
+    text-align: center;
+    transition: all .3s;
+    vertical-align: middle;
+}
+
+textarea, textarea.form-control {
+    line-height: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+input[type=text]:hover, input[type=number]:hover, input[type=password]:hover, textarea.form-control:hover, textarea:hover, select:hover {
+    background: #F9F9F9;
+    border: 2px solid #ccc;
+    box-shadow: none;
+    outline: 0;
+}
+
+input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, textarea.form-control:focus, textarea:focus, select:focus {
+    background: #fff;
+    border: 2px solid #ccc;
+    box-shadow: none;
+    outline: 0;
+}
+
+input[type=text]:-moz-placeholder, input[type=number]:-moz-placeholder, input[type=password]:-moz-placeholder, textarea.form-control:-moz-placeholder, textarea:-moz-placeholder {
+    color: #888
+}
+
+input[type=text]:-ms-input-placeholder, input[type=number]:-ms-input-placeholder, input[type=password]:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #888
+}
+
+input[type=text]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #888
+}
+
+button.btn {
+    background: #19b9e7;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: none;
+    color: #fff;
+    font-family: IRANSans, Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    height: 50px;
+    line-height: 50px;
+    margin: 0;
+    padding: 0 20px;
+    text-shadow: none;
+    transition: all .3s;
+    vertical-align: middle;
+}
+
+button.btn:active {
+    box-shadow: none;
+    outline: 0;
+}
+
+button.btn.active:focus, button.btn:active:focus, button.btn:focus {
+    background: #19b9e7;
+    color: #fff;
+    opacity: .6;
+    outline: 0;
+}
+
+.help-block {
+    direction: rtl;
+    text-align: right;
+}

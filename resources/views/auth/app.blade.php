@@ -1,93 +1,50 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="fa">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="DFhB9qBb8hRewxQtoZCtiDQlpBkhSUnU5Dg5IRK6iZA" />
     <title>هایپرآنلاین</title>
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/mine.css') }}" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('/auth/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/auth/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/auth/css/form-elements.css') }}">
+    <link rel="stylesheet" href="{{ asset('/auth/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/auth/css/iransans.css') }}">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        var bg = '{{ asset('/auth/img/backgrounds/1.png') }}';
+    </script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand font" href="{{ url('/') }}">خانه</a>
+<!-- Top content -->
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h2>فروشگاه <strong>هایپرآنلاین</strong></h2>
+                </div>
+            </div>
+            <div class="row">
+                @yield('content')
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right font">
-                @if (Auth::guest())
-                    <li>
-                        <a href="{{ url('/login') }}">ورود</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/register') }}">ثبت نام</a>
-                    </li>
-                @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            @if (Auth::user()->can_post())
-                                <li>
-                                    <a href="{{ url('/new-post') }}">Add new post</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('/user/'.Auth::id().'/posts') }}">My Posts</a>
-                                </li>
-                            @endif
-                            <li>
-                                <a href="{{ url('/user/'.Auth::id()) }}">My Profile</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/auth/logout') }}">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                @endif
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container">
-    @if (Session::has('message'))
-        <div class="flash alert-info">
-            <p class="panel-body">
-                {{ Session::get('message') }}
-            </p>
-        </div>
-    @endif
-    @if ($errors->any())
-        <div class='flash alert-danger'>
-            <ul class="panel-body">
-                @foreach ( $errors->all() as $error )
-                    <li>
-                        {{ $error }}
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="panel-body">
-        @yield('content')
     </div>
 </div>
-{{--<script src="{{ asset('/js/app2.js') }}"></script>--}}
-{{--<script src="{{ asset('/js/bootstrap.min.js') }}"></script>--}}
-{{--<script src="{{ asset('/js/jquery.min.js') }}"></script>--}}
-{{--<!--[if lt IE 9]>--}}
-{{--<script src="{{ asset('/js/respond.min.js') }}"></script>--}}
-{{--<script src="{{ asset('/js/html5shiv.min.js') }}"></script>--}}
-{{--<![endif]-->--}}
+<!-- Javascript -->
+<script src="{{ asset('auth/js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ asset('auth/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('auth/js/jquery.backstretch.min.js') }}"></script>
+<script src="{{ asset('auth/js/scripts.js') }}"></script>
+<!--[if lt IE 10]>
+<script src="{{ asset('auth/js/placeholder.js') }}"></script>
+<![endif]-->
 </body>
 </html>

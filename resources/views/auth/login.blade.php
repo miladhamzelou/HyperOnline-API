@@ -1,45 +1,51 @@
 @extends('auth.app')
 
 @section('content')
-    <div class="container">
-        <div class="wrapper">
-            <form role="form" method="POST" action="{{ route('login') }}" class="form-signin">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        {{ csrf_field() }}
-                        <h3 class="form-signin-heading font">جهت ورود اطلاعات خود را وارد کنید</h3>
-                        <hr class="colorgraph">
-                        <br>
-
-                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <input id="phone" type="tel" class="font form-control" style="text-align: center"
-                                   name="phone"
-                                   value="{{ old('phone') }}" placeholder="شماره تلفن" required>
-
-                            @if ($errors->has('phone'))
-                                <span class="help-block"><strong>{{ $errors->first('phone') }}</strong></span>
-                            @endif
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <input id="password" type="password" style="text-align: center" placeholder="رمز عبور"
-                                   class="font form-control" name="password" required>
-
-                            @if ($errors->has('password'))
-                                <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
-                            @endif
-                        </div>
-
-                        <br>
-                        <div class="form-group">
-                            <button type="submit" class="font btn btn-block btn3d btn-lg btn-info">ورود</button>
-                        </div>
-                    </div>
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4">
+        <div class="form-box">
+            <div class="form-top">
+                <div class="form-top-left">
+                    <h3>ورود</h3>
+                    <p>اطلاعات کاربری را وارد نمایید :</p>
                 </div>
-            </form>
-            <br>
-            <div class="flex-center">
-                <h6 class="">Coded With <span class="fa fa-heart pulse2"></span> By Arash Hatami</h6>
+                <div class="form-top-right">
+                    <i class="fa fa-key"></i>
+                </div>
+            </div>
+            <div class="form-bottom">
+                <form role="form" action="{{ route('login') }}" method="POST" class="login-form">
+                    {{ csrf_field() }}
+                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                        <input type="number" name="phone" placeholder="شماره تلفن"
+                               class="form-control" id="phone" value="{{ old('phone') }}" style="text-align: center">
+                        @if ($errors->has('phone'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('phone') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <input type="password" name="password" placeholder="رمز عبور"
+                               class="form-control" id="password" value="{{ old('password') }}">
+                        @if ($errors->has('password'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    @if ($errors->has('g-recaptcha-response'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                        </span>
+                    @endif
+                    {!! NoCaptcha::renderJs('fa') !!}
+                    {!! NoCaptcha::display() !!}
+                    <button type="submit" class="btn">ورود</button>
+                </form>
+                <p style="text-align: center; margin-top: 10px">حساب کاربری ندارید ؟ <a href="{{ route('register') }}">ثبت
+                        نام کنید</a></p>
             </div>
         </div>
     </div>
