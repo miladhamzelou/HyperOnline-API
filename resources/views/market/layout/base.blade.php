@@ -97,7 +97,7 @@
                                 </form>
                                 @if($admin)
                                     <li>
-                                        <a href="{{ url('admin') }}" target="_blank">پنل
+                                        <a href="{{ route('admin') }}" target="_blank">پنل
                                             ادمین</a>
                                     </li>
                                 @else

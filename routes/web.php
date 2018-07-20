@@ -7,99 +7,99 @@ Route::get('/home', 'v1\MARKET\MainController@index')->name('home');
 
 Route::get('/profile', 'v1\ADMIN\UserController@profile')->name('profile');
 
-Route::group(['middleware' => ['auth']], function () {
-	Route::get('/admin', 'v1\ADMIN\AdminController@admin')->name('admin');
-	Route::get('/admin/database', 'v1\ADMIN\AdminController@database_get')->name('database');
-	Route::post('/admin/database', 'v1\ADMIN\AdminController@database_store')->name('database');
-	Route::get('/admin/support', 'v1\ADMIN\AdminController@support')->name('support');
-	Route::post('/admin/support', 'v1\ADMIN\AdminController@support_send')->name('support');
+Route::group(['prefix' => 'management', 'middleware' => ['auth']], function () {
+	Route::get('/', 'v1\ADMIN\AdminController@admin')->name('admin');
+	Route::get('/database', 'v1\ADMIN\AdminController@database_get')->name('database');
+	Route::post('/database', 'v1\ADMIN\AdminController@database_store')->name('database');
+	Route::get('/support', 'v1\ADMIN\AdminController@support')->name('support');
+	Route::post('/support', 'v1\ADMIN\AdminController@support_send')->name('support');
 
-	Route::get('/admin/setting', 'v1\ADMIN\AdminController@setting')->name('setting');
-	Route::post('/admin/setting', 'v1\ADMIN\AdminController@setting_send')->name('setting');
-	Route::get('/admin/setting/delete_log', 'v1\ADMIN\AdminController@delete_log')->name('setting');
-	Route::get('/admin/setting/resetMostSell', 'v1\ADMIN\AdminController@resetMostSell')->name('setting');
-	Route::get('/admin/setting/confirmAllPhones', 'v1\ADMIN\AdminController@confirmAllPhones')->name('setting');
-	Route::post('/admin/setting/updateOffline', 'v1\ADMIN\AdminController@updateOffline')->name('setting');
+	Route::get('/setting', 'v1\ADMIN\AdminController@setting')->name('setting');
+	Route::post('/setting', 'v1\ADMIN\AdminController@setting_send')->name('setting');
+	Route::get('/setting/delete_log', 'v1\ADMIN\AdminController@delete_log')->name('setting');
+	Route::get('/setting/resetMostSell', 'v1\ADMIN\AdminController@resetMostSell')->name('setting');
+	Route::get('/setting/confirmAllPhones', 'v1\ADMIN\AdminController@confirmAllPhones')->name('setting');
+	Route::post('/setting/updateOffline', 'v1\ADMIN\AdminController@updateOffline')->name('setting');
 
-	Route::get('/admin/products/create', 'v1\ADMIN\ProductController@show')->name('product_create');
-	Route::post('/admin/products/create', 'v1\ADMIN\ProductController@store')->name('product_create');
-	Route::get('/admin/products', 'v1\ADMIN\ProductController@index')->name('products');
-	Route::get('/admin/products/{id}', 'v1\ADMIN\ProductController@edit')->name('product_edit');
-	Route::post('/admin/products/update', 'v1\ADMIN\ProductController@update')->name('product_update');
-	Route::get('/admin/products/delete/{id}', 'v1\ADMIN\ProductController@delete')->name('product_delete');
-	Route::get('/admin/products/delete_photo/{id}', 'v1\ADMIN\ProductController@delete_photo')->name('product_delete');
-	Route::get('/admin/products_inactive', 'v1\ADMIN\ProductController@inactive')->name('products_inactive');
-	Route::get('/admin/products_active', 'v1\ADMIN\ProductController@active')->name('products_active');
+	Route::get('/products/create', 'v1\ADMIN\ProductController@show')->name('product_create');
+	Route::post('/products/create', 'v1\ADMIN\ProductController@store')->name('product_create');
+	Route::get('/products', 'v1\ADMIN\ProductController@index')->name('products');
+	Route::get('/products/{id}', 'v1\ADMIN\ProductController@edit')->name('product_edit');
+	Route::post('/products/update', 'v1\ADMIN\ProductController@update')->name('product_update');
+	Route::get('/products/delete/{id}', 'v1\ADMIN\ProductController@delete')->name('product_delete');
+	Route::get('/products/delete_photo/{id}', 'v1\ADMIN\ProductController@delete_photo')->name('product_delete');
+	Route::get('/products_inactive', 'v1\ADMIN\ProductController@inactive')->name('products_inactive');
+	Route::get('/products_active', 'v1\ADMIN\ProductController@active')->name('products_active');
 
-	Route::get('/admin/categories/create/{level}', 'v1\ADMIN\CategoryController@show')->name('category_create');
-	Route::post('/admin/categories/create/{level}', 'v1\ADMIN\CategoryController@store')->name('category_create');
-	Route::get('/admin/categories', 'v1\ADMIN\CategoryController@index')->name('categories');
-	Route::get('/admin/categories/{level}/{id}', 'v1\ADMIN\CategoryController@edit')->name('category_edit');
-	Route::post('/admin/categories/update/{level}', 'v1\ADMIN\CategoryController@update')->name('category_update');
-	Route::get('/admin/categories/delete/{level}/{id}', 'v1\ADMIN\CategoryController@delete')->name('category_delete');
-	Route::get('/admin/categories/delete_photo/{level}/{id}', 'v1\ADMIN\CategoryController@delete_photo')->name('category_delete');
+	Route::get('/categories/create/{level}', 'v1\ADMIN\CategoryController@show')->name('category_create');
+	Route::post('/categories/create/{level}', 'v1\ADMIN\CategoryController@store')->name('category_create');
+	Route::get('/categories', 'v1\ADMIN\CategoryController@index')->name('categories');
+	Route::get('/categories/{level}/{id}', 'v1\ADMIN\CategoryController@edit')->name('category_edit');
+	Route::post('/categories/update/{level}', 'v1\ADMIN\CategoryController@update')->name('category_update');
+	Route::get('/categories/delete/{level}/{id}', 'v1\ADMIN\CategoryController@delete')->name('category_delete');
+	Route::get('/categories/delete_photo/{level}/{id}', 'v1\ADMIN\CategoryController@delete_photo')->name('category_delete');
 
-	Route::get('/admin/authors/create', 'v1\ADMIN\AuthorController@show')->name('author_create');
-	Route::post('/admin/authors/create', 'v1\ADMIN\AuthorController@store')->name('author_create');
-	Route::get('/admin/authors', 'v1\ADMIN\AuthorController@index')->name('authors');
-	Route::get('/admin/authors/{id}', 'v1\ADMIN\AuthorController@edit')->name('author_edit');
-	Route::post('/admin/authors/update', 'v1\ADMIN\AuthorController@update')->name('author_update');
-	Route::get('/admin/authors/delete/{id}', 'v1\ADMIN\AuthorController@delete')->name('author_delete');
+	Route::get('/authors/create', 'v1\ADMIN\AuthorController@show')->name('author_create');
+	Route::post('/authors/create', 'v1\ADMIN\AuthorController@store')->name('author_create');
+	Route::get('/authors', 'v1\ADMIN\AuthorController@index')->name('authors');
+	Route::get('/authors/{id}', 'v1\ADMIN\AuthorController@edit')->name('author_edit');
+	Route::post('/authors/update', 'v1\ADMIN\AuthorController@update')->name('author_update');
+	Route::get('/authors/delete/{id}', 'v1\ADMIN\AuthorController@delete')->name('author_delete');
 
-	Route::get('/admin/sellers/create', 'v1\ADMIN\SellerController@show')->name('seller_create');
-	Route::post('/admin/sellers/create', 'v1\ADMIN\SellerController@store')->name('seller_create');
-	Route::get('/admin/sellers', 'v1\ADMIN\SellerController@index')->name('sellers');
-	Route::get('/admin/sellers/{id}', 'v1\ADMIN\SellerController@edit')->name('seller_edit');
-	Route::post('/admin/sellers/update', 'v1\ADMIN\SellerController@update')->name('seller_update');
-	Route::get('/admin/sellers/delete/{id}', 'v1\ADMIN\SellerController@delete')->name('seller_delete');
+	Route::get('/sellers/create', 'v1\ADMIN\SellerController@show')->name('seller_create');
+	Route::post('/sellers/create', 'v1\ADMIN\SellerController@store')->name('seller_create');
+	Route::get('/sellers', 'v1\ADMIN\SellerController@index')->name('sellers');
+	Route::get('/sellers/{id}', 'v1\ADMIN\SellerController@edit')->name('seller_edit');
+	Route::post('/sellers/update', 'v1\ADMIN\SellerController@update')->name('seller_update');
+	Route::get('/sellers/delete/{id}', 'v1\ADMIN\SellerController@delete')->name('seller_delete');
 
-	Route::get('/admin/users/create', 'v1\ADMIN\UserController@show')->name('user_create');
-	Route::post('/admin/users/create', 'v1\ADMIN\UserController@store')->name('user_create');
-	Route::get('/admin/users', 'v1\ADMIN\UserController@index')->name('users');
-	Route::get('/admin/users/{id}', 'v1\ADMIN\UserController@info')->name('user_edit');
-	Route::post('/admin/users/update', 'v1\ADMIN\UserController@update')->name('user_update');
-	Route::get('/admin/users/delete/{id}', 'v1\ADMIN\UserController@delete')->name('user_delete');
-	Route::post('/admin/users/charge', 'v1\ADMIN\UserController@chargeWallet')->name('user_charge');
+	Route::get('/users/create', 'v1\ADMIN\UserController@show')->name('user_create');
+	Route::post('/users/create', 'v1\ADMIN\UserController@store')->name('user_create');
+	Route::get('/users', 'v1\ADMIN\UserController@index')->name('users');
+	Route::get('/users/{id}', 'v1\ADMIN\UserController@info')->name('user_edit');
+	Route::post('/users/update', 'v1\ADMIN\UserController@update')->name('user_update');
+	Route::get('/users/delete/{id}', 'v1\ADMIN\UserController@delete')->name('user_delete');
+	Route::post('/users/charge', 'v1\ADMIN\UserController@chargeWallet')->name('user_charge');
 
-	Route::get('/admin/orders/create', 'v1\ADMIN\OrderController@show')->name('order_create');
-	Route::post('/admin/orders/create', 'v1\ADMIN\OrderController@store')->name('order_create');
-	Route::get('/admin/orders', 'v1\ADMIN\OrderController@index')->name('orders');
-	Route::get('/admin/orders/{id}', 'v1\ADMIN\OrderController@details')->name('order_details');
-	Route::post('/admin/orders/update', 'v1\ADMIN\OrderController@update')->name('order_update');
-	Route::get('/admin/orders/delete/{id}', 'v1\ADMIN\OrderController@delete')->name('order_delete');
-	Route::get('/admin/order_sent/{id}', 'v1\ADMIN\OrderController@sent')->name('order_sent');
+	Route::get('/orders/create', 'v1\ADMIN\OrderController@show')->name('order_create');
+	Route::post('/orders/create', 'v1\ADMIN\OrderController@store')->name('order_create');
+	Route::get('/orders', 'v1\ADMIN\OrderController@index')->name('orders');
+	Route::get('/orders/{id}', 'v1\ADMIN\OrderController@details')->name('order_details');
+	Route::post('/orders/update', 'v1\ADMIN\OrderController@update')->name('order_update');
+	Route::get('/orders/delete/{id}', 'v1\ADMIN\OrderController@delete')->name('order_delete');
+	Route::get('/order_sent/{id}', 'v1\ADMIN\OrderController@sent')->name('order_sent');
 
-	Route::get('/admin/pays', 'v1\ADMIN\OrderController@pays')->name('pays');
+	Route::get('/pays', 'v1\ADMIN\OrderController@pays')->name('pays');
 
-	Route::get('/admin/messages', 'v1\ADMIN\AdminController@messages')->name('messages');
-	Route::get('/admin/messages/sms', 'v1\ADMIN\AdminController@messages_sms')->name('messages');
-	Route::get('/admin/messages/push', 'v1\ADMIN\AdminController@messages_push')->name('messages');
-	Route::post('/admin/messages/sms', 'v1\ADMIN\AdminController@messages_send_sms')->name('messages');
-	Route::post('/admin/messages/push', 'v1\ADMIN\AdminController@messages_send_push')->name('messages');
+	Route::get('/messages', 'v1\ADMIN\AdminController@messages')->name('messages');
+	Route::get('/messages/sms', 'v1\ADMIN\AdminController@messages_sms')->name('messages');
+	Route::get('/messages/push', 'v1\ADMIN\AdminController@messages_push')->name('messages');
+	Route::post('/messages/sms', 'v1\ADMIN\AdminController@messages_send_sms')->name('messages');
+	Route::post('/messages/push', 'v1\ADMIN\AdminController@messages_send_push')->name('messages');
 
-	Route::post('/admin/confirm/message', 'v1\ADMIN\AdminController@messages_send_confirm')->name('messages');
-	Route::get('/admin/confirm/{id}/{code}', 'v1\ADMIN\AdminController@confirmInfo')->name('confirm');
-	Route::get('/admin/pop/{id}', 'v1\ADMIN\AdminController@popUser')->name('pop');
+	Route::post('/confirm/message', 'v1\ADMIN\AdminController@messages_send_confirm')->name('messages');
+	Route::get('/confirm/{id}/{code}', 'v1\ADMIN\AdminController@confirmInfo')->name('confirm');
+	Route::get('/pop/{id}', 'v1\ADMIN\AdminController@popUser')->name('pop');
 
-	Route::get('/admin/accounting', 'v1\ADMIN\AdminController@accounting')->name('accounting');
+	Route::get('/accounting', 'v1\ADMIN\AdminController@accounting')->name('accounting');
 
-	Route::get('/admin/banners/create', 'v1\ADMIN\AdminController@banner_show')->name('banner_show');
-	Route::post('/admin/banners/create', 'v1\ADMIN\AdminController@banner_create')->name('banner_create');
-	Route::get('/admin/banners', 'v1\ADMIN\AdminController@banners')->name('banners');
-	Route::get('/admin/banners/{id}', 'v1\ADMIN\AdminController@banner_edit')->name('banner_edit');
-	Route::post('/admin/banners/update', 'v1\ADMIN\AdminController@banner_update')->name('banner_update');
-	Route::get('/admin/banners/delete/{id}', 'v1\ADMIN\AdminController@banner_delete')->name('banner_delete');
+	Route::get('/banners/create', 'v1\ADMIN\AdminController@banner_show')->name('banner_show');
+	Route::post('/banners/create', 'v1\ADMIN\AdminController@banner_create')->name('banner_create');
+	Route::get('/banners', 'v1\ADMIN\AdminController@banners')->name('banners');
+	Route::get('/banners/{id}', 'v1\ADMIN\AdminController@banner_edit')->name('banner_edit');
+	Route::post('/banners/update', 'v1\ADMIN\AdminController@banner_update')->name('banner_update');
+	Route::get('/banners/delete/{id}', 'v1\ADMIN\AdminController@banner_delete')->name('banner_delete');
 
-	Route::get('/admin/comments', 'v1\ADMIN\AdminController@comments')->name('comments');
+	Route::get('/comments', 'v1\ADMIN\AdminController@comments')->name('comments');
 
 	Route::get('/checkout', 'v1\MARKET\MainController@checkout')->name('checkout');
 	Route::post('/pay_confirm', 'v1\MARKET\MainController@pay_confirm')->name('pay_confirm');
 
-	Route::get('/admin/logs/{type}', 'v1\ADMIN\AdminController@logs')->name('logs');
+	Route::get('/logs/{type}', 'v1\ADMIN\AdminController@logs')->name('logs');
 });
 
 Route::get('/search', 'v1\ADMIN\AdminController@search');
-Route::get('/admin/search', 'v1\ADMIN\AdminController@search');
+Route::get('/search', 'v1\ADMIN\AdminController@search');
 
 Route::get('/profile', 'v1\MARKET\UserController@profile');
 Route::get('/orders', 'v1\MARKET\UserController@orders');
@@ -109,7 +109,7 @@ Route::get('/addToCart', 'v1\API\ProductController@addToCart');
 Route::get('/removeFromCart', 'v1\MARKET\ProductController@removeFromCart');
 Route::get('/pay', 'v1\MARKET\MainController@pay')->name('pay');
 Route::post('/callback', 'v1\MARKET\MainController@callback');
-Route::get('/admin/downloadFactor/{id}', 'v1\ADMIN\OrderController@downloadFactor');
+Route::get('/downloadFactor/{id}', 'v1\ADMIN\OrderController@downloadFactor');
 
 Route::get('/contact_us', 'v1\MARKET\MainController@contact_us');
 Route::get('/about', 'v1\MARKET\MainController@about');

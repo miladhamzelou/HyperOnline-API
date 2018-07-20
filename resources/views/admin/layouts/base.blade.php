@@ -178,7 +178,7 @@
                 <li class="my_font"><a href="{{ url('/home') }}" target="_blank">مشاهده فروشگاه</a></li>
                 <li class="header">بخش اصلی</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="my_font"><a href="{{ url('/admin') }}">اطلاعات</a></li>
+                <li class="my_font"><a href="{{ url('/management') }}">اطلاعات</a></li>
 
                 <li class="treeview">
                     <a href="#">کالا ها
@@ -187,9 +187,9 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/products/create') }}">کالای جدید</a></li>
-                        <li><a href="{{ url('/admin/products') }}">لیست کالا ها</a></li>
-                        <li><a href="{{ url('/admin/products_inactive') }}">کالاهای تایید نشده</a></li>
+                        <li><a href="{{ url('/management/products/create') }}">کالای جدید</a></li>
+                        <li><a href="{{ url('/management/products') }}">لیست کالا ها</a></li>
+                        <li><a href="{{ url('/management/products_inactive') }}">کالاهای تایید نشده</a></li>
                     </ul>
                 </li>
 
@@ -200,10 +200,10 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/categories/create/1') }}">دسته بندی جدید − مرحله ۱</a></li>
-                        <li><a href="{{ url('/admin/categories/create/2') }}">دسته بندی جدید − مرحله ۲</a></li>
-                        <li><a href="{{ url('/admin/categories/create/3') }}">دسته بندی جدید − مرحله ۳</a></li>
-                        <li><a href="{{ url('/admin/categories') }}">لیست دسته بندی ها</a></li>
+                        <li><a href="{{ url('/management/categories/create/1') }}">دسته بندی جدید − مرحله ۱</a></li>
+                        <li><a href="{{ url('/management/categories/create/2') }}">دسته بندی جدید − مرحله ۲</a></li>
+                        <li><a href="{{ url('/management/categories/create/3') }}">دسته بندی جدید − مرحله ۳</a></li>
+                        <li><a href="{{ url('/management/categories') }}">لیست دسته بندی ها</a></li>
                     </ul>
                 </li>
 
@@ -214,8 +214,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/authors/create') }}">فروشنده جدید</a></li>
-                        <li><a href="{{ url('/admin/authors') }}">لیست فروشنده ها</a></li>
+                        <li><a href="{{ url('/management/authors/create') }}">فروشنده جدید</a></li>
+                        <li><a href="{{ url('/management/authors') }}">لیست فروشنده ها</a></li>
                     </ul>
                 </li>
 
@@ -226,8 +226,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/sellers/create') }}">فروشگاه جدید</a></li>
-                        <li><a href="{{ url('/admin/sellers') }}">لیست فروشگاه ها</a></li>
+                        <li><a href="{{ url('/management/sellers/create') }}">فروشگاه جدید</a></li>
+                        <li><a href="{{ url('/management/sellers') }}">لیست فروشگاه ها</a></li>
                     </ul>
                 </li>
 
@@ -238,8 +238,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        {{--                        <li><a href="{{ url('/admin/users/create') }}">کاربر جدید</a></li>--}}
-                        <li><a href="{{ url('/admin/users') }}">لیست کاربر ها</a></li>
+                        {{--                        <li><a href="{{ url('/management/users/create') }}">کاربر جدید</a></li>--}}
+                        <li><a href="{{ url('/management/users') }}">لیست کاربر ها</a></li>
                     </ul>
                 </li>
 
@@ -250,9 +250,9 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        {{--                        <li><a href="{{ url('/admin/orders/create') }}">سفارش جدید</a></li>--}}
-                        <li><a href="{{ url('/admin/orders') }}">لیست سفارش ها</a></li>
-                        <li><a href="{{ url('/admin/pays') }}">لیست تراکنش ها</a></li>
+                        {{--                        <li><a href="{{ url('/management/orders/create') }}">سفارش جدید</a></li>--}}
+                        <li><a href="{{ url('/management/orders') }}">لیست سفارش ها</a></li>
+                        <li><a href="{{ url('/management/pays') }}">لیست تراکنش ها</a></li>
                     </ul>
                 </li>
 
@@ -263,19 +263,19 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/banners/create') }}">بنر جدید</a></li>
-                        <li><a href="{{ url('/admin/banners') }}">مشاهده بنر ها</a></li>
+                        <li><a href="{{ url('/management/banners/create') }}">بنر جدید</a></li>
+                        <li><a href="{{ url('/management/banners') }}">مشاهده بنر ها</a></li>
                     </ul>
                 </li>
 
-                <li class="my_font"><a href="{{ url('/admin/comments') }}">نظرات</a></li>
+                <li class="my_font"><a href="{{ url('/management/comments') }}">نظرات</a></li>
 
                 <hr>
                 <li class="header">امکانات</li>
-                <li class="my_font"><a href="{{ url('/admin/accounting') }}">حسابداری</a></li>
-                <li class="my_font"><a href="{{ url('/admin/database') }}">پایگاه داده</a></li>
-                <li class="my_font"><a href="{{ url('/admin/support') }}">پشتیبانی</a></li>
-                <li class="my_font"><a href="{{ url('/admin/setting') }}">تنظیمات</a></li>
+                <li class="my_font"><a href="{{ url('/management/accounting') }}">حسابداری</a></li>
+                <li class="my_font"><a href="{{ url('/management/database') }}">پایگاه داده</a></li>
+                <li class="my_font"><a href="{{ url('/management/support') }}">پشتیبانی</a></li>
+                <li class="my_font"><a href="{{ url('/management/setting') }}">تنظیمات</a></li>
                 <li class="treeview">
                     <a href="#">پیام ها
                         <span class="pull-right-container">
@@ -283,9 +283,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/messages/sms') }}">ارسال اس ام اس</a></li>
-                        <li><a href="{{ url('/admin/messages/push') }}">ارسال پوش</a></li>
-                        <li><a href="{{ url('/admin/messages') }}">گزارشات</a></li>
+                        <li><a href="{{ url('/management/messages/sms') }}">ارسال اس ام اس</a></li>
+                        <li><a href="{{ url('/management/messages/push') }}">ارسال پوش</a></li>
+                        <li><a href="{{ url('/management/messages') }}">گزارشات</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

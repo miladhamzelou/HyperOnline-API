@@ -113,7 +113,7 @@
                                         <td style="text-align: right; direction: rtl;">{{ $user->address }}</td>
                                         <td style="text-align: right; direction: rtl;">{{ $user->phone }}</td>
                                         <td style="text-align: right; direction: rtl;"><a
-                                                    href="{{ url('/admin/users/'.$user->unique_id) }}">{{ $user->name }}</a>
+                                                    href="{{ url('/management/users/'.$user->unique_id) }}">{{ $user->name }}</a>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                     <div class="box-footer text-center">
-                        <a href="{{ url('/admin/users') }}">لیست کامل</a>
+                        <a href="{{ url('/management/users') }}">لیست کامل</a>
                     </div>
                 </div>
             </div>
@@ -153,12 +153,12 @@
                                         <td style="text-align: right; direction: rtl;">{{ $order->price }} تومان</td>
                                         <td style="text-align: right; direction: rtl;">{{ $order->stuffs }}</td>
                                         <td style="text-align: right; direction: rtl;">
-                                            <a href="{{ url('/admin/users/'.$order->user_id) }}">
+                                            <a href="{{ url('/management/users/'.$order->user_id) }}">
                                                 {{ $order->user_name }}
                                             </a>
                                         </td>
                                         <td style="text-align: right; direction: rtl;">
-                                            <a href="{{ url('/admin/orders/'.$order->unique_id) }}">
+                                            <a href="{{ url('/management/orders/'.$order->unique_id) }}">
                                                 {{ $order->code }}
                                             </a>
                                         </td>
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                     <div class="box-footer text-center">
-                        <a href="{{ url('/admin/orders') }}">لیست کامل</a>
+                        <a href="{{ url('/management/orders') }}">لیست کامل</a>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                                             @endif
                                         </div>
                                         <div class="product-info">
-                                            <a href="{{ url('/admin/products/'.$product->unique_id) }}"
+                                            <a href="{{ url('/management/products/'.$product->unique_id) }}"
                                                class="product-title">
                                                 {{ $product->name }}
                                                 <span class="label label-info pull-right"
@@ -226,7 +226,7 @@
                         @endif
                     </div>
                     <div class="box-footer text-center">
-                        <a href="{{ url('/admin/products') }}">لیست کامل</a>
+                        <a href="{{ url('/management/products') }}">لیست کامل</a>
                     </div>
                 </div>
             </div>
