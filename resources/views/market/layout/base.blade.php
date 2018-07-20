@@ -373,7 +373,7 @@
                 </div>
 
                 <div class="container" style="text-align: center;">
-                    <div style="display: inline-block">
+                    <div style="display: flex">
                         <div style="float: left;" class="logo">
                             <img class="img-responsive" style='cursor:pointer; margin:0 auto;'
                                  alt="asnaf"
