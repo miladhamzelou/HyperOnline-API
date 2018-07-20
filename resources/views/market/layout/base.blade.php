@@ -397,6 +397,13 @@
                                  alt="aparat"
                                  src="https://www.aparat.com/public/public/images/logo/v2/aparat_logo_fa_color_black_275x100.png"/>
                         </div>
+                        <div style="float: left;" class="logo">
+                            <a href='javascript:PayirTrust();'><img src='https://pay.ir/assets/img/pay-trust.png'
+                                                                    alt='نماد اعتماد درگاه Pay.ir'></a>
+                            <script type='text/javascript'>function PayirTrust() {
+                                    window.open('https://pay.ir/trust/34464', '', 'scrollbars=yes, width=500, height=500, top=150, left=300');
+                                }</script>
+                        </div>
                     </div>
                 </div>
                 <br>
