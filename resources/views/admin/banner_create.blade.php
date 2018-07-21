@@ -17,7 +17,7 @@
                     </div>
                     <div class="box-body">
                         <br>
-                        <form role="form" action="/admin/banners/create" method="post" enctype="multipart/form-data">
+                        <form role="form" action="/management/banners/create" method="post" enctype="multipart/form-data">
                             <div class="row" style="padding-right: 15px;padding-left: 15px">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

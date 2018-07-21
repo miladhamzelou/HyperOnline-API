@@ -16,14 +16,14 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <a href="{{ url('admin/setting/delete_log') }}" tabindex="1" class="btn btn-danger  btn-lg">حذف
+                        <a href="{{ url('management/setting/delete_log') }}" tabindex="1" class="btn btn-danger  btn-lg">حذف
                             لاگ</a>
-                        <a href="{{ url('admin/setting/resetMostSell') }}" tabindex="2" class="btn btn-danger  btn-lg">صفر
+                        <a href="{{ url('management/setting/resetMostSell') }}" tabindex="2" class="btn btn-danger  btn-lg">صفر
                             کردن فروش</a>
-                        <a href="{{ url('admin/setting/confirmAllPhones') }}" tabindex="3"
+                        <a href="{{ url('management/setting/confirmAllPhones') }}" tabindex="3"
                            class="btn btn-warning  btn-lg">تایید شماره ها</a>
                         <hr>
-                        <form role="form" action="/admin/setting/updateOffline" method="post">
+                        <form role="form" action="/management/setting/updateOffline" method="post">
                             <div class="row" style="padding-right: 15px;padding-left: 15px">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

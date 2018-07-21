@@ -9,7 +9,7 @@
         <div class="col-lg-6 col-centered center-block" style="float: none;">
             @if($products->count())
                 <a class="btn btn-success center-block btn-lg"
-                   href="{{ url('/admin/products_active') }}">تایید تمام محصولات</a>
+                   href="{{ url('/management/products_active') }}">تایید تمام محصولات</a>
                 <br>
                 <br>
             @endif
@@ -39,7 +39,7 @@
                                             @endif
                                         </div>
                                         <div class="product-info">
-                                            <a href="{{ url('/admin/products/'.$product->unique_id) }}"
+                                            <a href="{{ url('/management/products/'.$product->unique_id) }}"
                                                class="product-title">
                                                 {{ $product->name }}
                                                 <span class="label label-info pull-right"

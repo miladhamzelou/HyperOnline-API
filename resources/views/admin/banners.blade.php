@@ -47,7 +47,7 @@
                                             @endif
                                         </div>
                                         <div class="product-info">
-                                            <a href="{{ url('/admin/banners/'.$banner->unique_id) }}"
+                                            <a href="{{ url('/management/banners/'.$banner->unique_id) }}"
                                                class="product-title">
                                                 {{ $banner->title }}
                                             </a>

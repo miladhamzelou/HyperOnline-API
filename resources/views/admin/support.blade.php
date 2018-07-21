@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <form role="form" action="/admin/support" method="post">
+                        <form role="form" action="/management/support" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group{{ $errors->has('section') ? ' has-error' : '' }}">

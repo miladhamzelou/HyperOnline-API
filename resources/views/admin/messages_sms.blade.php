@@ -19,7 +19,7 @@
                         <br>
                         <p style="text-align: center; color: red;">پیامک فقط به کاربرانی که شماره تلفن تایید شده داشته باشند ارسال خواهد شد</p>
                         <br>
-                        <form role="form" action="/admin/messages/sms" method="post">
+                        <form role="form" action="/management/messages/sms" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="text-right form-group{{ $errors->has('body') ? ' has-error' : '' }}">

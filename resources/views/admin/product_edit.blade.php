@@ -17,7 +17,7 @@
                     </div>
                     <div class="box-body">
                         <br>
-                        <form role="form" action="/admin/products/update" method="post" enctype="multipart/form-data">
+                        <form role="form" action="/management/products/update" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }}">
@@ -211,12 +211,12 @@
 
                             <div class="form-group">
                                 <a class="btn btn-danger center-block btn-lg style="
-                                   href="{{ url('admin/products/delete_photo/'.$product->unique_id) }}">حذف عکس</a>
+                                   href="{{ url('management/products/delete_photo/'.$product->unique_id) }}">حذف عکس</a>
                             </div>
 
                             <div class="form-group">
                                 <a class="btn btn-danger center-block btn-lg"
-                                   href="{{ url('admin/products/delete/'.$product->unique_id) }}">حذف محصول</a>
+                                   href="{{ url('management/products/delete/'.$product->unique_id) }}">حذف محصول</a>
                             </div>
                         </form>
                     </div>

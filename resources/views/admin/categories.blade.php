@@ -33,12 +33,12 @@
                                     @foreach($categories3 as $category)
                                         <tr>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/categories/2/'.$category->parent_id) }}">
+                                                <a href="{{ url('/management/categories/2/'.$category->parent_id) }}">
                                                     {{ $category->parent_name }}
                                                 </a>
                                             </td>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/categories/3/'.$category->unique_id) }}">
+                                                <a href="{{ url('/management/categories/3/'.$category->unique_id) }}">
                                                     {{ $category->name }}
                                                 </a>
                                             </td>
@@ -80,12 +80,12 @@
                                     @foreach($categories2 as $category)
                                         <tr>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/categories/1/'.$category->parent_id) }}">
+                                                <a href="{{ url('/management/categories/1/'.$category->parent_id) }}">
                                                     {{ $category->parent_name }}
                                                 </a>
                                             </td>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/categories/2/'.$category->unique_id) }}">
+                                                <a href="{{ url('/management/categories/2/'.$category->unique_id) }}">
                                                     {{ $category->name }}
                                                 </a>
                                             </td>
@@ -125,7 +125,7 @@
                                     @foreach($categories1 as $category)
                                         <tr>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/categories/1/'.$category->unique_id) }}">
+                                                <a href="{{ url('/management/categories/1/'.$category->unique_id) }}">
                                                     {{ $category->name }}
                                                 </a>
                                             </td>

@@ -34,7 +34,7 @@
                                             <td style="text-align: right; direction: rtl;">{{ $seller->address }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ $seller->phone }}</td>
                                             <td style="text-align: right; direction: rtl;"><a
-                                                        href="{{ url('/admin/sellers/'.$seller->unique_id) }}">{{ $seller->name }}</a>
+                                                        href="{{ url('/management/sellers/'.$seller->unique_id) }}">{{ $seller->name }}</a>
                                         </tr>
                                     @endforeach
                                     </tbody>

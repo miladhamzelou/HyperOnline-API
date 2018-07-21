@@ -114,7 +114,7 @@
                                     @if($presenter!="null")
                                         <tr>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/users/' . $presenter->unique_id) }}"
+                                                <a href="{{ url('/management/users/' . $presenter->unique_id) }}"
                                                    target="_blank">{{ $presenter->name }}</a></td>
                                         </tr>
                                     @else
@@ -209,17 +209,17 @@
                         <br>
                         <br>
                         <a class="btn btn-success pull-right btn-lg" tabindex="1" style="margin-left: 5px"
-                           href="{{ url('admin/confirm/' . $user->unique_id . '/1') }}">تایید اطلاعات</a>
+                           href="{{ url('management/confirm/' . $user->unique_id . '/1') }}">تایید اطلاعات</a>
                         <a class="btn btn-danger pull-right btn-lg" tabindex="2" style="margin-left: 10px"
-                           href="{{ url('admin/confirm/' . $user->unique_id . '/0') }}">عدم تایید اطلاعات</a>
+                           href="{{ url('management/confirm/' . $user->unique_id . '/0') }}">عدم تایید اطلاعات</a>
                         <a class="btn btn-warning pull-right btn-lg" tabindex="3"
-                           href="{{ url('admin/pop/' . $user->unique_id) }}">خروج اجباری کاربر</a>
+                           href="{{ url('management/pop/' . $user->unique_id) }}">خروج اجباری کاربر</a>
                         <br>
                         <br>
                         <br>
                         <h3 style="text-align: center">ارسال پیام</h3>
                         <br>
-                        <form role="form" action="/admin/confirm/message" method="post">
+                        <form role="form" action="/management/confirm/message" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="id" value="{{ $user->unique_id }}">
 

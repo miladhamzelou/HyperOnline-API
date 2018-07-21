@@ -68,12 +68,12 @@
                                             <td style="text-align: right; direction: rtl;">{{ $order->price . ' تومان' }}</td>
                                             <td style="text-align: right; direction: rtl;">{{ str_replace(','," - ",$order->stuffs) }}</td>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/users/' . $order->user_id) }}">
+                                                <a href="{{ url('/management/users/' . $order->user_id) }}">
                                                     {{ $order->user_name }}
                                                 </a>
                                             </td>
                                             <td style="text-align: right; direction: rtl;">
-                                                <a href="{{ url('/admin/orders/' . $order->unique_id) }}">
+                                                <a href="{{ url('/management/orders/' . $order->unique_id) }}">
                                                     {{ $order->code }}
                                                 </a>
                                             </td>

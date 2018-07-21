@@ -17,7 +17,7 @@
                     </div>
                     <div class="box-body">
                         <br>
-                        <form role="form" action="/admin/products/create" method="post" enctype="multipart/form-data">
+                        <form role="form" action="/management/products/create" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }}">

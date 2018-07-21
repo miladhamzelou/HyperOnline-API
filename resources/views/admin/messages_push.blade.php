@@ -17,7 +17,7 @@
                     </div>
                     <div class="box-body">
                         <br>
-                        <form role="form" action="/admin/messages/push" method="post">
+                        <form role="form" action="/management/messages/push" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="text-right form-group{{ $errors->has('title') ? ' has-error' : '' }}">

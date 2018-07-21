@@ -40,8 +40,8 @@
                             <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
                         </span>
                     @endif
-                    {!! NoCaptcha::renderJs('fa') !!}
-                    {!! NoCaptcha::display() !!}
+                    {{--{!! NoCaptcha::renderJs('fa') !!}--}}
+                    {{--{!! NoCaptcha::display() !!}--}}
                     <button type="submit" class="btn">ورود</button>
                 </form>
                 <p style="text-align: center; margin-top: 10px">حساب کاربری ندارید ؟ <a href="{{ route('register') }}">ثبت

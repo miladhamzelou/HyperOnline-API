@@ -82,10 +82,10 @@
                                 / ساعت : </strong>{{ $order->create_date }}</p><br>
                         <br>
                         <a class="btn btn-warning pull-right btn-lg" tabindex="1" style="margin-left: 5px"
-                           href="{{ url('admin/downloadFactor/' . $order->code) }}">دانلود فاکتور</a>
+                           href="{{ url('management/downloadFactor/' . $order->code) }}">دانلود فاکتور</a>
 
                         <a class="btn btn-success pull-right btn-lg" tabindex="2"
-                           href="{{ url('admin/order_sent/' . $order->code) }}">ارسال شد</a>
+                           href="{{ url('management/order_sent/' . $order->code) }}">ارسال شد</a>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
             <div class="col-lg-4 col-centered center-block" style="float: none;">
                 <div class="flash alert-warning">
                     <p class="panel-body" style="font-size:20px; text-align:center; direction: rtl;">
-                        <a href="{{ url('/admin/products_inactive') }}" style="color:white;">
+                        <a href="{{ url('/management/products_inactive') }}" style="color:white;">
                             محصولات تایید نشده ای وجود دارند
                         </a>
                     </p>
@@ -47,7 +47,7 @@
                                             @endif
                                         </div>
                                         <div class="product-info">
-                                            <a href="{{ url('/admin/products/'.$product->unique_id) }}"
+                                            <a href="{{ url('/management/products/'.$product->unique_id) }}"
                                                class="product-title">
                                                 {{ $product->name }}
                                                 <span class="label label-info pull-right"

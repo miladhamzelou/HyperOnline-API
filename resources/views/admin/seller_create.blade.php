@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <form role="form" action="/admin/sellers/create" method="post">
+                        <form role="form" action="/management/sellers/create" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">

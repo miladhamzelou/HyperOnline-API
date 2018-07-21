@@ -17,7 +17,7 @@
                     </div>
                     <div class="box-body">
                         <br>
-                        <form role="form" action="/admin/categories/create/{{ $level }}" enctype="multipart/form-data"
+                        <form role="form" action="/management/categories/create/{{ $level }}" enctype="multipart/form-data"
                               method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

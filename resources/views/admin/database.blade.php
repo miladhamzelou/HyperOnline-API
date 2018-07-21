@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <form role="form" action="/admin/setting" method="post">
+                        <form role="form" action="/management/setting" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="unique_id" value="{{ $option->unique_id }}">
                             <br>

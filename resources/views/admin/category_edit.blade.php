@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <div class="box-body">
-                        <form role="form" action="/admin/categories/update/{{ $level }}" enctype="multipart/form-data"
+                        <form role="form" action="/management/categories/update/{{ $level }}" enctype="multipart/form-data"
                               method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="unique_id" value="{{ $category2->unique_id }}">
@@ -105,11 +105,11 @@
 
                             <div class="form-group">
                                 <a class="btn btn-danger center-block btn-lg"
-                                   href="{{ url('admin/categories/delete_photo/'.$level.'/'.$category2->unique_id) }}">حذف عکس</a>
+                                   href="{{ url('management/categories/delete_photo/'.$level.'/'.$category2->unique_id) }}">حذف عکس</a>
                             </div>
 
                             <div class="form-group">
-                                <a href="{{ url('admin/categories/delete/'.$level.'/'.$category2->unique_id) }}"
+                                <a href="{{ url('management/categories/delete/'.$level.'/'.$category2->unique_id) }}"
                                    tabindex="4" class="btn btn-danger center-block btn-lg">حذف دسته بندی</a>
                             </div>
                         </form>

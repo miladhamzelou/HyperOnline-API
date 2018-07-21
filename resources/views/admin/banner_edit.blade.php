@@ -17,7 +17,7 @@
                     </div>
                     <div class="box-body">
                         <br>
-                        <form role="form" action="/admin/banners/update" method="post" enctype="multipart/form-data">
+                        <form role="form" action="/management/banners/update" method="post" enctype="multipart/form-data">
                             <div class="row" style="padding-right: 15px;padding-left: 15px">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="unique_id" value="{{ $banner->unique_id }}">
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="form-group">
-                                <a href="{{ url('admin/banners/delete/'.$banner->unique_id) }}"
+                                <a href="{{ url('management/banners/delete/'.$banner->unique_id) }}"
                                    tabindex="4" class="btn btn-danger center-block btn-lg">حذف بنر</a>
                             </div>
                         </form>
