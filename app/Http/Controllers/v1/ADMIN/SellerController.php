@@ -73,7 +73,7 @@ class SellerController
             $seller->save();
 
             $message = "seller created";
-            return redirect('/admin/sellers')->withMessage($message);
+            return redirect('/management/sellers')->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
@@ -116,7 +116,7 @@ class SellerController
             $seller->save();
 
             $message = "seller updated";
-            return redirect('/admin/sellers')->withMessage($message);
+            return redirect('/management/sellers')->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');

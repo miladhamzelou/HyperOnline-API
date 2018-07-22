@@ -206,7 +206,7 @@ class AdminController
 
 			$option->save();
 			$message = "options updated";
-			return redirect('/admin')
+			return redirect('/management')
 				->withMessage($message);
 		} else
 			return redirect('/')
@@ -243,7 +243,7 @@ class AdminController
 
 
 			$message = "پیام شما ارسال شد";
-			return redirect('/admin')
+			return redirect('/management')
 				->withMessage($message);
 		} else
 			return redirect('/')
@@ -284,7 +284,7 @@ class AdminController
 			$option->save();
 
 			$message = "تنظیمات اعمال شد";
-			return redirect('/admin/database')
+			return redirect('/management/database')
 				->withMessage($message);
 		} else
 			return redirect('/')
@@ -294,7 +294,7 @@ class AdminController
 	public function delete_log()
 	{
 		unlink(storage_path('/logs/laravel.log'));
-		return redirect('/admin/setting')
+		return redirect('/management/setting')
 			->withMessage("فایل لاگ پاک شد");
 	}
 
@@ -305,7 +305,7 @@ class AdminController
 			$user->confirmed_phone = 1;
 			$user->save();
 		}
-		return redirect('/admin/setting')
+		return redirect('/management/setting')
 			->withMessage("تمام شماره ها تایید شد");
 	}
 
@@ -315,7 +315,7 @@ class AdminController
 		$option->offline = ($request->get('offline') == "on") ? 1 : 0;
 		$option->offline_msg = $request->get('message');
 		$option->save();
-		return redirect('/admin/setting')
+		return redirect('/management/setting')
 			->withMessage("وضعیت فروشگاه تغییر کرد");
 	}
 
@@ -364,7 +364,7 @@ class AdminController
 			Smsir::send($messages, $phones);
 
 			$message = "پیام شما با موفقیت ارسال شد";
-			return redirect('/admin/messages')
+			return redirect('/management/messages')
 				->withMessage($message);
 		} else
 			return redirect('/')
@@ -401,11 +401,11 @@ class AdminController
 			$push->title = $title;
 			$push->body = $body;
 			$push->save();
-			return redirect('/admin/messages')
+			return redirect('/management/messages')
 				->withMessage($message);
 		} else {
 			$message = "خطایی رخ داده است";
-			return redirect('/admin/messages')
+			return redirect('/management/messages')
 				->withErrors($message);
 		}
 	}
@@ -418,10 +418,10 @@ class AdminController
 		$user = User::where("unique_id", $id)->firstOrFail();
 
 		if ($this->sendPush($user->pushe, $title, $body))
-			return redirect('/admin/users/' . $id)
+			return redirect('/management/users/' . $id)
 				->withMessage("پیام شما با موفقیت ارسال شد");
 		else
-			return redirect('/admin/messages')
+			return redirect('/management/messages')
 				->withErrors("خطایی رخ داده است");
 	}
 
@@ -436,7 +436,7 @@ class AdminController
 			$msg = "کاربر تایید شد";
 			$this->sendPush($user->pushe, "اطلاعات حساب", "حساب شما تایید شد");
 		}
-		return redirect('/admin/users/' . $id)
+		return redirect('/management/users/' . $id)
 			->withMessage($msg);
 	}
 
@@ -602,7 +602,7 @@ class AdminController
 		$banner->save();
 
 		$message = "بنر اضافه شد";
-		return redirect('/admin/banners')->withMessage($message);
+		return redirect('/management/banners')->withMessage($message);
 	}
 
 	public function banners()
@@ -645,7 +645,7 @@ class AdminController
 
 			$banner->save();
 			$message = "بنر به روزرسانی شد";
-			return redirect('/admin/banners')
+			return redirect('/management/banners')
 				->withMessage($message);
 		} else
 			return redirect('/')
@@ -660,7 +660,7 @@ class AdminController
 				File::delete('images/' . $banner->image);
 			$banner->delete();
 			$message = "بنر حذف شد";
-			return redirect('/admin/banners')
+			return redirect('/management/banners')
 				->withMessage($message);
 		} else
 			return redirect('/')
@@ -842,7 +842,7 @@ class AdminController
 			$product->save();
 		}
 		$message = "فروش محصولات به حالت صفر برگشت";
-		return redirect('/admin/setting')
+		return redirect('/management/setting')
 			->withMessage($message);
 	}
 
@@ -878,10 +878,10 @@ class AdminController
 			]
 		);
 		if ($response->getStatusCode() == "201") {
-			return redirect('/admin/users/' . $uid)
+			return redirect('/management/users/' . $uid)
 				->withMessage("کاربر خارج شد");
 		} else
-			return redirect('/admin/users/' . $uid)
+			return redirect('/management/users/' . $uid)
 				->withErrors("خطایی رخ داده است");
 	}
 

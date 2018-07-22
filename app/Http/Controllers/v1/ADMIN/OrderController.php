@@ -160,10 +160,10 @@ class OrderController
 			]
 		);
 		if ($response->getStatusCode() == "201") {
-			return redirect('/admin/orders/' . $order->unique_id)
+			return redirect('/management/orders/' . $order->unique_id)
 				->withMessage("پیغام ارسال شد");
 		} else
-			return redirect('/admin/orders/' . $order->unique_id)
+			return redirect('/management/orders/' . $order->unique_id)
 				->withErrors("خطایی رخ داده است");
 	}
 

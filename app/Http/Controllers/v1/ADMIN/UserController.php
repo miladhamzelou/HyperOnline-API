@@ -123,11 +123,11 @@ class UserController extends Controller
 			$push->save();
 
 			$message = "کیف پول شارژ و پیام ارسال شد";
-			return redirect('/admin/users')
+			return redirect('/management/users')
 				->withMessage($message);
 		} else {
 			$message = "پیام ارسال نشد";
-			return redirect('/admin/users')
+			return redirect('/management/users')
 				->withMessage($message);
 		}
 	}

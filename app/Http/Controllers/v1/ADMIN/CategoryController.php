@@ -137,7 +137,7 @@ class CategoryController extends Controller
             $category->save();
         }
         $message = "دسته بندی " . $name . " ایجاد شد";
-        return redirect('/admin/categories')
+        return redirect('/management/categories')
             ->withMessage($message);
     }
 
@@ -235,7 +235,7 @@ class CategoryController extends Controller
                 $category->save();
             }
             $message = "دسته بندی به روزرسانی شد";
-            return redirect('/admin/categories')->withMessage($message);
+            return redirect('/management/categories')->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
@@ -289,7 +289,7 @@ class CategoryController extends Controller
                 $category->delete();
             }
             $message = "category deleted";
-            return redirect('/admin/categories')->withMessage($message);
+            return redirect('/management/categories')->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');

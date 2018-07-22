@@ -62,7 +62,7 @@ class AuthorController
             $author->save();
 
             $message = "author created";
-            return redirect('/admin/authors')->withMessage($message);
+            return redirect('/management/authors')->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
@@ -95,7 +95,7 @@ class AuthorController
             $author->save();
 
             $message = "author updated";
-            return redirect('/admin/authors')->withMessage($message);
+            return redirect('/management/authors')->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');

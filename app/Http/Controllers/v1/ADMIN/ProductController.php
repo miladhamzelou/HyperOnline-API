@@ -98,7 +98,7 @@ class ProductController extends Controller
         $product->save();
 
         $message = "محصول ( " . $product->name . " ) اضافه شد";
-        return redirect('/admin/products_inactive')->withMessage($message);
+        return redirect('/management/products_inactive')->withMessage($message);
     }
 
     public function edit($id)
@@ -158,7 +158,7 @@ class ProductController extends Controller
 
             $product->save();
             $message = "محصول ( " . $product->name . " ) به روزرسانی شد";
-            return redirect('/admin/products_inactive')
+            return redirect('/management/products_inactive')
                 ->withMessage($message);
         } else
             return redirect('/')
@@ -173,7 +173,7 @@ class ProductController extends Controller
                 File::delete('images/' . $product->image);
             $product->delete();
             $message = "محصول ( " . $product->name . " ) حذف شد";
-            return redirect('/admin/products')
+            return redirect('/management/products')
                 ->withMessage($message);
         } else
             return redirect('/')
@@ -191,7 +191,7 @@ class ProductController extends Controller
                 $message = "عکس محصول ( " . $product->name . " ) حذف شد";
             } else
                 $message = "برای محصول ( " . $product->name . " ) عکسی ثبت نشده است";
-            return redirect('/admin/products')->withMessage($message);
+            return redirect('/management/products')->withMessage($message);
         } else
             return redirect('/')
                 ->withErrors('دسترسی غیرمجاز');
@@ -216,7 +216,7 @@ class ProductController extends Controller
             $product->save();
         }
         $message = "تمام محصولات تایید شدند";
-        return redirect('/admin/products')
+        return redirect('/management/products')
             ->withMessage($message);
     }
 
