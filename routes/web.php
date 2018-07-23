@@ -92,10 +92,12 @@ Route::group(['prefix' => 'management', 'middleware' => ['auth']], function () {
 
 	Route::get('/comments', 'v1\ADMIN\AdminController@comments')->name('comments');
 
+	Route::get('/logs/{type}', 'v1\ADMIN\AdminController@logs')->name('logs');
+});
+
+Route::group(['middleware' => ['auth']], function () {
 	Route::get('/checkout', 'v1\MARKET\MainController@checkout')->name('checkout');
 	Route::post('/pay_confirm', 'v1\MARKET\MainController@pay_confirm')->name('pay_confirm');
-
-	Route::get('/logs/{type}', 'v1\ADMIN\AdminController@logs')->name('logs');
 });
 
 Route::get('/search', 'v1\ADMIN\AdminController@search');
