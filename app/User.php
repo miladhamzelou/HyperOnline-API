@@ -55,6 +55,11 @@ class User extends Authenticatable
 		return $this->hasMany(Visit::class, 'user_id');
 	}
 
+	public function lists()
+	{
+		return $this->hasMany(RList::class, 'user_id');
+	}
+
 	public function isAdmin()
 	{
 		if ($this->role == "admin")
