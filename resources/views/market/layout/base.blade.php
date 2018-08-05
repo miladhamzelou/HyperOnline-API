@@ -388,9 +388,9 @@
                                  src='https://logo.samandehi.ir/logo.aspx?id=92906&p=bsiyodrfbsiylymawlbq'/>
                         </div>
                         <div style="float: left;" class="logo">
-                            <img src="{{ asset('market/image/kasb.png') }}" alt=""
+                            <img class="img-responsive" src="{{ asset('market/image/kasb.png') }}" alt=""
                                  onclick="window.open('https://ecunion.ir/verify/hyper-online.ir?token=41876955acf0232a4434', 'Popup','toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30')"
-                                 style="cursor:pointer">
+                                 style="cursor:pointer;  margin:0 auto;">
                         </div>
                         <div style="float: left;" class="logo">
                             <img class="img-responsive" style='cursor:pointer; margin:0 auto;'
@@ -399,6 +399,8 @@
                         </div>
                         <div style="float: left;" class="logo">
                             <a href='javascript:PayirTrust();'><img src='https://pay.ir/assets/img/pay-trust.png'
+                                                                    style='cursor:pointer; margin:0 auto;'
+                                                                    class="img-responsive"
                                                                     alt='نماد اعتماد درگاه Pay.ir'></a>
                             <script type='text/javascript'>function PayirTrust() {
                                     window.open('https://pay.ir/trust/34464', '', 'scrollbars=yes, width=500, height=500, top=150, left=300');
