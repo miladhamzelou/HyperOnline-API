@@ -36,6 +36,17 @@
     font-weight: 400 !important;
 }
 
+.site-title {
+    color: #fff;
+    font-size: medium;
+    left: 50%;
+    line-height: 35px;
+    position: fixed;
+    text-align: center;
+    transform: translateX(-50%);
+    vertical-align: middle
+}
+
 @media only screen and (min-width: 767px) {
     .mobile_download {
         display: none;

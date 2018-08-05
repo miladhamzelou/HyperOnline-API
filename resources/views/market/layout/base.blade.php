@@ -82,6 +82,8 @@
                                 <li class="email" style="font-size: medium"><a href="mailto:hyperonlineir@gmail.com"><i
                                                 class="fa fa-envelope"></i>hyperonlineir@gmail.com</a></li>
                             </ul>
+                            <p class="site-title">
+                                هایپر آنلاین - سوپر مارکت شما</p>
                         </div>
                     </div>
                     <div id="top-links" class="nav pull-right flip">
