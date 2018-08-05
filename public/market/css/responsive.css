@@ -37,8 +37,8 @@
 
     /**===== Header =====**/
     #header .header-row {
+        padding: 75px 0 30px 0;
         text-align: center;
-        padding: 30px 0;
     }
 
     #header #logo a img {
@@ -51,31 +51,31 @@
     }
 
     .drop-icon {
-        width: 45px;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        float: left;
+        font-size: 23px;
         height: 35px;
         line-height: 35px;
         text-align: center;
-        font-size: 23px;
-        cursor: pointer;
-        float: left;
-        display: inline-block;
-        color: #fff;
+        width: 45px;
     }
 
     .left-top {
-        min-width: 160px;
         background: #3E7CB4;
+        display: none;
+        min-width: 160px;
+        padding: 5px 0;
         position: absolute;
         top: 35px;
         z-index: 99;
-        padding: 5px 0;
-        display: none;
     }
 
     .left-top #language, .left-top #currency {
-        float: none;
         border: none !important;
         display: block;
+        float: none;
     }
 
     .left-top #language > .btn-group, #currency > .btn-group {
@@ -83,14 +83,14 @@
     }
 
     #header .links {
-        float: none;
         border: none;
+        float: none;
     }
 
     #header .links > ul > li {
-        float: none;
-        display: block;
         border: none !important;
+        display: block;
+        float: none;
         line-height: 30px;
     }
 
@@ -99,8 +99,8 @@
     }
 
     #header #search {
-        position: relative;
         margin-top: 25px;
+        position: relative;
     }
 
     #header #cart {
@@ -109,13 +109,13 @@
     }
 
     #header #cart .dropdown-menu {
-        right: auto;
         left: 0;
+        right: auto;
     }
 
     #header.style2 #cart {
-        margin-top: auto;
         margin-bottom: 15px;
+        margin-top: auto;
         text-align: center;
     }
 
@@ -138,16 +138,16 @@
     }
 
     #menu .navbar-header > span {
-        text-transform: uppercase;
-        font-size: 16px;
-        padding: 0px 15px 0px 8px;
-        height: 45px;
-        line-height: 45px;
-        text-align: center;
-        margin: 0;
         cursor: pointer;
         display: inline-block;
+        font-size: 16px;
+        height: 45px;
+        line-height: 45px;
+        margin: 0;
+        padding: 0px 15px 0px 8px;
         position: relative;
+        text-align: center;
+        text-transform: uppercase;
     }
 
     #menu .navbar-header > span > b {
@@ -155,38 +155,38 @@
     }
 
     #menu .navbar-header > span > b:after {
+        border-color: #555 transparent transparent transparent;
+        border-style: solid;
+        border-width: 5px 6px 0px 6px;
+        bottom: 48%;
         clear: both;
         content: ' ';
         display: block;
-        width: 0;
         height: 0;
-        border-style: solid;
-        border-color: #555 transparent transparent transparent;
-        position: absolute;
-        border-width: 5px 6px 0px 6px;
-        bottom: 48%;
         margin: 0 0 -6px 0px;
         opacity: 0.7;
+        position: absolute;
+        width: 0;
     }
 
     #menu .navbar-header > span > b:before {
+        border-color: transparent transparent #555 transparent;
+        border-style: solid;
+        border-width: 0px 6px 5px 6px;
         clear: both;
         content: ' ';
         display: block;
-        width: 0;
         height: 0;
-        border-style: solid;
-        border-color: transparent transparent #555 transparent;
-        position: absolute;
-        border-width: 0px 6px 5px 6px;
-        top: 49%;
         margin: -6px 0 0 0px;
         opacity: 0.7;
+        position: absolute;
+        top: 49%;
+        width: 0;
     }
 
     #menu {
-        padding: 0;
         height: auto;
+        padding: 0;
         text-align: center;
     }
 
@@ -195,16 +195,16 @@
     }
 
     #menu .nav {
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
         padding: 0;
         text-align: left;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     #menu .nav > li {
-        float: none;
-        padding: 0px;
         display: block;
+        float: none;
         height: auto;
+        padding: 0px;
     }
 
     #menu .nav > li > a {
@@ -241,21 +241,21 @@
     }
 
     span.submore:after {
+        color: #555;
+        content: '+';
+        cursor: pointer;
         display: block;
-        position: absolute;
-        right: 0;
-        top: 0px;
-        width: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 22px;
         height: 32px;
         line-height: 32px;
-        font-size: 22px;
-        text-align: center;
-        cursor: pointer;
-        z-index: 1010;
-        content: '+';
-        font-family: Arial, Helvetica, sans-serif;
-        color: #555;
         opacity: 0.6;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 0px;
+        width: 30px;
+        z-index: 1010;
     }
 
     span.submore.plus:after {
@@ -272,9 +272,9 @@
     }
 
     #menu .nav > li.mega-menu > div > .column {
-        width: auto;
         display: block;
         margin: 0;
+        width: auto;
     }
 
     #menu .nav > li.mega-menu > div > .column > div {
@@ -287,9 +287,9 @@
     }
 
     #menu .nav > li.mega-menu > div > .column a, #menu .nav > li > div > ul li a, #menu .nav > li.mega-menu > div > .column > div > ul > li > a {
-        width: auto;
-        padding: 7px 0;
         margin: 0;
+        padding: 7px 0;
+        width: auto;
     }
 
     #menu .nav > li.sub:hover > a:after {
@@ -301,14 +301,14 @@
     }
 
     #menu .nav > li > .dropdown-menu, #menu .nav > li > .dropdown-menu li .dropdown-menu {
+        border: 0px none;
         box-shadow: none;
         float: none;
-        width: 100%;
-        position: relative;
-        min-width: inherit;
-        margin-top: 0px;
         left: auto;
-        border: 0px none;
+        margin-top: 0px;
+        min-width: inherit;
+        position: relative;
+        width: 100%;
     }
 
     #menu .nav > li .dropdown-menu ul {
@@ -323,8 +323,8 @@
 
     /**===== Fotter =====**/
     #footer .fpart-first {
-        padding-top: 30px;
         padding-bottom: 10px;
+        padding-top: 30px;
     }
 
     #footer .column, #footer .contact, #footer .about_details {
@@ -345,22 +345,22 @@
     }
 
     #footer .social {
-        text-align: center;
-        padding: 12px 0 0;
         margin: 0px !important;
+        padding: 12px 0 0;
+        text-align: center;
     }
 
     #footer .social a {
-        float: none;
         display: inline-block;
+        float: none;
     }
 
     #powered {
-        text-align: center;
-        width: 100%;
+        height: auto;
         line-height: normal;
         padding-top: 10px;
-        height: auto;
+        text-align: center;
+        width: 100%;
     }
 
     #custom_side_block, #facebook, #twitter_footer, #video_box {
@@ -369,8 +369,8 @@
 
     /**===== Product Page =====**/
     .product-list .left {
-        width: auto;
         float: none;
+        width: auto;
     }
 
     .product-info > .left {
@@ -399,9 +399,9 @@
     }
 
     .product-info .image-additional {
-        width: auto;
         margin-bottom: 10px;
         max-width: none;
+        width: auto;
     }
 
     .product-info .image-additional a {
@@ -431,8 +431,8 @@
     }
 
     .category-module .tabs li.active a {
-        padding-bottom: 2px;
         line-height: 22px;
+        padding-bottom: 2px;
     }
 
     .table-container .col-table-cell {
@@ -442,6 +442,10 @@
 
 @media (max-width: 767px) {
     /**===== Header =====**/
+    #header .header-row {
+        padding: 75px 0 35px 0;
+    }
+
     #header #cart, #header.style2 #cart, #header.style3 #cart {
         text-align: center;
     }
@@ -482,6 +486,10 @@
 
 @media screen and (max-width: 480px) {
     /**===== header =====**/
+    #header .header-row {
+        padding: 75px 0 35px 0;
+    }
+
     #header #cart .dropdown-menu, #header.style2 #cart .dropdown-menu {
         left: 50%;
         margin-left: -155px;
@@ -502,8 +510,8 @@
     }
 
     .product-info .cart div .qty {
-        float: none;
         display: inline-block;
+        float: none;
     }
 
     /**===== Tabs =====**/
@@ -524,21 +532,21 @@
 /**===== Five Grid Columns =====**/
 @media (min-width: 768px) {
     .col-sm-5ths {
-        width: 20%;
         float: left;
+        width: 20%;
     }
 }
 
 @media (min-width: 992px) {
     .col-md-5ths {
-        width: 20%;
         float: left;
+        width: 20%;
     }
 }
 
 @media (min-width: 1200px) {
     .col-lg-5ths {
-        width: 20%;
         float: left;
+        width: 20%;
     }
 }
