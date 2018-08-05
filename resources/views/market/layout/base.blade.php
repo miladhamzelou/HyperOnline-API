@@ -393,7 +393,7 @@
                                  src='https://logo.samandehi.ir/logo.aspx?id=92906&p=bsiyodrfbsiylymawlbq'/>
                         </div>
                         <div style="float: left;" class="logo">
-                            <img src="((آدرس نشان لوگوی اتحادیه))" alt=""
+                            <img src="{{ asset('market/image/kasb.png') }}" alt=""
                                  onclick="window.open('https://ecunion.ir/verify/hyper-online.ir?token=41876955acf0232a4434', 'Popup','toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30')"
                                  style="cursor:pointer">
                         </div>
