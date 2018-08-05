@@ -435,6 +435,8 @@ a:focus {
     border: 3px solid #e40571;
     border-radius: 0;
     border-width: 3px 0 0 0;
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.3), 0 10px 14px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 10px 14px rgba(0, 0, 0, 0.3), 0 10px 14px rgba(0, 0, 0, 0.3);
     left: auto;
     margin: 20px 0 0 0;
     padding: 8px;
