@@ -374,11 +374,6 @@
 
                 <div class="container" style="text-align: center;">
                     <div style="display: flex">
-                        <div style="float: left;" class="logo">
-                            <img class="img-responsive" style='cursor:pointer; margin:0 auto;'
-                                 alt="asnaf"
-                                 src="{{ asset('/market/image/asnaf.png') }}"/>
-                        </div>
                         <div style="float:left;" class="logo">
                             <img class="img-responsive"
                                  src="https://trustseal.enamad.ir/logo.aspx?id=71394&amp;p=QHelLvhqUOh0EElo"
