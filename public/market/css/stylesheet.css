@@ -1022,9 +1022,14 @@ a:focus {
     margin-bottom: 5px;
 }
 
+.owl-wrapper-outer {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .owl-carousel .product-thumb {
     border: 3px solid transparent;
-    margin: 0 3px 0 0;
+    margin: 8px 3px 20px 3px;
     padding: 7px;
     position: relative;
     text-align: center;
@@ -1032,7 +1037,8 @@ a:focus {
 
 @media only screen and (min-width: 1025px) {
     .owl-carousel .product-thumb:hover {
-        border-color: #eae9e9;
+        /*border-color: #eae9e9;*/
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.12), 0 10px 14px rgba(0, 0, 0, 0.20);
     }
 }
 
