@@ -341,7 +341,7 @@ class MainController extends Controller
 				'https://pay.ir/payment/send',
 				[
 					'json' => [
-						'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
+						'api' => config('pay.api-key'),
 						'amount' => '1000',
 						'redirect' => "http://hyper-online.ir/callback2",
 						'factorNumber' => '1'
@@ -372,7 +372,7 @@ class MainController extends Controller
 				'https://pay.ir/payment/verify',
 				[
 					'json' => [
-						'api' => '4d0d3be84eae7fbe5c317bf318c77e83',
+						'api' => config('pay.api-key'),
 						'transId' => $pay->transId
 					]
 				]);
