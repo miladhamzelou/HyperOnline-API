@@ -346,8 +346,12 @@ class UserController extends Controller
 			$user->fire = $fireBase;
 			$user->update_date = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 			if (app('request')->exists('v')) {
-				$version = $request->get("v");
-				$user->android = $version;
+				$android = $request->get("v");
+				$user->android = $android;
+			}
+			if (app('request')->exists('a')) {
+				$version = $request->get("a");
+				$user->version = $version;
 			}
 			$user->save();
 
